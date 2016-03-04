@@ -5,77 +5,77 @@ package com.ibititec.ldapp.models;
  */
 public class Endereco {
 
-    private String enderecoId;
-    private String logradouro ;
-    private String numero ;
-    private String complemento;
-    private String cidade ;
-    private String estado ;
-    private String bairro ;
-    private String comercianteId ;
+    private String EnderecoId;
+    private String Logradouro ;
+    private String Numero ;
+    private String Complemento;
+    private String Cidade ;
+    private String Estado ;
+    private String Bairro ;
+    private String ComercianteId ;
 
     public String getEnderecoId() {
-        return enderecoId;
+        return EnderecoId;
     }
 
     public void setEnderecoId(String enderecoId) {
-        this.enderecoId = enderecoId;
+        EnderecoId = enderecoId;
     }
 
     public String getLogradouro() {
-        return logradouro;
+        return Logradouro;
     }
 
     public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
+        Logradouro = logradouro;
     }
 
     public String getNumero() {
-        return numero;
+        return Numero;
     }
 
     public void setNumero(String numero) {
-        this.numero = numero;
+        Numero = numero;
     }
 
     public String getComplemento() {
-        return complemento;
+        return Complemento;
     }
 
     public void setComplemento(String complemento) {
-        this.complemento = complemento;
+        Complemento = complemento;
     }
 
     public String getCidade() {
-        return cidade;
+        return Cidade;
     }
 
     public void setCidade(String cidade) {
-        this.cidade = cidade;
+        Cidade = cidade;
     }
 
     public String getEstado() {
-        return estado;
+        return Estado;
     }
 
     public void setEstado(String estado) {
-        this.estado = estado;
+        Estado = estado;
     }
 
     public String getBairro() {
-        return bairro;
+        return Bairro;
     }
 
     public void setBairro(String bairro) {
-        this.bairro = bairro;
+        Bairro = bairro;
     }
 
     public String getComercianteId() {
-        return comercianteId;
+        return ComercianteId;
     }
 
     public void setComercianteId(String comercianteId) {
-        this.comercianteId = comercianteId;
+        ComercianteId = comercianteId;
     }
 }
 

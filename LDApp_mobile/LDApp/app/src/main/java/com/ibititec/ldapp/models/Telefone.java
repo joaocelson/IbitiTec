@@ -5,42 +5,40 @@ package com.ibititec.ldapp.models;
  */
 public class Telefone {
 
-    private String numero ;
-    private String descricao ;
-    private String telefoneId ;
-    private String comercianteID ;
+    private String Numero ;
+    private String Descricao ;
+    private String TelefoneId ;
+    private String ComercianteID ;
 
     public String getNumero() {
-        return numero;
+        return Numero;
     }
 
     public void setNumero(String numero) {
-        this.numero = numero;
+        Numero = numero;
     }
 
     public String getDescricao() {
-        return descricao;
+        return Descricao;
     }
 
     public void setDescricao(String descricao) {
-        this.descricao = descricao;
+        Descricao = descricao;
     }
 
     public String getTelefoneId() {
-        return telefoneId;
+        return TelefoneId;
     }
 
     public void setTelefoneId(String telefoneId) {
-        this.telefoneId = telefoneId;
+        TelefoneId = telefoneId;
     }
 
     public String getComercianteID() {
-        return comercianteID;
+        return ComercianteID;
     }
 
     public void setComercianteID(String comercianteID) {
-        this.comercianteID = comercianteID;
+        ComercianteID = comercianteID;
     }
-
-
 }

@@ -1,5 +1,8 @@
 package com.ibititec.ldapp.models;
 
+import android.graphics.Bitmap;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,51 +10,73 @@ import java.util.List;
  */
 public class Comerciante {
 
-    private String comercianteId;
+    private static final String PAHT_FOTO = "http://52.37.37.207:86/Comerciante/Image?nomeimagem=";
+    private String ComercianteId;
+    private String Nome;
+    private List<Telefone> Telefones;
+    private List<Endereco> Enderecos;
+    private String NomeFoto;
 
     public String getComercianteId() {
-        return comercianteId;
+        return ComercianteId;
     }
 
     public void setComercianteId(String comercianteId) {
-        this.comercianteId = comercianteId;
+        ComercianteId = comercianteId;
     }
 
     public String getNome() {
-        return nome;
+        return Nome;
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        Nome = nome;
     }
 
     public List<Telefone> getTelefones() {
-        return telefones;
+        return Telefones;
     }
 
     public void setTelefones(List<Telefone> telefones) {
-        this.telefones = telefones;
+        Telefones = telefones;
     }
 
     public List<Endereco> getEnderecos() {
-        return enderecos;
+        return Enderecos;
     }
 
     public void setEnderecos(List<Endereco> enderecos) {
-        this.enderecos = enderecos;
+        Enderecos = enderecos;
     }
 
     public String getNomeFoto() {
-        return nomeFoto;
+        return PAHT_FOTO + NomeFoto;
     }
 
     public void setNomeFoto(String nomeFoto) {
-        this.nomeFoto = nomeFoto;
+        NomeFoto = nomeFoto;
     }
 
-    private String nome;
-    private List<Telefone> telefones ;
-    private List<Endereco> enderecos;
-    private String nomeFoto ;
+    public List<String> getNomeListaFotos(ArrayList<Comerciante> comerciantes) {
+        List<String> nomeFotos = new ArrayList<>();
+        for (Comerciante comerciante : comerciantes) {
+            nomeFotos.add(comerciante.getNomeFoto());
+        }
+        return nomeFotos;
+    }
 
+    public int getComercianteImage(int position) {
+        switch (position) {
+            case 0:
+                return 0;
+            case 1:
+                return 0;
+            case 2:
+                return 0;
+            case 3:
+                return 0;
+            default:
+                return 0;
+        }
+    }
 }

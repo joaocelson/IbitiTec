@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">LDApp</string>
     <string name="action_settings">Settings</string>
+    <string name="action_atualizar">Atualizar</string>
     <string name="msg_erro_json">Erro baixando JSON: %s</string>
     <string name="url">http://52.37.37.207:86/Comerciante/GetComerciantes</string>
 </resources>

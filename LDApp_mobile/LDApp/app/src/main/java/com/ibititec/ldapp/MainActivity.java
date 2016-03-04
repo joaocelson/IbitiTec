@@ -1,6 +1,8 @@
 package com.ibititec.ldapp;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -12,15 +14,30 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.ibititec.ldapp.helpers.ComercianteAdapter;
 import com.ibititec.ldapp.helpers.HttpHelper;
+import com.ibititec.ldapp.helpers.JsonHelper;
+import com.ibititec.ldapp.helpers.UIHelper;
+import com.ibititec.ldapp.models.Comerciante;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "LOG";
+    public static final String PATH_FOTOS = "http://52.37.37.207:86/Comerciante/GetFotosComerciantes/";
 
+    private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +54,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //INICIALIZACAO DO FRESCO
+        Fresco.initialize(this);
+
+        progressBar = (ProgressBar)findViewById(R.id.progress_comerciantes);
+        progressBar.setVisibility(View.VISIBLE);
+
         setupComerciantes();
+
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -55,7 +80,21 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_atualizar) {
+
+            new AlertDialog.Builder(this)
+                    .setTitle("Download")
+                    .setMessage("Deseja atualizar os dados das empresas?")
+                    .setPositiveButton("Sim, baixar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Log.i(TAG, "Usuário pediu atualização.");
+                            AtualizarComerciantes();
+                        }
+                    })
+                    .setNegativeButton("Cancelar", null)
+                    .show();
+
             return true;
         }
 
@@ -66,12 +105,12 @@ public class MainActivity extends AppCompatActivity {
         String json = leJsonComerciantes();
 
         if (json.isEmpty()) {
-            Log.i(TAG, "Baixou patios");
+            Log.i(TAG, "Baixou comerciantes.");
             AtualizarComerciantes();
         } else {
-            Log.i(TAG, "Carregou patios salvos");
-           // carregaPatios(json);
-           //marcaPatios();
+            Log.i(TAG, "Carregou comerciantes salvos");
+            preencherListComerciantes(json);
+            //marcaPatios();
         }
     }
 
@@ -124,9 +163,23 @@ public class MainActivity extends AppCompatActivity {
                         .putString("comerciantes.json", json)
                         .apply();
 
+                preencherListComerciantes(json);
                 //carregaPatios(json);
                 //marcaPatios();
             }
         }).execute(getString(R.string.url));
+    }
+
+    private void preencherListComerciantes(String json) {
+        try {
+            List<Comerciante> comerciantesList = JsonHelper.getList(json, Comerciante[].class);
+            ArrayList<Comerciante> comerciantesArray = new ArrayList<>(comerciantesList);
+
+            ListView listView = (ListView) findViewById(R.id.listview_comerciantes);
+            listView.setAdapter(new ComercianteAdapter(this, comerciantesArray));
+            UIHelper.setListViewHeightBasedOnChildren(listView);
+        } catch (Exception e) {
+            Log.e(TAG, String.format("Erro ao mostrar comerciantes: %s", e.getMessage()));
+        }
     }
 }

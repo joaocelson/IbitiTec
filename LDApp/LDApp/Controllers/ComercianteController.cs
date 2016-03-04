@@ -182,6 +182,13 @@ namespace LDApp.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Image(string nomeImagem)
+        {
+            var dir = Server.MapPath("/images/upload");
+            var path = Path.Combine(dir, nomeImagem);
+            return base.File(path, "image/jpeg");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
