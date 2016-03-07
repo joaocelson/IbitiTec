@@ -3,6 +3,7 @@ package com.ibititec.ldapp;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -29,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,8 +39,11 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "LOG";
     public static final String PATH_FOTOS = "http://52.37.37.207:86/Comerciante/GetFotosComerciantes/";
-
+    ArrayList<Comerciante> comerciantesArray = new ArrayList<Comerciante>();
+    private ListView lsViewComerciantes;
     private ProgressBar progressBar;
+    private  Comerciante comerciante;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,15 +60,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        lsViewComerciantes = (ListView) findViewById(R.id.listview_comerciantes);
+
         //INICIALIZACAO DO FRESCO
         Fresco.initialize(this);
 
-        progressBar = (ProgressBar)findViewById(R.id.progress_comerciantes);
+        progressBar = (ProgressBar) findViewById(R.id.progress_comerciantes);
         progressBar.setVisibility(View.VISIBLE);
 
         setupComerciantes();
 
         progressBar.setVisibility(View.GONE);
+
+        lsViewComerciantes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> myAdapter, View myView, int myItemInt, long mylng) {
+               try{
+                   comerciante = (Comerciante) (lsViewComerciantes.getItemAtPosition(myItemInt));
+                   //exibirMsgAtualizacao("Selecionado o item: " + comerciante.getNome());
+                   StartarActivityDetalhe();
+               }catch (Exception ex){
+                   ex.getMessage();
+               }
+            }
+        });
     }
 
     @Override
@@ -164,16 +184,23 @@ public class MainActivity extends AppCompatActivity {
                         .apply();
 
                 preencherListComerciantes(json);
-                //carregaPatios(json);
-                //marcaPatios();
+                exibirMsgAtualizacao(String.format("%d Empresas atualizadas.", comerciantesArray.size()));
+                //marcaPatios()
             }
+
+
         }).execute(getString(R.string.url));
+    }
+
+    private void exibirMsgAtualizacao(String mensagem) {
+       // Snackbar.make(findViewById(R.id.fab), String.format("%d Dados atualizados.", patios.size()), Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(findViewById(R.id.fab), mensagem, Snackbar.LENGTH_SHORT).show();
     }
 
     private void preencherListComerciantes(String json) {
         try {
             List<Comerciante> comerciantesList = JsonHelper.getList(json, Comerciante[].class);
-            ArrayList<Comerciante> comerciantesArray = new ArrayList<>(comerciantesList);
+            comerciantesArray = new ArrayList<>(comerciantesList);
 
             ListView listView = (ListView) findViewById(R.id.listview_comerciantes);
             listView.setAdapter(new ComercianteAdapter(this, comerciantesArray));
@@ -181,5 +208,16 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             Log.e(TAG, String.format("Erro ao mostrar comerciantes: %s", e.getMessage()));
         }
+    }
+
+
+
+    private void StartarActivityDetalhe() {
+        Intent i = new Intent(this, DetalheActivity.class);
+
+        // Seta num campo estático da ActivityB
+        i.putExtra("comerciante", (Serializable) comerciante);
+
+        startActivity(i);
     }
 }

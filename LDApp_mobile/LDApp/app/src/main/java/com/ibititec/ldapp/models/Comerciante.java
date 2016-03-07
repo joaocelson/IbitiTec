@@ -2,13 +2,14 @@ package com.ibititec.ldapp.models;
 
 import android.graphics.Bitmap;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by JOAOCELSON on 01/03/2016.
  */
-public class Comerciante {
+public class Comerciante implements Serializable {
 
     private static final String PAHT_FOTO = "http://52.37.37.207:86/Comerciante/Image?nomeimagem=";
     private String ComercianteId;

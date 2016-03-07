@@ -61,8 +61,8 @@ public class ComercianteAdapter extends BaseAdapter {
             TextView txtTelefoneComerciante = (TextView) layout.findViewById(R.id.txtTelefoneComerciante);
             txtTelefoneComerciante.setText("Telefone: " + comerciante.getTelefones().get(0).getNumero());
 
-       /* ImageView ivCasa = (ImageView) layout.findViewById(R.id.ivComerciante);
-        ivCasa.setImageResource(comerciante.getComercianteImage(position));*/
+            /* ImageView ivCasa = (ImageView) layout.findViewById(R.id.ivComerciante);
+            ivCasa.setImageResource(comerciante.getComercianteImage(position));*/
 
             Uri imageUri = Uri.parse(comerciante.getNomeFoto());
             SimpleDraweeView draweeView = (SimpleDraweeView) layout.findViewById(R.id.my_image_view);

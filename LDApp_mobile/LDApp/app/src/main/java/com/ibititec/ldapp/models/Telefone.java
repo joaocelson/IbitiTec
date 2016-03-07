@@ -1,9 +1,11 @@
 package com.ibititec.ldapp.models;
 
+import java.io.Serializable;
+
 /**
  * Created by JOAOCELSON on 01/03/2016.
  */
-public class Telefone {
+public class Telefone implements Serializable {
 
     private String Numero ;
     private String Descricao ;
