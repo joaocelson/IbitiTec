@@ -6,13 +6,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.ibititec.ldapp.MainActivity;
+import com.ibititec.ldapp.ListComercianteActivity;
 import com.ibititec.ldapp.R;
 import com.ibititec.ldapp.models.Comerciante;
 
@@ -24,7 +22,7 @@ import java.util.ArrayList;
 public class ComercianteAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<Comerciante> listaComerciantes;
-
+    public  ArrayList<String> listComerciantes = new ArrayList<String>();
     public ComercianteAdapter(Context context, ArrayList<Comerciante> listaComerciantes) {
         this.context = context;
         this.listaComerciantes = listaComerciantes;
@@ -49,7 +47,7 @@ public class ComercianteAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         try {
-            Log.i(MainActivity.TAG, "Vai setar o Adapter, número de registro " + listaComerciantes.size() + " Position" + position);
+            Log.i(ListComercianteActivity.TAG, "Vai setar o Adapter, número de registro " + listaComerciantes.size() + " Position" + position);
 
             Comerciante comerciante = listaComerciantes.get(position);
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -67,11 +65,12 @@ public class ComercianteAdapter extends BaseAdapter {
             Uri imageUri = Uri.parse(comerciante.getNomeFoto());
             SimpleDraweeView draweeView = (SimpleDraweeView) layout.findViewById(R.id.my_image_view);
             draweeView.setImageURI(imageUri);
+            listComerciantes.add(comerciante.getNome());
 
             return layout;
 
         } catch (Exception e) {
-            Log.i(MainActivity.TAG, "Erro ao preecnher o getView: " + e.getMessage());
+            Log.i(ListComercianteActivity.TAG, "Erro ao preecnher o getView: " + e.getMessage());
             return null;
         }
     }

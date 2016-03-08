@@ -3,6 +3,7 @@
     package="com.ibititec.ldapp" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -23,6 +24,16 @@
         <activity
             android:name=".DetalheActivity"
             android:label="@string/title_activity_detalhe"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".ListComercianteActivity"
+            android:label="@string/title_activity_listaComerciante"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".CidadeActivity"
+            android:label="@string/title_activity_cidade"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>
