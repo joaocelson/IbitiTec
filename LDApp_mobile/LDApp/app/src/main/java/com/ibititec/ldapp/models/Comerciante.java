@@ -1,7 +1,5 @@
 package com.ibititec.ldapp.models;
 
-import android.graphics.Bitmap;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +15,25 @@ public class Comerciante implements Serializable {
     private List<Telefone> Telefones;
     private List<Endereco> Enderecos;
     private String NomeFoto;
+    private double Latitude;
+
+    public double getLatitude() {
+        return Latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        Latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return Longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        Longitude = longitude;
+    }
+
+    private double Longitude;
 
     public String getComercianteId() {
         return ComercianteId;

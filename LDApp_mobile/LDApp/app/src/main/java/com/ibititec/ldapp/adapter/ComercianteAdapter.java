@@ -1,4 +1,4 @@
-package com.ibititec.ldapp.helpers;
+package com.ibititec.ldapp.adapter;
 
 import android.content.Context;
 import android.net.Uri;

@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ibititec.ldapp" >
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
@@ -34,6 +35,46 @@
         <activity
             android:name=".CidadeActivity"
             android:label="@string/title_activity_cidade"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".utilidade_publica.UtilidadePulicaActivity"
+            android:label="@string/title_activity_utilidade_pulica"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".utilidade_publica.PrefeituraActivity"
+            android:label="@string/title_activity_prefeitura"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".utilidade_publica.CamaraActivity"
+            android:label="@string/title_activity_camara"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".utilidade_publica.TransporteActivity"
+            android:label="@string/title_activity_transporte"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".utilidade_publica.SantaCasaActivity"
+            android:label="@string/title_activity_santa_casa"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".utilidade_publica.PoliciaActivity"
+            android:label="@string/title_activity_policia"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".MapaActivity"
+            android:label="@string/title_activity_mapa"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".adapter.UtilidadeAdapter"
+            android:label="@string/title_activity_utilidade_adapter"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>

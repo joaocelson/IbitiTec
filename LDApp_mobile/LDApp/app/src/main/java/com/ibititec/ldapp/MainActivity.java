@@ -15,6 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.ibititec.ldapp.utilidade_publica.UtilidadePulicaActivity;
+
 import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity
@@ -91,7 +93,8 @@ public class MainActivity extends AppCompatActivity
             Intent i = new Intent(this, CidadeActivity.class);
             startActivity(i);
         } else if (id == R.id.nav_utilidade_publica) {
-
+            Intent i = new Intent(this, UtilidadePulicaActivity.class);
+            startActivity(i);
         } else if (id == R.id.nav_configuracao) {
 
         } else if (id == R.id.nav_share) {

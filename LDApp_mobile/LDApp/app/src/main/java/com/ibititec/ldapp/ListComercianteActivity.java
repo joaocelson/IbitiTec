@@ -27,10 +27,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.ibititec.ldapp.helpers.ComercianteAdapter;
+import com.ibititec.ldapp.adapter.ComercianteAdapter;
 import com.ibititec.ldapp.helpers.HttpHelper;
 import com.ibititec.ldapp.helpers.JsonHelper;
-import com.ibititec.ldapp.helpers.StringHelper;
 import com.ibititec.ldapp.helpers.UIHelper;
 import com.ibititec.ldapp.models.Comerciante;
 
