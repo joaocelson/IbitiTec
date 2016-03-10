@@ -16,13 +16,13 @@
 
     Na área da cultura e lazer, destaca-se na realização de diversos eventos anuais, como o Carnaval de Lima Duarte, em fevereiro ou março, ou a Exposição Agropecuária, realizada em setembro ou outubro. Possui ainda alguns atrativos turísticos de valor cultural ou histórico, como a Igreja Nossa Senhora do Rosário ou o Calçamento de Paralelepípedos da Praça Juscelino Kubitschek. No município situa-se também o Parque Estadual do Ibitipoca, conhecido por suas montanhas, cachoeiras e trilhas para caminhada, além de vistas panorâmicas dos vários morros que compõem a paisagem do lugar.
 </string>
-    <string name="title_activity_cidade">CidadeActivity</string>
-    <string name="title_activity_utilidade_pulica">UtilidadePulicaActivity</string>
-    <string name="title_activity_prefeitura">PrefeituraActivity</string>
-    <string name="title_activity_camara">CamaraActivity</string>
-    <string name="title_activity_transporte">TransporteActivity</string>
-    <string name="title_activity_santa_casa">SantaCasaActivity</string>
-    <string name="title_activity_policia">PoliciaActivity</string>
-    <string name="title_activity_mapa">MapaActivity</string>
+    <string name="title_activity_cidade">Cidade</string>
+    <string name="title_activity_utilidade_pulica">Utilidade Pública</string>
+    <string name="title_activity_prefeitura">Prefeitura</string>
+    <string name="title_activity_camara">Câmara Municipal</string>
+    <string name="title_activity_transporte">Transporte</string>
+    <string name="title_activity_santa_casa">Santa Casa</string>
+    <string name="title_activity_policia">Polícia</string>
+    <string name="title_activity_mapa">Local Empresa</string>
     <string name="title_activity_utilidade_adapter">UtilidadeAdapterActivity</string>
 </resources>

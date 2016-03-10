@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -21,56 +22,72 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
         <activity
             android:name=".DetalheActivity"
             android:label="@string/title_activity_detalhe"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName="com.ibititec.ldapp.ListComercianteActivity">
+
         </activity>
         <activity
             android:name=".ListComercianteActivity"
             android:label="@string/title_activity_listaComerciante"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName="com.ibititec.ldapp.MainActivity">>
         </activity>
         <activity
             android:name=".CidadeActivity"
             android:label="@string/title_activity_cidade"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName="com.ibititec.ldapp.utilidade_publica.UtilidadePulicaActivity">>
         </activity>
         <activity
             android:name=".utilidade_publica.UtilidadePulicaActivity"
             android:label="@string/title_activity_utilidade_pulica"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName="com.ibititec.ldapp.MainActivity">>
         </activity>
         <activity
             android:name=".utilidade_publica.PrefeituraActivity"
             android:label="@string/title_activity_prefeitura"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName="com.ibititec.ldapp.utilidade_publica.UtilidadePulicaActivity">>
         </activity>
         <activity
             android:name=".utilidade_publica.CamaraActivity"
             android:label="@string/title_activity_camara"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName="com.ibititec.ldapp.utilidade_publica.UtilidadePulicaActivity">>
         </activity>
         <activity
             android:name=".utilidade_publica.TransporteActivity"
             android:label="@string/title_activity_transporte"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName="com.ibititec.ldapp.utilidade_publica.UtilidadePulicaActivity">>
         </activity>
         <activity
             android:name=".utilidade_publica.SantaCasaActivity"
             android:label="@string/title_activity_santa_casa"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName="com.ibititec.ldapp.utilidade_publica.UtilidadePulicaActivity">>
         </activity>
         <activity
             android:name=".utilidade_publica.PoliciaActivity"
             android:label="@string/title_activity_policia"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName="com.ibititec.ldapp.utilidade_publica.UtilidadePulicaActivity">>
         </activity>
         <activity
             android:name=".MapaActivity"
             android:label="@string/title_activity_mapa"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName="com.ibititec.ldapp.utilidade_publica.UtilidadePulicaActivity">>
         </activity>
         <activity
             android:name=".adapter.UtilidadeAdapter"
@@ -78,5 +95,4 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>
-
 </manifest>

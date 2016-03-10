@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,7 +23,6 @@ public class UtilidadePulicaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_utilidade_pulica);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,7 +35,7 @@ public class UtilidadePulicaActivity extends AppCompatActivity {
         String[] values = new String[] { "Telefones Prefeitura", "Telefones Santa Casa", "Telefones Polícia",
                 "Transporte", "Telefone Câmara" };
         final ListView lvUtilidadePublica = (ListView) findViewById(R.id.lv_utilidade_publica);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, values);
         lvUtilidadePublica.setAdapter(adapter);
@@ -70,5 +71,23 @@ public class UtilidadePulicaActivity extends AppCompatActivity {
             Intent intent = new Intent(this, CamaraActivity.class);
             startActivity(intent);
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+
+        int id = item.getItemId();
+        switch (id) {
+            // Id correspondente ao botão Up/Home da actionbar
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+
+
+        return super.onOptionsItemSelected(item);
     }
 }

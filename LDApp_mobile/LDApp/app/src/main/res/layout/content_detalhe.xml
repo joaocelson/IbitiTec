@@ -47,6 +47,12 @@
             android:textSize="19sp"
             android:textStyle="italic" />
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/btn_visualizar_mapa"
+            android:text="Ver no Mapa"
+            />
     </LinearLayout>
 
 

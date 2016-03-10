@@ -16,9 +16,12 @@ public class Comerciante implements Serializable {
     private List<Endereco> Enderecos;
     private String NomeFoto;
     private double Latitude;
+    private double Longitude;
 
     public double getLatitude() {
-        return Latitude;
+        //return Latitude;
+        //-21.847771, -43.814943
+        return  -21.847771;
     }
 
     public void setLatitude(double latitude) {
@@ -26,14 +29,14 @@ public class Comerciante implements Serializable {
     }
 
     public double getLongitude() {
-        return Longitude;
+        //return Longitude;
+        return -43.814943;
     }
 
     public void setLongitude(double longitude) {
         Longitude = longitude;
     }
 
-    private double Longitude;
 
     public String getComercianteId() {
         return ComercianteId;

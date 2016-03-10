@@ -33,7 +33,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:src="@android:drawable/ic_menu_call" />
+        android:src="@drawable/ic_call_black_48dp"
+        android:background="@color/White"/>
 
     <LinearLayout android:orientation="vertical"
         android:layout_width="match_parent"

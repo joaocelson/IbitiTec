@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -55,7 +56,6 @@ public class ListComercianteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_comerciantes);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +64,7 @@ public class ListComercianteActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lsViewComerciantes = (ListView) findViewById(R.id.listview_comerciantes);
 
         //INICIALIZACAO DO FRESCO
@@ -104,7 +104,12 @@ public class ListComercianteActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        switch (id) {
+            // Id correspondente ao botão Up/Home da actionbar
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_atualizar) {
 

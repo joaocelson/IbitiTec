@@ -12,16 +12,12 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.method.DateTimeKeyListener;
-import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -30,8 +26,7 @@ import com.ibititec.ldapp.models.Comerciante;
 import com.ibititec.ldapp.models.Endereco;
 import com.ibititec.ldapp.models.Telefone;
 
-import java.security.Permission;
-import java.util.Date;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,6 +36,7 @@ public class DetalheActivity extends AppCompatActivity {
     private Comerciante comerciante;
     private TextView txtNomeComerciante;
     private String telefoneChamar;
+    private Button btnVerMapa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +44,6 @@ public class DetalheActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detalhe);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,12 +52,22 @@ public class DetalheActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lerIntent();
         exibirMsgAtualizacao("Tela de detalhes aberta, comerciante: " + comerciante.getNome());
         txtNomeComerciante = (TextView) findViewById(R.id.txtNomeComercianteDetalhe);
         txtNomeComerciante.setText(comerciante.getNome());
         carregarTelefoneEndereco();
         setupFab();
+        btnVerMapa = (Button) findViewById(R.id.btn_visualizar_mapa);
+        btnVerMapa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(DetalheActivity.this,MapaActivity.class);
+                i.putExtra("comerciante", (Serializable) comerciante);
+                startActivity(i);
+            }
+        });
     }
 
     private void carregarTelefoneEndereco() {
@@ -174,6 +179,21 @@ public class DetalheActivity extends AppCompatActivity {
     private void lerIntent() {
         Intent intent = getIntent();
         comerciante = (Comerciante) intent.getSerializableExtra("comerciante");
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        switch (id) {
+            // Id correspondente ao botão Up/Home da actionbar
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void exibirMsgAtualizacao(String mensagem) {

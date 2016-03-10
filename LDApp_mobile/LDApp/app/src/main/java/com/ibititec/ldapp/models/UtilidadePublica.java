@@ -8,6 +8,15 @@ public class UtilidadePublica {
     private String NomeUtilidade;
     private String TelefoneUtilidade;
 
+    public UtilidadePublica() {
+
+    }
+
+    public UtilidadePublica(String nomeUtilidade, String telefoneUtilidade) {
+        NomeUtilidade = nomeUtilidade;
+        TelefoneUtilidade = telefoneUtilidade;
+    }
+
     public String getNomeUtilidade() {
         return NomeUtilidade;
     }

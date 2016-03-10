@@ -10,14 +10,15 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
 import com.ibititec.ldapp.R;
 import com.ibititec.ldapp.adapter.UtilidadeAdapter;
-import com.ibititec.ldapp.helpers.UIHelper;
 import com.ibititec.ldapp.models.UtilidadePublica;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ import java.util.Map;
 
 public class PrefeituraActivity extends AppCompatActivity {
 
-    private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 12 ;
+    private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 12;
 
     UtilidadePublica utilidadePublica;
 
@@ -45,46 +46,50 @@ public class PrefeituraActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ArrayList<UtilidadePublica> utilidadeArray = new ArrayList<UtilidadePublica>();
-        UtilidadePublica utilidade = new UtilidadePublica();
-        utilidade.setNomeUtilidade("Secretária Saúde");
-        utilidade.setTelefoneUtilidade("032 32811710");
-        utilidadeArray.add(utilidade);
-
-        UtilidadePublica utilidade2 = new UtilidadePublica();
-        utilidade2.setNomeUtilidade("Gabinete Prefeito");
-        utilidade2.setTelefoneUtilidade("032 32811810");
-        utilidadeArray.add(utilidade2);
+        utilidadeArray.add(new UtilidadePublica("Recepção", "(32) 3281-1281"));
+        utilidadeArray.add(new UtilidadePublica("Gabinete Prefeito", "(32) 3281-1235"));
+        utilidadeArray.add(new UtilidadePublica("Secretária Saúde", "(32) 3281-1440"));
+        utilidadeArray.add(new UtilidadePublica("Secretária Administração", "(32) 3281-1281"));
+        utilidadeArray.add(new UtilidadePublica("Secretária Obras", "(32) 3281 3266"));
+        utilidadeArray.add(new UtilidadePublica("Secretária Educação", "(32) 3281-1573"));
+        utilidadeArray.add(new UtilidadePublica("Secretária Fazenda Finanças", "(32) 3281-1281"));
+        utilidadeArray.add(new UtilidadePublica("Secretária Agric e Pecuária", "(32) 3281-3266"));
+        utilidadeArray.add(new UtilidadePublica("Secretária Assist. Social", "(32) 3281-1936"));
+        utilidadeArray.add(new UtilidadePublica("Secretária Meio Ambiente", "(32) 3281-1195"));
+        utilidadeArray.add(new UtilidadePublica("Secretária Esporte", "(32) 3281-3266"));
+        utilidadeArray.add(new UtilidadePublica("Secretária Turismo", "(32) 3281-1195"));
+        utilidadeArray.add(new UtilidadePublica("Demae", "(32) 3281-1981"));
 
         UtilidadeAdapter utilidadeAdater = new UtilidadeAdapter(this, utilidadeArray, this);
         final ListView listView = (ListView) findViewById(R.id.listview_utilidades_prefeitura);
         listView.setAdapter(utilidadeAdater);
-        UIHelper.setListViewHeightBasedOnChildren(listView);
+        //UIHelper.setListViewHeightBasedOnChildren(listView);
     }
 
-        private void setupFab() {
-            if (ActivityCompat.checkSelfPermission(PrefeituraActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                if (!ActivityCompat.shouldShowRequestPermissionRationale(PrefeituraActivity.this, Manifest.permission.CALL_PHONE)) {
-                    showMessageOKCancel("Você precisa permitir acesso ao discador do telefone!",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    ActivityCompat.requestPermissions(PrefeituraActivity.this,new String[] {Manifest.permission.CALL_PHONE},
-                                            MY_PERMISSIONS_REQUEST_CALL_PHONE);
-                                }
-                            });
-                    return;
-                }
-                ActivityCompat.requestPermissions(PrefeituraActivity.this, new String[]{Manifest.permission.CALL_PHONE},
-                        MY_PERMISSIONS_REQUEST_CALL_PHONE);
+    private void setupFab() {
+        if (ActivityCompat.checkSelfPermission(PrefeituraActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(PrefeituraActivity.this, Manifest.permission.CALL_PHONE)) {
+                showMessageOKCancel("Você precisa permitir acesso ao discador do telefone!",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ActivityCompat.requestPermissions(PrefeituraActivity.this, new String[]{Manifest.permission.CALL_PHONE},
+                                        MY_PERMISSIONS_REQUEST_CALL_PHONE);
+                            }
+                        });
                 return;
             }
+            ActivityCompat.requestPermissions(PrefeituraActivity.this, new String[]{Manifest.permission.CALL_PHONE},
+                    MY_PERMISSIONS_REQUEST_CALL_PHONE);
+            return;
+        }
 
-            Intent callIntent = new Intent(Intent.ACTION_CALL);
-            callIntent.setData(Uri.parse("tel:" + utilidadePublica.getTelefoneUtilidade()));
-            callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(callIntent);
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse("tel:" + utilidadePublica.getTelefoneUtilidade()));
+        callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(callIntent);
 //            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //            fab.setOnClickListener(new View.OnClickListener() {
 //                @TargetApi(Build.VERSION_CODES.M)
@@ -93,7 +98,7 @@ public class PrefeituraActivity extends AppCompatActivity {
 //
 //                }
 //            });
-        }
+    }
 
     private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
         new AlertDialog.Builder(PrefeituraActivity.this)
@@ -128,6 +133,22 @@ public class PrefeituraActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
 
+        int id = item.getItemId();
+        switch (id) {
+            // Id correspondente ao botão Up/Home da actionbar
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
 
 }
