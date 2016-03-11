@@ -4,9 +4,8 @@
     <string name="action_atualizar">Atualizar</string>
     <string name="msg_erro_json">Erro baixando JSON: %s</string>
     <string name="url">http://52.37.37.207:86/Comerciante/GetComerciantes</string>
-    <string name="title_activity_detalhe">DetalheActivity</string>
-    <string name="title_activity_main">MainActivity</string>
-
+    <string name="title_activity_detalhe">Detalhe Empresa</string>
+    <string name="title_activity_main">LDApp</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_listaComerciante">Lista Comerciantes</string>

@@ -21,6 +21,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.appodeal.ads.Appodeal;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.ibititec.ldapp.models.Comerciante;
 import com.ibititec.ldapp.models.Endereco;
@@ -37,6 +39,7 @@ public class DetalheActivity extends AppCompatActivity {
     private TextView txtNomeComerciante;
     private String telefoneChamar;
     private Button btnVerMapa;
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,30 +47,28 @@ public class DetalheActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detalhe);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        Fresco.initialize(this);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lerIntent();
-        exibirMsgAtualizacao("Tela de detalhes aberta, comerciante: " + comerciante.getNome());
+        //exibirMsgAtualizacao("Tela de detalhes aberta, comerciante: " + comerciante.getNome());
         txtNomeComerciante = (TextView) findViewById(R.id.txtNomeComercianteDetalhe);
         txtNomeComerciante.setText(comerciante.getNome());
+
         carregarTelefoneEndereco();
         setupFab();
+
         btnVerMapa = (Button) findViewById(R.id.btn_visualizar_mapa);
         btnVerMapa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(DetalheActivity.this,MapaActivity.class);
+                Intent i = new Intent(DetalheActivity.this, MapaActivity.class);
                 i.putExtra("comerciante", (Serializable) comerciante);
                 startActivity(i);
             }
         });
+        Appodeal.show(this, Appodeal.BANNER_BOTTOM);
     }
 
     private void carregarTelefoneEndereco() {
@@ -76,61 +77,69 @@ public class DetalheActivity extends AppCompatActivity {
         draweeView.setImageURI(imageUri);
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.linear_layout_detalhe);
-        TextView tx = new TextView(this);
-        tx.setText("Telefone: ");
-        layout.addView(tx);
 
-        for (Telefone telefone : comerciante.getTelefones()) {
-            TextView txTelefone = new TextView(this);
-            txTelefone.setText(telefone.getNumero());
-            layout.addView(txTelefone);
-        }
-
-        TextView txEndereco = new TextView(this);
-        txEndereco.setText("Endereço: ");
-        layout.addView(txEndereco);
-
-        if (comerciante.getTelefones() != null) {
+        if (comerciante.getTelefones() != null && comerciante.getTelefones().size()>0) {
             telefoneChamar = comerciante.getTelefones().get(0).getNumero();
+
+            TextView tx = new TextView(this);
+            tx.setText("Telefone: ");
+            layout.addView(tx);
+
+            for (Telefone telefone : comerciante.getTelefones()) {
+                TextView txTelefone = new TextView(this);
+                txTelefone.setText(telefone.getNumero());
+                layout.addView(txTelefone);
+            }
         }
 
-        for (Endereco endereco : comerciante.getEnderecos()) {
-            TextView txLogradouro = new TextView(this);
-            txLogradouro.setText("Rua/Av:" + endereco.getLogradouro());
-            layout.addView(txLogradouro);
+        if (comerciante.getEnderecos() != null && comerciante.getEnderecos().size() > 0) {
+            TextView txEndereco = new TextView(this);
+            txEndereco.setText("Endereço: ");
+            layout.addView(txEndereco);
 
-            TextView txEnderecoNumero = new TextView(this);
-            txEnderecoNumero.setText("N°: " + endereco.getNumero());
-            layout.addView(txEnderecoNumero);
 
-            TextView txEnderecoBairro = new TextView(this);
-            txEnderecoBairro.setText("Bairro: " + endereco.getBairro());
-            layout.addView(txEnderecoBairro);
+            for (Endereco endereco : comerciante.getEnderecos()) {
+                TextView txLogradouro = new TextView(this);
+                txLogradouro.setText("Rua/Av:" + endereco.getLogradouro());
+                txLogradouro.setTextSize(14);
+                layout.addView(txLogradouro);
 
-            TextView txComplemento = new TextView(this);
-            txComplemento.setText("Complemento: " + endereco.getComplemento());
-            layout.addView(txComplemento);
+                TextView txEnderecoNumero = new TextView(this);
+                txEnderecoNumero.setText("N°: " + endereco.getNumero());
+                txEnderecoNumero.setTextSize(14);
+                layout.addView(txEnderecoNumero);
+
+                TextView txEnderecoBairro = new TextView(this);
+                txEnderecoBairro.setText("Bairro: " + endereco.getBairro());
+                txEnderecoBairro.setTextSize(14);
+                layout.addView(txEnderecoBairro);
+
+                TextView txComplemento = new TextView(this);
+                txComplemento.setText("Complemento: " + endereco.getComplemento());
+                txComplemento.setTextSize(14);
+                layout.addView(txComplemento);
+            }
         }
     }
 
     private void setupFab() {
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @TargetApi(Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
                 if (ActivityCompat.checkSelfPermission(DetalheActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                        if (!ActivityCompat.shouldShowRequestPermissionRationale(DetalheActivity.this, Manifest.permission.CALL_PHONE)) {
-                            showMessageOKCancel("Você precisa permitir acesso ao discador do telefone!",
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            ActivityCompat.requestPermissions(DetalheActivity.this,new String[] {Manifest.permission.CALL_PHONE},
-                                                    MY_PERMISSIONS_REQUEST_CALL_PHONE);
-                                        }
-                                    });
-                            return;
-                        }
+                    if (!ActivityCompat.shouldShowRequestPermissionRationale(DetalheActivity.this, Manifest.permission.CALL_PHONE)) {
+                        showMessageOKCancel("Você precisa permitir acesso ao discador do telefone!",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        ActivityCompat.requestPermissions(DetalheActivity.this, new String[]{Manifest.permission.CALL_PHONE},
+                                                MY_PERMISSIONS_REQUEST_CALL_PHONE);
+                                    }
+                                });
+                        return;
+                    }
                     ActivityCompat.requestPermissions(DetalheActivity.this, new String[]{Manifest.permission.CALL_PHONE},
                             MY_PERMISSIONS_REQUEST_CALL_PHONE);
                     return;

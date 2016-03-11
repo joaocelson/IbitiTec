@@ -14,9 +14,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.appodeal.ads.Appodeal;
 import com.ibititec.ldapp.ListComercianteActivity;
 import com.ibititec.ldapp.R;
 import com.ibititec.ldapp.models.UtilidadePublica;
@@ -70,13 +71,16 @@ public class UtilidadeAdapter extends BaseAdapter {
             TextView txtTelefoneUtilidade = (TextView) layout.findViewById(R.id.txtTelefoneUtilidade);
             txtTelefoneUtilidade.setText("Telefone: " + utilidade.getTelefoneUtilidade());
 
-            ImageButton btnCall = (ImageButton) layout.findViewById(R.id.btn_image_button);
-            btnCall.setOnClickListener(new View.OnClickListener() {
+       //     ImageButton btnCall = (ImageButton) layout.findViewById(R.id.btn_image_button);
+            ImageView ivCall = (ImageView) layout.findViewById(R.id.ivCall);
+
+            ivCall.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     discar(v,utilidade);
                 }
             });
+            Appodeal.show(activity, Appodeal.BANNER_BOTTOM);
             return layout;
 
         } catch (Exception e) {

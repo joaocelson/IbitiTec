@@ -7,14 +7,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ListView;
 
 import com.ibititec.ldapp.R;
@@ -38,28 +35,21 @@ public class PrefeituraActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ArrayList<UtilidadePublica> utilidadeArray = new ArrayList<UtilidadePublica>();
         utilidadeArray.add(new UtilidadePublica("Recepção", "(32) 3281-1281"));
         utilidadeArray.add(new UtilidadePublica("Gabinete Prefeito", "(32) 3281-1235"));
-        utilidadeArray.add(new UtilidadePublica("Secretária Saúde", "(32) 3281-1440"));
-        utilidadeArray.add(new UtilidadePublica("Secretária Administração", "(32) 3281-1281"));
-        utilidadeArray.add(new UtilidadePublica("Secretária Obras", "(32) 3281 3266"));
-        utilidadeArray.add(new UtilidadePublica("Secretária Educação", "(32) 3281-1573"));
-        utilidadeArray.add(new UtilidadePublica("Secretária Fazenda Finanças", "(32) 3281-1281"));
-        utilidadeArray.add(new UtilidadePublica("Secretária Agric e Pecuária", "(32) 3281-3266"));
-        utilidadeArray.add(new UtilidadePublica("Secretária Assist. Social", "(32) 3281-1936"));
-        utilidadeArray.add(new UtilidadePublica("Secretária Meio Ambiente", "(32) 3281-1195"));
-        utilidadeArray.add(new UtilidadePublica("Secretária Esporte", "(32) 3281-3266"));
-        utilidadeArray.add(new UtilidadePublica("Secretária Turismo", "(32) 3281-1195"));
+        utilidadeArray.add(new UtilidadePublica("Secret. Saúde", "(32) 3281-1440"));
+        utilidadeArray.add(new UtilidadePublica("Secret. Administração", "(32) 3281-1281"));
+        utilidadeArray.add(new UtilidadePublica("Secret. Obras", "(32) 3281 3266"));
+        utilidadeArray.add(new UtilidadePublica("Secret. Educação", "(32) 3281-1573"));
+        utilidadeArray.add(new UtilidadePublica("Secret. Fazen/Finanças", "(32) 3281-1281"));
+        utilidadeArray.add(new UtilidadePublica("Secret. Agric/Pecuária", "(32) 3281-3266"));
+        utilidadeArray.add(new UtilidadePublica("Secret. Assist. Social", "(32) 3281-1936"));
+        utilidadeArray.add(new UtilidadePublica("Secret. Meio Ambiente", "(32) 3281-1195"));
+        utilidadeArray.add(new UtilidadePublica("Secret. Esporte", "(32) 3281-3266"));
+        utilidadeArray.add(new UtilidadePublica("Secret. Turismo", "(32) 3281-1195"));
         utilidadeArray.add(new UtilidadePublica("Demae", "(32) 3281-1981"));
 
         UtilidadeAdapter utilidadeAdater = new UtilidadeAdapter(this, utilidadeArray, this);

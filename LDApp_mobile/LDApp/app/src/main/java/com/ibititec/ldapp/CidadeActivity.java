@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.appodeal.ads.Appodeal;
+
 public class CidadeActivity extends AppCompatActivity {
 
     @Override
@@ -23,6 +25,7 @@ public class CidadeActivity extends AppCompatActivity {
 //                        .setAction("Action", null).show();
 //            }
 //        });
+        Appodeal.show(this, Appodeal.BANNER_BOTTOM);
     }
 
     @Override

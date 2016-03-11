@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
@@ -14,7 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -37,7 +35,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
     GoogleMap mMap;
     private double latitude = 0;
     private double longitude = 0;
-    private float zoom = 18;
+    private float zoom = 15;
     private List<String> empresa;
     private Comerciante comerciante;
 
@@ -52,19 +50,11 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setupFab();
         setupMapa();
         lerIntent();
         lePosicao();
+
     }
 
     private void lerIntent() {
@@ -91,55 +81,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
 //        }
 //    }
 
-    private void setupFab() {
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-//                final AutoCompleteTextView actv = new AutoCompleteTextView(MapaActivity.this);
-//                actv.setSingleLine();
-//                actv.setThreshold(1);
-//                actv.setAllCaps(true);
-//
-//                LinearLayout.LayoutParams layoutParams =
-//                        new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-//                                ViewGroup.LayoutParams.WRAP_CONTENT);
-//                actv.setLayoutParams(layoutParams);
-//
-//                ArrayAdapter<String> adapter = new ArrayAdapter<>(MapaActivity.this,
-//                        android.R.layout.simple_list_item_1,
-//                        siglas);
-//                actv.setAdapter(adapter);
-//
-//                actv.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
-//
-//                //Fazer a busca de pátio
-//                final AlertDialog alertDialog = new AlertDialog.Builder(MapaActivity.this)
-//                        .setTitle("Busca")
-//                        .setPositiveButton("Busca", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                buscaPatio(actv.getText().toString().trim().toUpperCase());
-//                            }
-//                        })
-//                        .setNegativeButton("Cancela", null)
-//                        .setView(actv)
-//                        .show();
-//
-//                actv.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//                    @Override
-//                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//                        buscaPatio(actv.getText().toString().trim().toUpperCase());
-//                        alertDialog.dismiss();
-//
-//                        return true;
-//                    }
-//                });
-
-            }
-        });
-    }
 
     private void buscaPatio(String sigla) {
         Log.i(TAG, String.format("Busca: %s", sigla));

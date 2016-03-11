@@ -27,6 +27,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.appodeal.ads.Appodeal;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.ibititec.ldapp.adapter.ComercianteAdapter;
 import com.ibititec.ldapp.helpers.HttpHelper;
@@ -48,7 +49,7 @@ public class ListComercianteActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private  Comerciante comerciante;
     private List<String> listComerciantes;
-
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,14 +57,8 @@ public class ListComercianteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_comerciantes);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lsViewComerciantes = (ListView) findViewById(R.id.listview_comerciantes);
 
@@ -77,6 +72,8 @@ public class ListComercianteActivity extends AppCompatActivity {
 
         progressBar.setVisibility(View.GONE);
 
+        setupFab();
+
         lsViewComerciantes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> myAdapter, View myView, int myItemInt, long mylng) {
                 try {
@@ -88,7 +85,7 @@ public class ListComercianteActivity extends AppCompatActivity {
                 }
             }
         });
-        setupFab();
+        Appodeal.show(this, Appodeal.BANNER_BOTTOM);
     }
 
     @Override
@@ -243,7 +240,6 @@ public class ListComercianteActivity extends AppCompatActivity {
     }
 
     private void setupFab() {
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

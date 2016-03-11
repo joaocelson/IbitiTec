@@ -2,8 +2,6 @@ package com.ibititec.ldapp.utilidade_publica;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -23,14 +21,7 @@ public class UtilidadePulicaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_utilidade_pulica);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
 
         String[] values = new String[] { "Telefones Prefeitura", "Telefones Santa Casa", "Telefones Polícia",
                 "Transporte", "Telefone Câmara" };
