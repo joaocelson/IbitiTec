@@ -17,7 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -38,7 +38,7 @@ public class DetalheActivity extends AppCompatActivity {
     private Comerciante comerciante;
     private TextView txtNomeComerciante;
     private String telefoneChamar;
-    private Button btnVerMapa;
+    private ImageView btnVerMapa;
     FloatingActionButton fab;
 
     @Override
@@ -59,7 +59,7 @@ public class DetalheActivity extends AppCompatActivity {
         carregarTelefoneEndereco();
         setupFab();
 
-        btnVerMapa = (Button) findViewById(R.id.btn_visualizar_mapa);
+        btnVerMapa = (ImageView) findViewById(R.id.btn_visualizar_mapa);
         btnVerMapa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -11,7 +11,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- Optional -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-
+    <uses-permission android:name="android.permission.SET_DEBUG_APP"/>
 
 
     <application

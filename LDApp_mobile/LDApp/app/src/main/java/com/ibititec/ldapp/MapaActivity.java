@@ -42,7 +42,6 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
     private HashMap<Marker, Comerciante> empresaPorMarker;
     private HashMap<String, Marker> markersPorEmpresa;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +53,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
         setupMapa();
         lerIntent();
         lePosicao();
-
+        permissaoMapa();
     }
 
     private void lerIntent() {
@@ -67,21 +66,6 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
-
-//    private void setupPatios() {
-//        String json = leJsonPatios();
-//
-//        if (json.isEmpty()) {
-//            Log.i(TAG, "Baixou patios");
-//            //baixarPatios();
-//        } else {
-//            Log.i(TAG, "Carregou patios salvos");
-//            carregaPatios(json);
-//            //marcaPatios();
-//        }
-//    }
-
-
 
     private void buscaPatio(String sigla) {
         Log.i(TAG, String.format("Busca: %s", sigla));
@@ -101,53 +85,15 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
         marker.showInfoWindow();
     }
 
-//        private void baixarPatios() {
-//            (new AsyncTask<String, Void, String>() {
-//
-//                private ProgressDialog progressDialog;
-//
-//                @Override
-//                protected void onPreExecute() {
-//                    super.onPreExecute();
-//                    progressDialog = ProgressDialog.show(MapaActivity.this, "Aguarde", "Baixando pátios");
-//                }
-//
-//                @Override
-//                protected String doInBackground(String... params) {
-//                    String json = null;
-//
-//                    try {
-//                        String url = params[0];
-//                        json = HttpHelper.downloadFromURL(url);
-//                        Log.i(TAG, json);
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                        Log.e(TAG, String.format(getString(R.string.msg_erro_json), e.getMessage()));
-//                    }
-//
-//                    return json;
-//                }
-//
-//                @Override
-//                protected void onPostExecute(String json) {
-//                    super.onPostExecute(json);
-//
-//                    progressDialog.dismiss();
-//
-//                    if (json == null) {
-//                        Log.w(TAG, "JSON veio nulo!");
-//                        return;
-//                    }
-//
-//                    PreferenceManager.getDefaultSharedPreferences(MapaActivity.this).edit()
-//                            .putString("patios.json", json)
-//                            .apply();
-//
-//                    carregaPatios(json);
-//                    marcaPatios();
-//                }
-//            }).execute(getString(R.string.patios));
-//        }
+    private void permissaoMapa() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                    REQUEST_CODE_MY_LOCATION);
+        }
+    }
 
     private void lePosicao() {
         // SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MapaActivity.this);
@@ -177,19 +123,6 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .putFloat("zoom", zoom)
                 .apply();
     }
-
-//    private String leJsonPatios() {
-//        String json = PreferenceManager.getDefaultSharedPreferences(MapaActivity.this)
-//                .getString("patios.json", "");
-//        Log.i(TAG, "Lendo preferences: " + json);
-//        return json;
-//    }
-
-//    private void carregaPatios(String json) {
-//        comerciantes = JsonHelper.getList(json, Comerciante[].class);
-//
-//        Snackbar.make(findViewById(R.id.fab), String.format("%d pátios carregados.", comerciantes.size()), Snackbar.LENGTH_SHORT).show();
-//    }
 
     private void marcarEmpresa() {
         if (mMap != null && comerciante != null) {
@@ -230,15 +163,12 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
         }
-
-
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
         switch (requestCode) {
             case REQUEST_CODE_MY_LOCATION: {
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
@@ -255,7 +185,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-      //   mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        //   mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
@@ -292,14 +222,10 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
 
                 Comerciante comerciante = empresaPorMarker.get(marker);
-
-
             }
         });
 
-        //restauraPosicao();
         marcarEmpresa();
-        //marcaPatios();
     }
 
 }

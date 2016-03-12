@@ -22,10 +22,12 @@ import java.util.ArrayList;
 public class ComercianteAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<Comerciante> listaComerciantes;
-    public  ArrayList<String> listComerciantes = new ArrayList<String>();
+    public ArrayList<String> listComerciantes;
+
     public ComercianteAdapter(Context context, ArrayList<Comerciante> listaComerciantes) {
         this.context = context;
         this.listaComerciantes = listaComerciantes;
+        this.listComerciantes = new ArrayList<String>();
     }
 
     @Override
@@ -55,17 +57,19 @@ public class ComercianteAdapter extends BaseAdapter {
 
             TextView nome = (TextView) layout.findViewById(R.id.txtNomeComerciante);
             nome.setText(comerciante.getNome());
-
+            nome.setPadding(10,0,0,0);
             TextView txtTelefoneComerciante = (TextView) layout.findViewById(R.id.txtTelefoneComerciante);
             txtTelefoneComerciante.setText("Telefone: " + comerciante.getTelefones().get(0).getNumero());
-
+            txtTelefoneComerciante.setPadding(10,0,0,0);
             /* ImageView ivCasa = (ImageView) layout.findViewById(R.id.ivComerciante);
             ivCasa.setImageResource(comerciante.getComercianteImage(position));*/
 
             Uri imageUri = Uri.parse(comerciante.getNomeFoto());
             SimpleDraweeView draweeView = (SimpleDraweeView) layout.findViewById(R.id.my_image_view);
             draweeView.setImageURI(imageUri);
-            listComerciantes.add(comerciante.getNome());
+            if (!listComerciantes.contains(comerciante.getNome())) {
+                listComerciantes.add(comerciante.getNome());
+            }
 
             return layout;
 

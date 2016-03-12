@@ -12,13 +12,15 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.ibititec.ldapp.DetalheActivity"
     tools:showIn="@layout/activity_detalhe"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="1">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:weightSum="1">
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/img_fresco_detalhe"
@@ -31,14 +33,14 @@
             fresco:placeholderImage="@drawable/loading_img"
             fresco:retryImage="@drawable/retry_img" />
 
-        <Button
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:src="@drawable/maps_icon"
             android:id="@+id/btn_visualizar_mapa"
             android:text="Visualizar no Mapa"
-            android:background="@color/colorAccent"
-            />
-
+            android:paddingLeft="30dp"
+            android:layout_weight="0.04" />
     </LinearLayout>
 
     <LinearLayout
@@ -64,10 +66,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="10dp">
-
-
-
     </LinearLayout>
-
 
 </LinearLayout>
