@@ -9,13 +9,10 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior" tools:showIn="@layout/app_bar_main"
     tools:context="com.ibititec.ldapp.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:text="Pesquisar Empresa"
+    <AutoCompleteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:textAllCaps="true"
-        android:textSize="25sp"
-        android:textStyle="bold"
         android:id="@+id/text_view_procurar_empresa"/>
 
     <ImageView
@@ -25,14 +22,6 @@
         android:id="@+id/procurar_empresa"
         android:layout_alignParentRight="true" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@android:color/darker_gray"
-        android:paddingTop="10dp"
-        android:layout_below="@+id/procurar_empresa"
-        android:id="@+id/separator"/>
-
     <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -40,19 +29,15 @@
     android:layout_height="match_parent"
     android:paddingBottom="20dp"
     android:paddingTop="40dp"
-        android:layout_below="@+id/separator"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.automateasy.patios.DetalheActivity"
-    tools:showIn="@layout/activity_main">
+    tools:showIn="@layout/activity_main"
+        android:layout_below="@+id/procurar_empresa">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-
-
-
         <ProgressBar
             android:id="@+id/progress_comerciantes_main"
             android:layout_width="wrap_content"

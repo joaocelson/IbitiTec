@@ -6,16 +6,13 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- Optional -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.SET_DEBUG_APP"/>
+    <uses-permission android:name="android.permission.SET_DEBUG_APP" />
 
-
-    <application
-        android:name="android.support.multidex.MultiDexApplication">
+    <application android:name="android.support.multidex.MultiDexApplication" >
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -30,8 +27,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -39,205 +36,298 @@
         <activity
             android:name=".DetalheActivity"
             android:label="@string/title_activity_detalhe"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName="com.ibititec.ldapp.ListComercianteActivity">
-
+            android:parentActivityName=".ListComercianteActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
             android:name=".ListComercianteActivity"
             android:label="@string/title_activity_listaComerciante"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName="com.ibititec.ldapp.MainActivity">>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+>
         </activity>
         <activity
             android:name=".CidadeActivity"
             android:label="@string/title_activity_cidade"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName="com.ibititec.ldapp.utilidade_publica.UtilidadePulicaActivity">>
+            android:parentActivityName=".utilidade_publica.UtilidadePulicaActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+>
         </activity>
         <activity
             android:name=".utilidade_publica.UtilidadePulicaActivity"
             android:label="@string/title_activity_utilidade_pulica"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName="com.ibititec.ldapp.MainActivity">>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+>
         </activity>
         <activity
             android:name=".utilidade_publica.PrefeituraActivity"
             android:label="@string/title_activity_prefeitura"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName="com.ibititec.ldapp.utilidade_publica.UtilidadePulicaActivity">>
+            android:parentActivityName=".utilidade_publica.UtilidadePulicaActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+>
         </activity>
         <activity
             android:name=".utilidade_publica.CamaraActivity"
             android:label="@string/title_activity_camara"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName="com.ibititec.ldapp.utilidade_publica.UtilidadePulicaActivity">>
+            android:parentActivityName=".utilidade_publica.UtilidadePulicaActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+>
         </activity>
         <activity
             android:name=".utilidade_publica.TransporteActivity"
             android:label="@string/title_activity_transporte"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName="com.ibititec.ldapp.utilidade_publica.UtilidadePulicaActivity">>
+            android:parentActivityName=".utilidade_publica.UtilidadePulicaActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+>
         </activity>
         <activity
             android:name=".utilidade_publica.SantaCasaActivity"
             android:label="@string/title_activity_santa_casa"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName="com.ibititec.ldapp.utilidade_publica.UtilidadePulicaActivity">>
+            android:parentActivityName=".utilidade_publica.UtilidadePulicaActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+>
         </activity>
         <activity
             android:name=".utilidade_publica.PoliciaActivity"
             android:label="@string/title_activity_policia"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName="com.ibititec.ldapp.utilidade_publica.UtilidadePulicaActivity">>
+            android:parentActivityName=".utilidade_publica.UtilidadePulicaActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+>
         </activity>
         <activity
             android:name=".MapaActivity"
             android:label="@string/title_activity_mapa"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName="com.ibititec.ldapp.utilidade_publica.UtilidadePulicaActivity">>
+            android:parentActivityName=".utilidade_publica.UtilidadePulicaActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+>
         </activity>
-        <!--<activity-->
-            <!--android:name=".adapter.UtilidadeAdapter"-->
-            <!--android:label="@string/title_activity_utilidade_adapter"-->
-            <!--android:theme="@style/AppTheme.NoActionBar" >-->
-        <!--</activity>-->
-
-        <!--APPODEAL-->
-        <!-- <uses-feature android:name="android.hardware.location" android:required="false" />
-        <uses-feature android:name="android.hardware.location.network" android:required="false" />-->
+        <!-- <activity -->
+        <!-- android:name=".adapter.UtilidadeAdapter" -->
+        <!-- android:label="@string/title_activity_utilidade_adapter" -->
+        <!-- android:theme="@style/AppTheme.NoActionBar" > -->
+        <!-- </activity> -->
 
 
-        <meta-data android:name="com.appodeal.framework" android:value="android" />
-        <receiver android:name="com.appodeal.ads.AppodealPackageAddedReceiver" android:exported="true" android:enabled="true">
+        <!-- APPODEAL -->
+        <!--
+        <uses-feature android:name="android.hardware.location" android:required="false" />
+        <uses-feature android:name="android.hardware.location.network" android:required="false" />
+        -->
+
+        <meta-data
+            android:name="com.appodeal.framework"
+            android:value="android" />
+
+        <receiver
+            android:name="com.appodeal.ads.AppodealPackageAddedReceiver"
+            android:enabled="true"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
+
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
 
-        <activity android:name="com.appodeal.ads.InterstitialActivity"
+        <activity
+            android:name="com.appodeal.ads.InterstitialActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name="com.appodeal.ads.VideoActivity"
+        <activity
+            android:name="com.appodeal.ads.VideoActivity"
+            android:configChanges="orientation|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.appodeal.ads.LoaderActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <activity android:name="com.appodeal.ads.LoaderActivity"
-            android:configChanges="orientation|screenSize"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
-        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
-
-        <activity android:name="com.google.android.gms.ads.AdActivity"
+        <activity
+            android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:theme="@android:style/Theme.Translucent" />
-
-        <activity android:name="com.chartboost.sdk.CBImpressionActivity" android:excludeFromRecents="true"
-            android:hardwareAccelerated="true" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
-            android:configChanges="keyboardHidden|orientation|screenSize" />
-
-        <activity android:name="com.applovin.adview.AppLovinInterstitialActivity"
+        <activity
+            android:name="com.chartboost.sdk.CBImpressionActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:excludeFromRecents="true"
+            android:hardwareAccelerated="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="com.applovin.adview.AppLovinInterstitialActivity"
             android:theme="@android:style/Theme.Translucent" />
-
-        <activity android:name="com.mopub.mobileads.MoPubActivity"
+        <activity
+            android:name="com.mopub.mobileads.MoPubActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@android:style/Theme.Translucent" />
-        <activity android:name="com.mopub.common.MoPubBrowser"
+        <activity
+            android:name="com.mopub.common.MoPubBrowser"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:name="com.mopub.mobileads.MraidActivity"
+        <activity
+            android:name="com.mopub.mobileads.MraidActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:name="com.mopub.mobileads.MraidVideoPlayerActivity"
+        <activity
+            android:name="com.mopub.mobileads.MraidVideoPlayerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-
-        <activity android:name="org.nexage.sourcekit.mraid.MRAIDBrowser"
+        <activity
+            android:name="org.nexage.sourcekit.mraid.MRAIDBrowser"
             android:configChanges="orientation|keyboard|keyboardHidden|screenSize"
             android:theme="@android:style/Theme.Translucent" />
-
-
-        <activity android:name="com.amazon.device.ads.AdActivity" android:configChanges="keyboardHidden|orientation|screenSize"/>
-
-        <activity android:name="ru.mail.android.mytarget.ads.MyTargetActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
-
-        <activity android:name="org.nexage.sourcekit.vast.activity.VASTActivity"
+        <activity
+            android:name="com.amazon.device.ads.AdActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name="ru.mail.android.mytarget.ads.MyTargetActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
+        <activity
+            android:name="org.nexage.sourcekit.vast.activity.VASTActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="org.nexage.sourcekit.vast.activity.VPAIDActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="com.appodeal.ads.networks.SpotXActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <!-- suppress AndroidDomInspection -->
+        <activity
+            android:name="com.facebook.ads.InterstitialAdActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name="com.unity3d.ads.android.view.UnityAdsFullscreenActivity"
+            android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
+            android:hardwareAccelerated="true"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <activity
+            android:name="com.unity3d.ads.android2.view.UnityAdsFullscreenActivity"
+            android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
+            android:hardwareAccelerated="true"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 
-        <activity android:name="org.nexage.sourcekit.vast.activity.VPAIDActivity"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-
-        <activity android:name="com.appodeal.ads.networks.SpotXActivity"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
-        <!--suppress AndroidDomInspection -->
-        <activity android:name="com.facebook.ads.InterstitialAdActivity" android:configChanges="keyboardHidden|orientation|screenSize" />
-
-        <activity android:name="com.unity3d.ads.android.view.UnityAdsFullscreenActivity"
-            android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:hardwareAccelerated="true" />
-        <activity android:name="com.unity3d.ads.android2.view.UnityAdsFullscreenActivity"
-            android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:hardwareAccelerated="true" />
-
-
-        <!--suppress AndroidDomInspection -->
-        <activity android:name="com.jirbo.adcolony.AdColonyOverlay"
+        <!-- suppress AndroidDomInspection -->
+        <activity
+            android:name="com.jirbo.adcolony.AdColonyOverlay"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
-        <!--suppress AndroidDomInspection -->
-        <activity android:name="com.jirbo.adcolony.AdColonyFullscreen"
+        <!-- suppress AndroidDomInspection -->
+        <activity
+            android:name="com.jirbo.adcolony.AdColonyFullscreen"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
-        <!--suppress AndroidDomInspection -->
-        <activity android:name="com.jirbo.adcolony.AdColonyBrowser"
+        <!-- suppress AndroidDomInspection -->
+        <activity
+            android:name="com.jirbo.adcolony.AdColonyBrowser"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
-        <!--suppress AndroidDomInspection -->
-        <activity android:name="com.vungle.publisher.FullScreenAdActivity"
+        <!-- suppress AndroidDomInspection -->
+        <activity
+            android:name="com.vungle.publisher.FullScreenAdActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
-        <!--suppress AndroidDomInspection -->
-        <activity android:name="com.startapp.android.publish.list3d.List3DActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <!-- suppress AndroidDomInspection -->
+        <activity
+            android:name="com.startapp.android.publish.list3d.List3DActivity"
             android:theme="@android:style/Theme" />
-        <!--suppress AndroidDomInspection -->
-        <activity android:name="com.startapp.android.publish.OverlayActivity"
-            android:theme="@android:style/Theme.Translucent"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
-        <!--suppress AndroidDomInspection -->
-        <activity android:name="com.startapp.android.publish.FullScreenActivity"
-            android:theme="@android:style/Theme"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
-        <service android:name="com.yandex.metrica.MetricaService" android:enabled="true"
-            android:exported="true" android:process=":Metrica">
+        <!-- suppress AndroidDomInspection -->
+        <activity
+            android:name="com.startapp.android.publish.OverlayActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme.Translucent" />
+        <!-- suppress AndroidDomInspection -->
+        <activity
+            android:name="com.startapp.android.publish.FullScreenActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme" />
+
+        <service
+            android:name="com.yandex.metrica.MetricaService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":Metrica" >
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <action android:name="com.yandex.metrica.IMetricaService" />
+
                 <data android:scheme="metrica" />
             </intent-filter>
-            <meta-data android:name="metrica:api:level" android:value="39" />
+
+            <meta-data
+                android:name="metrica:api:level"
+                android:value="39" />
         </service>
-        <receiver android:name="com.yandex.metrica.MetricaEventHandler"
-            android:enabled="true" android:exported="true">
+
+        <receiver
+            android:name="com.yandex.metrica.MetricaEventHandler"
+            android:enabled="true"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
             </intent-filter>
         </receiver>
-        <!--suppress AndroidDomInspection -->
-        <activity android:name="com.yandex.mobile.ads.AdActivity"
+        <!-- suppress AndroidDomInspection -->
+        <activity
+            android:name="com.yandex.mobile.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
-        <activity android:name="com.inmobi.rendering.InMobiAdActivity"
+        <activity
+            android:name="com.inmobi.rendering.InMobiAdActivity"
             android:configChanges="keyboardHidden|orientation|keyboard|smallestScreenSize|screenSize"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" android:hardwareAccelerated="true" />
-        <receiver android:name="com.inmobi.commons.core.utilities.uid.ImIdShareBroadCastReceiver"
-            android:enabled="true" android:exported="true" >
+            android:hardwareAccelerated="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <receiver
+            android:name="com.inmobi.commons.core.utilities.uid.ImIdShareBroadCastReceiver"
+            android:enabled="true"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="com.inmobi.share.id" />
             </intent-filter>
         </receiver>
-        <service android:enabled="true" android:name="com.inmobi.signals.activityrecognition.ActivityRecognitionManager" />
 
-        <!--suppress AndroidDomInspection -->
-        <activity android:name="com.flurry.android.FlurryFullscreenTakeoverActivity"
+        <service
+            android:name="com.inmobi.signals.activityrecognition.ActivityRecognitionManager"
+            android:enabled="true" />
+
+        <!-- suppress AndroidDomInspection -->
+        <activity
+            android:name="com.flurry.android.FlurryFullscreenTakeoverActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" />
 
-        <!--FIM APPODEAL-->
+        <!-- FIM APPODEAL -->
+        <activity
+            android:name=".utilidade_publica.FarmaciasPlantaoActivity"
+            android:label="@string/title_activity_vimara"
+            android:parentActivityName=".utilidade_publica.UtilidadePulicaActivity" >
+        </activity>
+        <activity
+            android:name=".utilidade_publica.transporte.VimaraActivity"
+            android:label="@string/title_activity_vimara"
+            android:parentActivityName=".utilidade_publica.UtilidadePulicaActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".utilidade_publica.transporte.BassamarActivity"
+            android:label="@string/title_activity_bassamar"
+            android:parentActivityName=".utilidade_publica.UtilidadePulicaActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".utilidade_publica.transporte.SertanejaActivity"
+            android:label="@string/title_activity_sertaneja"
+            android:parentActivityName=".utilidade_publica.UtilidadePulicaActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".utilidade_publica.transporte.TaxistasActivity"
+            android:label="@string/title_activity_taxistas"
+            android:parentActivityName=".utilidade_publica.UtilidadePulicaActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity android:name=".adapter.TransporteAdapter" >
+        </activity>
     </application>
+
 </manifest>

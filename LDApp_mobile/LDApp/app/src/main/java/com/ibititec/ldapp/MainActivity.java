@@ -16,20 +16,16 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.appodeal.ads.Appodeal;
 import com.facebook.drawee.backends.pipeline.Fresco;
@@ -57,13 +53,14 @@ public class MainActivity extends AppCompatActivity
     private Comerciante comerciante;
     private List<String> listComerciantes;
     ImageView imgBuscarEmpresa;
-
+    private AutoCompleteTextView actv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        actv = (AutoCompleteTextView)findViewById(R.id.text_view_procurar_empresa);//new AutoCompleteTextView(MainActivity.this);
 
 
         //APPODEAL
@@ -104,7 +101,7 @@ public class MainActivity extends AppCompatActivity
         imgBuscarEmpresa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                procurarEmpresa();
+                buscaComerciante(actv.getText().toString().trim());
             }
         });
 
@@ -123,29 +120,29 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        TextView txView = (TextView) findViewById(R.id.text_view_procurar_empresa);
-        txView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "Clicou no texto.");
-                procurarEmpresa();
-            }
-        });
+//        TextView txView = (TextView) findViewById(R.id.text_view_procurar_empresa);
+//        txView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.i(TAG, "Clicou no texto.");
+//                //procurarEmpresa();
+//            }
+//        });
 
+        setarAutomaComplete();
 
     }
 
-    private void procurarEmpresa() {
+    private void setarAutomaComplete() {
 
-        final AutoCompleteTextView actv = new AutoCompleteTextView(MainActivity.this);
         actv.setSingleLine();
         actv.setThreshold(1);
         actv.setAllCaps(true);
 
-        LinearLayout.LayoutParams layoutParams =
-                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
-        actv.setLayoutParams(layoutParams);
+//        LinearLayout.LayoutParams layoutParams =
+//                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+//                        ViewGroup.LayoutParams.WRAP_CONTENT);
+//        actv.setLayoutParams(layoutParams);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this,
                 android.R.layout.simple_list_item_1,
@@ -155,28 +152,28 @@ public class MainActivity extends AppCompatActivity
         actv.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
 
         //Fazer a busca de pátio
-        final AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
-                .setTitle("Busca")
-                .setPositiveButton("Busca", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        buscaComerciante(actv.getText().toString().trim());
-                        //buscaComerciante(actv.getText().toString().trim().toUpperCase());
-                    }
-                })
-                .setNegativeButton("Cancela", null)
-                .setView(actv)
-                .show();
+//        final AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
+//                .setTitle("Busca")
+//                .setPositiveButton("Busca", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        buscaComerciante(actv.getText().toString().trim());
+//                        //buscaComerciante(actv.getText().toString().trim().toUpperCase());
+//                    }
+//                })
+//                .setNegativeButton("Cancela", null)
+//                .setView(actv)
+//                .show();
 
-        actv.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                buscaComerciante(actv.getText().toString().trim());
-                alertDialog.dismiss();
+//        actv.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                buscaComerciante(actv.getText().toString().trim());
+//                alertDialog.dismiss();
 
-                return true;
-            }
-        });
+//                return true;
+//            }
+//        });
     }
 
     private void StartarActivityDetalhe() {
@@ -345,18 +342,25 @@ public class MainActivity extends AppCompatActivity
             Snackbar.make(findViewById(R.id.listview_comerciantes_main), "Digite o nome de uma empresa.", Snackbar.LENGTH_SHORT).show();
             return;
         }else {
+            ArrayList<Comerciante> comerciantesArrayPesquisa = new ArrayList<Comerciante>();
+
             for (Comerciante c : comerciantesArray) {
                 if(c.getNome().equals(comerciante)){
-                    atualizarListViewComerciante(c);
+                    this.comerciante = c;
+                    StartarActivityDetalhe();
                 }
+
+//                if(comerciante.startsWith(c.getTipoComerciante().getDescricacao())){
+//                    comerciantesArrayPesquisa.add(c);
+//                    atualizarListViewComerciante(comerciantesArrayPesquisa);
+//                }
+
             }
         }
     }
 
-    private void atualizarListViewComerciante(Comerciante c) {
-        comerciantesArray = new ArrayList<Comerciante>();
-        comerciantesArray.add(c);
-        ComercianteAdapter comercianteAdapter = new ComercianteAdapter(MainActivity.this, comerciantesArray);
+    private void atualizarListViewComerciante(ArrayList<Comerciante> comerciantes) {
+        ComercianteAdapter comercianteAdapter = new ComercianteAdapter(MainActivity.this, comerciantes);
         lsViewComerciantes.setAdapter(comercianteAdapter);
         UIHelper.setListViewHeightBasedOnChildren(lsViewComerciantes);
 

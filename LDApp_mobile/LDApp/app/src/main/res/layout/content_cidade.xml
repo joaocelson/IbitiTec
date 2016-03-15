@@ -28,7 +28,7 @@
             android:id="@+id/img_cidade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/limaduartemg"/>
+            android:src="@drawable/limaduarte"/>
 
         <TextView
             android:layout_width="wrap_content"

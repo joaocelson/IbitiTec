@@ -17,6 +17,15 @@ public class Comerciante implements Serializable {
     private String NomeFoto;
     private double Latitude;
     private double Longitude;
+    private TipoComerciante TipoComerciante;
+
+    public com.ibititec.ldapp.models.TipoComerciante getTipoComerciante() {
+        return TipoComerciante;
+    }
+
+    public void setTipoComerciante(com.ibititec.ldapp.models.TipoComerciante tipoComerciante) {
+        TipoComerciante = tipoComerciante;
+    }
 
     public double getLatitude() {
         //return Latitude;

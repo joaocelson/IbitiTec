@@ -40,6 +40,7 @@ public class DetalheActivity extends AppCompatActivity {
     private String telefoneChamar;
     private ImageView btnVerMapa;
     FloatingActionButton fab;
+    ImageView imgCall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,8 @@ public class DetalheActivity extends AppCompatActivity {
         //exibirMsgAtualizacao("Tela de detalhes aberta, comerciante: " + comerciante.getNome());
         txtNomeComerciante = (TextView) findViewById(R.id.txtNomeComercianteDetalhe);
         txtNomeComerciante.setText(comerciante.getNome());
+
+        imgCall = (ImageView)findViewById(R.id.btn_ligar_detalhe);
 
         carregarTelefoneEndereco();
         setupFab();
@@ -124,7 +127,7 @@ public class DetalheActivity extends AppCompatActivity {
 
     private void setupFab() {
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        imgCall.setOnClickListener(new View.OnClickListener() {
             @TargetApi(Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {

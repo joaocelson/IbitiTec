@@ -23,5 +23,9 @@
     <string name="title_activity_santa_casa">Santa Casa</string>
     <string name="title_activity_policia">Polícia</string>
     <string name="title_activity_mapa">Local Empresa</string>
-    <string name="title_activity_utilidade_adapter">UtilidadeAdapterActivity</string>
+    <string name="title_activity_utilidade_adapter">Utilidade Pública</string>
+    <string name="title_activity_vimara">Vimara</string>
+    <string name="title_activity_bassamar">Bassamar</string>
+    <string name="title_activity_sertaneja">Sertaneja</string>
+    <string name="title_activity_taxistas">Taxistas</string>
 </resources>

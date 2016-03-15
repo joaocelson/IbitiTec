@@ -61,6 +61,9 @@ public class UtilidadePulicaActivity extends AppCompatActivity {
         }else  if(getListName=="Telefone Câmara") {
             Intent intent = new Intent(this, CamaraActivity.class);
             startActivity(intent);
+        }else  if(getListName=="Farmácias Plantão") {
+            Intent intent = new Intent(this, FarmaciasPlantaoActivity.class);
+            startActivity(intent);
         }
     }
 
