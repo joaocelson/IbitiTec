@@ -53,7 +53,7 @@ public class ComercianteAdapter extends BaseAdapter {
 
             Comerciante comerciante = listaComerciantes.get(position);
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View layout = inflater.inflate(R.layout.comerciante_adapter, null);
+            View layout = inflater.inflate(R.layout.adapter_comerciante, null);
 
             TextView nome = (TextView) layout.findViewById(R.id.txtNomeComerciante);
             nome.setText(comerciante.getNome());

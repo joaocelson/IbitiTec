@@ -5,8 +5,14 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import com.appodeal.ads.Appodeal;
+import com.ibititec.ldapp.adapter.CidadeAdapter;
+import com.ibititec.ldapp.helpers.UIHelper;
+import com.ibititec.ldapp.models.Cidade;
+
+import java.util.ArrayList;
 
 public class CidadeActivity extends AppCompatActivity {
 
@@ -17,15 +23,25 @@ public class CidadeActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+
+        ArrayList<Cidade> cidades = getTextoCidade();
+
+        CidadeAdapter cidadeAdapter = new CidadeAdapter(this, cidades);
+        final ListView listView = (ListView) findViewById(R.id.listview_cidade);
+        listView.setAdapter(cidadeAdapter);
+        UIHelper.setListViewHeightBasedOnChildren(listView);
+
         Appodeal.show(this, Appodeal.BANNER_BOTTOM);
+    }
+
+    private ArrayList<Cidade> getTextoCidade(){
+        ArrayList<Cidade> cidades = new ArrayList<Cidade>();
+        cidades.add(new Cidade(R.string.txtLimaDuarte_1,R.drawable.limaduarte));
+        cidades.add(new Cidade(R.string.txtLimaDuarte_2,R.drawable.limaduarte_2));
+        cidades.add(new Cidade(R.string.txtLimaDuarte_3,R.drawable.limaduarte_3));
+        cidades.add(new Cidade(R.string.txtLimaDuarte_4,R.drawable.limaduarte_4));
+        cidades.add(new Cidade(R.string.txtLimaDuarte_5,R.drawable.limaduarte_5));
+        return cidades;
     }
 
     @Override

@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity
         actv.setSingleLine();
         actv.setThreshold(1);
         actv.setAllCaps(true);
-
+        actv.setFocusable(false);
 //        LinearLayout.LayoutParams layoutParams =
 //                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
 //                        ViewGroup.LayoutParams.WRAP_CONTENT);

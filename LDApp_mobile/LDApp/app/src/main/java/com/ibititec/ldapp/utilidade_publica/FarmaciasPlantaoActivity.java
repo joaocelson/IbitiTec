@@ -1,6 +1,7 @@
 package com.ibititec.ldapp.utilidade_publica;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -19,14 +20,22 @@ public class FarmaciasPlantaoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_farmacias_plantao);
+        setContentView(R.layout.activity_farmacia_plantao);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ArrayList<UtilidadePublica> utilidadeArray = getFarmaciasPlantao();
+
+        UtilidadeAdapter utilidadeAdater = new UtilidadeAdapter(this, utilidadeArray, this);
+        final ListView listView = (ListView) findViewById(R.id.listview_farmacia_plantao);
+        listView.setAdapter(utilidadeAdater);
+        UIHelper.setListViewHeightBasedOnChildren(listView);
+    }
+
+    @NonNull
+    private ArrayList<UtilidadePublica> getFarmaciasPlantao() {
         ArrayList<UtilidadePublica> utilidadeArray = new ArrayList<UtilidadePublica>();
         utilidadeArray.add(new UtilidadePublica("01-03 Pharmavida", "(32) 3281-0943"));
         utilidadeArray.add(new UtilidadePublica("02-03 Pharmavida", "(32) 3215-1109"));
@@ -59,11 +68,7 @@ public class FarmaciasPlantaoActivity extends AppCompatActivity {
         utilidadeArray.add(new UtilidadePublica("29-03 Pharmavida", "(32) 3215-1109"));
         utilidadeArray.add(new UtilidadePublica("30-03 Pharmavida", "(32) 3276-1125"));
         utilidadeArray.add(new UtilidadePublica("31-03 Pharmavida", "(32) 3215-1109"));
-
-        UtilidadeAdapter utilidadeAdater = new UtilidadeAdapter(this, utilidadeArray, this);
-        final ListView listView = (ListView) findViewById(R.id.listview_utilidades_farmacia_plantao);
-        listView.setAdapter(utilidadeAdater);
-        UIHelper.setListViewHeightBasedOnChildren(listView);
+        return utilidadeArray;
     }
 
     @Override

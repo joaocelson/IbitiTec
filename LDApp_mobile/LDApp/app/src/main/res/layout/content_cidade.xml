@@ -1,38 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="30dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.ibititec.ldapp.CidadeActivity"
-    tools:showIn="@layout/a_cidade"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+    tools:showIn="@layout/activity_cidade">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:orientation="vertical">
 
-        <!--<SeekBar-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/seekBar" />-->
-
-        <ImageView
-            android:adjustViewBounds="true"
-            android:id="@+id/img_cidade"
+        <ListView
+            android:id="@+id/listview_cidade"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/limaduarte"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/a_cidade"/>
+            android:layout_height="wrap_content" />
     </LinearLayout>
-</LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

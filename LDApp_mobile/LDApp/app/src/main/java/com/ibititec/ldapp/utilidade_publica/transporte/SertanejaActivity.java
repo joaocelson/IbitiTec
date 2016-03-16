@@ -1,6 +1,7 @@
 package com.ibititec.ldapp.utilidade_publica.transporte;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,6 +26,16 @@ public class SertanejaActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        ArrayList<Transporte> utilidadeArray = getHorariosSertaneja();
+
+        TransporteAdapter transporteAdater = new TransporteAdapter(this, utilidadeArray, this);
+        final ListView listView = (ListView) findViewById(R.id.listview_vimara);
+        listView.setAdapter(transporteAdater);
+        UIHelper.setListViewHeightBasedOnChildren(listView);
+    }
+
+    @NonNull
+    private ArrayList<Transporte> getHorariosSertaneja() {
         ArrayList<Transporte> utilidadeArray = new ArrayList<Transporte>();
         utilidadeArray.add(new Transporte("Lima Duarte x Ibitipoca", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
         utilidadeArray.add(new Transporte("Ibitipoca x Lima Duarte", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
@@ -36,11 +47,7 @@ public class SertanejaActivity extends AppCompatActivity {
         utilidadeArray.add(new Transporte("São Domingos (Olaria) x LD", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
         utilidadeArray.add(new Transporte("Lima Duarte x Rancharia", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
         utilidadeArray.add(new Transporte("Rancharia x Lima Duarte", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
-
-        TransporteAdapter transporteAdater = new TransporteAdapter(this, utilidadeArray, this);
-        final ListView listView = (ListView) findViewById(R.id.listview_vimara);
-        listView.setAdapter(transporteAdater);
-        UIHelper.setListViewHeightBasedOnChildren(listView);
+        return utilidadeArray;
     }
 
     @Override

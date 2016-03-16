@@ -24,7 +24,7 @@ public class UtilidadePulicaActivity extends AppCompatActivity {
 
 
         String[] values = new String[] { "Telefones Prefeitura", "Telefones Santa Casa", "Telefones Polícia",
-                "Transporte", "Telefone Câmara" };
+                "Transporte", "Telefone Câmara", "Farmácias Plantão" };
         final ListView lvUtilidadePublica = (ListView) findViewById(R.id.lv_utilidade_publica);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,

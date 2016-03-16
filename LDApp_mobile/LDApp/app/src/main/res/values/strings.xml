@@ -9,12 +9,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="title_activity_listaComerciante">Lista Comerciantes</string>
-    <string name="a_cidade">Lima Duarte é um município brasileiro no interior do estado de Minas Gerais. Pertence à Mesorregião da Zona da Mata e Microrregião de Juiz de Fora e localiza-se a sul da capital do estado, distando desta cerca de 295 km.[3] Ocupa uma área de 848,089 km², sendo 2,525 km² estão em perímetro urbano,[8] e sua população em 2010 era de 16 166 habitantes,[5] sendo então o 222º mais populoso do estado mineiro.
-
-    A sede tem uma temperatura média anual de 20,1°C e na vegetação do município predomina a mata atlântica. Com uma taxa de urbanização da ordem de 72%, o município contava, em 2009, com 22 estabelecimentos de saúde. O seu Índice de Desenvolvimento Humano (IDH) é de 0,739, considerando como elevado em relação ao estado.
-
-    Na área da cultura e lazer, destaca-se na realização de diversos eventos anuais, como o Carnaval de Lima Duarte, em fevereiro ou março, ou a Exposição Agropecuária, realizada em setembro ou outubro. Possui ainda alguns atrativos turísticos de valor cultural ou histórico, como a Igreja Nossa Senhora do Rosário ou o Calçamento de Paralelepípedos da Praça Juscelino Kubitschek. No município situa-se também o Parque Estadual do Ibitipoca, conhecido por suas montanhas, cachoeiras e trilhas para caminhada, além de vistas panorâmicas dos vários morros que compõem a paisagem do lugar.
-</string>
+    <string name="a_cidade"></string>
     <string name="title_activity_cidade">Cidade</string>
     <string name="title_activity_utilidade_pulica">Utilidade Pública</string>
     <string name="title_activity_prefeitura">Prefeitura</string>
@@ -28,4 +23,13 @@
     <string name="title_activity_bassamar">Bassamar</string>
     <string name="title_activity_sertaneja">Sertaneja</string>
     <string name="title_activity_taxistas">Taxistas</string>
+    <string name="title_activity_cidade_adapter">CidadeAdapter</string>
+
+    <string name="txtLimaDuarte_1">Lima Duarte é um município brasileiro no interior do estado de Minas Gerais. Pertence à Mesorregião da Zona da Mata e Microrregião de Juiz de Fora e localiza-se a sul da capital do estado, distando desta cerca de 295 km.[3] Ocupa uma área de 848,089 km², sendo 2,525 km² estão em perímetro urbano,[8] e sua população em 2010 era de 16 166 habitantes,[5] sendo então o 222º mais populoso do estado mineiro.</string>
+    <string name="txtLimaDuarte_2">A sede tem uma temperatura média anual de 20,1°C e na vegetação do município predomina a mata atlântica. Com uma taxa de urbanização da ordem de 72%, o município contava, em 2009, com 22 estabelecimentos de saúde. O seu Índice de Desenvolvimento Humano (IDH) é de 0,739, considerando como elevado em relação ao estado.</string>
+    <string name="txtLimaDuarte_3">Na área da cultura e lazer, destaca-se na realização de diversos eventos anuais, como o Carnaval de Lima Duarte, em fevereiro ou março, ou a Exposição Agropecuária, realizada em setembro ou outubro. Possui ainda alguns atrativos turísticos de valor cultural ou histórico, como a Igreja Nossa Senhora do Rosário ou o Calçamento de Paralelepípedos da Praça Juscelino Kubitschek.</string>
+    <string name="txtLimaDuarte_4">No município situa-se também o Parque Estadual do Ibitipoca, conhecido por suas montanhas, cachoeiras e trilhas para caminhada, além de vistas panorâmicas dos vários morros que compõem a paisagem do lugar.</string>
+    <string name="txtLimaDuarte_5">No município situa-se também o Parque Estadual do Ibitipoca, conhecido por suas montanhas, cachoeiras e trilhas para caminhada, além de vistas panorâmicas dos vários morros que compõem a paisagem do lugar.</string>
+
+
 </resources>

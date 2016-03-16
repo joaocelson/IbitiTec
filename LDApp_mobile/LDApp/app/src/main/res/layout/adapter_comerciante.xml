@@ -26,7 +26,7 @@
         fresco:failureImage="@drawable/error_img"
         fresco:failureImageScaleType="centerInside"
         fresco:retryImage="@drawable/retry_img"
-        fresco:roundAsCircle="true"
+        fresco:roundedCornerRadius="5dp"
         />
 
     <LinearLayout

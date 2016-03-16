@@ -63,7 +63,7 @@ public class UtilidadeAdapter extends BaseAdapter {
 
             final UtilidadePublica utilidade = listaUtilidades.get(position);
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View layout = inflater.inflate(R.layout.utilidade_adapter, null);
+            View layout = inflater.inflate(R.layout.adapter_utilidade, null);
 
             TextView nome = (TextView) layout.findViewById(R.id.txtNomeUtilidade);
             nome.setText(utilidade.getNomeUtilidade());

@@ -299,8 +299,9 @@
         <!-- FIM APPODEAL -->
         <activity
             android:name=".utilidade_publica.FarmaciasPlantaoActivity"
-            android:label="@string/title_activity_vimara"
-            android:parentActivityName=".utilidade_publica.UtilidadePulicaActivity" >
+            android:label="Farmácias de Plantão"
+            android:parentActivityName=".utilidade_publica.UtilidadePulicaActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
             android:name=".utilidade_publica.transporte.VimaraActivity"
@@ -327,6 +328,11 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity android:name=".adapter.TransporteAdapter" >
+        </activity>
+        <activity
+            android:name=".adapter.CidadeAdapter"
+            android:label="@string/title_activity_cidade_adapter"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>
 
