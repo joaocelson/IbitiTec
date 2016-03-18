@@ -334,6 +334,39 @@
             android:label="@string/title_activity_cidade_adapter"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity
+            android:name=".Ibitipoca.IbitipocaMainActivity"
+            android:label="@string/title_activity_ibitipoca_main"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".Ibitipoca.PousadasChalesActivity"
+            android:label="@string/title_activity_pousadas_chales"
+            android:parentActivityName=".Ibitipoca.IbitipocaMainActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".Ibitipoca.CasasActivity"
+            android:label="@string/title_activity_casas"
+            android:parentActivityName=".Ibitipoca.IbitipocaMainActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".Ibitipoca.ParqueActivity"
+            android:label="@string/title_activity_parque"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".Ibitipoca.RestaurantesActivity"
+            android:label="@string/title_activity_restaurantes"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".Ibitipoca.VilaActivity"
+            android:label="@string/title_activity_vila"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>

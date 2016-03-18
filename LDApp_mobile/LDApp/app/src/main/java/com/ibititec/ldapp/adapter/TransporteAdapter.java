@@ -68,7 +68,8 @@ public class TransporteAdapter extends BaseAdapter {
             return layout;
         } catch (Exception e) {
             Log.i(UtilidadeAdapter.TAG, "Erro ao preecnher o getView: " + e.getMessage());
-            return null;
+
         }
+        return convertView;
     }
 }

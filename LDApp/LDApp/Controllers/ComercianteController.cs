@@ -45,6 +45,78 @@ namespace LDApp.Controllers
             //return View(db.Comerciantes.ToList());
         }
 
+        // GET: /GetPousada/
+        public String GetPousada()
+        {
+            try
+            {
+                List<Comerciante> comerciantes = (List<Comerciante>)db.Comerciantes.Where(a => ( a.TipoComercio.Descricao.Equals("POUSADA") || a.TipoComercio.Descricao.Equals("CHALE")) && a.Enderecos.FirstOrDefault().Bairro.Equals("IBITIPOCA")).ToList();
+
+                foreach (Comerciante comerciante in comerciantes)
+                {
+                    comerciante.NomeFoto = @Url.Content("~/images/upload/") + comerciante.NomeFoto;
+
+                }
+                //Necessario converter o Json Serialize devido ao proxy do EntityFramework
+                return JsonConvert.SerializeObject(comerciantes, Formatting.Indented);
+            }
+            catch (Exception ex)
+            {
+                ex = ex;
+                return null;
+            }
+
+            //return View(db.Comerciantes.ToList());
+        }
+
+        // GET: /GetRestaurantesIbitipoca/
+        public String GetRestaurantesIbitipoca()
+        {
+            try
+            {
+                List<Comerciante> comerciantes = (List<Comerciante>)db.Comerciantes.Where(a => a.TipoComercio.Descricao.Equals("RESTAURANTE") || a.Enderecos.FirstOrDefault().Bairro.Equals("IBITIPOCA")).ToList();
+
+                foreach (Comerciante comerciante in comerciantes)
+                {
+                    comerciante.NomeFoto = @Url.Content("~/images/upload/") + comerciante.NomeFoto;
+
+                }
+                //Necessario converter o Json Serialize devido ao proxy do EntityFramework
+                return JsonConvert.SerializeObject(comerciantes, Formatting.Indented);
+            }
+            catch (Exception ex)
+            {
+                ex = ex;
+                return null;
+            }
+
+            //return View(db.Comerciantes.ToList());
+        }
+
+        // GET: /GetRestaurantesIbitipoca/
+        public String GetRestaurantesIbitipoca()
+        {
+            try
+            {
+                List<Comerciante> comerciantes = (List<Comerciante>)db.Comerciantes.Where(a => a.TipoComercio.Descricao.Equals("CASA") || a.Enderecos.FirstOrDefault().Bairro.Equals("IBITIPOCA")).ToList();
+
+                foreach (Comerciante comerciante in comerciantes)
+                {
+                    comerciante.NomeFoto = @Url.Content("~/images/upload/") + comerciante.NomeFoto;
+
+                }
+                //Necessario converter o Json Serialize devido ao proxy do EntityFramework
+                return JsonConvert.SerializeObject(comerciantes, Formatting.Indented);
+            }
+            catch (Exception ex)
+            {
+                ex = ex;
+                return null;
+            }
+
+            //return View(db.Comerciantes.ToList());
+        }
+
         // GET: /Comerciante/Details/5
         public ActionResult Details(Guid? id)
         {

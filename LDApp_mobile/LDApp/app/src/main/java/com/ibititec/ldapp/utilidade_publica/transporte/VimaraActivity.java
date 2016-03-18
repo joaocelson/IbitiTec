@@ -37,16 +37,20 @@ public class VimaraActivity extends AppCompatActivity {
     @NonNull
     private ArrayList<Transporte> getHorariosVimara() {
         ArrayList<Transporte> utilidadeArray = new ArrayList<Transporte>();
-        utilidadeArray.add(new Transporte("Lima Duarte x Ibitipoca", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
-        utilidadeArray.add(new Transporte("Ibitipoca x Lima Duarte", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
-        utilidadeArray.add(new Transporte("Lima Duarte x Divisa", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
-        utilidadeArray.add(new Transporte("Divisa x Lima Duarte", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
-        utilidadeArray.add(new Transporte("Lima Duarte x Lopes", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
-        utilidadeArray.add(new Transporte("Lopes x Lima Duarte", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
-        utilidadeArray.add(new Transporte("LD x São Domingos (Olaria)", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
-        utilidadeArray.add(new Transporte("São Domingos (Olaria) x LD", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
-        utilidadeArray.add(new Transporte("Lima Duarte x Rancharia", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
-        utilidadeArray.add(new Transporte("Rancharia x Lima Duarte", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
+        utilidadeArray.add(new Transporte("Lima Duarte x Ibitipoca", "Seg a Sex: 06:30/15:15", "Sab/Dom/Fer: 7:30/15:15"));
+        utilidadeArray.add(new Transporte("Ibitipoca x Lima Duarte", "Seg a Sex: 08:30/17:00", "Sab/Dom/Fer: 9:30/17:00"));
+        utilidadeArray.add(new Transporte("Lima Duarte x Divisa", "Seg a Sex: 06:30/15:15", "Sab/Dom/Fer: 9:30/17:00"));
+        utilidadeArray.add(new Transporte("Divisa x Lima Duarte", "Seg a Sex: 06:30/15:15", "Sab/Dom/Fer: 9:30/17:00"));
+        utilidadeArray.add(new Transporte("Lima Duarte x Lopes", "Seg a Sex: 06:30/15:15", "Sab/Dom/Fer: 7:30h/15:15"));
+        utilidadeArray.add(new Transporte("Lopes x Lima Duarte", "Seg a Sex: 06:30/15:15", "Sab/Dom/Fer: 10:00h/17:30"));
+        utilidadeArray.add(new Transporte("LD x São Domingos (Olaria)", "Seg a Sex: 6:30h/16:30", ""));
+        utilidadeArray.add(new Transporte("São Domingos (Olaria) x LD", "Seg a Sex: 8:00/18:00", ""));
+        utilidadeArray.add(new Transporte("Lima Duarte x Várzea do Brumado", "Seg a Sex: 6:30/16:00", ""));
+        utilidadeArray.add(new Transporte("Várzea do Brumado x Lima Duarte", "Seg a Sex: 08:00/17:30", ""));
+        utilidadeArray.add(new Transporte("Lima Duarte x Orvalho", "Seg a Sex: ", ""));
+        utilidadeArray.add(new Transporte("Orvalho x Lima Duarte", "Seg a Sex: ", "Sab/Dom/Fer: "));
+        utilidadeArray.add(new Transporte("Vila Cruzeiro x Centro", "Seg a Sex: ", ""));
+        utilidadeArray.add(new Transporte("Centro x Vila Cruzeiro", "Seg a Sex: ", "Sab/Dom/Fer: "));
         return utilidadeArray;
     }
 

@@ -8,8 +8,8 @@
             android:title="Nossa Cidade" />
         <item android:id="@+id/nav_utilidade_publica" android:icon="@android:drawable/ic_menu_slideshow"
             android:title="Utilidade Pública" />
-        <item android:id="@+id/nav_configuracao" android:icon="@android:drawable/ic_menu_manage"
-            android:title="Configurações" />
+        <item android:id="@+id/nav_ibitipoca" android:icon="@android:drawable/ic_menu_manage"
+            android:title="Ibitipoca" />
     </group>
 
     <item android:title="Communicate">

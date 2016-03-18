@@ -30,6 +30,7 @@ import android.widget.ProgressBar;
 import com.appodeal.ads.Appodeal;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.android.gms.ads.AdRequest;
+import com.ibititec.ldapp.Ibitipoca.IbitipocaMainActivity;
 import com.ibititec.ldapp.adapter.ComercianteAdapter;
 import com.ibititec.ldapp.helpers.HttpHelper;
 import com.ibititec.ldapp.helpers.JsonHelper;
@@ -383,8 +384,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_utilidade_publica) {
             Intent i = new Intent(this, UtilidadePulicaActivity.class);
             startActivity(i);
-        } else if (id == R.id.nav_configuracao) {
-
+        } else if (id == R.id.nav_ibitipoca) {
+            Intent i = new Intent(this, IbitipocaMainActivity.class);
+            startActivity(i);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {

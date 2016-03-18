@@ -4,6 +4,9 @@
     <string name="action_atualizar">Atualizar</string>
     <string name="msg_erro_json">Erro baixando JSON: %s</string>
     <string name="url">http://52.37.37.207:86/Comerciante/GetComerciantes</string>
+    <string name="url_pousadas">http://52.37.37.207:86/Comerciante/GetComerciantes</string>
+    <string name="url_casas">http://52.37.37.207:86/Comerciante/GetComerciantes</string>
+    <string name="url_restaurantes">http://52.37.37.207:86/Comerciante/GetComerciantes</string>
     <string name="title_activity_detalhe">Detalhe Empresa</string>
     <string name="title_activity_main">LDApp</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -30,6 +33,12 @@
     <string name="txtLimaDuarte_3">Na área da cultura e lazer, destaca-se na realização de diversos eventos anuais, como o Carnaval de Lima Duarte, em fevereiro ou março, ou a Exposição Agropecuária, realizada em setembro ou outubro. Possui ainda alguns atrativos turísticos de valor cultural ou histórico, como a Igreja Nossa Senhora do Rosário ou o Calçamento de Paralelepípedos da Praça Juscelino Kubitschek.</string>
     <string name="txtLimaDuarte_4">No município situa-se também o Parque Estadual do Ibitipoca, conhecido por suas montanhas, cachoeiras e trilhas para caminhada, além de vistas panorâmicas dos vários morros que compõem a paisagem do lugar.</string>
     <string name="txtLimaDuarte_5">No município situa-se também o Parque Estadual do Ibitipoca, conhecido por suas montanhas, cachoeiras e trilhas para caminhada, além de vistas panorâmicas dos vários morros que compõem a paisagem do lugar.</string>
+    <string name="title_activity_ibitipoca_main">Conheça Ibitipoca</string>
+    <string name="title_activity_pousadas_chales">Pousadas e Chales</string>
+    <string name="title_activity_casas">Aluguel Casa;</string>
+    <string name="title_activity_parque">Sobre o Parque</string>
+    <string name="title_activity_restaurantes">Restaurantes</string>
+    <string name="title_activity_vila">Sobre a Vila</string>
 
 
 </resources>

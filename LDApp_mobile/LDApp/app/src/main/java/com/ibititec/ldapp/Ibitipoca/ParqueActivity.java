@@ -1,46 +1,47 @@
-package com.ibititec.ldapp.utilidade_publica.transporte;
+package com.ibititec.ldapp.Ibitipoca;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import com.appodeal.ads.Appodeal;
 import com.ibititec.ldapp.R;
-import com.ibititec.ldapp.adapter.TransporteAdapter;
+import com.ibititec.ldapp.adapter.CidadeAdapter;
 import com.ibititec.ldapp.helpers.UIHelper;
-import com.ibititec.ldapp.models.Transporte;
+import com.ibititec.ldapp.models.Cidade;
 
 import java.util.ArrayList;
 
-public class SertanejaActivity extends AppCompatActivity {
+public class ParqueActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sertaneja);
+        setContentView(R.layout.activity_parque);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ArrayList<Cidade> cidades = getTextoCidade();
 
-        ArrayList<Transporte> utilidadeArray = getHorariosSertaneja();
-
-        TransporteAdapter transporteAdater = new TransporteAdapter(this, utilidadeArray, this);
-        final ListView listView = (ListView) findViewById(R.id.listview_vimara);
-        listView.setAdapter(transporteAdater);
+        CidadeAdapter cidadeAdapter = new CidadeAdapter(this, cidades);
+        final ListView listView = (ListView) findViewById(R.id.listview_cidade);
+        listView.setAdapter(cidadeAdapter);
         UIHelper.setListViewHeightBasedOnChildren(listView);
+
+        Appodeal.show(this, Appodeal.BANNER_BOTTOM);
     }
 
-    @NonNull
-    private ArrayList<Transporte> getHorariosSertaneja() {
-        ArrayList<Transporte> utilidadeArray = new ArrayList<Transporte>();
-        utilidadeArray.add(new Transporte("Lima Duarte x Ibitipoca", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
-        utilidadeArray.add(new Transporte("Ibitipoca x Lima Duarte", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
-
-        return utilidadeArray;
+    private ArrayList<Cidade> getTextoCidade(){
+        ArrayList<Cidade> cidades = new ArrayList<Cidade>();
+        cidades.add(new Cidade(R.string.txtLimaDuarte_1,R.drawable.limaduarte));
+        cidades.add(new Cidade(R.string.txtLimaDuarte_2,R.drawable.limaduarte_2));
+        cidades.add(new Cidade(R.string.txtLimaDuarte_3,R.drawable.limaduarte_3));
+        cidades.add(new Cidade(R.string.txtLimaDuarte_4,R.drawable.limaduarte_4));
+        cidades.add(new Cidade(R.string.txtLimaDuarte_5,R.drawable.limaduarte_5));
+        return cidades;
     }
 
     @Override
@@ -56,6 +57,8 @@ public class SertanejaActivity extends AppCompatActivity {
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
         }
+
+
         return super.onOptionsItemSelected(item);
     }
 }

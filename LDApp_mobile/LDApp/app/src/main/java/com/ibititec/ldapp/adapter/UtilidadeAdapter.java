@@ -85,8 +85,9 @@ public class UtilidadeAdapter extends BaseAdapter {
 
         } catch (Exception e) {
             Log.i(UtilidadeAdapter.TAG, "Erro ao preecnher o getView: " + e.getMessage());
-            return null;
+
         }
+        return convertView;
     }
 
     private void discar(View v, UtilidadePublica utilidade) {
