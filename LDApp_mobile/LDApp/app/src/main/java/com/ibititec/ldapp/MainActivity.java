@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //APPODEAL
-        Appodeal.show(this, Appodeal.BANNER_BOTTOM);
+        //Appodeal.show(this, Appodeal.BANNER_BOTTOM);
 
         // //INICIALIZACAO DO FRESCO
         Fresco.initialize(this);
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity
         actv.setSingleLine();
         actv.setThreshold(1);
         actv.setAllCaps(true);
-        actv.setFocusable(false);
+        lsViewComerciantes.setFocusable(true);
 //        LinearLayout.LayoutParams layoutParams =
 //                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
 //                        ViewGroup.LayoutParams.WRAP_CONTENT);

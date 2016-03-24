@@ -17,5 +17,7 @@ namespace LDApp.Models
         public System.Data.Entity.DbSet<LDApp.Models.Comerciante> Comerciantes { get; set; }
         public System.Data.Entity.DbSet<LDApp.Models.Telefone> Telefones { get; set; }
         public System.Data.Entity.DbSet<LDApp.Models.Endereco> Enderecos { get; set; }
+
+        public System.Data.Entity.DbSet<LDApp.Models.TipoComercio> TipoComercios { get; set; }
     }
 }

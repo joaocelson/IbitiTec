@@ -17,6 +17,7 @@ namespace LDApp.Models
         public String Numero { get; set; }
         public String Descricao { get; set; }       
         public Guid ComercianteID { get; set; }
+
         [JsonIgnore]
         public virtual Comerciante Comerciante { get; set; }
 

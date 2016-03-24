@@ -164,12 +164,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ComercianteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TipoComercioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201603020329238_AddUser.cs" />
-    <Compile Include="Migrations\201603020329238_AddUser.Designer.cs">
-      <DependentUpon>201603020329238_AddUser.cs</DependentUpon>
+    <Compile Include="Migrations\201603220108225_initialMigration.cs" />
+    <Compile Include="Migrations\201603220108225_initialMigration.Designer.cs">
+      <DependentUpon>201603220108225_initialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -177,6 +178,7 @@
     <Compile Include="Models\Endereco.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Telefone.cs" />
+    <Compile Include="Models\TipoComercio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -227,7 +229,7 @@
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Comerciante\Create.cshtml" />
+    <Content Include="Views\Comerciante\Create_bkp.cshtml" />
     <Content Include="Views\Comerciante\Delete.cshtml" />
     <Content Include="Views\Comerciante\Details.cshtml" />
     <Content Include="Views\Comerciante\Edit.cshtml" />
@@ -235,6 +237,12 @@
     <Content Include="Views\Comerciante\_PartialTelefone.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Collection.cshtml" />
     <Content Include="Views\Comerciante\_PartialEndereco.cshtml" />
+    <Content Include="Views\TipoComercio\Delete.cshtml" />
+    <Content Include="Views\TipoComercio\Details.cshtml" />
+    <Content Include="Views\TipoComercio\Edit.cshtml" />
+    <Content Include="Views\TipoComercio\Index.cshtml" />
+    <Content Include="Views\TipoComercio\Create.cshtml" />
+    <Content Include="Views\Comerciante\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -249,8 +257,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603020329238_AddUser.resx">
-      <DependentUpon>201603020329238_AddUser.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201603220108225_initialMigration.resx">
+      <DependentUpon>201603220108225_initialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

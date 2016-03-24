@@ -50,7 +50,7 @@ namespace LDApp.Controllers
         {
             try
             {
-                List<Comerciante> comerciantes = (List<Comerciante>)db.Comerciantes.Where(a => ( a.TipoComercio.Descricao.Equals("POUSADA") || a.TipoComercio.Descricao.Equals("CHALE")) && a.Enderecos.FirstOrDefault().Bairro.Equals("IBITIPOCA")).ToList();
+                List<Comerciante> comerciantes = (List<Comerciante>)db.Comerciantes.Where(a => ( a.TipoComercio.Descricao.Equals("POUSADA") && a.TipoComercio.Descricao.Equals("CHALE")) && a.Enderecos.FirstOrDefault().Bairro.Equals("IBITIPOCA")).ToList();
 
                 foreach (Comerciante comerciante in comerciantes)
                 {
@@ -94,11 +94,11 @@ namespace LDApp.Controllers
         }
 
         // GET: /GetRestaurantesIbitipoca/
-        public String GetRestaurantesIbitipoca()
+        public String GetCasasIbitipoca()
         {
             try
             {
-                List<Comerciante> comerciantes = (List<Comerciante>)db.Comerciantes.Where(a => a.TipoComercio.Descricao.Equals("CASA") || a.Enderecos.FirstOrDefault().Bairro.Equals("IBITIPOCA")).ToList();
+                List<Comerciante> comerciantes = (List<Comerciante>)db.Comerciantes.Where(a => a.TipoComercio.Descricao.Equals("CASA") && a.Enderecos.FirstOrDefault().Bairro.Equals("IBITIPOCA")).ToList();
 
                 foreach (Comerciante comerciante in comerciantes)
                 {
@@ -135,7 +135,11 @@ namespace LDApp.Controllers
         // GET: /Comerciante/Create
         public ActionResult Create()
         {
-            return View();
+            Comerciante comercia = new Comerciante();
+            comercia.TipoComercioList = new List<TipoComercio>();
+            comercia.TipoComercioList = db.TipoComercios.ToList();
+            ViewBag.Comerciante = comercia;
+            return View(ViewBag.Comerciante);
         }
 
         // POST: /Comerciante/Create
@@ -143,7 +147,7 @@ namespace LDApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ComercianteId,Nome,NomeFoto, File, Telefones, Enderecos")] Comerciante comerciante)
+        public ActionResult Create([Bind(Include = "ComercianteId,Nome,NomeFoto, File, Telefones, Enderecos, TipoComercio")] Comerciante comerciante)
         {
             if (ModelState.IsValid)
             {
@@ -166,6 +170,8 @@ namespace LDApp.Controllers
                     }
 
                 }
+
+                comerciante.TipoComercio = db.TipoComercios.Find(comerciante.TipoComercio.TipoComercioId);
 
                 comerciante.NomeFoto = file.FileName;
                 comerciante.ComercianteId = Guid.NewGuid();

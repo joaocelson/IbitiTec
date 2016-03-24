@@ -14,9 +14,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
@@ -27,7 +27,6 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.appodeal.ads.Appodeal;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.ibititec.ldapp.adapter.ComercianteAdapter;
 import com.ibititec.ldapp.helpers.HttpHelper;
@@ -85,7 +84,7 @@ public class ListComercianteActivity extends AppCompatActivity {
                 }
             }
         });
-        Appodeal.show(this, Appodeal.BANNER_BOTTOM);
+        //Appodeal.show(this, Appodeal.BANNER_BOTTOM);
     }
 
     @Override

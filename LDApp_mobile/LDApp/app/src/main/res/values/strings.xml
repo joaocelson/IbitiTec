@@ -4,9 +4,9 @@
     <string name="action_atualizar">Atualizar</string>
     <string name="msg_erro_json">Erro baixando JSON: %s</string>
     <string name="url">http://52.37.37.207:86/Comerciante/GetComerciantes</string>
-    <string name="url_pousadas">http://52.37.37.207:86/Comerciante/GetComerciantes</string>
-    <string name="url_casas">http://52.37.37.207:86/Comerciante/GetComerciantes</string>
-    <string name="url_restaurantes">http://52.37.37.207:86/Comerciante/GetComerciantes</string>
+    <string name="url_pousadas">http://52.37.37.207:86/Comerciante/GetPousada</string>
+    <string name="url_casas">http://52.37.37.207:86/Comerciante/GetCasasIbitipoca</string>
+    <string name="url_restaurantes">http://52.37.37.207:86/Comerciante/GetRestaurantesIbitipoca</string>
     <string name="title_activity_detalhe">Detalhe Empresa</string>
     <string name="title_activity_main">LDApp</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>

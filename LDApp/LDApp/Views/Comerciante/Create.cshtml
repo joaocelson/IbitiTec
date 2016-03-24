@@ -6,48 +6,68 @@
 
 <h2>Create</h2>
 
-
-@using (Html.BeginForm("Create", "Comerciante", FormMethod.Post, new 
-                                       { enctype = "multipart/form-data" })) 
+@using (Html.BeginForm("Create", "Comerciante", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Comerciante</h4>
         <hr />
         @Html.ValidationSummary(true)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Nome)
-                @Html.ValidationMessageFor(model => model.Nome)
+            <div class="form-group">
+                @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Nome)
+                    @Html.ValidationMessageFor(model => model.Nome)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NomeFoto, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NomeFoto)
+                    @Html.ValidationMessageFor(model => model.NomeFoto)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.TipoComercio, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.TipoComercio.TipoComercioId, ((IEnumerable<LDApp.Models.TipoComercio>)ViewBag.Comerciante.TipoComercioList).Select(option => new SelectListItem
+                    {
+                        Text = option.Descricao,
+                        Value = option.TipoComercioId.ToString(),
+                        Selected = (Model != null) 
+                    }), "Selecione um Instrutor...", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TipoComercio)
+
+                </div>
+            </div>
+            <label for="file">Upload Image:</label>
+            @Html.TextBoxFor(model => model.File, new { type = "file" })
+
+            <div id="new-telefone"></div>
+            <div class="form-group">
+                <div class="col-md-10 col-lg-offset-2">
+                    <a href="javascript:void(0);" id="add-telefone">Adicionar Telefone</a>
+                </div>
+            </div>
+
+            <div id="new-endereco"></div>
+            <div class="form-group">
+                <div class="col-md-10 col-lg-offset-2">
+                    <a href="javascript:void(0);" id="add-endereco">Adicionar Endereço</a>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
             </div>
         </div>
-
-        <label for="file">Upload Image:</label>
-        @Html.TextBoxFor(model => model.File, new { type = "file" })
-
-        <div id="new-telefone"></div>
-        <div class="form-group">
-            <div class="col-md-10 col-lg-offset-2">
-                <a href="javascript:void(0);" id="add-telefone">Adicionar Telefone</a>
-            </div>
-        </div>
-
-        <div id="new-endereco"></div>
-        <div class="form-group">
-            <div class="col-md-10 col-lg-offset-2">
-                <a href="javascript:void(0);" id="add-endereco">Adicionar Endereço</a>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>   
+    </div>
 }
 
 <div>
@@ -56,9 +76,9 @@
 
 @section Scripts {
 
-@Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryval")
 
-<script>
+    <script>
         $('#add-telefone').click(function () {
             $.ajax({
                 url: '@Url.Action("GetNewTelefone","Comerciante")',
@@ -68,10 +88,10 @@
                 }
             });
             return false;
-        });    
-</script>
+        });
+    </script>
 
-<script>
+    <script>
         $('#add-endereco').click(function () {
             $.ajax({
                 url: '@Url.Action("GetNewEndereco","Comerciante")',
@@ -82,6 +102,5 @@
             });
             return false;
         });
-</script>
-
+    </script>
 }

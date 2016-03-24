@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
-import com.appodeal.ads.Appodeal;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.ibititec.ldapp.R;
 import com.ibititec.ldapp.adapter.ComercianteAdapter;
@@ -68,7 +67,7 @@ public class CasasActivity extends AppCompatActivity {
                 }
             }
         });
-        Appodeal.show(this, Appodeal.BANNER_BOTTOM);
+        //Appodeal.show(this, Appodeal.BANNER_BOTTOM);
     }
 
     public void setupComerciantes() {
@@ -130,7 +129,7 @@ public class CasasActivity extends AppCompatActivity {
                 }
 
                 PreferenceManager.getDefaultSharedPreferences(CasasActivity.this).edit()
-                        .putString("comerciantes.json", json)
+                        .putString("casas.json", json)
                         .apply();
 
                 preencherListComerciantes(json);

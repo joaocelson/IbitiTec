@@ -21,7 +21,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.appodeal.ads.Appodeal;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.ibititec.ldapp.models.Comerciante;
@@ -71,7 +70,7 @@ public class DetalheActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        Appodeal.show(this, Appodeal.BANNER_BOTTOM);
+        //Appodeal.show(this, Appodeal.BANNER_BOTTOM);
     }
 
     private void carregarTelefoneEndereco() {

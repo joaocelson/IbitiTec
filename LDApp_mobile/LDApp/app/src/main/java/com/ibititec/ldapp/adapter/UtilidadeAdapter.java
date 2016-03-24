@@ -17,7 +17,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.appodeal.ads.Appodeal;
 import com.ibititec.ldapp.ListComercianteActivity;
 import com.ibititec.ldapp.R;
 import com.ibititec.ldapp.models.UtilidadePublica;
@@ -80,7 +79,7 @@ public class UtilidadeAdapter extends BaseAdapter {
                     discar(v,utilidade);
                 }
             });
-            Appodeal.show(activity, Appodeal.BANNER_BOTTOM);
+            //Appodeal.show(activity, Appodeal.BANNER_BOTTOM);
             return layout;
 
         } catch (Exception e) {

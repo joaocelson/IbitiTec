@@ -7,7 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ListView;
 
-import com.appodeal.ads.Appodeal;
 import com.ibititec.ldapp.R;
 import com.ibititec.ldapp.adapter.CidadeAdapter;
 import com.ibititec.ldapp.helpers.UIHelper;
@@ -31,7 +30,7 @@ public class VilaActivity extends AppCompatActivity {
         listView.setAdapter(cidadeAdapter);
         UIHelper.setListViewHeightBasedOnChildren(listView);
 
-        Appodeal.show(this, Appodeal.BANNER_BOTTOM);
+        //Appodeal.show(this, Appodeal.BANNER_BOTTOM);
     }
 
     private ArrayList<Cidade> getTextoCidade(){

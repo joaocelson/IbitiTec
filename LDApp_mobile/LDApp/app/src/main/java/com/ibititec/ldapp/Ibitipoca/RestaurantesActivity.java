@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
-import com.appodeal.ads.Appodeal;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.ibititec.ldapp.R;
 import com.ibititec.ldapp.adapter.ComercianteAdapter;
@@ -68,7 +67,7 @@ public class RestaurantesActivity extends AppCompatActivity {
                 }
             }
         });
-        Appodeal.show(this, Appodeal.BANNER_BOTTOM);
+        //Appodeal.show(this, Appodeal.BANNER_BOTTOM);
     }
     public void setupComerciantes() {
         String json = leJsonComerciantes();
@@ -85,7 +84,7 @@ public class RestaurantesActivity extends AppCompatActivity {
 
     private String leJsonComerciantes() {
         String json = PreferenceManager.getDefaultSharedPreferences(RestaurantesActivity.this)
-                .getString("pousadas.json", "");
+                .getString("restaurantes.json", "");
         Log.i(TAG, "Lendo preferences: " + json);
         return json;
     }

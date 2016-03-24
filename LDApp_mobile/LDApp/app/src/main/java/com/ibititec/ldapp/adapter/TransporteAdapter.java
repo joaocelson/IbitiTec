@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.appodeal.ads.Appodeal;
 import com.ibititec.ldapp.ListComercianteActivity;
 import com.ibititec.ldapp.R;
 import com.ibititec.ldapp.models.Transporte;
@@ -64,7 +63,7 @@ public class TransporteAdapter extends BaseAdapter {
             TextView txtTranporteAdapter2 = (TextView) layout.findViewById(R.id.txtTranporteAdapter2);
             txtTranporteAdapter2.setText(transporte.getTextFds());
 
-            Appodeal.show(activity, Appodeal.BANNER_BOTTOM);
+            //Appodeal.show(activity, Appodeal.BANNER_BOTTOM);
             return layout;
         } catch (Exception e) {
             Log.i(UtilidadeAdapter.TAG, "Erro ao preecnher o getView: " + e.getMessage());
