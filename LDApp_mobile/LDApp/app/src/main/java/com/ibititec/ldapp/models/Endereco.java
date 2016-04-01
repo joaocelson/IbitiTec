@@ -14,7 +14,22 @@ public class Endereco  implements Serializable {
     private String Cidade ;
     private String Estado ;
     private String Bairro ;
-    private String ComercianteId ;
+    private String Latitude;
+    private String Longitude;
+    private String ComercianteId;
+
+    public void setLatitude(String latitude) {
+        Latitude = latitude;
+    }
+    public void setLongitude(String longitude) {
+        Longitude = longitude;
+    }
+    public String getLatitude() {
+       return  Latitude ;
+    }
+    public String getLongitude() {
+        return  Longitude ;
+    }
 
     public String getEnderecoId() {
         return EnderecoId;

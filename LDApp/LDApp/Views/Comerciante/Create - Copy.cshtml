@@ -38,7 +38,7 @@
                     {
                         Text = option.Descricao,
                         Value = option.TipoComercioId.ToString(),
-                        Selected = (Model != null)
+                        Selected = (Model != null) 
                     }), "Selecione um Instrutor...", new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.TipoComercio)
 

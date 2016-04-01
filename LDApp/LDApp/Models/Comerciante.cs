@@ -15,7 +15,8 @@ namespace LDApp.Models
         public String Nome { get; set; }
         public virtual ICollection<Telefone> Telefones { get; set; }
         public virtual ICollection<Endereco> Enderecos{ get; set; }
-        public TipoComercio TipoComercio { get; set; }
+        public virtual TipoComercio TipoComercio { get; set; }
+        public String Publicidade { get; set; }
         public String NomeFoto { get; set; }
         
         [NotMapped]

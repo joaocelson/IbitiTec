@@ -125,21 +125,27 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void marcarEmpresa() {
-        if (mMap != null && comerciante != null) {
-            empresaPorMarker = new HashMap<>();
-            markersPorEmpresa = new HashMap<>();
 
-            Marker marker = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(comerciante.getLatitude(), comerciante.getLongitude()))
-                    .title(comerciante.getNome())
-                    .snippet(comerciante.getNome())
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+        try {
+            if (mMap != null && comerciante != null) {
+                empresaPorMarker = new HashMap<>();
+                markersPorEmpresa = new HashMap<>();
 
-            empresaPorMarker.put(marker, comerciante);
-            markersPorEmpresa.put(comerciante.getNome(), marker);
+                Marker marker = mMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(Double.parseDouble(comerciante.getEnderecos().get(0).getLatitude()),
+                                Double.parseDouble(comerciante.getEnderecos().get(0).getLongitude())))
+                        .title(comerciante.getNome())
+                        .snippet(comerciante.getNome())
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
-            empresa = new ArrayList<>(markersPorEmpresa.keySet());
-            restauraPosicao();
+                empresaPorMarker.put(marker, comerciante);
+                markersPorEmpresa.put(comerciante.getNome(), marker);
+
+                empresa = new ArrayList<>(markersPorEmpresa.keySet());
+                restauraPosicao();
+            }
+        } catch (Exception ex) {
+            Log.i(TAG, ex.getMessage());
         }
     }
 

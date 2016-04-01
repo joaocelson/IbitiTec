@@ -19,6 +19,8 @@ namespace LDApp.Models
         public String Cidade { get; set; }
         public String Estado { get; set; }
         public String Bairro { get; set; }
+        public String Latitude { get; set; }
+        public String Longitude { get; set; }
 
         public Guid ComercianteId { get; set; }
         [JsonIgnore]

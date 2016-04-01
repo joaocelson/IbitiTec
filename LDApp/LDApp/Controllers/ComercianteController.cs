@@ -27,14 +27,15 @@ namespace LDApp.Controllers
         {
             try
             {
-                List<Comerciante> comerciantes = (List<Comerciante>) db.Comerciantes.ToList();
-                
-                foreach(Comerciante comerciante in comerciantes){
+                List<Comerciante> comerciantes = (List<Comerciante>)db.Comerciantes.ToList();
+
+                foreach (Comerciante comerciante in comerciantes)
+                {
                     comerciante.NomeFoto = @Url.Content("~/images/upload/") + comerciante.NomeFoto;
-                   
+
                 }
                 //Necessario converter o Json Serialize devido ao proxy do EntityFramework
-                return JsonConvert.SerializeObject(comerciantes, Formatting.Indented);              
+                return JsonConvert.SerializeObject(comerciantes, Formatting.Indented);
             }
             catch (Exception ex)
             {
@@ -50,7 +51,31 @@ namespace LDApp.Controllers
         {
             try
             {
-                List<Comerciante> comerciantes = (List<Comerciante>)db.Comerciantes.Where(a => ( a.TipoComercio.Descricao.Equals("POUSADA") && a.TipoComercio.Descricao.Equals("CHALE")) && a.Enderecos.FirstOrDefault().Bairro.Equals("IBITIPOCA")).ToList();
+                List<Comerciante> comerciantes = (List<Comerciante>)db.Comerciantes.Where(a => (a.TipoComercio.Descricao.Equals("POUSADA") || a.TipoComercio.Descricao.Equals("CHALE")) && a.Enderecos.FirstOrDefault().Bairro.Equals("IBITIPOCA")).ToList();
+
+                foreach (Comerciante comerciante in comerciantes)
+                {
+                    comerciante.NomeFoto = @Url.Content("~/images/upload/") + comerciante.NomeFoto;
+
+                }
+                //Necessario converter o Json Serialize devido ao proxy do EntityFramework
+                return JsonConvert.SerializeObject(comerciantes, Formatting.Indented);
+            }
+            catch (Exception ex)
+            {
+                ex = ex;
+                return null;
+            }
+
+            //return View(db.Comerciantes.ToList());
+        }
+
+        // GET: /GetEmpresasPublicidade/
+        public String GetEmpresasPublicidade()
+        {
+            try
+            {
+                List<Comerciante> comerciantes = (List<Comerciante>)db.Comerciantes.Where(a => a.Publicidade != null).ToList();
 
                 foreach (Comerciante comerciante in comerciantes)
                 {
@@ -74,7 +99,7 @@ namespace LDApp.Controllers
         {
             try
             {
-                List<Comerciante> comerciantes = (List<Comerciante>)db.Comerciantes.Where(a => a.TipoComercio.Descricao.Equals("RESTAURANTE") || a.Enderecos.FirstOrDefault().Bairro.Equals("IBITIPOCA")).ToList();
+                List<Comerciante> comerciantes = (List<Comerciante>)db.Comerciantes.Where(a => a.TipoComercio.Descricao.Equals("RESTAURANTE") && a.Enderecos.FirstOrDefault().Bairro.Equals("IBITIPOCA")).ToList();
 
                 foreach (Comerciante comerciante in comerciantes)
                 {
@@ -116,6 +141,44 @@ namespace LDApp.Controllers
 
             //return View(db.Comerciantes.ToList());
         }
+
+        // GET: /GetRestaurantesIbitipoca/
+        public String GetCasasFarmaciasPlantao()
+        {
+            try
+            { 
+                String line = String.Empty;
+                List<Comerciante> comerciantes = new List<Comerciante>();
+                using (StreamReader CsvReader = new StreamReader(Server.MapPath("/docs/Farmacias.csv")))
+                {
+
+                  
+
+                    while ((line = CsvReader.ReadLine()) != null)
+                    {
+                        Comerciante comerciante = new Comerciante();
+                        string[] vars = line.Split(',');
+                        comerciante.Nome = vars[0];
+                        ICollection<Telefone> telefones = new List<Telefone>();
+                        Telefone telefone = new Telefone();
+                        telefone.Numero = vars[1];
+                        telefones.Add(telefone);
+                        comerciante.Telefones = telefones;
+                        comerciantes.Add(comerciante);
+                    }
+                    CsvReader.Close();
+                }
+                return JsonConvert.SerializeObject(comerciantes, Formatting.Indented);
+            }
+            catch (Exception ex)
+            {
+                ex = ex;
+                return null;
+            }
+
+            //return View(db.Comerciantes.ToList());
+        }
+
 
         // GET: /Comerciante/Details/5
         public ActionResult Details(Guid? id)
@@ -223,7 +286,7 @@ namespace LDApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="id,Nome,NomeFoto")] Comerciante comerciante)
+        public ActionResult Edit([Bind(Include = "id,Nome,NomeFoto")] Comerciante comerciante)
         {
             if (ModelState.IsValid)
             {

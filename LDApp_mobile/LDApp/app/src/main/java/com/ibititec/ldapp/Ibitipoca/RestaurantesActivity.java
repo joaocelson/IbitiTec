@@ -50,7 +50,7 @@ public class RestaurantesActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progress_restaurante);
         progressBar.setVisibility(View.VISIBLE);
 
-        //setupComerciantes();
+        setupComerciantes();
 
         progressBar.setVisibility(View.GONE);
 
@@ -67,6 +67,7 @@ public class RestaurantesActivity extends AppCompatActivity {
                 }
             }
         });
+
         //Appodeal.show(this, Appodeal.BANNER_BOTTOM);
     }
     public void setupComerciantes() {

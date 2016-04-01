@@ -1,25 +1,27 @@
 package com.ibititec.ldapp.models;
 
+import java.io.Serializable;
+
 /**
  * Created by JOAOCELSON on 14/03/2016.
  */
-public class TipoComerciante {
-    private String TipoComercianteId;
-    private String Descricacao;
+public class TipoComerciante implements Serializable {
+    private String TipoComercioId;
+    private String Descricao;
 
     public String getTipoComercianteId() {
-        return TipoComercianteId;
+        return TipoComercioId;
     }
 
     public void setTipoComercianteId(String tipoComercianteId) {
-        TipoComercianteId = tipoComercianteId;
+        TipoComercioId = tipoComercianteId;
     }
 
     public String getDescricacao() {
-        return Descricacao;
+        return Descricao;
     }
 
     public void setDescricacao(String descricacao) {
-        Descricacao = descricacao;
+        Descricao = descricacao;
     }
 }

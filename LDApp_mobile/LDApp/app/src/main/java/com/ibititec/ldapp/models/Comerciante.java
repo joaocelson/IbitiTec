@@ -15,16 +15,14 @@ public class Comerciante implements Serializable {
     private List<Telefone> Telefones;
     private List<Endereco> Enderecos;
     private String NomeFoto;
-    private double Latitude;
-    private double Longitude;
-    private TipoComerciante TipoComerciante;
+    private TipoComerciante TipoComercio;
 
-    public com.ibititec.ldapp.models.TipoComerciante getTipoComerciante() {
-        return TipoComerciante;
+    public TipoComerciante getTipoComercio() {
+        return TipoComercio;
     }
 
-    public void setTipoComerciante(com.ibititec.ldapp.models.TipoComerciante tipoComerciante) {
-        TipoComerciante = tipoComerciante;
+    public void setTipoComercio(com.ibititec.ldapp.models.TipoComerciante tipoComerciante) {
+        TipoComercio = tipoComerciante;
     }
 
     public double getLatitude() {
@@ -33,18 +31,12 @@ public class Comerciante implements Serializable {
         return  -21.847771;
     }
 
-    public void setLatitude(double latitude) {
-        Latitude = latitude;
-    }
 
     public double getLongitude() {
         //return Longitude;
         return -43.814943;
     }
 
-    public void setLongitude(double longitude) {
-        Longitude = longitude;
-    }
 
 
     public String getComercianteId() {

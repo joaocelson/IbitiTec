@@ -67,9 +67,9 @@ public class ComercianteAdapter extends BaseAdapter {
             Uri imageUri = Uri.parse(comerciante.getNomeFoto());
             SimpleDraweeView draweeView = (SimpleDraweeView) layout.findViewById(R.id.my_image_view);
             draweeView.setImageURI(imageUri);
-            if (!listComerciantes.contains(comerciante.getNome())) {
-                listComerciantes.add(comerciante.getNome());
-            }
+//            if (!listComerciantes.contains(comerciante.getNome())) {
+//                listComerciantes.add(comerciante.getNome());
+//            }
 
             return layout;
 

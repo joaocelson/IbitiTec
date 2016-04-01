@@ -13,6 +13,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <ProgressBar
+            android:id="@+id/progress_farmacias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
         <ListView
             android:id="@+id/listview_farmacia_plantao"
             android:layout_width="match_parent"

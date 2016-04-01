@@ -172,6 +172,10 @@
     <Compile Include="Migrations\201603220108225_initialMigration.Designer.cs">
       <DependentUpon>201603220108225_initialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603290042528_initial.cs" />
+    <Compile Include="Migrations\201603290042528_initial.Designer.cs">
+      <DependentUpon>201603290042528_initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Comerciante.cs" />
@@ -191,6 +195,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="docs\Farmacias.csv" />
     <None Include="Properties\PublishProfiles\FTP_LDApp.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -229,7 +234,6 @@
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Comerciante\Create_bkp.cshtml" />
     <Content Include="Views\Comerciante\Delete.cshtml" />
     <Content Include="Views\Comerciante\Details.cshtml" />
     <Content Include="Views\Comerciante\Edit.cshtml" />
@@ -243,6 +247,7 @@
     <Content Include="Views\TipoComercio\Index.cshtml" />
     <Content Include="Views\TipoComercio\Create.cshtml" />
     <Content Include="Views\Comerciante\Create.cshtml" />
+    <Content Include="Views\Comerciante\Create - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -259,6 +264,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201603220108225_initialMigration.resx">
       <DependentUpon>201603220108225_initialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603290042528_initial.resx">
+      <DependentUpon>201603290042528_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

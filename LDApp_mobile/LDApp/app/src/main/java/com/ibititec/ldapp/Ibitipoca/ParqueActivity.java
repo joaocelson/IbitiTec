@@ -20,13 +20,14 @@ public class ParqueActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parque);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         ArrayList<Cidade> cidades = getTextoCidade();
 
         CidadeAdapter cidadeAdapter = new CidadeAdapter(this, cidades);
-        final ListView listView = (ListView) findViewById(R.id.listview_cidade);
+        final ListView listView = (ListView) findViewById(R.id.listview_parque);
         listView.setAdapter(cidadeAdapter);
         UIHelper.setListViewHeightBasedOnChildren(listView);
 
@@ -35,11 +36,10 @@ public class ParqueActivity extends AppCompatActivity {
 
     private ArrayList<Cidade> getTextoCidade(){
         ArrayList<Cidade> cidades = new ArrayList<Cidade>();
-        cidades.add(new Cidade(R.string.txtLimaDuarte_1,R.drawable.limaduarte));
-        cidades.add(new Cidade(R.string.txtLimaDuarte_2,R.drawable.limaduarte_2));
-        cidades.add(new Cidade(R.string.txtLimaDuarte_3,R.drawable.limaduarte_3));
-        cidades.add(new Cidade(R.string.txtLimaDuarte_4,R.drawable.limaduarte_4));
-        cidades.add(new Cidade(R.string.txtLimaDuarte_5,R.drawable.limaduarte_5));
+        cidades.add(new Cidade(R.string.txtIbitipoca_pq_1,R.drawable.limaduarte));
+        cidades.add(new Cidade(R.string.txtIbitipoca_pq_2,R.drawable.limaduarte_2));
+        cidades.add(new Cidade(R.string.txtIbitipoca_pq_3,R.drawable.limaduarte_3));
+        cidades.add(new Cidade(R.string.txtIbitipoca_pq_4,R.drawable.limaduarte_4));
         return cidades;
     }
 
@@ -56,8 +56,6 @@ public class ParqueActivity extends AppCompatActivity {
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
         }
-
-
         return super.onOptionsItemSelected(item);
     }
 }

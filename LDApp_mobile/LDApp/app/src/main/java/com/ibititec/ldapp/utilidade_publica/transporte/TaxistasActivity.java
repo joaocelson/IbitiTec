@@ -38,15 +38,7 @@ public class TaxistasActivity extends AppCompatActivity {
     private ArrayList<Transporte> getTaxistas() {
         ArrayList<Transporte> utilidadeArray = new ArrayList<Transporte>();
         utilidadeArray.add(new Transporte("Lima Duarte x Ibitipoca", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
-        utilidadeArray.add(new Transporte("Ibitipoca x Lima Duarte", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
-        utilidadeArray.add(new Transporte("Lima Duarte x Divisa", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
-        utilidadeArray.add(new Transporte("Divisa x Lima Duarte", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
-        utilidadeArray.add(new Transporte("Lima Duarte x Lopes", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
-        utilidadeArray.add(new Transporte("Lopes x Lima Duarte", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
-        utilidadeArray.add(new Transporte("LD x São Domingos (Olaria)", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
-        utilidadeArray.add(new Transporte("São Domingos (Olaria) x LD", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
-        utilidadeArray.add(new Transporte("Lima Duarte x Rancharia", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
-        utilidadeArray.add(new Transporte("Rancharia x Lima Duarte", "Seg a Sex: 06:30/15:15", "Seg a Sex: 06:30/15:15"));
+
         return utilidadeArray;
     }
 

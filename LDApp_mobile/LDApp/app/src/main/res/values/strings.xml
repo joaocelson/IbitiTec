@@ -3,7 +3,9 @@
     <string name="action_settings">Settings</string>
     <string name="action_atualizar">Atualizar</string>
     <string name="msg_erro_json">Erro baixando JSON: %s</string>
+    <string name="url_farmacias_plantao">http://52.37.37.207:86/Comerciante/GetCasasFarmaciasPlantao</string>
     <string name="url">http://52.37.37.207:86/Comerciante/GetComerciantes</string>
+    <string name="url_publicidade">http://52.37.37.207:86/Comerciante/GetEmpresasPublicidade</string>
     <string name="url_pousadas">http://52.37.37.207:86/Comerciante/GetPousada</string>
     <string name="url_casas">http://52.37.37.207:86/Comerciante/GetCasasIbitipoca</string>
     <string name="url_restaurantes">http://52.37.37.207:86/Comerciante/GetRestaurantesIbitipoca</string>
@@ -28,10 +30,10 @@
     <string name="title_activity_taxistas">Taxistas</string>
     <string name="title_activity_cidade_adapter">CidadeAdapter</string>
 
-    <string name="txtLimaDuarte_1">Lima Duarte é um município brasileiro no interior do estado de Minas Gerais. Pertence à Mesorregião da Zona da Mata e Microrregião de Juiz de Fora e localiza-se a sul da capital do estado, distando desta cerca de 295 km.[3] Ocupa uma área de 848,089 km², sendo 2,525 km² estão em perímetro urbano,[8] e sua população em 2010 era de 16 166 habitantes,[5] sendo então o 222º mais populoso do estado mineiro.</string>
-    <string name="txtLimaDuarte_2">A sede tem uma temperatura média anual de 20,1°C e na vegetação do município predomina a mata atlântica. Com uma taxa de urbanização da ordem de 72%, o município contava, em 2009, com 22 estabelecimentos de saúde. O seu Índice de Desenvolvimento Humano (IDH) é de 0,739, considerando como elevado em relação ao estado.</string>
-    <string name="txtLimaDuarte_3">Na área da cultura e lazer, destaca-se na realização de diversos eventos anuais, como o Carnaval de Lima Duarte, em fevereiro ou março, ou a Exposição Agropecuária, realizada em setembro ou outubro. Possui ainda alguns atrativos turísticos de valor cultural ou histórico, como a Igreja Nossa Senhora do Rosário ou o Calçamento de Paralelepípedos da Praça Juscelino Kubitschek.</string>
-    <string name="txtLimaDuarte_4">No município situa-se também o Parque Estadual do Ibitipoca, conhecido por suas montanhas, cachoeiras e trilhas para caminhada, além de vistas panorâmicas dos vários morros que compõem a paisagem do lugar.</string>
+    <string name="txtLimaDuarte_1">Lima Duarte é um município brasileiro no interior do estado de Minas Gerais e pertence à Mesorregião da Zona da Mata. Localiza-se a sul da capital do estado e ocupa uma área de 848,089 km², sendo que 2,525 km² constituem a zona urbana e os 845,564 km² restantes constituem a zona rural. Sua população em 2010, de acordo com o IBGE, era de 16.166 habitantes, sendo então o 222º mais populoso do estado mineiro.</string>
+    <string name="txtLimaDuarte_2">A temperatura média anual é de 20,1°C e a vegetação predominante é a mata atlântica. O seu Índice de Desenvolvimento Humano (IDH) é de 0,739, considerado elevado em relação ao estado.</string>
+    <string name="txtLimaDuarte_3">Na área de cultura e lazer, destaca-se a realização de diversos eventos anuais, como o Carnaval e a Exposição Agropecuária, geralmente realizada em setembro. Possui ainda alguns atrativos turísticos de valor histórico, como a Igreja Nossa Senhora do Rosário, o Calçamento de Paralelepípedos da Praça Juscelino Kubitschek, a Capela de São Domingos de Gusmão da Bocaina, entre outros.</string>
+    <string name="txtLimaDuarte_4">Seu relevo montanhoso permite vários passeios incríveis com paisagens de tirar o fôlego. O Parque Estadual do Ibitipoca, conhecido por suas montanhas, cachoeiras e trilhas, oferece roteiros variados para todos os gostos.</string>
     <string name="txtLimaDuarte_5">No município situa-se também o Parque Estadual do Ibitipoca, conhecido por suas montanhas, cachoeiras e trilhas para caminhada, além de vistas panorâmicas dos vários morros que compõem a paisagem do lugar.</string>
     <string name="title_activity_ibitipoca_main">Conheça Ibitipoca</string>
     <string name="title_activity_pousadas_chales">Pousadas e Chales</string>
@@ -39,6 +41,11 @@
     <string name="title_activity_parque">Sobre o Parque</string>
     <string name="title_activity_restaurantes">Restaurantes</string>
     <string name="title_activity_vila">Sobre a Vila</string>
+    <string name="txtIbitipoca_pq_1">O Parque Estadual do Ibitipoca é um dos principais atrativos turísticos da região e está localizado nos municípios de Lima Duarte e Santa Rita do Ibitipoca.  </string>
+    <string name="txtIbitipoca_pq_2">Com uma área de 1.488 hectares, no parque encontra-se grutas, cachoeiras, picos e lindas paisagens. A Janela do Céu, Gruta dos três arcos, Pico do Pião, Cachoeira dos Macacos e Lago dos Espelhos são apenas alguns desses atrativos.</string>
+    <string name="txtIbitipoca_pq_3">Samambaias e orquídeas fazem parte da sua flora. Já sua fauna é composta por espécies ameaçadas de extinção como o Lobo Guará.</string>
+    <string name="txtIbitipoca_pq_4">O Parque possui estacionamento, restaurante e área de camping. A abertura é as 07 horas com término de visitação às 18 horas. Para maiores informações entre em contato: 3281-1101.</string>
 
-
+    <string name="txtIbitipoca_vila_1">Conceição do Ibitipoca é distrito do município de Lima Duarte e a distância da Vila ao Parque é de 3 km. "Ibitipoca", palavra tupi-guarani, significa "Serra Estourada", referente a incidência de raios comuns na serra. </string>
+    <string name="txtIbitipoca_vila_2">De acordo com o IBGE, sua população em 2010 era de 1004 habitantes. Na época de busca pelo ouro a região chegou a abrigar 5000 moradores.</string>
 </resources>

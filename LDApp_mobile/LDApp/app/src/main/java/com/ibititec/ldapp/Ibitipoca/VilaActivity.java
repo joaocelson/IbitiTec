@@ -20,6 +20,7 @@ public class VilaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vila);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -35,16 +36,18 @@ public class VilaActivity extends AppCompatActivity {
 
     private ArrayList<Cidade> getTextoCidade(){
         ArrayList<Cidade> cidades = new ArrayList<Cidade>();
-        cidades.add(new Cidade(R.string.txtLimaDuarte_1,R.drawable.limaduarte));
-        cidades.add(new Cidade(R.string.txtLimaDuarte_2,R.drawable.limaduarte_2));
-        cidades.add(new Cidade(R.string.txtLimaDuarte_3,R.drawable.limaduarte_3));
-        cidades.add(new Cidade(R.string.txtLimaDuarte_4,R.drawable.limaduarte_4));
-        cidades.add(new Cidade(R.string.txtLimaDuarte_5,R.drawable.limaduarte_5));
+        cidades.add(new Cidade(R.string.txtIbitipoca_vila_1,R.drawable.limaduarte));
+        cidades.add(new Cidade(R.string.txtIbitipoca_vila_2,R.drawable.limaduarte_2));
+        cidades.add(new Cidade(R.string.txtIbitipoca_vila_1,R.drawable.limaduarte_3));
+        cidades.add(new Cidade(R.string.txtIbitipoca_vila_2,R.drawable.limaduarte_4));
         return cidades;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
 
         int id = item.getItemId();
         switch (id) {
@@ -53,6 +56,7 @@ public class VilaActivity extends AppCompatActivity {
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
         }
+
 
         return super.onOptionsItemSelected(item);
     }

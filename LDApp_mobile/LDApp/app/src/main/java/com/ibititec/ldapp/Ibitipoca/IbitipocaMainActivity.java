@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.ibititec.ldapp.R;
-import com.ibititec.ldapp.utilidade_publica.PoliciaActivity;
 
 public class IbitipocaMainActivity extends AppCompatActivity {
 
@@ -50,7 +49,7 @@ public class IbitipocaMainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, CasasActivity.class);
             startActivity(intent);
         }else  if(getListName=="Parque") {
-            Intent intent = new Intent(this, PoliciaActivity.class);
+            Intent intent = new Intent(this, ParqueActivity.class);
             startActivity(intent);
         }else  if(getListName=="Restaurantes") {
             Intent intent = new Intent(this, RestaurantesActivity.class);

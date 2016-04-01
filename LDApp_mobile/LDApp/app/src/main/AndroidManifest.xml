@@ -357,16 +357,19 @@
         <activity
             android:name=".Ibitipoca.ParqueActivity"
             android:label="@string/title_activity_parque"
+            android:parentActivityName=".Ibitipoca.IbitipocaMainActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
             android:name=".Ibitipoca.RestaurantesActivity"
             android:label="@string/title_activity_restaurantes"
+            android:parentActivityName=".Ibitipoca.IbitipocaMainActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
             android:name=".Ibitipoca.VilaActivity"
             android:label="@string/title_activity_vila"
+            android:parentActivityName=".Ibitipoca.IbitipocaMainActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>
