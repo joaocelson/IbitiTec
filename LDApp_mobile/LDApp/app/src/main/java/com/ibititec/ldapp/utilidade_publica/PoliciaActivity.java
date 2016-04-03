@@ -5,7 +5,9 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.ibititec.ldapp.R;
 import com.ibititec.ldapp.adapter.UtilidadeAdapter;
@@ -22,7 +24,9 @@ public class PoliciaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_policia);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress_policia);
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ArrayList<UtilidadePublica> utilidadeArray = new ArrayList<UtilidadePublica>();
         utilidadeArray.add(new UtilidadePublica("Ocorrência", "190           "));

@@ -1,6 +1,7 @@
 package com.ibititec.ldapp.Ibitipoca;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -14,6 +15,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.ibititec.ldapp.DetalheActivity;
 import com.ibititec.ldapp.R;
 import com.ibititec.ldapp.adapter.ComercianteAdapter;
 import com.ibititec.ldapp.helpers.HttpHelper;
@@ -22,6 +24,7 @@ import com.ibititec.ldapp.helpers.UIHelper;
 import com.ibititec.ldapp.models.Comerciante;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +34,7 @@ public class RestaurantesActivity extends AppCompatActivity {
     private ListView lsViewComerciantes;
     private ProgressBar progressBar;
     ArrayList<Comerciante> comerciantesArray = new ArrayList<Comerciante>();
-
+    private Comerciante comerciante;
     private static final String TAG = "RESTAURANTE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +62,9 @@ public class RestaurantesActivity extends AppCompatActivity {
         lsViewRestaurantes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> myAdapter, View myView, int myItemInt, long mylng) {
                 try {
-                    //comerciante = (Comerciante) (lsViewComerciantes.getItemAtPosition(myItemInt));
+                    comerciante = (Comerciante) (lsViewRestaurantes.getItemAtPosition(myItemInt));
                     //exibirMsgAtualizacao("Selecionado o item: " + comerciante.getNome());
-                    // StartarActivityDetalhe();
+                     StartarActivityDetalhe();
                 } catch (Exception ex) {
                     ex.getMessage();
                 }
@@ -69,6 +72,15 @@ public class RestaurantesActivity extends AppCompatActivity {
         });
 
         //Appodeal.show(this, Appodeal.BANNER_BOTTOM);
+    }
+
+    private void StartarActivityDetalhe() {
+        Intent i = new Intent(this, DetalheActivity.class);
+
+        // Seta num campo estático da ActivityB
+        i.putExtra("comerciante", (Serializable) comerciante);
+
+        startActivity(i);
     }
     public void setupComerciantes() {
         String json = leJsonComerciantes();

@@ -5,7 +5,9 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.ibititec.ldapp.R;
 import com.ibititec.ldapp.adapter.UtilidadeAdapter;
@@ -22,7 +24,9 @@ public class CamaraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camara);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress_camara);
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ArrayList<UtilidadePublica> utilidadeArray = new ArrayList<UtilidadePublica>();
         utilidadeArray.add(new UtilidadePublica("Recepção", "(32) 3281-1165"));

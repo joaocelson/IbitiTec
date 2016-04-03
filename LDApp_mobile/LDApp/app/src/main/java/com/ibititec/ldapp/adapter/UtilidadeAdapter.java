@@ -58,9 +58,9 @@ public class UtilidadeAdapter extends BaseAdapter {
     @Override
     public View getView(int position, final View convertView, ViewGroup parent) {
         try {
-            Log.i(ListComercianteActivity.TAG, "Vai setar o Adapter, número de registro " + listaUtilidades.size() + " Position" + position);
-
             final UtilidadePublica utilidade = listaUtilidades.get(position);
+            Log.i(ListComercianteActivity.TAG, "Vai setar o Adapter, número de registro: " + listaUtilidades.size() + " Position: " + position + " - Nome Utilidade " + utilidade.getNomeUtilidade());
+
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View layout = inflater.inflate(R.layout.adapter_utilidade, null);
 

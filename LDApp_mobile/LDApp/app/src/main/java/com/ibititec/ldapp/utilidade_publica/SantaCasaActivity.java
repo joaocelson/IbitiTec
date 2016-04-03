@@ -5,7 +5,9 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.ibititec.ldapp.R;
 import com.ibititec.ldapp.adapter.UtilidadeAdapter;
@@ -28,6 +30,9 @@ public class SantaCasaActivity extends AppCompatActivity {
         ArrayList<UtilidadePublica> utilidadeArray = new ArrayList<UtilidadePublica>();
         utilidadeArray.add(new UtilidadePublica("Recepção", "(32) 3281-1222"));
 
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress_santa_casa);
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
 
         UtilidadeAdapter utilidadeAdater = new UtilidadeAdapter(this, utilidadeArray, this);
         final ListView listView = (ListView) findViewById(R.id.listview_utilidades_santa_casa);

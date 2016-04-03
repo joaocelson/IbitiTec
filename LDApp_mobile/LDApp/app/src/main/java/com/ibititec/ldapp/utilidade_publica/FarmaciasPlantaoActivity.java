@@ -46,11 +46,9 @@ public class FarmaciasPlantaoActivity extends AppCompatActivity {
 
         progressBar = (ProgressBar) findViewById(R.id.progress_farmacias);
         progressBar.setVisibility(View.VISIBLE);
-
-        setupFarmacias();
-
         progressBar.setVisibility(View.GONE);
 
+        setupFarmacias();
 
         lsViewFarmacia = (ListView) findViewById(R.id.listview_farmacia_plantao);
 

@@ -1,6 +1,7 @@
 package com.ibititec.ldapp.Ibitipoca;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -14,6 +15,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.ibititec.ldapp.DetalheActivity;
 import com.ibititec.ldapp.R;
 import com.ibititec.ldapp.adapter.ComercianteAdapter;
 import com.ibititec.ldapp.helpers.HttpHelper;
@@ -22,11 +24,12 @@ import com.ibititec.ldapp.helpers.UIHelper;
 import com.ibititec.ldapp.models.Comerciante;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CasasActivity extends AppCompatActivity {
-
+    Comerciante comerciante =null;
     private ListView lsViewComerciantes;
     private ProgressBar progressBar;
     ArrayList<Comerciante> comerciantesArray = new ArrayList<Comerciante>();
@@ -43,7 +46,7 @@ public class CasasActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         lsViewComerciantes = (ListView) findViewById(R.id.listview_casas_ibitipoca);
-//171940
+
         //INICIALIZACAO DO FRESCO
         Fresco.initialize(this);
 
@@ -54,14 +57,12 @@ public class CasasActivity extends AppCompatActivity {
 
         progressBar.setVisibility(View.GONE);
 
-        //setupFab();
-
         lsViewComerciantes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> myAdapter, View myView, int myItemInt, long mylng) {
                 try {
-                    //comerciante = (Comerciante) (lsViewComerciantes.getItemAtPosition(myItemInt));
-                    //exibirMsgAtualizacao("Selecionado o item: " + comerciante.getNome());
-                   // StartarActivityDetalhe();
+                   Comerciante comerciante = (Comerciante) (lsViewComerciantes.getItemAtPosition(myItemInt));
+                   // exibirMsgAtualizacao("Selecionado o item: " + comerciante.getNome());
+                    StartarActivityDetalhe();
                 } catch (Exception ex) {
                     ex.getMessage();
                 }
@@ -69,7 +70,14 @@ public class CasasActivity extends AppCompatActivity {
         });
         //Appodeal.show(this, Appodeal.BANNER_BOTTOM);
     }
+    private void StartarActivityDetalhe() {
+        Intent i = new Intent(this, DetalheActivity.class);
 
+        // Seta num campo estático da ActivityB
+        i.putExtra("comerciante", (Serializable) comerciante);
+
+        startActivity(i);
+    }
     public void setupComerciantes() {
         String json = leJsonComerciantes();
 

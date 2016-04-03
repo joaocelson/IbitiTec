@@ -12,10 +12,13 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.ibititec.ldapp.R;
 import com.ibititec.ldapp.adapter.UtilidadeAdapter;
+import com.ibititec.ldapp.helpers.UIHelper;
 import com.ibititec.ldapp.models.UtilidadePublica;
 
 import java.util.ArrayList;
@@ -35,6 +38,9 @@ public class PrefeituraActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.progress_prefeitura);
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ArrayList<UtilidadePublica> utilidadeArray = new ArrayList<UtilidadePublica>();
@@ -55,7 +61,7 @@ public class PrefeituraActivity extends AppCompatActivity {
         UtilidadeAdapter utilidadeAdater = new UtilidadeAdapter(this, utilidadeArray, this);
         final ListView listView = (ListView) findViewById(R.id.listview_utilidades_prefeitura);
         listView.setAdapter(utilidadeAdater);
-        //UIHelper.setListViewHeightBasedOnChildren(listView);
+        UIHelper.setListViewHeightBasedOnChildren(listView);
     }
 
     private void setupFab() {

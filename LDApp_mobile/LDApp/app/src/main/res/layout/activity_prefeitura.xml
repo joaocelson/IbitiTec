@@ -16,4 +16,5 @@
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_prefeitura" />
+
 </android.support.design.widget.CoordinatorLayout>
