@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">CampeonatoLD</string>
+    <string name="msg_erro_json">Erro baixando JSON: %s</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_primeira_divisao">PrimeiraDivisaoActivity</string>
+    <string name="title_activity_primeira_divisao_tabela">PrimeiraDivisaoTabelaActivity</string>
+
+    <string name="url_pdtabela">http://52.37.37.207:88/Campeonato/getPDTabela</string>
+    <string name="url_pdclassificacao">http://52.37.37.207:88/Campeonato/getPDClassificacao</string>
+    <string name="url_pdartilharia">http://52.37.37.207:88/Campeonato/getPDArtilharia</string>
+    <string name="url_sdtabela">http://52.37.37.207:88/Campeonato/getSDTabela</string>
+    <string name="url_sdclassificacao">http://52.37.37.207:88/Campeonato/getSDTabela</string>
+    <string name="url_sdartilharia">http://52.37.37.207:88/Campeonato/getSDTabela</string>
+    <string name="title_activity_adapter_rodada">AdapterRodada</string>
+
+
+</resources>
