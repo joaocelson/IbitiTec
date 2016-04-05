@@ -13,8 +13,9 @@
     <string name="url_pdclassificacao">http://52.37.37.207:88/Campeonato/getPDClassificacao</string>
     <string name="url_pdartilharia">http://52.37.37.207:88/Campeonato/getPDArtilharia</string>
     <string name="url_sdtabela">http://52.37.37.207:88/Campeonato/getSDTabela</string>
-    <string name="url_sdclassificacao">http://52.37.37.207:88/Campeonato/getSDTabela</string>
-    <string name="url_sdartilharia">http://52.37.37.207:88/Campeonato/getSDTabela</string>
+    <string name="url_sdclassificacao">http://52.37.37.207:88/Campeonato/getSDClassificacao</string>
+    <string name="url_sdartilharia">http://52.37.37.207:88/Campeonato/getSDArtilharia</string>
+    <string name="url_imagens">http://52.37.37.207:88/Campeonato/Image</string>
     <string name="title_activity_adapter_rodada">AdapterRodada</string>
 
 

@@ -13,15 +13,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnPrimeiraDivisao"
-        android:src="@android:drawable/ic_input_add"
+        android:src="@drawable/primeirad"
         android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1ª Divisão"
+        android:textAlignment="center"
+        android:textSize="24dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btnPrimeiraDivisao"
+        android:layout_toLeftOf="@+id/btnSegundaDivisao"
+        android:layout_toStartOf="@+id/btnSegundaDivisao"
+        android:id="@+id/textView2" />
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnSegundaDivisao"
-        android:src="@android:drawable/ic_input_delete"
+        android:src="@drawable/segundad"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2ª Divisão"
+        android:textSize="24dp"
+        android:textAlignment="center"
+        android:layout_toRightOf="@+id/btnPrimeiraDivisao"
+        android:layout_below="@+id/btnSegundaDivisao"
+        android:layout_alignRight="@+id/btnSegundaDivisao"
+        android:layout_alignEnd="@+id/btnSegundaDivisao" />
 </RelativeLayout>

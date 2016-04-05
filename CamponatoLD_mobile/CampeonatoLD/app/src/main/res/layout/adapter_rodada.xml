@@ -1,85 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_adapter_rodada"
-    tools:context="com.ibititec.campeonatold.adapter.AdapterRodada">
+    tools:context="com.ibititec.campeonatold.adapter.AdapterRodada"
+    tools:showIn="@layout/activity_adapter_rodada">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txtRodada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="RODADA: "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/txtData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/txtRodada"
+            android:text="DATA: "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="RODADA: "
-        android:id="@+id/txtRodada"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="DATA: "
-        android:id="@+id/txtData"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/txtRodada" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="CAMPO: "
         android:id="@+id/txtCampo"
-        android:layout_below="@+id/txtRodada"
-        android:layout_alignRight="@+id/txtData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/txtData"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/txtData"
+        android:layout_below="@+id/txtRodada"
+        android:text="CAMPO: "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Hr: "
-        android:id="@+id/txtHrJogo1"
-        android:layout_below="@+id/txtCampo"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Jogo: "
-        android:id="@+id/txtJogo1"
-        android:layout_above="@+id/txtHrJogo2"
-        android:layout_toRightOf="@+id/txtHrJogo1"
-        android:layout_toEndOf="@+id/txtHrJogo1"
-        android:layout_marginLeft="38dp"
-        android:layout_marginStart="38dp" />
+        <TextView
+            android:id="@+id/txtHrJogo1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left|center_vertical"
+            android:text="Hr: "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Hr: "
-        android:id="@+id/txtHrJogo2"
-        android:layout_below="@+id/txtHrJogo1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="wrap_content"
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/imageView2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                fresco:actualImageScaleType="centerCrop"
+                fresco:failureImage="@drawable/error_img"
+                fresco:failureImageScaleType="centerInside"
+                fresco:placeholderImage="@drawable/loading_img"
+                fresco:retryImage="@drawable/retry_img"
+                fresco:roundedCornerRadius="5dp" />
+
+            <TextView
+                android:id="@+id/txtversus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" X "
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/imageView3"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="right"
+                fresco:actualImageScaleType="centerCrop"
+                fresco:failureImage="@drawable/error_img"
+                fresco:failureImageScaleType="centerInside"
+                fresco:placeholderImage="@drawable/loading_img"
+                fresco:retryImage="@drawable/retry_img"
+                fresco:roundedCornerRadius="5dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Jogo: "
-        android:id="@+id/txtJogo2"
-        android:layout_alignTop="@+id/txtHrJogo2"
-        android:layout_alignLeft="@+id/txtJogo1"
-        android:layout_alignStart="@+id/txtJogo1" />
-</RelativeLayout>
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp">
+
+        <TextView
+            android:id="@+id/txtHrJogo2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:gravity="center_vertical"
+            android:text="Hr: "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal|center_vertical">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/imageView4"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                fresco:actualImageScaleType="centerCrop"
+                fresco:failureImage="@drawable/error_img"
+                fresco:failureImageScaleType="centerInside"
+                fresco:placeholderImage="@drawable/loading_img"
+                fresco:retryImage="@drawable/retry_img"
+                fresco:roundedCornerRadius="5dp" />
+
+            <TextView
+                android:id="@+id/txtversus2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" X "
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/imageView5"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                fresco:actualImageScaleType="centerCrop"
+                fresco:failureImage="@drawable/error_img"
+                fresco:failureImageScaleType="centerInside"
+                fresco:placeholderImage="@drawable/loading_img"
+                fresco:retryImage="@drawable/retry_img"
+                fresco:roundedCornerRadius="5dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

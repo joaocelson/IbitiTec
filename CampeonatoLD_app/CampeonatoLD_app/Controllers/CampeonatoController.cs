@@ -132,5 +132,178 @@ namespace CampeonatoLD_app.Controllers
                 return null;
             }
         }
+
+        //TABELA CAMPEONATO SEGUNDA DIVISÃO
+
+        //
+        // GET: /Campeonato/getPDTabela
+        public String getSDTabela()
+        {
+            try
+            {
+                String line = String.Empty;
+                ICollection<Rodada> rodadas = new List<Rodada>();
+                using (StreamReader CsvReader = new StreamReader(Server.MapPath("/docs/sdTabela.csv")))
+                {
+                    while ((line = CsvReader.ReadLine()) != null)
+                    {
+                        Rodada rodada = new Rodada();
+                        string[] vars = line.Split(',');
+                        rodada.Numero = vars[0];
+                        rodada.Data = vars[1];
+                        rodada.Campo = vars[2];
+                        rodada.HoraJogo1 = vars[3];
+                        rodada.Jogo1 = vars[4];
+                        rodada.HoraJogo2 = vars[5];
+                        rodada.Jogo2 = vars[6];
+                        rodadas.Add(rodada);
+                    }
+                    CsvReader.Close();
+                }
+                return JsonConvert.SerializeObject(rodadas, Formatting.Indented);
+            }
+            catch (Exception ex)
+            {
+                ex = ex;
+                return null;
+            }
+        }
+
+
+        //CLASSIFICACAO SEGUNDA DIVISÃO
+
+        //
+        // GET: /Campeonato/getPDTabela
+        public String getSDClassificacao()
+        {
+            try
+            {
+                String line = String.Empty;
+                ICollection<Classificacao> classificacaoList = new List<Classificacao>();
+                using (StreamReader CsvReader = new StreamReader(Server.MapPath("/docs/sdClassificacao.csv")))
+                {
+                    while ((line = CsvReader.ReadLine()) != null)
+                    {
+                        Classificacao classificacao = new Classificacao();
+                        string[] vars = line.Split(',');
+                        classificacao.Posicao = vars[0];
+                        classificacao.Time = vars[1];
+                        classificacao.Pontos = vars[2];
+                        classificacaoList.Add(classificacao);
+                    }
+                    CsvReader.Close();
+                }
+                return JsonConvert.SerializeObject(classificacaoList, Formatting.Indented);
+            }
+            catch (Exception ex)
+            {
+                ex = ex;
+                return null;
+            }
+        }
+
+        //CLASSIFICACAO PRIMEIRA DIVISÃO
+
+        //
+        // GET: /Campeonato/getPDTabela
+        public String getPDClassificacao()
+        {
+            try
+            {
+                String line = String.Empty;
+                ICollection<Classificacao> classificacaoList = new List<Classificacao>();
+                using (StreamReader CsvReader = new StreamReader(Server.MapPath("/docs/pdClassificacao.csv")))
+                {
+                    while ((line = CsvReader.ReadLine()) != null)
+                    {
+                        Classificacao classificacao = new Classificacao();
+                        string[] vars = line.Split(',');
+                        classificacao.Posicao = vars[0];
+                        classificacao.Time = vars[1];
+                        classificacao.Pontos = vars[2];
+                        classificacaoList.Add(classificacao);
+                    }
+                    CsvReader.Close();
+                }
+                return JsonConvert.SerializeObject(classificacaoList, Formatting.Indented);
+            }
+            catch (Exception ex)
+            {
+                ex = ex;
+                return null;
+            }
+        }
+
+        //ARTILHARIA PRIMEIRA DIVISÃO
+
+        //
+        // GET: /Campeonato/getPDTabela
+        public String getPDArtilharia()
+        {
+            try
+            {
+                String line = String.Empty;
+                ICollection<Artilharia> artilhariaList = new List<Artilharia>();
+                using (StreamReader CsvReader = new StreamReader(Server.MapPath("/docs/pdArtilharia.csv")))
+                {
+                    while ((line = CsvReader.ReadLine()) != null)
+                    {
+                        Artilharia artilharia = new Artilharia();
+                        string[] vars = line.Split(',');
+                        artilharia.Gols = vars[0];
+                        artilharia.Nome = vars[1];
+                        artilharia.Time = vars[2];
+                        artilhariaList.Add(artilharia);
+                    }
+                    CsvReader.Close();
+                }
+                return JsonConvert.SerializeObject(artilhariaList, Formatting.Indented);
+            }
+            catch (Exception ex)
+            {
+                ex = ex;
+                return null;
+            }
+        }
+
+        //ARTILHARIA PRIMEIRA DIVISÃO
+
+        //
+        // GET: /Campeonato/getPDTabela
+        public String getSDArtilharia()
+        {
+            try
+            {
+                String line = String.Empty;
+                ICollection<Artilharia> artilhariaList = new List<Artilharia>();
+                using (StreamReader CsvReader = new StreamReader(Server.MapPath("/docs/sdArtilharia.csv")))
+                {
+                    while ((line = CsvReader.ReadLine()) != null)
+                    {
+                        Artilharia artilharia = new Artilharia();
+                        string[] vars = line.Split(',');
+                        artilharia.Gols = vars[0]; 
+                        artilharia.Nome = vars[1];
+                        artilharia.Time = vars[2];
+                        artilhariaList.Add(artilharia);
+                    }
+                    CsvReader.Close();
+                }
+                return JsonConvert.SerializeObject(artilhariaList, Formatting.Indented);
+            }
+            catch (Exception ex)
+            {
+                ex = ex;
+                return null;
+            }
+        }
+
+        //GETIMAGENS
+        public ActionResult Image(string nomeImagem)
+        {
+            var dir = Server.MapPath("/Content/imagens/escudo");
+            var path = Path.Combine(dir, nomeImagem);
+            return base.File(path, "image/jpg");
+        }
     }
 }

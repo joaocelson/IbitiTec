@@ -9,12 +9,73 @@
     tools:showIn="@layout/activity_primeira_divisao_tabela"
     android:paddingBottom="30dp">
 
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <LinearLayout android:id="@+id/cabecalho_artilahria"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="150dp"
+                android:textSize="20dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:id="@+id/txtNome"
+                android:text="NOME"
+                />
+            <TextView
+                android:layout_width="63dp"
+                android:textSize="20dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:id="@+id/txtGols"
+                android:text="GOLS"/>
+
+            <TextView
+                android:layout_width="93dp"
+                android:textSize="20dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:id="@+id/txtTime2"
+                android:text="TIME"/>
+        </LinearLayout>
+
+        <LinearLayout android:id="@+id/cabecalho_classificacao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="80dp"
+                android:textSize="20dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:id="@+id/txtPosicao"
+                android:text="Posicao" />
+
+            <TextView
+                android:layout_width="210dp"
+                android:textSize="20dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:id="@+id/txtTime"
+                android:text="Time" />
+
+            <TextView
+                android:layout_width="93dp"
+                android:textSize="20dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:id="@+id/txtPontos"
+                android:text="Pontos"/>
+        </LinearLayout>
 
         <ListView
             android:id="@+id/listview_primeira_tabela"

@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.ibititec.campeonatold.helpers.HttpHelper;
 
 import java.io.IOException;
@@ -28,12 +29,13 @@ public class MainActivity extends AppCompatActivity
 
     //DECLARACAO DOS OBJETOS DE TELA
     private ImageButton btnPrimeiraDivisao, btnSegundaDivisao;
-    private ProgressDialog progressDialog;
+   // private ProgressDialog progressDialog;
 
     //CONSTANTES NOME DO JSON NA BASE DE DADOS
     public static final String PDARTILHARIA = "pdartilharia", PDTABELA = "pdtabela", PDCLASSIFICACAO = "pdclassificacao",
             SDARTILHARIA = "sdartilharia", SDTABELA = "dstabela", SDCLASSIFICACAO = "sdclassificacao";
     public static final String TAG = "CAMPEONATOLD";
+    public static final String PATH_FOTOS = "http://52.37.37.207:88/Campeonato/Image?nomeimagem=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,9 @@ public class MainActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
+
+        // //INICIALIZACAO DO FRESCO
+        Fresco.initialize(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -74,16 +79,11 @@ public class MainActivity extends AppCompatActivity
     private void atualizarBaseDados() {
         try {
             donwnloadFromUrl(PDTABELA, getString(R.string.url_pdtabela));
-
-//            donwnloadFromUrl(PDARTILHARIA, getString(R.string.url_pdartilharia));
-//
-//            donwnloadFromUrl(PDCLASSIFICACAO, getString(R.string.url_pdclassificacao));
-//
-//            donwnloadFromUrl(SDTABELA, getString(R.string.url_sdtabela));
-//
-//            donwnloadFromUrl(SDARTILHARIA, getString(R.string.url_sdartilharia));
-//
-//            donwnloadFromUrl(SDCLASSIFICACAO, getString(R.string.url_sdclassificacao));
+            donwnloadFromUrl(PDARTILHARIA, getString(R.string.url_pdartilharia));
+            donwnloadFromUrl(PDCLASSIFICACAO, getString(R.string.url_pdclassificacao));
+            donwnloadFromUrl(SDTABELA, getString(R.string.url_sdtabela));
+            donwnloadFromUrl(SDARTILHARIA, getString(R.string.url_sdartilharia));
+            donwnloadFromUrl(SDCLASSIFICACAO, getString(R.string.url_sdclassificacao));
 
         } catch (Exception ex) {
             Log.i(TAG, "Não foi possível atualizar  base de dados." + ex.getMessage());
@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity
 
     private void donwnloadFromUrl(final String nomeJsonParam, String urlJson) {
         (new AsyncTask<String, Void, String>() {
-
+            ProgressDialog progressDialog;
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
@@ -202,7 +202,6 @@ public class MainActivity extends AppCompatActivity
                     e.printStackTrace();
                     Log.e(TAG, String.format(getString(R.string.msg_erro_json), e.getMessage()));
                 }
-
                 return json;
             }
 
