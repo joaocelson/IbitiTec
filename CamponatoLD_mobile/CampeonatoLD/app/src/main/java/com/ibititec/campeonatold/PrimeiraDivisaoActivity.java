@@ -8,9 +8,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.appodeal.ads.Appodeal;
+
 public class PrimeiraDivisaoActivity extends AppCompatActivity {
 
-    private ImageButton btnTabela, btnArtilharia, btnClassificacao;
+    private ImageButton btnTabela, btnArtilharia, btnClassificacao, btnAjuda;
     private String divisao;
     Toolbar toolbar;
 
@@ -25,11 +27,14 @@ public class PrimeiraDivisaoActivity extends AppCompatActivity {
         btnArtilharia = (ImageButton) findViewById(R.id.btnPrimeiraDivisaoArtilharia);
         btnTabela = (ImageButton) findViewById(R.id.btnPrimeiraDivisaoTabela);
         btnClassificacao = (ImageButton) findViewById(R.id.btnPrimeiraDivisaoClassificacao);
-
+        btnAjuda = (ImageButton) findViewById(R.id.btnPrimeiraDivisaoSobre);
         lerIntent();
         executarAcoes();
+        iniciarAppodeal();
     }
-
+    private void iniciarAppodeal() {
+        Appodeal.show(this, Appodeal.BANNER_BOTTOM);
+    }
     @Override
     public void onBackPressed() {
         Intent intent = new Intent();
@@ -67,6 +72,20 @@ public class PrimeiraDivisaoActivity extends AppCompatActivity {
                 startarActivity(divisao, "classificacao");
             }
         });
+
+        btnClassificacao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startarActivityHelp(divisao, "sobre");
+            }
+        });
+    }
+
+    private void startarActivityHelp(String divisao, String funcionalidade) {
+        Intent intent = new Intent(this, SobreActivity.class);
+        intent.putExtra("divisao", divisao);
+        intent.putExtra("funcionalidade", funcionalidade);
+        startActivity(intent);
     }
 
     private void startarActivity(String divisao, String funcionalidade) {

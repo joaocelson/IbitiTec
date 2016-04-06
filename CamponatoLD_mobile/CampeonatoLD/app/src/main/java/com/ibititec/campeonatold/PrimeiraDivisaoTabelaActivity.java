@@ -2,7 +2,6 @@ package com.ibititec.campeonatold;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -12,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
+import com.appodeal.ads.Appodeal;
 import com.ibititec.campeonatold.adapter.AdapterArtilharia;
 import com.ibititec.campeonatold.adapter.AdapterClassificacao;
 import com.ibititec.campeonatold.adapter.AdapterRodada;
@@ -46,14 +46,21 @@ public class PrimeiraDivisaoTabelaActivity extends AppCompatActivity {
 
         lerIntent();
         executarAcoes();
+        iniciarAppodeal();
+    }
+
+    private void iniciarAppodeal() {
+        Appodeal.show(this, Appodeal.BANNER_BOTTOM);
     }
 
     @Override
     public void onBackPressed() {
         Intent intent = new Intent();
         intent.putExtra("divisao", divisao);
+
         // add data to Intent
         setResult(PrimeiraDivisaoTabelaActivity.RESULT_OK, intent);
+        Appodeal.show(this, Appodeal.NATIVE);
         super.onBackPressed();
     }
 
@@ -89,24 +96,14 @@ public class PrimeiraDivisaoTabelaActivity extends AppCompatActivity {
         }
     }
 
-    private String leJsonBancoLocal(String nomeJson) {
-        try {
-            String json = PreferenceManager.getDefaultSharedPreferences(PrimeiraDivisaoTabelaActivity.this)
-                    .getString(nomeJson + ".json", "");
-            Log.i(TAG, "Lendo preferences: " + json);
-            return json;
-        } catch (Exception ex) {
-            Log.i(TAG, "Erro no metodo:  nomeJson: " + nomeJson + " - Erro: " + ex.getMessage());
-            return null;
-        }
-    }
+
 
     private void atualizarArtilhariaSegundaDivisao() {
         try {
             cabecalhoLayout = (LinearLayout) findViewById(R.id.cabecalho_artilahria);
             cabecalhoLayout.setVisibility(View.VISIBLE);
             this.setTitle("Artilharia 2ª Divisão");
-            tabela = leJsonBancoLocal(MainActivity.SDARTILHARIA);
+            tabela = JsonHelper.leJsonBancoLocal(MainActivity.SDARTILHARIA, this);
             List<Artilharia> listArtilharia = JsonHelper.getList(tabela, Artilharia[].class);
             AdapterArtilharia adapterArtilharia = new AdapterArtilharia(this, listArtilharia);
             lvTabela.setAdapter(adapterArtilharia);
@@ -121,7 +118,7 @@ public class PrimeiraDivisaoTabelaActivity extends AppCompatActivity {
             cabecalhoLayout = (LinearLayout) findViewById(R.id.cabecalho_artilahria);
             cabecalhoLayout.setVisibility(View.VISIBLE);
             this.setTitle("Artilharia 1ª Divisão");
-            tabela = leJsonBancoLocal(MainActivity.PDARTILHARIA);
+            tabela = JsonHelper.leJsonBancoLocal(MainActivity.PDARTILHARIA, this);
             List<Artilharia> listArtilharia = JsonHelper.getList(tabela, Artilharia[].class);
             AdapterArtilharia adapterArtilharia = new AdapterArtilharia(this, listArtilharia);
             lvTabela.setAdapter(adapterArtilharia);
@@ -136,7 +133,7 @@ public class PrimeiraDivisaoTabelaActivity extends AppCompatActivity {
             cabecalhoLayout = (LinearLayout) findViewById(R.id.cabecalho_classificacao);
             cabecalhoLayout.setVisibility(View.VISIBLE);
             this.setTitle("Classificação 2ª Divisão");
-            tabela = leJsonBancoLocal(MainActivity.SDCLASSIFICACAO);
+            tabela = JsonHelper.leJsonBancoLocal(MainActivity.SDCLASSIFICACAO, this);
             List<Classificacao> listClassificacao = JsonHelper.getList(tabela, Classificacao[].class);
             AdapterClassificacao adapterClassificacao = new AdapterClassificacao(this, listClassificacao);
             lvTabela.setAdapter(adapterClassificacao);
@@ -151,7 +148,7 @@ public class PrimeiraDivisaoTabelaActivity extends AppCompatActivity {
             cabecalhoLayout = (LinearLayout) findViewById(R.id.cabecalho_classificacao);
             cabecalhoLayout.setVisibility(View.VISIBLE);
             this.setTitle("Classificação 1ª Divisão");
-            tabela = leJsonBancoLocal(MainActivity.PDCLASSIFICACAO);
+            tabela = JsonHelper.leJsonBancoLocal(MainActivity.PDCLASSIFICACAO, this);
             List<Classificacao> listClassificacao = JsonHelper.getList(tabela, Classificacao[].class);
             AdapterClassificacao adapterClassificacao = new AdapterClassificacao(this, listClassificacao);
             lvTabela.setAdapter(adapterClassificacao);
@@ -164,7 +161,7 @@ public class PrimeiraDivisaoTabelaActivity extends AppCompatActivity {
     private void atualizarTabelaSegundaDivisao() {
         try {
             this.setTitle("Tabela 2ª Divisão");
-            tabela = leJsonBancoLocal(MainActivity.SDTABELA);
+            tabela = JsonHelper.leJsonBancoLocal(MainActivity.SDTABELA, this);
             List<Rodada> listRodada = JsonHelper.getList(tabela, Rodada[].class);
             AdapterRodada adapterRodada = new AdapterRodada(this, listRodada);
             lvTabela.setAdapter(adapterRodada);
@@ -178,7 +175,7 @@ public class PrimeiraDivisaoTabelaActivity extends AppCompatActivity {
     private void atualizarTabelaPrimeiraDivisao() {
         try {
             this.setTitle("Tabela 1ª Divisão");
-            String tabela = leJsonBancoLocal(MainActivity.PDTABELA);
+            String tabela = JsonHelper.leJsonBancoLocal(MainActivity.PDTABELA, this);
             List<Rodada> listRodada = JsonHelper.getList(tabela, Rodada[].class);
             AdapterRodada adapterRodada = new AdapterRodada(this, listRodada);
             lvTabela.setAdapter(adapterRodada);

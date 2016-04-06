@@ -5,9 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -19,8 +17,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.appodeal.ads.Appodeal;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.ibititec.campeonatold.helpers.HttpHelper;
+import com.ibititec.campeonatold.helpers.JsonHelper;
 
 import java.io.IOException;
 
@@ -29,7 +29,8 @@ public class MainActivity extends AppCompatActivity
 
     //DECLARACAO DOS OBJETOS DE TELA
     private ImageButton btnPrimeiraDivisao, btnSegundaDivisao;
-   // private ProgressDialog progressDialog;
+   Menu menu;
+    // private ProgressDialog progressDialog;
 
     //CONSTANTES NOME DO JSON NA BASE DE DADOS
     public static final String PDARTILHARIA = "pdartilharia", PDTABELA = "pdtabela", PDCLASSIFICACAO = "pdclassificacao",
@@ -44,23 +45,17 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         // //INICIALIZACAO DO FRESCO
         Fresco.initialize(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
-        toggle.syncState();
+        //AS DUAS LINHAS ABAIXO DESABILITAR A BARRA DE MENU
+        toggle.setDrawerIndicatorEnabled(false);
+        //toggle.syncState();
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -72,19 +67,30 @@ public class MainActivity extends AppCompatActivity
         //METODOS DOS CLICKS
         executarAcoes();
 
-        atualizarBaseDados();
+        atualizarBaseDados(false);
 
+        iniciarAppodeal();    }
+
+    private void iniciarAppodeal() {
+        Appodeal.show(this, Appodeal.BANNER_BOTTOM);
     }
 
-    private void atualizarBaseDados() {
-        try {
-            donwnloadFromUrl(PDTABELA, getString(R.string.url_pdtabela));
-            donwnloadFromUrl(PDARTILHARIA, getString(R.string.url_pdartilharia));
-            donwnloadFromUrl(PDCLASSIFICACAO, getString(R.string.url_pdclassificacao));
-            donwnloadFromUrl(SDTABELA, getString(R.string.url_sdtabela));
-            donwnloadFromUrl(SDARTILHARIA, getString(R.string.url_sdartilharia));
-            donwnloadFromUrl(SDCLASSIFICACAO, getString(R.string.url_sdclassificacao));
+    @Override
+    public void onResume() {
+        super.onResume();
+        Appodeal.onResume(this, Appodeal.BANNER);
+    }
 
+    private void atualizarBaseDados(boolean atualizar) {
+        try {
+            if (JsonHelper.leJsonBancoLocal(MainActivity.PDTABELA, this) == "" || atualizar == true) {
+                donwnloadFromUrl(PDTABELA, getString(R.string.url_pdtabela));
+                donwnloadFromUrl(PDARTILHARIA, getString(R.string.url_pdartilharia));
+                donwnloadFromUrl(PDCLASSIFICACAO, getString(R.string.url_pdclassificacao));
+                donwnloadFromUrl(SDTABELA, getString(R.string.url_sdtabela));
+                donwnloadFromUrl(SDARTILHARIA, getString(R.string.url_sdartilharia));
+                donwnloadFromUrl(SDCLASSIFICACAO, getString(R.string.url_sdclassificacao));
+            }
         } catch (Exception ex) {
             Log.i(TAG, "Não foi possível atualizar  base de dados." + ex.getMessage());
         }
@@ -104,6 +110,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
         return true;
     }
 
@@ -115,7 +122,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_atualizar) {
+            atualizarBaseDados(true);
             return true;
         }
 
@@ -184,6 +192,7 @@ public class MainActivity extends AppCompatActivity
     private void donwnloadFromUrl(final String nomeJsonParam, String urlJson) {
         (new AsyncTask<String, Void, String>() {
             ProgressDialog progressDialog;
+
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
