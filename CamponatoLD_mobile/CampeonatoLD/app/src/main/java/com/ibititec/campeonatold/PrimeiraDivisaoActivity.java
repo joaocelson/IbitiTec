@@ -30,8 +30,15 @@ public class PrimeiraDivisaoActivity extends AppCompatActivity {
         btnAjuda = (ImageButton) findViewById(R.id.btnPrimeiraDivisaoSobre);
         lerIntent();
         executarAcoes();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+//        AnalyticsApplication.enviarGoogleAnalitcs(this);
         iniciarAppodeal();
     }
+
     private void iniciarAppodeal() {
         Appodeal.show(this, Appodeal.BANNER_BOTTOM);
     }
@@ -73,7 +80,7 @@ public class PrimeiraDivisaoActivity extends AppCompatActivity {
             }
         });
 
-        btnClassificacao.setOnClickListener(new View.OnClickListener() {
+        btnAjuda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startarActivityHelp(divisao, "sobre");

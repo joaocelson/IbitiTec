@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.appodeal.ads.Appodeal;
+import com.ibititec.campeonatold.util.AnalyticsApplication;
 
 public class SobreActivity extends AppCompatActivity {
 
@@ -17,11 +18,16 @@ public class SobreActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         lerIntent();
-        iniciarAppodeal();
-
     }
     private void iniciarAppodeal() {
         Appodeal.show(this, Appodeal.BANNER_BOTTOM);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        AnalyticsApplication.enviarGoogleAnalitcs(this);
+        iniciarAppodeal();
     }
 
     private void lerIntent() {

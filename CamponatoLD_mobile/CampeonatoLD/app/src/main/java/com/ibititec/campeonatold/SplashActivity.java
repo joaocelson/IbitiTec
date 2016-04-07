@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.appodeal.ads.Appodeal;
+import com.facebook.drawee.backends.pipeline.Fresco;
 
 public class SplashActivity extends AppCompatActivity {
     private  final int DURACAO_TELA = 2000;
@@ -17,7 +18,19 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        //CHAMANDO A TELA MAIN ACTIVITY
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent novaTela = new Intent(SplashActivity.this, MainActivity.class);
+                SplashActivity.this.startActivity(novaTela);
+                SplashActivity.this.finish();
+            }
+        }, DURACAO_TELA);
         iniciarAppodeal();
+
+        // //INICIALIZACAO DO FRESCO
+        Fresco.initialize(this);
     }
 
     private void iniciarAppodeal() {
@@ -29,17 +42,9 @@ public class SplashActivity extends AppCompatActivity {
         Appodeal.show(this, Appodeal.BANNER_BOTTOM);
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent novaTela = new Intent(SplashActivity.this, MainActivity.class);
-                SplashActivity.this.startActivity(novaTela);
-                SplashActivity.this.finish();
-            }
-        },DURACAO_TELA);
+
         return true;
     }
 
@@ -58,9 +63,5 @@ public class SplashActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onResume(){
-        super.onResume();
-        Appodeal.show(this, Appodeal.BANNER);
-    }
+
 }

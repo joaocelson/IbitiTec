@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.appodeal.ads.Appodeal;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.ibititec.campeonatold.adapter.AdapterArtilharia;
 import com.ibititec.campeonatold.adapter.AdapterClassificacao;
 import com.ibititec.campeonatold.adapter.AdapterRodada;
@@ -20,6 +21,7 @@ import com.ibititec.campeonatold.helpers.UIHelper;
 import com.ibititec.campeonatold.modelo.Artilharia;
 import com.ibititec.campeonatold.modelo.Classificacao;
 import com.ibititec.campeonatold.modelo.Rodada;
+import com.ibititec.campeonatold.util.AnalyticsApplication;
 
 import java.util.List;
 
@@ -46,11 +48,24 @@ public class PrimeiraDivisaoTabelaActivity extends AppCompatActivity {
 
         lerIntent();
         executarAcoes();
+
+        // //INICIALIZACAO DO FRESCO
+        Fresco.initialize(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        AnalyticsApplication.enviarGoogleAnalitcs(this);
         iniciarAppodeal();
     }
 
     private void iniciarAppodeal() {
-        Appodeal.show(this, Appodeal.BANNER_BOTTOM);
+        try{
+            Appodeal.show(this, Appodeal.BANNER_BOTTOM);
+        }catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro: iniciarAppodeal: " + ex.getMessage());
+        }
     }
 
     @Override
@@ -95,8 +110,6 @@ public class PrimeiraDivisaoTabelaActivity extends AppCompatActivity {
                 break;
         }
     }
-
-
 
     private void atualizarArtilhariaSegundaDivisao() {
         try {

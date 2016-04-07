@@ -18,9 +18,9 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.appodeal.ads.Appodeal;
-import com.facebook.drawee.backends.pipeline.Fresco;
 import com.ibititec.campeonatold.helpers.HttpHelper;
 import com.ibititec.campeonatold.helpers.JsonHelper;
+import com.ibititec.campeonatold.util.AnalyticsApplication;
 
 import java.io.IOException;
 
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity
 
     //DECLARACAO DOS OBJETOS DE TELA
     private ImageButton btnPrimeiraDivisao, btnSegundaDivisao;
-   Menu menu;
+    Menu menu;
     // private ProgressDialog progressDialog;
 
     //CONSTANTES NOME DO JSON NA BASE DE DADOS
@@ -45,11 +45,8 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // //INICIALIZACAO DO FRESCO
-        Fresco.initialize(this);
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-                ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         //AS DUAS LINHAS ABAIXO DESABILITAR A BARRA DE MENU
@@ -63,13 +60,7 @@ public class MainActivity extends AppCompatActivity
         //IDENTIFICACAO DOS OBJETOS DE LAYOUT
         btnPrimeiraDivisao = (ImageButton) findViewById(R.id.btnPrimeiraDivisao);
         btnSegundaDivisao = (ImageButton) findViewById(R.id.btnSegundaDivisao);
-
-        //METODOS DOS CLICKS
-        executarAcoes();
-
-        atualizarBaseDados(false);
-
-        iniciarAppodeal();    }
+    }
 
     private void iniciarAppodeal() {
         Appodeal.show(this, Appodeal.BANNER_BOTTOM);
@@ -78,7 +69,12 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onResume() {
         super.onResume();
-        Appodeal.onResume(this, Appodeal.BANNER);
+        //METODOS DOS CLICKS
+        executarAcoes();
+
+        atualizarBaseDados(false);
+        AnalyticsApplication.enviarGoogleAnalitcs(this);
+        iniciarAppodeal();
     }
 
     private void atualizarBaseDados(boolean atualizar) {
@@ -110,7 +106,6 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-
         return true;
     }
 
