@@ -10,6 +10,7 @@ import java.net.URL;
  */
 public class HttpHelper {
     public static String downloadFromURL(String urlAddress) throws IOException {
+
         BufferedReader reader = new BufferedReader(new InputStreamReader(new URL(urlAddress).openStream()));
         StringBuilder result = new StringBuilder();
 

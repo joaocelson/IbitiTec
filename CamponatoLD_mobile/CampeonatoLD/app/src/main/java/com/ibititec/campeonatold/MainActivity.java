@@ -1,7 +1,11 @@
 package com.ibititec.campeonatold;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -9,6 +13,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -29,7 +34,10 @@ public class MainActivity extends AppCompatActivity
 
     //DECLARACAO DOS OBJETOS DE TELA
     private ImageButton btnPrimeiraDivisao, btnSegundaDivisao;
-    Menu menu;
+
+    boolean haveConnectedWifi = false;
+    boolean haveConnectedMobile = false;
+
     // private ProgressDialog progressDialog;
 
     //CONSTANTES NOME DO JSON NA BASE DE DADOS
@@ -60,6 +68,8 @@ public class MainActivity extends AppCompatActivity
         //IDENTIFICACAO DOS OBJETOS DE LAYOUT
         btnPrimeiraDivisao = (ImageButton) findViewById(R.id.btnPrimeiraDivisao);
         btnSegundaDivisao = (ImageButton) findViewById(R.id.btnSegundaDivisao);
+
+
     }
 
     private void iniciarAppodeal() {
@@ -79,13 +89,18 @@ public class MainActivity extends AppCompatActivity
 
     private void atualizarBaseDados(boolean atualizar) {
         try {
+
             if (JsonHelper.leJsonBancoLocal(MainActivity.PDTABELA, this) == "" || atualizar == true) {
-                donwnloadFromUrl(PDTABELA, getString(R.string.url_pdtabela));
-                donwnloadFromUrl(PDARTILHARIA, getString(R.string.url_pdartilharia));
-                donwnloadFromUrl(PDCLASSIFICACAO, getString(R.string.url_pdclassificacao));
-                donwnloadFromUrl(SDTABELA, getString(R.string.url_sdtabela));
-                donwnloadFromUrl(SDARTILHARIA, getString(R.string.url_sdartilharia));
-                donwnloadFromUrl(SDCLASSIFICACAO, getString(R.string.url_sdclassificacao));
+                if (existeConexao()) {
+                    donwnloadFromUrl(PDTABELA, getString(R.string.url_pdtabela));
+                    donwnloadFromUrl(PDARTILHARIA, getString(R.string.url_pdartilharia));
+                    donwnloadFromUrl(PDCLASSIFICACAO, getString(R.string.url_pdclassificacao));
+                    donwnloadFromUrl(SDTABELA, getString(R.string.url_sdtabela));
+                    donwnloadFromUrl(SDARTILHARIA, getString(R.string.url_sdartilharia));
+                    donwnloadFromUrl(SDCLASSIFICACAO, getString(R.string.url_sdclassificacao));
+                } else {
+                    Log.i(TAG, "Sem conexão com a internet.");
+                }
             }
         } catch (Exception ex) {
             Log.i(TAG, "Não foi possível atualizar  base de dados." + ex.getMessage());
@@ -225,6 +240,52 @@ public class MainActivity extends AppCompatActivity
                         .apply();
             }
         }).execute(urlJson);
+    }
+
+    private void exibirMensagem() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        //define o titulo
+        builder.setTitle("Atenção");
+        //define a mensagem
+        builder.setMessage("Não identificado conexão com a internet, verifique sua conexão está ativa.");
+        //define um botão como positivo
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                return;
+                // Toast.makeText(MainActivity.this, "positivo=" + arg1, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //cria o AlertDialog
+        AlertDialog alerta = builder.create();
+        //Exibe
+        alerta.show();
+    }
+
+    public boolean existeConexao() {
+        ConnectivityManager connectivity = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        try {
+            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+            for (NetworkInfo ni : netInfo) {
+                if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                    if (ni.isConnected())
+                        haveConnectedWifi = true;
+                if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                    if (ni.isConnected())
+                        haveConnectedMobile = true;
+            }
+            if (!haveConnectedWifi && !haveConnectedMobile) {
+                exibirMensagem();
+            }
+            return haveConnectedWifi || haveConnectedMobile;
+
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro ao verificar conexao com a intenet." + ex.getMessage());
+            return false;
+        }
     }
 
 }

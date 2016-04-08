@@ -305,5 +305,12 @@ namespace CampeonatoLD_app.Controllers
             var path = Path.Combine(dir, nomeImagem);
             return base.File(path, "image/jpg");
         }
+
+        public FileResult DownloadFutebolLD()
+        {
+            byte[] fileBytes = System.IO.File.ReadAllBytes(Server.MapPath("/apk/futebolld.apk"));
+            string fileName = "futebolld.apk";
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
     }
 }

@@ -175,10 +175,23 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\imagens\escudo\Caete.jpg" />
+    <Content Include="Content\imagens\escudo\Ipiranga.jpg" />
+    <Content Include="Content\imagens\escudo\Juventude.jpg" />
+    <Content Include="Content\imagens\escudo\Laranjeira.jpg" />
+    <Content Include="Content\imagens\escudo\Orvalho.jpg" />
+    <Content Include="Content\imagens\escudo\Piuna.jpg" />
+    <Content Include="Content\imagens\escudo\PocoPedra.jpg" />
+    <Content Include="Content\imagens\escudo\Polemica.jpg" />
+    <Content Include="Content\imagens\escudo\RosaGomes.jpg" />
+    <Content Include="Content\imagens\escudo\SaoDomingos.jpg" />
+    <Content Include="Content\imagens\escudo\Serab.jpg" />
+    <Content Include="Content\imagens\escudo\Social.jpg" />
     <Content Include="docs\pdClassificacao.csv" />
     <Content Include="docs\sdArtilharia.csv" />
     <Content Include="docs\sdTabela.csv" />
     <Content Include="docs\pdArtilharia.csv" />
+    <Content Include="apk\futebolld.apk" />
     <None Include="docs\pdTabela.csv" />
     <Content Include="Content\imagens\escudo\Bahia.jpg" />
     <Content Include="Content\imagens\escudo\semifinal.jpg" />
@@ -190,7 +203,6 @@
     <Content Include="Content\imagens\escudo\Juventus.jpg" />
     <Content Include="Content\imagens\escudo\Manejo.jpg" />
     <Content Include="Content\imagens\escudo\Minas.jpg" />
-    <Content Include="Content\imagens\escudo\Oravalho.jpg" />
     <Content Include="Content\imagens\escudo\Perobas.jpg" />
     <Content Include="Content\imagens\escudo\STerezinha.jpg" />
     <Content Include="Content\imagens\escudo\Vila.jpg" />
