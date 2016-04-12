@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:id="@+id/txtPosicao"
-        android:text="Posicao" />
+        android:text="Posicao" android:paddingBottom="20dp" />
 
     <TextView
         android:layout_width="210dp"

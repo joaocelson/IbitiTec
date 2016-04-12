@@ -18,7 +18,7 @@
             android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="horizontal" android:paddingBottom="20dp"
             >
             <TextView
                 android:layout_width="150dp"
@@ -50,7 +50,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:visibility="gone"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:paddingBottom="20dp">
 
             <TextView
                 android:layout_width="80dp"
@@ -80,7 +81,8 @@
         <ListView
             android:id="@+id/listview_primeira_tabela"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:paddingBottom="40dp" />
 
         <ProgressBar
             android:id="@+id/progress_primeira_tabela"
