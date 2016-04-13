@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">LFFA</string>
+    <string name="msg_erro_json">Erro baixando JSON: %s</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_primeira_divisao">PrimeiraDivisaoActivity</string>
+    <string name="title_activity_primeira_divisao_tabela">PrimeiraDivisaoTabelaActivity</string>
+    <string name="url_pdtabela">http://52.37.37.207:92/Campeonato/getPDTabela</string>
+    <string name="url_pdclassificacao">http://52.37.37.207:92/Campeonato/getPDClassificacao</string>
+    <string name="url_pdartilharia">http://52.37.37.207:92/Campeonato/getPDArtilharia</string>
+    <string name="url_sdtabela">http://52.37.37.207:92/Campeonato/getSDTabela</string>
+    <string name="url_sdclassificacao">http://52.37.37.207:92/Campeonato/getSDClassificacao</string>
+    <string name="url_sdartilharia">http://52.37.37.207:92/Campeonato/getSDArtilharia</string>
+    <string name="url_imagens">http://52.37.37.207:92/Campeonato/Image</string>
+    <string name="title_activity_adapter_rodada">AdapterRodada</string>
+    <string name="title_activity_sobre">Sobre a Ibititec</string>
+</resources>
