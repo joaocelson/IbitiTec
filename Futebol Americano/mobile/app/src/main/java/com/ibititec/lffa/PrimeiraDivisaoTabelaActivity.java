@@ -108,6 +108,26 @@ public class PrimeiraDivisaoTabelaActivity extends AppCompatActivity {
                     atualizarArtilhariaSegundaDivisao();
                 }
                 break;
+            case "equipes":
+                if (divisao.equals("primeira")) {
+                    atualizarEquipesPrimeiraDivisao();
+                }
+                break;
+        }
+    }
+
+    private void atualizarEquipesPrimeiraDivisao() {
+        try {
+            cabecalhoLayout = (LinearLayout) findViewById(R.id.cabecalho_classificacao);
+            cabecalhoLayout.setVisibility(View.VISIBLE);
+            this.setTitle("Equipes");
+            tabela = JsonHelper.leJsonBancoLocal(MainActivity.PDCLASSIFICACAO, this);
+            List<Classificacao> listClassificacao = JsonHelper.getList(tabela, Classificacao[].class);
+            AdapterClassificacao adapterClassificacao = new AdapterClassificacao(this, listClassificacao, false);
+            lvTabela.setAdapter(adapterClassificacao);
+            UIHelper.setListViewHeightBasedOnChildren(lvTabela);
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro ao preencher listView: " + ex.getMessage());
         }
     }
 
@@ -148,7 +168,7 @@ public class PrimeiraDivisaoTabelaActivity extends AppCompatActivity {
             this.setTitle("Classificação 2ª Divisão");
             tabela = JsonHelper.leJsonBancoLocal(MainActivity.SDCLASSIFICACAO, this);
             List<Classificacao> listClassificacao = JsonHelper.getList(tabela, Classificacao[].class);
-            AdapterClassificacao adapterClassificacao = new AdapterClassificacao(this, listClassificacao);
+            AdapterClassificacao adapterClassificacao = new AdapterClassificacao(this, listClassificacao, true);
             lvTabela.setAdapter(adapterClassificacao);
             UIHelper.setListViewHeightBasedOnChildren(lvTabela);
         } catch (Exception ex) {
@@ -163,7 +183,7 @@ public class PrimeiraDivisaoTabelaActivity extends AppCompatActivity {
             this.setTitle("Classificação Geral");
             tabela = JsonHelper.leJsonBancoLocal(MainActivity.PDCLASSIFICACAO, this);
             List<Classificacao> listClassificacao = JsonHelper.getList(tabela, Classificacao[].class);
-            AdapterClassificacao adapterClassificacao = new AdapterClassificacao(this, listClassificacao);
+            AdapterClassificacao adapterClassificacao = new AdapterClassificacao(this, listClassificacao, true);
             lvTabela.setAdapter(adapterClassificacao);
             UIHelper.setListViewHeightBasedOnChildren(lvTabela);
         } catch (Exception ex) {

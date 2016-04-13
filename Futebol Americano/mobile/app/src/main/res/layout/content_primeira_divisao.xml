@@ -16,16 +16,19 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnPrimeiraDivisaoTabela"
         android:src="@drawable/tabela"
-        android:background="@color/Transparente"
+        android:background="@color/Black"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/textView4"
+        android:layout_alignRight="@+id/btnPrimeiraDivisaoClassificacao"
+        android:layout_alignEnd="@+id/btnPrimeiraDivisaoClassificacao" />
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnPrimeiraDivisaoArtilharia"
-        android:src="@drawable/artilharia"
+        android:src="@drawable/arqueiro"
         android:background="@color/Transparente"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
@@ -62,7 +65,8 @@
         android:layout_below="@+id/btnPrimeiraDivisaoTabela"
         android:layout_alignRight="@+id/btnPrimeiraDivisaoTabela"
         android:layout_alignEnd="@+id/btnPrimeiraDivisaoTabela"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="@color/White" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -75,7 +79,8 @@
         android:layout_alignStart="@+id/btnPrimeiraDivisaoArtilharia"
         android:layout_below="@+id/btnPrimeiraDivisaoArtilharia"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/White" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -88,7 +93,8 @@
         android:layout_alignBaseline="@+id/textHelp"
         android:layout_alignBottom="@+id/textHelp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="@color/White" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -101,5 +107,6 @@
         android:layout_alignStart="@+id/btnPrimeiraDivisaoSobre"
         android:layout_below="@+id/btnPrimeiraDivisaoSobre"
         android:layout_alignRight="@+id/btnPrimeiraDivisaoSobre"
-        android:layout_alignEnd="@+id/btnPrimeiraDivisaoSobre" />
+        android:layout_alignEnd="@+id/btnPrimeiraDivisaoSobre"
+        android:textColor="@color/White" />
 </RelativeLayout>

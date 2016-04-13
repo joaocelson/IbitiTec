@@ -1,5 +1,6 @@
 package com.ibititec.lffa.adapter;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
@@ -20,10 +21,12 @@ import java.util.List;
 public class AdapterClassificacao extends BaseAdapter {
     private List<Classificacao> classificacaoList = null;
     private Activity activity;
+    private boolean exibirPontuacao;
 
-    public AdapterClassificacao(Activity activityParam, List<Classificacao> classificacaoList) {
+    public AdapterClassificacao(Activity activityParam, List<Classificacao> classificacaoList, boolean exibirPontuacao) {
         this.classificacaoList = classificacaoList;
         this.activity = activityParam;
+        this.exibirPontuacao = exibirPontuacao;
     }
 
     public AdapterClassificacao() {
@@ -61,6 +64,8 @@ public class AdapterClassificacao extends BaseAdapter {
             TextView empates = (TextView) layout.findViewById(R.id.txtEmpates);
             //TextView time = (TextView) layout.findViewById(R.id.txtTime);
 
+
+
             if (classificacao.getTime().equals("GRUPOA") || classificacao.getTime().equals("GRUPOB")) {
             //    posicao.setText("");
 //                pontos.setText("");
@@ -70,7 +75,7 @@ public class AdapterClassificacao extends BaseAdapter {
 //                empates.setText("");
 
                 //time.setText(classificacao.getTime());
-            }else{
+            }else if(exibirPontuacao){
              //   posicao.setText(classificacao.getPosicao());
                 pontos.setText(classificacao.getPontos());
                 jogos.setText(classificacao.getJogos());
@@ -81,7 +86,16 @@ public class AdapterClassificacao extends BaseAdapter {
             Uri imageUri = Uri.parse(MainActivity.PATH_FOTOS + classificacao.getTime() + ".png");
             SimpleDraweeView draweeView = (SimpleDraweeView) layout.findViewById(R.id.ivClassificacao);
             draweeView.setImageURI(imageUri);
-
+            if(!exibirPontuacao){
+                pontos.setVisibility(View.INVISIBLE);
+                jogos.setVisibility(View.INVISIBLE);
+                vitoria.setVisibility(View.INVISIBLE);
+                derrotas.setVisibility(View.INVISIBLE);
+                empates.setVisibility(View.INVISIBLE);
+                ViewGroup.LayoutParams params=draweeView.getLayoutParams();
+                params.width= ActionBar.LayoutParams.MATCH_PARENT;
+                draweeView.setLayoutParams(params);
+            }
             //Appodeal.show(activity, Appodeal.BANNER_BOTTOM);
             return layout;
         } catch (Exception e) {

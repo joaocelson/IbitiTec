@@ -7,7 +7,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior" tools:showIn="@layout/app_bar_main"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/Black">
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -33,7 +34,8 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="97dp"
         android:layout_alignRight="@+id/btnPrimeiraDivisao"
-        android:layout_alignEnd="@+id/btnPrimeiraDivisao" />
+        android:layout_alignEnd="@+id/btnPrimeiraDivisao"
+        android:textColor="@color/White" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -57,7 +59,8 @@
         android:layout_alignRight="@+id/btnSegundaDivisao"
         android:layout_alignEnd="@+id/btnSegundaDivisao"
         android:layout_alignLeft="@+id/btnSegundaDivisao"
-        android:layout_alignStart="@+id/btnSegundaDivisao" />
+        android:layout_alignStart="@+id/btnSegundaDivisao"
+        android:textColor="@color/White" />
 
     <com.appodeal.ads.BannerView
         android:id="@+id/appodealBannerView"

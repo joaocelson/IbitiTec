@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/Black">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +15,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:id="@+id/txtNome"
-        android:text="NOME" />
+        android:text="ARQUEIRO"
+        android:textColor="@color/White" />
 
     <TextView
         android:layout_width="63dp"
@@ -22,7 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:id="@+id/txtGols"
-        android:text="GOLS"/>
+        android:text="GOLS"
+        android:textColor="@color/White" />
 
         <TextView
             android:layout_width="match_parent"
@@ -30,6 +33,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="right"
             android:id="@+id/txtTime"
-            android:text="TIME" />
+            android:text="TIME"
+            android:textColor="@color/White" />
     </LinearLayout>
 </LinearLayout>

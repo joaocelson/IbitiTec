@@ -170,21 +170,23 @@ public class MainActivity extends AppCompatActivity
         btnPrimeiraDivisao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startarActivity("primeira");
+                //VOU CHAMAR TEAL DE EQUIPES
+                startarActivity("primeira","equipes");
             }
         });
 
         btnSegundaDivisao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startarActivity("segunda");
+                startarActivity("segunda","");
             }
         });
     }
 
-    private void startarActivity(String divisao) {
-        Intent intent = new Intent(this, PrimeiraDivisaoActivity.class);
+    private void startarActivity(String divisao, String funcionalidade) {
+        Intent intent = new Intent(this, PrimeiraDivisaoTabelaActivity.class);
         intent.putExtra("divisao", divisao);
+        intent.putExtra("funcionalidade", funcionalidade);
         startActivity(intent);
     }
 

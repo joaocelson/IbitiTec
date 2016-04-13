@@ -178,6 +178,8 @@
     <Content Include="Content\imagens\escudo\Blaze.png" />
     <Content Include="Content\imagens\escudo\Destroyers.png" />
     <Content Include="Content\imagens\escudo\Gaditas.png" />
+    <Content Include="Content\imagens\escudo\GrupoA.png" />
+    <Content Include="Content\imagens\escudo\GrupoB.png" />
     <Content Include="Content\imagens\escudo\Hunters.png" />
     <Content Include="Content\imagens\escudo\Mamutes.png" />
     <Content Include="Content\imagens\escudo\MELHORSEED.png" />
