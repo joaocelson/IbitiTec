@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     //DECLARACAO DOS OBJETOS DE TELA
-    private ImageButton btnPrimeiraDivisao, btnSegundaDivisao;
+    private ImageButton btnPrimeiraDivisao, btnSegundaDivisao, btnAliga;
 
     boolean haveConnectedWifi = false;
     boolean haveConnectedMobile = false;
@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity
         //IDENTIFICACAO DOS OBJETOS DE LAYOUT
         btnPrimeiraDivisao = (ImageButton) findViewById(R.id.btnPrimeiraDivisao);
         btnSegundaDivisao = (ImageButton) findViewById(R.id.btnSegundaDivisao);
+        btnAliga= (ImageButton) findViewById(R.id.btnAliga);
 
 
     }
@@ -171,19 +172,41 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 //VOU CHAMAR TEAL DE EQUIPES
-                startarActivity("primeira","equipes");
+                startarActivityTabela("primeira","equipes");
             }
         });
+
+        btnAliga.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //VOU CHAMAR TEAL DE EQUIPES
+                startarActivityALiga();
+
+            }
+        });
+
 
         btnSegundaDivisao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startarActivity("segunda","");
+                startarActivity("primeira", "");
             }
         });
     }
 
+    private void startarActivityALiga() {
+
+        Intent intent = new Intent(this, ALigaActivity.class);
+        startActivity(intent);
+    }
     private void startarActivity(String divisao, String funcionalidade) {
+        Intent intent = new Intent(this, PrimeiraDivisaoActivity.class);
+        intent.putExtra("divisao", divisao);
+        intent.putExtra("funcionalidade", funcionalidade);
+        startActivity(intent);
+    }
+
+    private void startarActivityTabela(String divisao, String funcionalidade) {
         Intent intent = new Intent(this, PrimeiraDivisaoTabelaActivity.class);
         intent.putExtra("divisao", divisao);
         intent.putExtra("funcionalidade", funcionalidade);

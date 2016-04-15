@@ -10,7 +10,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.ibititec.lffa.SobreActivity"
-    tools:showIn="@layout/activity_sobre">
+    tools:showIn="@layout/activity_sobre"
+    android:background="@color/Black">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +29,8 @@
             android:layout_alignRight="@+id/textView9"
             android:text="Sobre a IBITITEC"
             android:textAlignment="center"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/White" />
 
         <TextView
             android:id="@+id/textView9"
@@ -39,7 +41,8 @@
             android:layout_below="@+id/textView8"
             android:layout_marginTop="44dp"
             android:text="Empresa de desenvolvimento de software."
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/White" />
 
         <TextView
             android:id="@+id/textView10"
@@ -51,7 +54,8 @@
             android:layout_alignRight="@+id/textView11"
             android:layout_centerVertical="true"
             android:text="Contato: (32) 98821-3243"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/White" />
 
         <TextView
             android:id="@+id/textView11"
@@ -63,7 +67,8 @@
             android:layout_alignRight="@+id/textView12"
             android:layout_below="@+id/textView10"
             android:text="E-mail: ibititec@gmail.com"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/White" />
 
         <TextView
             android:id="@+id/textView12"
@@ -75,7 +80,8 @@
             android:layout_alignRight="@+id/textView9"
             android:layout_below="@+id/textView11"
             android:text="Site: www.ibititec.com"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/White" />
 
         <TextView
             android:id="@+id/textView13"
@@ -84,7 +90,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/textView9"
-            android:text="Envie nos o escudo do seu time para melhor visualização no aplicativo."
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:text="Em parceria com a Liga Fluminense Futebol Americano para deixar você por dentro da classificação da liga"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/White" />
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
