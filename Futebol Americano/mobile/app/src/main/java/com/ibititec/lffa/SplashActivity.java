@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import com.appodeal.ads.Appodeal;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.ibititec.lffa.util.RegistrationIntentService;
 
 public class SplashActivity extends AppCompatActivity {
     private  final int DURACAO_TELA = 5000;
@@ -31,7 +32,11 @@ public class SplashActivity extends AppCompatActivity {
 
         // //INICIALIZACAO DO FRESCO
         Fresco.initialize(this);
+
+
     }
+
+
 
     private void iniciarAppodeal() {
         //String PRODUCAO

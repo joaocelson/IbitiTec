@@ -23,9 +23,12 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.appodeal.ads.Appodeal;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.ibititec.lffa.helpers.HttpHelper;
 import com.ibititec.lffa.helpers.JsonHelper;
 import com.ibititec.lffa.util.AnalyticsApplication;
+import com.ibititec.lffa.util.RegistrationIntentService;
 
 import java.io.IOException;
 
@@ -34,6 +37,8 @@ public class MainActivity extends AppCompatActivity
 
     //DECLARACAO DOS OBJETOS DE TELA
     private ImageButton btnPrimeiraDivisao, btnSegundaDivisao, btnAliga;
+
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
     boolean haveConnectedWifi = false;
     boolean haveConnectedMobile = false;
@@ -70,7 +75,31 @@ public class MainActivity extends AppCompatActivity
         btnSegundaDivisao = (ImageButton) findViewById(R.id.btnSegundaDivisao);
         btnAliga= (ImageButton) findViewById(R.id.btnAliga);
 
+        inicializarPushMessage();
+        btnAliga= (ImageButton) findViewById(R.id.btnAliga);
 
+    }
+
+    private boolean checkPlayServices() {
+        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
+                GooglePlayServicesUtil.getErrorDialog(resultCode, this,
+                        PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            } else {
+                Log.i("LOG", "This device is not supported.");
+                finish();
+            }
+            return false;
+        }
+        return true;
+    }
+
+     private void inicializarPushMessage() {
+         if(checkPlayServices()) {
+             Intent intent = new Intent(this, RegistrationIntentService.class);
+             startService(intent);
+         }
     }
 
     private void iniciarAppodeal() {
