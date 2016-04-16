@@ -14,6 +14,7 @@ namespace CampeonatoLD_app.Models
         public String Derrotas { get; set; }
         public String Empate { get; set; }
         public String Jogos { get; set; }
-
+        public String PontosPP { get; set; }
+        public String PontosPC { get; set; }
     }
 }

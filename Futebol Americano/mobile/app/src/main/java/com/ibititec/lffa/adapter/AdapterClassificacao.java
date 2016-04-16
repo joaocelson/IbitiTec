@@ -62,9 +62,10 @@ public class AdapterClassificacao extends BaseAdapter {
             TextView vitoria = (TextView) layout.findViewById(R.id.txtVitorias);
             TextView derrotas = (TextView) layout.findViewById(R.id.txtDerrotas);
             TextView empates = (TextView) layout.findViewById(R.id.txtEmpates);
+
+            TextView pontospp = (TextView) layout.findViewById(R.id.txtPP);
+            TextView pontospc = (TextView) layout.findViewById(R.id.txtPC);
             //TextView time = (TextView) layout.findViewById(R.id.txtTime);
-
-
 
             if (classificacao.getTime().equals("GRUPOA") || classificacao.getTime().equals("GRUPOB")) {
             //    posicao.setText("");
@@ -82,16 +83,25 @@ public class AdapterClassificacao extends BaseAdapter {
                 vitoria.setText(classificacao.getVitorias());
                 derrotas.setText(classificacao.getDerrotas());
                 empates.setText(classificacao.getEmpate());
+                pontospp.setText(classificacao.getPontosPC());
+                pontospc.setText(classificacao.getPontosPC());
+                Uri imageUri = Uri.parse(MainActivity.PATH_FOTOS + classificacao.getTime() + "_escudo.png");
+                SimpleDraweeView draweeView = (SimpleDraweeView) layout.findViewById(R.id.ivClassificacao);
+                draweeView.setImageURI(imageUri);
             }
-            Uri imageUri = Uri.parse(MainActivity.PATH_FOTOS + classificacao.getTime() + ".png");
-            SimpleDraweeView draweeView = (SimpleDraweeView) layout.findViewById(R.id.ivClassificacao);
-            draweeView.setImageURI(imageUri);
+
+
             if(!exibirPontuacao){
+                Uri imageUri = Uri.parse(MainActivity.PATH_FOTOS + classificacao.getTime() + ".png");
+                SimpleDraweeView draweeView = (SimpleDraweeView) layout.findViewById(R.id.ivClassificacao);
+                draweeView.setImageURI(imageUri);
                 pontos.setVisibility(View.INVISIBLE);
                 jogos.setVisibility(View.INVISIBLE);
                 vitoria.setVisibility(View.INVISIBLE);
                 derrotas.setVisibility(View.INVISIBLE);
                 empates.setVisibility(View.INVISIBLE);
+                pontospc.setVisibility(View.INVISIBLE);
+                pontospp.setVisibility(View.INVISIBLE);
                 ViewGroup.LayoutParams params=draweeView.getLayoutParams();
                 params.width= ActionBar.LayoutParams.MATCH_PARENT;
                 draweeView.setLayoutParams(params);

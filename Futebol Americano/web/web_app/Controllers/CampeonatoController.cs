@@ -227,7 +227,9 @@ namespace CampeonatoLD_app.Controllers
                         classificacao.Vitorias = vars[4];
                         classificacao.Derrotas = vars[5];
                         classificacao.Empate = vars[6];
-
+                        classificacao.PontosPP = vars[7];
+                        classificacao.PontosPC = vars[8];
+                        
                         classificacaoList.Add(classificacao);
                     }
                     CsvReader.Close();

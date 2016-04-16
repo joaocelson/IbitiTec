@@ -10,12 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="1"
-        android:layout_weight="0.03">
+        android:weightSum="1">
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/ivClassificacao"
-            android:layout_width="250dp"
+            android:layout_width="110dp"
             android:layout_height="86dp"
             android:layout_gravity="center_horizontal"
             fresco:actualImageScaleType="centerCrop"
@@ -23,16 +22,16 @@
             fresco:failureImageScaleType="centerInside"
             fresco:placeholderImage="@drawable/loading_img"
             fresco:retryImage="@drawable/retry_img"
-            fresco:roundedCornerRadius="5dp"
-            android:layout_weight="0.34" />
+            fresco:roundedCornerRadius="5dp" />
 
         <TextView
-            android:layout_width="23dp"
+            android:layout_width="wrap_content"
             android:textSize="20dp"
             android:layout_height="match_parent"
             android:layout_gravity="right"
             android:id="@+id/txtPontos"
             android:text="P"
+            android:layout_weight="0.12"
             android:textColor="@color/White" />
 
         <TextView
@@ -41,8 +40,8 @@
             android:layout_height="match_parent"
             android:id="@+id/txtJogos"
             android:text="J"
-            android:layout_weight="0.21"
-            android:textColor="@color/White" />
+            android:textColor="@color/White"
+            android:layout_weight="0.12" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -50,7 +49,7 @@
             android:layout_height="match_parent"
             android:id="@+id/txtVitorias"
             android:text="V"
-            android:layout_weight="0.21"
+            android:layout_weight="0.12"
             android:textColor="@color/White" />
 
         <TextView
@@ -59,7 +58,7 @@
             android:layout_height="match_parent"
             android:id="@+id/txtDerrotas"
             android:text="D"
-            android:layout_weight="0.21"
+            android:layout_weight="0.12"
             android:textColor="@color/White" />
 
         <TextView
@@ -68,7 +67,25 @@
             android:layout_height="match_parent"
             android:id="@+id/txtEmpates"
             android:text="E"
-            android:layout_weight="0.21"
+            android:layout_weight="0.12"
+            android:textColor="@color/White" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="20dp"
+            android:layout_height="match_parent"
+            android:id="@+id/txtPP"
+            android:text="PP"
+            android:layout_weight="0.12"
+            android:textColor="@color/White" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="20dp"
+            android:layout_height="match_parent"
+            android:id="@+id/txtPC"
+            android:text="PC"
+            android:layout_weight="0.12"
             android:textColor="@color/White" />
     </LinearLayout>
 </LinearLayout>

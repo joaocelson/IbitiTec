@@ -11,6 +11,24 @@ public class Classificacao {
     private  String Derrotas;
     private  String Empate;
     private  String Jogos;
+    private  String PontosPP;
+    private  String PontosPC;
+
+    public String getPontosPC() {
+        return PontosPC;
+    }
+
+    public void setPontosPC(String pontosPC) {
+        PontosPC = pontosPC;
+    }
+
+    public String getPontosPP() {
+        return PontosPP;
+    }
+
+    public void setPontosPP(String pontosPP) {
+        PontosPP = pontosPP;
+    }
 
     public String getPosicao() {
         return Posicao;

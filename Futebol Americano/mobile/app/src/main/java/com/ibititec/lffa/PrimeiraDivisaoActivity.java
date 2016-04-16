@@ -54,7 +54,7 @@ public class PrimeiraDivisaoActivity extends AppCompatActivity {
     private void executarAcoes() {
 
         if (divisao.equals("primeira")) {
-            this.setTitle("LFFA");
+            this.setTitle("LiFFA");
         } else {
             this.setTitle("Segunda Divisão");
         }
