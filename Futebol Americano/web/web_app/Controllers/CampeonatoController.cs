@@ -327,11 +327,11 @@ namespace CampeonatoLD_app.Controllers
         // POST: /Campeonato/Create
         public String EnviarMensagemGoogleCloud()
         {
-            string deviceId = "eELH77OL4Lg:APA91bGv8Ey6m4zcDmfZTUASURuNG2FywypUExMiLQE1mZ6qLRpqWUqLsQKPhb278RBe03rdcF9KkHcXjN211kGrnFvRTRmwkzBgp68buac5zzPGsoNeT7yFqlk4EGYSJBcjObHKCMRH";
+            string deviceId = "f0tnwv5yu5w:APA91bH9NbXK-FeCvDw1gBSnq_sKNRxrv20iPEF1p6aC_zZ4z3LSFF7Fv5KY1UQGiL-f4LO954FQWbooOQL_rJFJ8FcvNlnIy9yItmb4Yp-sX-EAVMb2dBAuk_-JO2Vf73S0V3GxIxOp";
 
-            string message = "some test message";
-            string tickerText = "example test GCM";
-            string contentTitle = "content title GCM";
+            string message = "Atualizado os resultados da última rodada";
+            string tickerText = "Atualização Classificação Campeonato";
+            string contentTitle = "FutebolLD Atualização Classificação";
             string postData =
             "{ \"registration_ids\": [ \"" + deviceId + "\" ], " +
               "\"data\": {\"tickerText\":\"" + tickerText + "\", " +
