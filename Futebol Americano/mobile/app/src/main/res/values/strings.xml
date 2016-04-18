@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LFFA</string>
+    <string name="app_name">LiFFA</string>
     <string name="msg_erro_json">Erro baixando JSON: %s</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
