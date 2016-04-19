@@ -196,8 +196,8 @@
     <Content Include="docs\sdArtilharia.csv" />
     <Content Include="docs\sdTabela.csv" />
     <Content Include="docs\pdArtilharia.csv" />
-    <Content Include="apk\futebolld.apk" />
     <None Include="docs\pdTabela.csv" />
+    <Content Include="docs\tokens.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -245,6 +245,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="apk\" />
     <Folder Include="App_Data\" />
     <Folder Include="Views\Campeonato\" />
   </ItemGroup>

@@ -13,6 +13,7 @@
     <string name="url_sdclassificacao">http://52.37.37.207:92/Campeonato/getSDClassificacao</string>
     <string name="url_sdartilharia">http://52.37.37.207:92/Campeonato/getSDArtilharia</string>
     <string name="url_imagens">http://52.37.37.207:92/Campeonato/Image</string>
+    <string name="sendToken">http://52.37.37.207:92/Campeonato/SendToken</string>
     <string name="title_activity_adapter_rodada">AdapterRodada</string>
     <string name="title_activity_sobre">Sobre a Ibititec</string>
     <string name="title_activity_aliga">Sobre a Liga</string>

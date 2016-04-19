@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity
         executarAcoes();
 
         atualizarBaseDados(false);
-        AnalyticsApplication.enviarGoogleAnalitcs(this);
+       // AnalyticsApplication.enviarGoogleAnalitcs(this);
         iniciarAppodeal();
     }
 

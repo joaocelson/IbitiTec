@@ -229,7 +229,7 @@ namespace CampeonatoLD_app.Controllers
                         classificacao.Empate = vars[6];
                         classificacao.PontosPP = vars[7];
                         classificacao.PontosPC = vars[8];
-                        
+
                         classificacaoList.Add(classificacao);
                     }
                     CsvReader.Close();
@@ -327,74 +327,40 @@ namespace CampeonatoLD_app.Controllers
         // POST: /Campeonato/Create
         public String EnviarMensagemGoogleCloud()
         {
+            try
+            {
+
+            
             string deviceId = "f0tnwv5yu5w:APA91bH9NbXK-FeCvDw1gBSnq_sKNRxrv20iPEF1p6aC_zZ4z3LSFF7Fv5KY1UQGiL-f4LO954FQWbooOQL_rJFJ8FcvNlnIy9yItmb4Yp-sX-EAVMb2dBAuk_-JO2Vf73S0V3GxIxOp";
 
             string message = "Atualizado os resultados da última rodada";
             string tickerText = "Atualização Classificação Campeonato";
-            string contentTitle = "FutebolLD Atualização Classificação";
-            string postData =
-            "{ \"registration_ids\": [ \"" + deviceId + "\" ], " +
-              "\"data\": {\"tickerText\":\"" + tickerText + "\", " +
-                         "\"contentTitle\":\"" + contentTitle + "\", " +
-                         "\"message\": \"" + message + "\"}}";
+            string contentTitle = "LiFFA - Atualização Resultados e Classificação";
 
-//            string response = SendGCMNotification("AIzaSyCo_YCF3pzU6VL8e8quJxmnQZBAMyfvzkk", postData);
-            string response = SendNotification(deviceId, postData);
+            string text = System.IO.File.ReadAllText((Server.MapPath("/docs/tokens.txt")));
+
+            string[] tokens = text.Split('|');
+            string response="";
+
+            foreach (string str in tokens)
+            {
+
+                string postData =
+                "{ \"registration_ids\": [ \"" + deviceId + "\" ], " +
+                  "\"data\": {\"tickerText\":\"" + tickerText + "\", " +
+                             "\"contentTitle\":\"" + contentTitle + "\", " +
+                             "\"message\": \"" + message + "\"}}";
+
+                //            string response = SendGCMNotification("AIzaSyCo_YCF3pzU6VL8e8quJxmnQZBAMyfvzkk", postData);
+                response = SendNotification(deviceId, postData);
+            }
             return response;
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
         }
-
-        // <summary>
-        /// Send a Google Cloud Message. Uses the GCM service and your provided api key.
-        /// </summary>
-        /// <param name="apiKey"></param>
-        /// <param name="postData"></param>
-        /// <param name="postDataContentType"></param>
-        /// <returns>The response string from the google servers</returns>
-        //private string SendGCMNotification(string apiKey, string postData, string postDataContentType = "application/json")
-        //{
-        //    ServicePointManager.ServerCertificateValidationCallback += new RemoteCertificateValidationCallback(ValidateServerCertificate);
-
-        //    //  MESSAGE CONTENT
-        //    byte[] byteArray = Encoding.UTF8.GetBytes(postData);
-
-        //    //  CREATE REQUEST
-        //    HttpWebRequest Request = (HttpWebRequest)WebRequest.Create("https://android.googleapis.com/gcm/send");
-        //    Request.Method = "POST";
-        //    Request.KeepAlive = false;
-        //    Request.ContentType = postDataContentType;
-        //    Request.Headers.Add(string.Format("Authorization: key={0}", apiKey));
-        //    Request.ContentLength = byteArray.Length;
-
-        //    Stream dataStream = Request.GetRequestStream();
-        //    dataStream.Write(byteArray, 0, byteArray.Length);
-        //    dataStream.Close();
-
-        //    //
-        //    //  SEND MESSAGE
-        //    try
-        //    {
-        //        WebResponse Response = Request.GetResponse();
-        //        HttpStatusCode ResponseCode = ((HttpWebResponse)Response).StatusCode;
-        //        if (ResponseCode.Equals(HttpStatusCode.Unauthorized) || ResponseCode.Equals(HttpStatusCode.Forbidden))
-        //        {
-        //            var text = "Unauthorized - need new token";
-        //        }
-        //        else if (!ResponseCode.Equals(HttpStatusCode.OK))
-        //        {
-        //            var text = "Response from web service isn't OK";
-        //        }
-
-        //        StreamReader Reader = new StreamReader(Response.GetResponseStream());
-        //        string responseLine = Reader.ReadToEnd();
-        //        Reader.Close();
-
-        //        return responseLine;
-        //    }
-        //    catch (Exception e)
-        //    {               
-        //    }
-        //    return "error";
-        //}
 
         public string SendNotification(string deviceId, string message)
         {
@@ -425,18 +391,45 @@ namespace CampeonatoLD_app.Controllers
             StreamReader tReader = new StreamReader(dataStream);
 
             String sResponseFromServer = tReader.ReadToEnd();
-            
+
             tReader.Close();
             dataStream.Close();
             tResponse.Close();
             return sResponseFromServer;
         }
-    
+
         public static bool ValidateServerCertificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
         {
             return true;
         }
 
+        // POST: /Campeonato/Create
+        public String SendToken(string token)
+        {
+            try
+            {
+
+                //Pass the filepath and filename to the StreamWriter Constructor
+                StreamWriter sw = new StreamWriter(Server.MapPath("/docs/tokens.txt"));
+
+                //Write a line of text
+                sw.Write(token + "|");
+
+                //Close the file
+                sw.Close();
+            }
+            catch (Exception e)
+            {
+                // Console.WriteLine("Exception: " + e.Message);
+                return "";
+            }
+            finally
+            {
+                Console.WriteLine("Executing finally block.");
+            }
+            string ok = "OK";
+            return ok;
+        }
 
     }
 }
