@@ -344,7 +344,8 @@ namespace CampeonatoLD_app.Controllers
 
             foreach (string str in tokens)
             {
-
+                if (!str.Equals("")) { 
+                deviceId = str;
                 string postData =
                 "{ \"registration_ids\": [ \"" + deviceId + "\" ], " +
                   "\"data\": {\"tickerText\":\"" + tickerText + "\", " +
@@ -353,6 +354,7 @@ namespace CampeonatoLD_app.Controllers
 
                 //            string response = SendGCMNotification("AIzaSyCo_YCF3pzU6VL8e8quJxmnQZBAMyfvzkk", postData);
                 response = SendNotification(deviceId, postData);
+                }
             }
             return response;
             }

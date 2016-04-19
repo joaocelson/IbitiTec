@@ -21,11 +21,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.appodeal.ads.Appodeal;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.ibititec.campeonatold.helpers.HttpHelper;
 import com.ibititec.campeonatold.helpers.JsonHelper;
 import com.ibititec.campeonatold.util.AnalyticsApplication;
+import com.ibititec.campeonatold.util.RegistrationIntentService;
 
 import java.io.IOException;
 
@@ -34,6 +38,9 @@ public class MainActivity extends AppCompatActivity
 
     //DECLARACAO DOS OBJETOS DE TELA
     private ImageButton btnPrimeiraDivisao, btnSegundaDivisao;
+    private TextView txtPrimeiraDivisao, txtSegundaDivisao;
+
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
     boolean haveConnectedWifi = false;
     boolean haveConnectedMobile = false;
@@ -69,7 +76,33 @@ public class MainActivity extends AppCompatActivity
         btnPrimeiraDivisao = (ImageButton) findViewById(R.id.btnPrimeiraDivisao);
         btnSegundaDivisao = (ImageButton) findViewById(R.id.btnSegundaDivisao);
 
+        txtPrimeiraDivisao = (TextView) findViewById(R.id.txtPrimeiraDivisao);
+        txtSegundaDivisao = (TextView) findViewById(R.id.txtSegundaDivisao);
 
+        inicializarPushMessage();
+
+    }
+
+    private void inicializarPushMessage() {
+        if(checkPlayServices()) {
+            Intent intent = new Intent(this, RegistrationIntentService.class);
+            startService(intent);
+        }
+    }
+
+    private boolean checkPlayServices() {
+        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
+                GooglePlayServicesUtil.getErrorDialog(resultCode, this,
+                        PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            } else {
+                Log.i("LOG", "This device is not supported.");
+                finish();
+            }
+            return false;
+        }
+        return true;
     }
 
     private void iniciarAppodeal() {
@@ -175,6 +208,20 @@ public class MainActivity extends AppCompatActivity
         });
 
         btnSegundaDivisao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startarActivity("segunda");
+            }
+        });
+
+        txtPrimeiraDivisao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startarActivity("primeira");
+            }
+        });
+
+        txtSegundaDivisao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startarActivity("segunda");

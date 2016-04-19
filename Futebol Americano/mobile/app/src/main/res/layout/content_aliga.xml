@@ -32,7 +32,8 @@
         android:text="Fundada em 2012, a Liga Fluminense de Futebol Americano tem como missão promover a prática do futebol americano na grama em todo Estado do Rio de Janeiro e sua primeira categoria foi o NOPAD (jogado sem ombreiras e capacetes).
 Em 2016 a LiFFA mantém seu torneio já tradicional, e inicia o primeiro Campeonato Estadual Fullpad do RJ."
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/White" />
+        android:textColor="@color/White"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/textView19"
@@ -41,7 +42,8 @@ Em 2016 a LiFFA mantém seu torneio já tradicional, e inicia o primeiro Campeon
         android:text="Hoje a liga conta com 18 times:
 Angra dos Reis Destroyers, Blaze F.A, Magé Barões, Juiz de Fora Mamutes, Botafogo Reptiles, Islanders RJ, Macaé Oilers, Nova Friburgo Yetis, Petrópolis Wolves, Teresópolis Rockers, Rio das Ostras Warriors, Niterói Federals, Juiz de Fora Red Fox, Mangaratiba Gaditas, Goytacá Indians, São Gonçalo Shadows, Valença Hunters, Volta Redonda Falcons"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/White" />
+        android:textColor="@color/White"
+        android:textSize="24sp" />
 
 </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
