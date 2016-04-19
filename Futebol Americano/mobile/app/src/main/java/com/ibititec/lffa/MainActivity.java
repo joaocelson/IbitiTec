@@ -21,13 +21,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.appodeal.ads.Appodeal;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.ibititec.lffa.helpers.HttpHelper;
 import com.ibititec.lffa.helpers.JsonHelper;
-import com.ibititec.lffa.util.AnalyticsApplication;
 import com.ibititec.lffa.util.RegistrationIntentService;
 
 import java.io.IOException;
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity
 
     //DECLARACAO DOS OBJETOS DE TELA
     private ImageButton btnPrimeiraDivisao, btnSegundaDivisao, btnAliga;
-
+    private TextView txtEquipes, txtNopad, txtALiga;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
     boolean haveConnectedWifi = false;
@@ -74,6 +74,10 @@ public class MainActivity extends AppCompatActivity
         btnPrimeiraDivisao = (ImageButton) findViewById(R.id.btnPrimeiraDivisao);
         btnSegundaDivisao = (ImageButton) findViewById(R.id.btnSegundaDivisao);
         btnAliga= (ImageButton) findViewById(R.id.btnAliga);
+
+        txtALiga = (TextView) findViewById(R.id.txtALiga);
+        txtEquipes = (TextView) findViewById(R.id.txtEquipes);
+        txtNopad = (TextView) findViewById(R.id.txtNopad);
 
         inicializarPushMessage();
         btnAliga= (ImageButton) findViewById(R.id.btnAliga);
@@ -205,6 +209,14 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        txtEquipes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //VOU CHAMAR TEAL DE EQUIPES
+                startarActivityTabela("primeira","equipes");
+            }
+        });
+
         btnAliga.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -215,7 +227,23 @@ public class MainActivity extends AppCompatActivity
         });
 
 
+        txtALiga.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //VOU CHAMAR TEAL DE EQUIPES
+                startarActivityALiga();
+
+            }
+        });
+
         btnSegundaDivisao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startarActivity("primeira", "");
+            }
+        });
+
+        txtNopad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startarActivity("primeira", "");

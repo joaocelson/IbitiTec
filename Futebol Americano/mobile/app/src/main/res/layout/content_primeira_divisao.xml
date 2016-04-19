@@ -34,7 +34,7 @@
                 android:src="@drawable/tabela" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/txtTabela"
                 android:layout_width="134dp"
                 android:layout_height="wrap_content"
                 android:text="TABELA"
@@ -64,11 +64,11 @@
                 android:src="@drawable/classificacao" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/txtClassificacao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/textHelp"
-                android:layout_alignBottom="@+id/textHelp"
+                android:layout_alignBaseline="@+id/txtAjuda"
+                android:layout_alignBottom="@+id/txtAjuda"
                 android:text="CLASSIFICAÇÃO"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/White"
@@ -92,7 +92,7 @@
                 android:src="@drawable/pontuador" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/txtMaiorPontuador"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="M. PONTUADOR"
@@ -118,7 +118,7 @@
                 android:src="@drawable/help" />
 
             <TextView
-                android:id="@+id/textHelp"
+                android:id="@+id/txtAjuda"
                 android:layout_width="176dp"
                 android:layout_height="wrap_content"
                 android:text="AJUDA"

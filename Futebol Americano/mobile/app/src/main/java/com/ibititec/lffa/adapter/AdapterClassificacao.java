@@ -76,7 +76,9 @@ public class AdapterClassificacao extends BaseAdapter {
 //                empates.setText("");
 
                 //time.setText(classificacao.getTime());
-            }else if(exibirPontuacao){
+            }
+
+            if(exibirPontuacao){
              //   posicao.setText(classificacao.getPosicao());
                 pontos.setText(classificacao.getPontos());
                 jogos.setText(classificacao.getJogos());

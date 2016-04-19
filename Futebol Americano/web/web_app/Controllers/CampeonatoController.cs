@@ -317,7 +317,7 @@ namespace CampeonatoLD_app.Controllers
 
         public FileResult DownloadAPK()
         {
-            byte[] fileBytes = System.IO.File.ReadAllBytes(Server.MapPath("/apk/futebolld.apk"));
+            byte[] fileBytes = System.IO.File.ReadAllBytes(Server.MapPath("/apk/apk.apk"));
             string fileName = "apk.apk";
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
@@ -330,31 +330,31 @@ namespace CampeonatoLD_app.Controllers
             try
             {
 
-            
-            string deviceId = "f0tnwv5yu5w:APA91bH9NbXK-FeCvDw1gBSnq_sKNRxrv20iPEF1p6aC_zZ4z3LSFF7Fv5KY1UQGiL-f4LO954FQWbooOQL_rJFJ8FcvNlnIy9yItmb4Yp-sX-EAVMb2dBAuk_-JO2Vf73S0V3GxIxOp";
 
-            string message = "Atualizado os resultados da última rodada";
-            string tickerText = "Atualização Classificação Campeonato";
-            string contentTitle = "LiFFA - Atualização Resultados e Classificação";
+                string deviceId = "f0tnwv5yu5w:APA91bH9NbXK-FeCvDw1gBSnq_sKNRxrv20iPEF1p6aC_zZ4z3LSFF7Fv5KY1UQGiL-f4LO954FQWbooOQL_rJFJ8FcvNlnIy9yItmb4Yp-sX-EAVMb2dBAuk_-JO2Vf73S0V3GxIxOp";
 
-            string text = System.IO.File.ReadAllText((Server.MapPath("/docs/tokens.txt")));
+                string message = "Atualizado os resultados da última rodada";
+                string tickerText = "Atualização Classificação Campeonato";
+                string contentTitle = "LiFFA - Atualização Resultados e Classificação";
 
-            string[] tokens = text.Split('|');
-            string response="";
+                string text = System.IO.File.ReadAllText((Server.MapPath("/docs/tokens.txt")));
 
-            foreach (string str in tokens)
-            {
+                string[] tokens = text.Split('|');
+                string response = "";
 
-                string postData =
-                "{ \"registration_ids\": [ \"" + deviceId + "\" ], " +
-                  "\"data\": {\"tickerText\":\"" + tickerText + "\", " +
-                             "\"contentTitle\":\"" + contentTitle + "\", " +
-                             "\"message\": \"" + message + "\"}}";
+                foreach (string str in tokens)
+                {
 
-                //            string response = SendGCMNotification("AIzaSyCo_YCF3pzU6VL8e8quJxmnQZBAMyfvzkk", postData);
-                response = SendNotification(deviceId, postData);
-            }
-            return response;
+                    string postData =
+                    "{ \"registration_ids\": [ \"" + deviceId + "\" ], " +
+                      "\"data\": {\"tickerText\":\"" + tickerText + "\", " +
+                                 "\"contentTitle\":\"" + contentTitle + "\", " +
+                                 "\"message\": \"" + message + "\"}}";
+
+                    //            string response = SendGCMNotification("AIzaSyCo_YCF3pzU6VL8e8quJxmnQZBAMyfvzkk", postData);
+                    response = SendNotification(deviceId, postData);
+                }
+                return response;
             }
             catch (Exception ex)
             {
@@ -408,17 +408,126 @@ namespace CampeonatoLD_app.Controllers
         {
             try
             {
+                if (!System.IO.File.Exists(Server.MapPath("/docs/tokens.txt")))
+                {
+                    var file = System.IO.File.Create(Server.MapPath("/docs/tokens.txt"));
+                    file.Dispose();
+                }
+                using (StreamWriter sw = new StreamWriter(Server.MapPath("/docs/tokens.txt"), true))
+                {
+                    //Pass the filepath and filename to the StreamWriter Constructor
+                    //StreamWriter sw = new StreamWriter(Server.MapPath("/docs/tokens.txt"), true);
 
-                //Pass the filepath and filename to the StreamWriter Constructor
-                StreamWriter sw = new StreamWriter(Server.MapPath("/docs/tokens.txt"));
+                    //Write a line of text
+                    sw.Write(token + "|");
 
-                //Write a line of text
-                sw.Write(token + "|");
-
-                //Close the file
-                sw.Close();
+                    //Close the file
+                    sw.Close();
+                }
             }
-            catch (Exception e)
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+             catch (Exception e)
             {
                 // Console.WriteLine("Exception: " + e.Message);
                 return "";

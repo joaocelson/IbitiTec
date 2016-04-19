@@ -4,7 +4,6 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.provider.SyncStateContract;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -27,7 +26,6 @@ public class RegistrationIntentService extends IntentService {
     private static final String TAG = "RegIntentService";
     public static final String SENT_TOKEN_TO_SERVER = "sentTokenToServer";
     public static final String GCM_TOKEN = "gcmToken";
-    public static final String GCM_TOKEN_ENVIADO = "enviado";
     String token = "";
 
     public RegistrationIntentService() {
@@ -37,9 +35,10 @@ public class RegistrationIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         synchronized (TAG) {
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
             // Make a call to Instance API
             InstanceID instanceID = InstanceID.getInstance(this);
             String senderId = getResources().getString(R.string.gcm_defaultSenderId);
@@ -51,30 +50,40 @@ public class RegistrationIntentService extends IntentService {
                 // Fetch token here
                 // save token
                 sharedPreferences.edit().putString(GCM_TOKEN, token).apply();
+                Log.d(TAG, "Gravou o GCM Registration Token: ");
 
                 // pass along this data
                 sendRegistrationToServer(token);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
+            } catch (IOException ex) {
+                Log.d(TAG, "Erro ao Gravar o Token:  valor do Toketn: " + token);
+                        ex.printStackTrace();
+            } catch (JSONException ex) {
+                ex.printStackTrace();
+                Log.d(TAG, "Erro ao Gravar o Token:  valor do Toketn: " + token);
+                ex.printStackTrace();
             }
         }
     }
 
     private void sendRegistrationToServer(String token) throws IOException, JSONException {
         // send network request
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String stringEnviado = sharedPreferences.getString(SENT_TOKEN_TO_SERVER, "");
+        try {
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        JSONObject json = new JSONObject();
-        json.put("token", token);
+            String stringEnviado = sharedPreferences.getString(SENT_TOKEN_TO_SERVER, "");
 
-        if (!stringEnviado.equals("OK")) {
-            String result = HttpHelper.POST(getString(R.string.sendToken),json.toString());
-            if (result.equals("OK")) {
-                sharedPreferences.edit().putString(SENT_TOKEN_TO_SERVER, "OK").apply();
+            if (!stringEnviado.equals("OK")) {
+                JSONObject json = new JSONObject();
+                json.put("token", token);
+                String result = HttpHelper.POST(getString(R.string.sendToken), json.toString());
+                if (result.equals("OK")) {
+                    sharedPreferences.edit().putString(SENT_TOKEN_TO_SERVER, "OK").apply();
+                }
             }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Log.d(TAG, "Erro ao Enviar o Token:  valor do Toketn: " + token);
         }
     }
+
 }
