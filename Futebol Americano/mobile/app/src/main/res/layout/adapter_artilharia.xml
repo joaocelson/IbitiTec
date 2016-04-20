@@ -11,7 +11,7 @@
         android:paddingBottom="20dp">
     <TextView
         android:layout_width="150dp"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:id="@+id/txtNome"
@@ -20,7 +20,7 @@
 
     <TextView
         android:layout_width="63dp"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:id="@+id/txtGols"
@@ -29,7 +29,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:layout_height="match_parent"
             android:layout_gravity="right"
             android:id="@+id/txtTime"

@@ -15,4 +15,5 @@
     <string name="url_imagens">http://52.37.37.207:88/Campeonato/Image</string>
     <string name="title_activity_adapter_rodada">AdapterRodada</string>
     <string name="title_activity_sobre">Sobre a Ibititec</string>
+    <string name="sendToken">http://52.37.37.207:88/Campeonato/SendToken</string>
 </resources>

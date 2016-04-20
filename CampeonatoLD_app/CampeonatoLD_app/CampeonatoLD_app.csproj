@@ -208,6 +208,7 @@
     <Content Include="Content\imagens\escudo\Vila.jpg" />
     <Content Include="Content\imagens\escudo\Vsa.jpg" />
     <Content Include="Content\imagens\escudo\Vsgfc.jpg" />
+    <Content Include="docs\tokens.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

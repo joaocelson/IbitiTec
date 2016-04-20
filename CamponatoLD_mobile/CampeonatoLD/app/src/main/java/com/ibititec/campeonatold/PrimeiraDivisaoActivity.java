@@ -7,12 +7,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.appodeal.ads.Appodeal;
 
 public class PrimeiraDivisaoActivity extends AppCompatActivity {
 
     private ImageButton btnTabela, btnArtilharia, btnClassificacao, btnAjuda;
+    private TextView txtTabela, txtArtilharia, txtClassificacao, txtAjuda;
     private String divisao;
     Toolbar toolbar;
 
@@ -28,6 +30,12 @@ public class PrimeiraDivisaoActivity extends AppCompatActivity {
         btnTabela = (ImageButton) findViewById(R.id.btnPrimeiraDivisaoTabela);
         btnClassificacao = (ImageButton) findViewById(R.id.btnPrimeiraDivisaoClassificacao);
         btnAjuda = (ImageButton) findViewById(R.id.btnPrimeiraDivisaoSobre);
+
+        txtArtilharia = (TextView) findViewById(R.id.txtArtilharia);
+        txtTabela = (TextView) findViewById(R.id.txtTabela);
+        txtClassificacao = (TextView) findViewById(R.id.txtClassificacao);
+        txtAjuda = (TextView) findViewById(R.id.txtHelp);
+
         lerIntent();
         executarAcoes();
     }
@@ -81,6 +89,34 @@ public class PrimeiraDivisaoActivity extends AppCompatActivity {
         });
 
         btnAjuda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startarActivityHelp(divisao, "sobre");
+            }
+        });
+
+        txtArtilharia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startarActivity(divisao, "artilharia");
+            }
+        });
+
+        txtTabela.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startarActivity(divisao, "tabela");
+            }
+        });
+
+        txtClassificacao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startarActivity(divisao, "classificacao");
+            }
+        });
+
+        txtAjuda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startarActivityHelp(divisao, "sobre");

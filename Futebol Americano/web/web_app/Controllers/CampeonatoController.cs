@@ -339,20 +339,24 @@ namespace CampeonatoLD_app.Controllers
 
                 string text = System.IO.File.ReadAllText((Server.MapPath("/docs/tokens.txt")));
 
+
                 string[] tokens = text.Split('|');
                 string response = "";
 
                 foreach (string str in tokens)
                 {
+                    if (!str.Equals(""))
+                    {
+                        deviceId = str;
+                        string postData =
+                        "{ \"registration_ids\": [ \"" + deviceId + "\" ], " +
+                          "\"data\": {\"tickerText\":\"" + tickerText + "\", " +
+                                     "\"contentTitle\":\"" + contentTitle + "\", " +
+                                     "\"message\": \"" + message + "\"}}";
 
-                    string postData =
-                    "{ \"registration_ids\": [ \"" + deviceId + "\" ], " +
-                      "\"data\": {\"tickerText\":\"" + tickerText + "\", " +
-                                 "\"contentTitle\":\"" + contentTitle + "\", " +
-                                 "\"message\": \"" + message + "\"}}";
-
-                    //            string response = SendGCMNotification("AIzaSyCo_YCF3pzU6VL8e8quJxmnQZBAMyfvzkk", postData);
-                    response = SendNotification(deviceId, postData);
+                        //            string response = SendGCMNotification("AIzaSyCo_YCF3pzU6VL8e8quJxmnQZBAMyfvzkk", postData);
+                        response = SendNotification(deviceId, postData);
+                    }
                 }
                 return response;
             }

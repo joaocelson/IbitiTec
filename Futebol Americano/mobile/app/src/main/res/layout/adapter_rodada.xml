@@ -26,6 +26,7 @@
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/txtRodada"
             android:text="DATA: "
+            android:textSize="20sp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/White" />
     </LinearLayout>
@@ -40,6 +41,7 @@
         android:layout_alignRight="@+id/txtData"
         android:layout_below="@+id/txtRodada"
         android:text="LOCAL: "
+        android:textSize="20sp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/White" />
 
@@ -90,6 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" X "
+                android:textSize="20sp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/White" />
 

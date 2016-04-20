@@ -4,6 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -309,8 +313,129 @@ namespace CampeonatoLD_app.Controllers
         public FileResult DownloadFutebolLD()
         {
             byte[] fileBytes = System.IO.File.ReadAllBytes(Server.MapPath("/apk/futebolld.apk"));
-            string fileName = "futebolld.apk";
+            string fileName = "apk.apk";
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
+
+        //GOOGLE CLOUD MESSAGE  -- SEND MESSAGE FOR SERVER
+
+        // POST: /Campeonato/Create
+        public String EnviarMensagemGoogleCloud()
+        {
+            try
+            {
+
+
+                string deviceId = "f0tnwv5yu5w:APA91bH9NbXK-FeCvDw1gBSnq_sKNRxrv20iPEF1p6aC_zZ4z3LSFF7Fv5KY1UQGiL-f4LO954FQWbooOQL_rJFJ8FcvNlnIy9yItmb4Yp-sX-EAVMb2dBAuk_-JO2Vf73S0V3GxIxOp";
+
+                string message = "Atualizado os resultados da última rodada";
+                string tickerText = "Atualização Classificação Campeonato";
+                string contentTitle = "FUTEBOL LD - Atualização Resultados e Classificação";
+
+                string text = System.IO.File.ReadAllText((Server.MapPath("/docs/tokens.txt")));
+
+
+                string[] tokens = text.Split('|');
+                string response = "";
+
+                foreach (string str in tokens)
+                {
+                    if (!str.Equals(""))
+                    {
+                        deviceId = str;
+                        string postData =
+                        "{ \"registration_ids\": [ \"" + deviceId + "\" ], " +
+                          "\"data\": {\"tickerText\":\"" + tickerText + "\", " +
+                                     "\"contentTitle\":\"" + contentTitle + "\", " +
+                                     "\"message\": \"" + message + "\"}}";
+
+                        //            string response = SendGCMNotification("AIzaSyCo_YCF3pzU6VL8e8quJxmnQZBAMyfvzkk", postData);
+                        response = SendNotification(deviceId, postData);
+                    }
+                }
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
+
+        public string SendNotification(string deviceId, string message)
+        {
+            string SERVER_API_KEY = "AIzaSyDdtnM5NR9L7d2HEy63bjcX4FIi2-bPMw0";
+            var SENDER_ID = deviceId; //"application number";
+            var value = message;
+            WebRequest tRequest;
+            tRequest = WebRequest.Create("https://android.googleapis.com/gcm/send");
+            tRequest.Method = "post";
+            tRequest.ContentType = " application/x-www-form-urlencoded;charset=UTF-8";
+            tRequest.Headers.Add(string.Format("Authorization: key={0}", SERVER_API_KEY));
+
+            tRequest.Headers.Add(string.Format("Sender: id={0}", SENDER_ID));
+
+            string postData = "collapse_key=score_update&time_to_live=108&delay_while_idle=1&data.message=" + value + "&data.time=" + System.DateTime.Now.ToString() + "&registration_id=" + deviceId + "";
+            Console.WriteLine(postData);
+            Byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            tRequest.ContentLength = byteArray.Length;
+
+            Stream dataStream = tRequest.GetRequestStream();
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            dataStream.Close();
+
+            WebResponse tResponse = tRequest.GetResponse();
+
+            dataStream = tResponse.GetResponseStream();
+
+            StreamReader tReader = new StreamReader(dataStream);
+
+            String sResponseFromServer = tReader.ReadToEnd();
+
+            tReader.Close();
+            dataStream.Close();
+            tResponse.Close();
+            return sResponseFromServer;
+        }
+
+        public static bool ValidateServerCertificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        {
+            return true;
+        }
+
+        // POST: /Campeonato/Create
+        public String SendToken(string token)
+        {
+            try
+            {
+                if (!System.IO.File.Exists(Server.MapPath("/docs/tokens.txt")))
+                {
+                    var file = System.IO.File.Create(Server.MapPath("/docs/tokens.txt"));
+                    file.Dispose();
+                }
+                using (StreamWriter sw = new StreamWriter(Server.MapPath("/docs/tokens.txt"), true))
+                {
+                    //Pass the filepath and filename to the StreamWriter Constructor
+                    //StreamWriter sw = new StreamWriter(Server.MapPath("/docs/tokens.txt"), true);
+
+                    //Write a line of text
+                    sw.Write(token + "|");
+
+                    //Close the file
+                    sw.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                // Console.WriteLine("Exception: " + e.Message);
+                return "";
+            }
+            finally
+            {
+                Console.WriteLine("Executing finally block.");
+            }
+            string ok = "OK";
+            return ok;
+        }
+
     }
 }
