@@ -1,0 +1,54 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Campeonato.Dominio;
+using Campeonato.Dominio.contrato;
+using Campeonato.RepositorioADO;
+
+namespace Campeonato.Aplicacao
+{
+    public class CampeonatoAplicacao
+    {
+        private readonly IRepositorio<Campeonatos> repositorio;
+
+        public CampeonatoAplicacao(IRepositorio<Campeonatos> repo)
+        {
+            repositorio = repo;
+        }
+
+        public void Salvar(Campeonatos campeonato)
+        {
+            repositorio.Salvar(campeonato);
+        }
+
+        public void Excluir(Campeonatos campeonato)
+        {
+            repositorio.Excluir(campeonato);
+        }
+
+        public IEnumerable<Campeonatos> ListarTodos()
+        {
+            return repositorio.ListarTodos();
+        }
+
+        public Campeonatos ListarPorId(string id)
+        {
+            return repositorio.ListarPorId(id);
+        }
+
+               public List<Campeonatos> ConverterListausuario()
+        {
+
+            return null;
+
+        }
+
+        public void AdicionarTimes(List<Time> listaTimesAdicionar, string idCampeonato)
+        {
+            CampeonatoRepositorioADO campADO = new CampeonatoRepositorioADO();
+            campADO.AdicionarTimes(listaTimesAdicionar, idCampeonato);
+        }
+    }
+}

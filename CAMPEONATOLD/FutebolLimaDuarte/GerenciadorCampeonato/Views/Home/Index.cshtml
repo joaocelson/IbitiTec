@@ -1,0 +1,167 @@
+﻿@model IEnumerable<Campeonato.Dominio.Partida>
+
+@{
+    ViewBag.Title = "Home Page";
+    var primeira = false;
+    var segunda = false;
+}
+
+
+<div class="row">
+    <div class="container">
+        <div class="col-md-4 "><div><a href="~/Admin/Galeria/Index"><img width="100%" height="200" src="https://lh6.googleusercontent.com/HHSVkAZyseiDNKhl4Wg4Tn16gXBpI4kmWjI7-jZHJiJ-=w356-h203-p-no"><h2>Fotos da Rodada</h2></a></div></div>
+        <div class="col-md-4" style="margin:auto"><div class="row text-center"><a href="~/Admin/Campeonato/Index"><img width="210" height="200" src="https://lh3.googleusercontent.com/-01hT4teUwcU/VCIhpqfZSZI/AAAAAAAAU2U/_cx1gjpzRwo/w225-h221-no/Sem%2Bt%C3%ADtulo%2B%281%29.png"><h2>Confira a classificação</h2></a></div></div>
+        <div class="col-md-4" style="margin:auto"><div class="row text-center "><a href="~/Admin/Galeria/Index"><img width="90%" height="200" src="https://lh3.googleusercontent.com/QQvhiLm-kt9wTAu7SSbQaZQNV_AbYTY4FBuK8C1FStfD=s425-no"><h2>Participe do Bolão</h2></a></div></div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="container">
+        <div class="col-md-4">
+           <!--PROPAGANDA-->
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="container">
+        <div class="col-md-4">
+            <a href="~/Admin/Time/Index"><img width="100%" height="150" src="~/Content/images/escudo/Times.png"><h2>Conheça os times da cidade</h2></a>
+        </div>
+        <div class="col-md-4">
+
+            <div class="row-fluid">
+
+                <table class="table table-striped">
+                    @foreach (var item in Model)
+                    {
+                        if (primeira == false && item.NomeCampeonato.StartsWith("1ª"))
+                        {
+                            primeira = true;
+                            <tr>
+                                <th style="text-align:left">
+                                    <b>@item.NomeCampeonato</b>
+                                </th>
+                                <th style="text-align:left" colspan="4">
+                                    <b>Campo: @item.LocalPartida</b>
+                                </th>
+                            </tr>
+                        }
+                        else if (segunda == false && item.NomeCampeonato.StartsWith("2ª"))
+                        {
+                            segunda = true;
+                            <tr>
+                                <th style="text-align:left">
+                                    <b>@item.NomeCampeonato</b>
+                                </th>
+                                <th style="text-align:left" colspan="4">
+                                    <b>Campo: @item.LocalPartida</b>
+                                </th>
+                            </tr>
+                        }
+                        <tr>
+                            <th style="text-align:left" colspan="3">
+                                <b>@item.DataPartida.ToString("dd/MM/yyyy HH:mm")</b>
+                            </th>
+                            <th style="text-align:left" colspan="2">
+                                <b>Rodada: @item.Rodada</b>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th style="text-align:left">
+                                <img src="~/Content/images/escudo/@item.EscudoPequenoMandante" height="40">
+                            </th>
+                            <th style="text-align:left">
+                                <b>@item.GolMandante</b>
+                            </th>
+                            <th style="text-align:center">
+                                <b>X</b>
+                            </th>
+                            <th style="text-align:right">
+                                @item.GolVisitante
+                            </th>
+                            <th style="text-align:right">
+                                <img src="~/Content/images/escudo/@item.EscudoPequenoVisitante" height="40">
+                            </th>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+            @*<div class="row">
+                    @foreach (var item in Model)
+                    {
+                        if (primeira == false && item.NomeCampeonato.StartsWith("1ª"))
+                        {
+                            primeira = true;
+                            <div style="text-align:left">
+                                <div class="col-md-4"><b> @Html.DisplayFor(modelItem => item.NomeCampeonato)</b></div>
+                                <div class="col-md-8"> Campo:@Html.DisplayFor(modelItem => item.LocalPartida)</div>
+                            </div>
+                        }
+                        else if (segunda == false && item.NomeCampeonato.StartsWith("2ª"))
+                        {
+                            <br />
+                            segunda = true;
+                            <div style="text-align:left">
+                                <div class="col-md-4"><b> @Html.DisplayFor(modelItem => item.NomeCampeonato)</b></div>
+                                <div class="col-md-8">Campo: @Html.DisplayFor(modelItem => item.LocalPartida)</div>
+                            </div>
+                        }
+                        <div class="row">
+                            <div class="col-md-8">Data: @Html.DisplayFor(modelItem => item.DataPartida)</div>
+                            <div class="col-md-4">
+                                @Html.DisplayFor(modelItem => item.Rodada)ª Rod.
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-3">
+                                <img src="~/Content/images/escudo/@item.EscudoPequenoMandante" height="40">
+                                @Html.DisplayFor(modelItem => item.GolMandante)
+                            </div>
+                            <div class="col-md-2">X</div>
+                            <div class="col-md-3">
+                                @Html.DisplayFor(modelItem => item.GolVisitante)
+                                <img src="~/Content/images/escudo/@item.EscudoPequenoVisitante" height="40">
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                    }
+                </div>*@
+        </div>
+        <div class="col-md-4">
+            <a href="~/Pagina/AlimentarAntesPartida"><img width="100%" src="https://lh3.googleusercontent.com/-W5_QrWx06jM/VDMjLlAWM9I/AAAAAAAAVV4/TEqPABwQRCc/w535-h355-no/3%C2%AA%2BFoto.jpg" /><h3>Alimentação antes de uma partida de futebol</h3></a>
+        </div>
+    </div>
+</div>
+<br />
+
+
+@*<div class="jumbotron">
+        <h1>ASP.NET</h1>
+        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+        <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Getting started</h2>
+            <p>
+                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                enables a clean separation of concerns and gives you full control over markup
+                for enjoyable, agile development.
+            </p>
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Get more libraries</h2>
+            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Web Hosting</h2>
+            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        </div>
+    </div>*@

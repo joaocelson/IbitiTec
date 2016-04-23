@@ -412,7 +412,7 @@ namespace CampeonatoLD_app.Controllers
         {
             try
             {
-                if (!System.IO.File.Exists(Server.MapPath("/docs/tokens.txt")))
+               if (!System.IO.File.Exists(Server.MapPath("/docs/tokens.txt")))
                 {
                     var file = System.IO.File.Create(Server.MapPath("/docs/tokens.txt"));
                     file.Dispose();
