@@ -130,9 +130,14 @@ INSERT INTO T_BOLAO_CAMPEONATO (nome) VALUES ('1ª Divisão');
 
 --INSERT INTO CAMPEONATO
 SELECT * FROM campeonato;
-delete from campeonato where id = 1
 INSERT INTO campeonato (nome, data_inicio)
 values ('1ª Divisão', '20160508 13:00:00 PM');
+
+INSERT INTO campeonato (nome, data_inicio)
+values ('2ª Divisão A', '20160417 13:00:00 PM');
+
+INSERT INTO campeonato (nome, data_inicio)
+values ('2ª Divisão B', '20160417 13:00:00 PM');
 
 --INSERT TIME
 SELECT * FROM times;

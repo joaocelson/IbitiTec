@@ -79,7 +79,7 @@ namespace Campeonato.RepositorioADO
                                "FROM partida p INNER JOIN " +
                                "times tm on tm.id = p.id_time_mandante INNER JOIN " +
                                "times tv on tv.id = p.id_time_visitante INNER JOIN " +
-                                   "campeonato c on c.id = p.id_campeonato  ORDER BY p.rodada";
+                                   "campeonato c on c.id = p.id_campeonato  ORDER BY CAST(p.rodada AS INT)";
                 var retornoDataReader = contexto.ExecutaComandoComRetorno(strQuery);
                 return TransformaReaderEmListaDeObjeto(retornoDataReader);
             }
@@ -93,7 +93,7 @@ namespace Campeonato.RepositorioADO
                                "FROM partida p INNER JOIN " +
                                "times tm on tm.id = p.id_time_mandante INNER JOIN " +
                                "times tv on tv.id = p.id_time_visitante INNER JOIN " +
-                                   "campeonato c on c.id = p.id_campeonato  WHERE p.Id = {0} ORDER BY p.rodada", id);
+                                   "campeonato c on c.id = p.id_campeonato  WHERE p.Id = {0} ORDER BY CAST(p.rodada AS INT)", id);
 
 
                 var retornoDataReader = contexto.ExecutaComandoComRetorno(strQuery);
@@ -108,7 +108,7 @@ namespace Campeonato.RepositorioADO
                            "FROM partida p INNER JOIN " +
                            "times tm on tm.id = p.id_time_mandante INNER JOIN " +
                            "times tv on tv.id = p.id_time_visitante INNER JOIN " +
-                           "campeonato c on c.id = p.id_campeonato  WHERE p.Id = {0} ORDER BY p.rodada", id);
+                           "campeonato c on c.id = p.id_campeonato  WHERE p.Id = {0} ORDER BY CAST(p.rodada AS INT)", id);
             var retornoDataReader = contexto.ExecutaComandoComRetorno(strQuery);
             return TransformaReaderEmListaDeObjeto(retornoDataReader).FirstOrDefault();
 
@@ -138,10 +138,9 @@ namespace Campeonato.RepositorioADO
                 {
                     partidaRemarcada = Convert.ToBoolean(reader["remarcada_partida"].ToString());
                 }
-                if (!reader["pontos_computado"].ToString().Equals(""))
+                if (reader["pontos_computado"] != null && !reader["pontos_computado"].ToString().Equals(""))
                 {
-
-                    PontosComputados = Convert.ToBoolean(reader["pontos_computado"].ToString());
+                    if (reader["pontos_computado"].ToString().Equals("1")) { PontosComputados = true; }
                 }
 
                 var temObjeto = new Partida()
@@ -518,7 +517,7 @@ namespace Campeonato.RepositorioADO
                                    "FROM partida p INNER JOIN " +
                                    "times tm on tm.id = p.id_time_mandante INNER JOIN " +
                                    "times tv on tv.id = p.id_time_visitante INNER JOIN " +
-                                   "campeonato c on c.id = p.id_campeonato where c.id = {0} ORDER BY p.rodada", id);
+                                   "campeonato c on c.id = p.id_campeonato where c.id = {0} ORDER BY CAST(p.rodada AS INT) ", id);
                     var retornoDataReader = contexto.ExecutaComandoComRetorno(strQuery);
                     return TransformaReaderEmListaDeObjeto(retornoDataReader);
                 }

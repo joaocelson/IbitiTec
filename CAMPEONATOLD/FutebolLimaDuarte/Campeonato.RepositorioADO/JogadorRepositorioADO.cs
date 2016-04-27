@@ -102,23 +102,26 @@ namespace Campeonato.RepositorioADO
 
         private List<Jogador> TransformaReaderEmListaDeObjeto(SqlDataReader reader)
         {
-            var LitaJogador = new List<Jogador>();
-            while (reader.Read())
+            if (reader != null)
             {
-
-                var temObjeto = new Jogador()
+                var LitaJogador = new List<Jogador>();
+                while (reader.Read())
                 {
-                    Id = Convert.ToInt32(reader["id"].ToString()),
-                    Nome = reader["Nome"].ToString(),
-                    Posicao = reader["Posicao"].ToString(),
-                    Descricao = reader["Descricao"].ToString(),
-                    Foto = reader["Foto"].ToString(),
 
-                };
-                LitaJogador.Add(temObjeto);
-            }
-            reader.Close();
-            return LitaJogador;
+                    var temObjeto = new Jogador()
+                    {
+                        Id = Convert.ToInt32(reader["id"].ToString()),
+                        Nome = reader["Nome"].ToString(),
+                        Posicao = reader["Posicao"].ToString(),
+                        Descricao = reader["Descricao"].ToString(),
+                        Foto = reader["Foto"].ToString(),
+
+                    };
+                    LitaJogador.Add(temObjeto);
+                }
+                reader.Close();
+                return LitaJogador;
+            } return new List<Jogador>();
         }
 
 

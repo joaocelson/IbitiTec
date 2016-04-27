@@ -1,6 +1,7 @@
 ﻿using Campeonato.Aplicacao;
 using Campeonato.Dominio;
 using Campeonato.UI.WEB.Security;
+using GerenciadorCampeonato.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -139,6 +140,17 @@ namespace Campeonato.UI.WEB.Areas.Admin
             //Descomentar para rodar com o tabela de jogadores.
             partida.TimeMandanteObj.ListaJogadores = appJogador.ListarPorTimeCampeonato(partida.IdCampeonato, partida.IdTimeMandante);
             partida.TimeVisitanteObj.ListaJogadores = appJogador.ListarPorTimeCampeonato(partida.IdCampeonato, partida.IdTimeVisitante);
+
+            if (partida == null)
+                return HttpNotFound();
+
+            return View(partida);
+        }
+
+        public ActionResult TabelaJson(string id)
+        {
+            Rodada rodada = new Rodada();
+            var partida = rodada.ConverterPartidasParaRodada(appPartida.ListaTabelaPorCampeonato(id));
 
             if (partida == null)
                 return HttpNotFound();
