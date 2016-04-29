@@ -4,15 +4,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.appodeal.ads.Appodeal;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.ibititec.campeonatold.admin.LoginUsuarioActivity;
+import com.ibititec.campeonatold.util.RegistrationIntentService;
 
 public class SplashActivity extends AppCompatActivity {
     private  final int DURACAO_TELA = 2000;
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +38,29 @@ public class SplashActivity extends AppCompatActivity {
 
         // //INICIALIZACAO DO FRESCO
         Fresco.initialize(this);
-    }
+        inicializarPushMessage();
 
+    }
+    private boolean checkPlayServices() {
+        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
+                GooglePlayServicesUtil.getErrorDialog(resultCode, this,
+                        PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            } else {
+                Log.i("LOG", "This device is not supported.");
+                finish();
+            }
+            return false;
+        }
+        return true;
+    }
+    private void inicializarPushMessage() {
+        if(checkPlayServices()) {
+            Intent intent = new Intent(this, RegistrationIntentService.class);
+            startService(intent);
+        }
+    }
     private void iniciarAppodeal() {
         //String PRODUCAO
          String appKey = "a7abb670bb95499ee0c535d3d8f3787704b48736d99fab89";
