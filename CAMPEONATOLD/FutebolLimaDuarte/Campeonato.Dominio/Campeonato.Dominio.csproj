@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Acesso.cs" />
+    <Compile Include="Artilheiro.cs" />
     <Compile Include="Bolao.cs" />
     <Compile Include="Campeoes.cs" />
     <Compile Include="Campeonatos.cs" />

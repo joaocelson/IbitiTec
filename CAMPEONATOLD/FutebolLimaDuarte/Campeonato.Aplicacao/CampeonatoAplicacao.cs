@@ -50,5 +50,11 @@ namespace Campeonato.Aplicacao
             CampeonatoRepositorioADO campADO = new CampeonatoRepositorioADO();
             campADO.AdicionarTimes(listaTimesAdicionar, idCampeonato);
         }
+
+        public IEnumerable<Artilheiro> ArtilhariaPorCampeonato(string id)
+        {
+            CampeonatoRepositorioADO campADO = new CampeonatoRepositorioADO();
+            return campADO.ArtilhariaPorCampeonato(id);
+        }
     }
 }

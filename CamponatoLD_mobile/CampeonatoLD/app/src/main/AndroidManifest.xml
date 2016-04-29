@@ -9,13 +9,15 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-
     <uses-permission android:name="android.permission.VIBRATE" />
 
-    <permission android:name="com.ibititec.campeonatold.permission.C2D_MESSAGE" android:protectionLevel="signature" />
-    <uses-permission android:name="com.ibititec.campeonatold.permission.C2D_MESSAGE" />
-    <!-- Optional -->
+    <permission
+        android:name="com.ibititec.campeonatold.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
 
+    <uses-permission android:name="com.ibititec.campeonatold.permission.C2D_MESSAGE" />
+
+    <!-- Optional -->
     <application
         android:name=".util.AnalyticsApplication"
         android:allowBackup="true"
@@ -28,6 +30,7 @@
             android:theme="@style/Theme.AppCompat.Translucent" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -37,34 +40,35 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
 
-
-        <!--GCM - CLOUD MESSAGE GOOGLE-->
+        <!-- GCM - CLOUD MESSAGE GOOGLE -->
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
                 <category android:name="com.example.gcm" />
             </intent-filter>
         </receiver>
+
         <service
-            android:name="com.ibititec.campeonatold.util.GcmMessageHandler"
+            android:name=".util.GcmMessageHandler"
             android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
         <service
-            android:name="com.ibititec.campeonatold.util.MyInstanceIDListenerService"
-            android:exported="false">
+            android:name=".util.MyInstanceIDListenerService"
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.android.gms.iid.InstanceID" />
             </intent-filter>
         </service>
-        <service android:name="com.ibititec.campeonatold.util.RegistrationIntentService"
+        <service
+            android:name=".util.RegistrationIntentService"
             android:exported="false" />
-
 
         <!-- APPODEAL -->
         <!--
@@ -275,6 +279,16 @@
         <activity
             android:name=".SobreActivity"
             android:label="@string/title_activity_sobre"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".admin.CadastroUsuarioActivity"
+            android:label="@string/title_activity_cadastro_usuario"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".admin.LoginUsuarioActivity"
+            android:label="@string/title_activity_login_usuario"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>

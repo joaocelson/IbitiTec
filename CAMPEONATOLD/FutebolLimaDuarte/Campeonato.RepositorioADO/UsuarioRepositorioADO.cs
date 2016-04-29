@@ -18,9 +18,9 @@ namespace Campeonato.RepositorioADO
             try
             {
                 var strQuery = "";
-                strQuery += " INSERT INTO usuario (nome_usuario, senha_usuario, email_usuario, tipo_usuario) ";
-                strQuery += string.Format(" VALUES ('{0}','{1}','{2}',{3}) ",
-                    usuario.NomeUsuario, usuario.Senha, usuario.LoginEmail, usuario.TipoUsuario
+                strQuery += " INSERT INTO usuario (nome_usuario, senha_usuario, email_usuario, tipo_usuario, token) ";
+                strQuery += string.Format(" VALUES ('{0}','{1}','{2}',{3},'{4}') ",
+                    usuario.NomeUsuario, usuario.Senha, usuario.LoginEmail, usuario.TipoUsuario, usuario.Token
                     );
                 using (contexto = new Contexto())
                 {

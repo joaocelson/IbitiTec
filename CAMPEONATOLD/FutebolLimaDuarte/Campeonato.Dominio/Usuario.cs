@@ -25,5 +25,8 @@ namespace Campeonato.Dominio
         [Required(ErrorMessage = "Digite nome do usuário")]
         public string NomeUsuario { get; set; }
 
+        public string Token { get; set; }
+
+
     }
 }

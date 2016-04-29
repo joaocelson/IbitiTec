@@ -16,4 +16,11 @@
     <string name="title_activity_adapter_rodada">AdapterRodada</string>
     <string name="title_activity_sobre">Sobre a Ibititec</string>
     <string name="sendToken">http://52.37.37.207:88/Campeonato/SendToken</string>
+    <string name="title_activity_login_usuario">LoginUsuarioActivity</string>
+    <string name="title_activity_cadastro_usuario">CadastroUsuarioActivity</string>
+
+    <string name="url_cadastrar_usuario">http://52.37.37.207:94/Admin/Usuario/CadastrarJson</string>
+    <string name="url_login_usuario">http://52.37.37.207:94/Admin/AdminHome/LoginJson</string>
+
+
 </resources>

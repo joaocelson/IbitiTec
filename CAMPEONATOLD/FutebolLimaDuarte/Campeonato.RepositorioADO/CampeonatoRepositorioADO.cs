@@ -128,5 +128,36 @@ namespace Campeonato.RepositorioADO
                 TratamentoLog.GravarLog("PartidaRepositorioADO::GerarPartidaAutomaticamenteTime:. Erro ao geras Partidas" + ex.Message, TratamentoLog.NivelLog.Erro);
             }
         }
+
+        public IEnumerable<Artilheiro> ArtilhariaPorCampeonato(String idCampeonato)
+        {
+            using (contexto = new Contexto())
+            {
+                var strQuery = @" SELECT t.Nome Nome, ar.numero_gols Numero_Gols, tm.Nome Time  FROM artilharia ar
+                                    INNER JOIN t_jogador t on (t.id = ar.id_jogador)
+                                    INNER JOIN times tm on (tm.id_time = ar.id_time)
+                                    WHERE ar.id_campeonato = " + idCampeonato;
+                var retornoDataReader = contexto.ExecutaComandoComRetorno(strQuery);
+                return TransformaReaderEmListaDeObjetoArtilharia(retornoDataReader);
+            }
+
+        }
+
+        private IEnumerable<Artilheiro> TransformaReaderEmListaDeObjetoArtilharia(SqlDataReader reader)
+        {
+            var artilharia = new List<Artilheiro>();
+            while (reader.Read())
+            {
+                var temObjeto = new Artilheiro()
+                {
+                    Nome = reader["Nome"].ToString(),
+                    Time = reader["Time"].ToString(),
+                    NumeroGols = reader["Numero_Gols"].ToString(),
+                };
+                artilharia.Add(temObjeto);
+            }
+            reader.Close();
+            return artilharia;
+        }
     }
 }

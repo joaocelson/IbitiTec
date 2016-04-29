@@ -22,6 +22,12 @@ public class JsonHelper {
         return (new Gson()).fromJson(json, tClass);
     }
 
+    public static String objectToJson(Object object){
+        Gson gson = new Gson();
+        String json = gson.toJson(object);
+        return json;
+    }
+
     public static String leJsonBancoLocal(String nomeJson, Activity activity) {
         try {
             String json = PreferenceManager.getDefaultSharedPreferences(activity)

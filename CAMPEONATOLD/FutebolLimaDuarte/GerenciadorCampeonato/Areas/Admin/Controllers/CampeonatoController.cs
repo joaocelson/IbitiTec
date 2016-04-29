@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Campeonato.UI.WEB.Security;
+using Newtonsoft.Json;
 
 namespace Campeonato.UI.WEB.Areas.Admin
 {
@@ -178,6 +179,22 @@ namespace Campeonato.UI.WEB.Areas.Admin
         {
             var listaCampeos = appClassificacao.ListarCampeoesPorCampeonato(id);
             return View(listaCampeos);
+        }
+
+
+        //JSON - Retorna todos os dados JSON
+        //=======================================================
+
+        public String ObterClassificacaoJson(string id)
+        {
+            var listaClassificacao = appClassificacao.ListarClassicacaoPorCampeonato(id);
+            return JsonConvert.SerializeObject(listaClassificacao, Formatting.Indented);
+        }
+
+        public String ObterArtilhariaJson(string id)
+        {
+            var listaArtilheiros = appCampeonato.ArtilhariaPorCampeonato(id);
+            return JsonConvert.SerializeObject(listaArtilheiros, Formatting.Indented);
         }
     }
 }

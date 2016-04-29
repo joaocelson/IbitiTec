@@ -1,5 +1,9 @@
 package com.ibititec.campeonatold.helpers;
 
+import android.util.Log;
+
+import com.ibititec.campeonatold.MainActivity;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -63,7 +67,7 @@ public class HttpHelper {
                 response = "";
             }
         } catch (Exception ex) {
-
+            Log.i(MainActivity.TAG, "Erro ao post json usuario." + ex.getMessage());
         }
         return response;
     }

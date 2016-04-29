@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import com.appodeal.ads.Appodeal;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.ibititec.campeonatold.admin.LoginUsuarioActivity;
 
 public class SplashActivity extends AppCompatActivity {
     private  final int DURACAO_TELA = 2000;
@@ -22,7 +23,8 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent novaTela = new Intent(SplashActivity.this, MainActivity.class);
+                //Intent novaTela = new Intent(SplashActivity.this, MainActivity.class);
+                Intent novaTela = new Intent(SplashActivity.this, LoginUsuarioActivity.class);
                 SplashActivity.this.startActivity(novaTela);
                 SplashActivity.this.finish();
             }

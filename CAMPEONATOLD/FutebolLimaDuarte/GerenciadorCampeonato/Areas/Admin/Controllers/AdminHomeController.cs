@@ -1,6 +1,7 @@
 ﻿using Campeonato.Aplicacao;
 using Campeonato.Dominio;
 using Campeonato.UI.WEB.Security;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -84,25 +85,25 @@ namespace Campeonato.UI.WEB.Areas.Admin.Controllers
         }
 
 
-        [HttpPost]
-        public ActionResult LoginJSON(Usuario usuario)
-        {
-            Usuario usuarioValidado = appUsuario.ValidarUsuario(usuario);
-            if (usuarioValidado != null)
-            {
-                FormsAuthentication.SetAuthCookie(usuarioValidado.LoginEmail, false);
-                FormsAuthentication.RedirectFromLoginPage(usuarioValidado.LoginEmail, false);
+        //[HttpPost]
+        //public ActionResult LoginJSON(Usuario usuario)
+        //{
+        //    Usuario usuarioValidado = appUsuario.ValidarUsuario(usuario);
+        //    if (usuarioValidado != null)
+        //    {
+        //        FormsAuthentication.SetAuthCookie(usuarioValidado.LoginEmail, false);
+        //        FormsAuthentication.RedirectFromLoginPage(usuarioValidado.LoginEmail, false);
 
-                System.Web.Script.Serialization.JavaScriptSerializer jSearializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-                string jsonString = jSearializer.Serialize(usuario);
-                return Json(jsonString, JsonRequestBehavior.AllowGet);
+        //        System.Web.Script.Serialization.JavaScriptSerializer jSearializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+        //        string jsonString = jSearializer.Serialize(usuario);
+        //        return Json(jsonString, JsonRequestBehavior.AllowGet);
 
-            }
-            else
-            {
-                return View();
-            }
-        }
+        //    }
+        //    else
+        //    {
+        //        return View();
+        //    }
+        //}
 
         public ActionResult Login()
         {
@@ -113,6 +114,25 @@ namespace Campeonato.UI.WEB.Areas.Admin.Controllers
         {
             System.Web.Security.FormsAuthentication.SignOut();
             return RedirectToAction("Login");
+        }
+
+
+        //METODOS JSON
+        //===========================================
+        //
+        // POST: /Account/Login
+        [HttpPost]
+        public String LoginJson(Usuario usuario)
+        {
+            var usa = appUsuario.ValidarUsuarioEmail(usuario);
+            if (usa != null)
+            {
+                return JsonConvert.SerializeObject(usa, Formatting.Indented);
+            }
+            else
+            {
+                return "Erro";
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 using Campeonato.Dominio;
 using Campeonato.UI.WEB.Security;
 using GerenciadorCampeonato.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -146,18 +147,7 @@ namespace Campeonato.UI.WEB.Areas.Admin
 
             return View(partida);
         }
-
-        public ActionResult TabelaJson(string id)
-        {
-            Rodada rodada = new Rodada();
-            var partida = rodada.ConverterPartidasParaRodada(appPartida.ListaTabelaPorCampeonato(id));
-
-            if (partida == null)
-                return HttpNotFound();
-
-            return View(partida);
-        }
-
+             
         public ActionResult Tabela(string id)
         {
             var partida = appPartida.ListaTabelaPorCampeonato(id);
@@ -212,6 +202,18 @@ namespace Campeonato.UI.WEB.Areas.Admin
         {
             var partida = appPartida.ListarPorId(id);
             return View(partida);
+        }
+
+
+        //JSON - Todos os métodos que retornam JSON
+        //============================================
+
+        public String ObterTabelaJson(string id)
+        {
+            Rodada rodada = new Rodada();
+            var partida = rodada.ConverterPartidasParaRodada(appPartida.ListaTabelaPorCampeonato(id));
+
+            return JsonConvert.SerializeObject(partida, Formatting.Indented);
         }
     }
 }

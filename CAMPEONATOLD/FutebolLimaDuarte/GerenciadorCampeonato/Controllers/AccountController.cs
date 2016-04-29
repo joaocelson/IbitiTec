@@ -9,6 +9,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using GerenciadorCampeonato.Models;
+using Campeonato.Dominio;
+using Campeonato.Aplicacao;
+using Newtonsoft.Json;
 
 namespace GerenciadorCampeonato.Controllers
 {
@@ -18,11 +21,16 @@ namespace GerenciadorCampeonato.Controllers
         public AccountController()
             : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
         {
+            appUsuario = UsuarioAplicacaoConstrutor.UsuarioAplicacaoADO();
         }
+
+        private readonly UsuarioAplicacao appUsuario;
+
 
         public AccountController(UserManager<ApplicationUser> userManager)
         {
             UserManager = userManager;
+            appUsuario = UsuarioAplicacaoConstrutor.UsuarioAplicacaoADO();
         }
 
         public UserManager<ApplicationUser> UserManager { get; private set; }
@@ -378,7 +386,8 @@ namespace GerenciadorCampeonato.Controllers
 
         private class ChallengeResult : HttpUnauthorizedResult
         {
-            public ChallengeResult(string provider, string redirectUri) : this(provider, redirectUri, null)
+            public ChallengeResult(string provider, string redirectUri)
+                : this(provider, redirectUri, null)
             {
             }
 
@@ -404,5 +413,8 @@ namespace GerenciadorCampeonato.Controllers
             }
         }
         #endregion
+
+
+       
     }
 }

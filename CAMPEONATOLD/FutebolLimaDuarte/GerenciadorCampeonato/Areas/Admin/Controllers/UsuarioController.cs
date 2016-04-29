@@ -53,5 +53,34 @@ namespace Campeonato.UI.WEB.Areas.Admin.Controllers
 
         }
 
+        //METODOS JSON
+        //========================================
+        [HttpPost]
+        public String CadastrarJson(Usuario usuario)
+        {
+
+            try
+            {
+
+            
+            if (appUsuario.ValidarUsuarioEmail(usuario) == null)
+            {
+                    usuario.TipoUsuario = 0;
+                    appUsuario.Salvar(usuario);
+
+                    return "OK";
+            }
+            else
+            {
+                ModelState.AddModelError("", "Login já cadastrado, tente outro login");
+                return "";
+            }
+            }
+            catch (Exception ex)
+            {
+                return "erro";
+            }
+        }
+
     }
 }
