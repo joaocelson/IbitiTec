@@ -1,11 +1,12 @@
 package com.ibititec.campeonatold.modelo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by JOAOCELSON on 28/04/2016.
  */
-public class Campeonato {
+public class Campeonato implements Serializable {
 
     private int Id ;
 

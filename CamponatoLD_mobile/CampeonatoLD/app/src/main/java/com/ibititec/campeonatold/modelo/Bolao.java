@@ -1,9 +1,11 @@
 package com.ibititec.campeonatold.modelo;
 
+import java.io.Serializable;
+
 /**
  * Created by JOAOCELSON on 28/04/2016.
  */
-public class Bolao {
+public class Bolao implements Serializable {
 
     private  int Id ;
     private  String Nome ;
@@ -14,4 +16,67 @@ public class Bolao {
     private  Partida Partida ;
     private  Campeonato Campeonatos ;
 
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
+    public String getNome() {
+        return Nome;
+    }
+
+    public void setNome(String nome) {
+        Nome = nome;
+    }
+
+    public int getGolVisitante() {
+        return GolVisitante;
+    }
+
+    public void setGolVisitante(int golVisitante) {
+        GolVisitante = golVisitante;
+    }
+
+    public int getGolMandante() {
+        return GolMandante;
+    }
+
+    public void setGolMandante(int golMandante) {
+        GolMandante = golMandante;
+    }
+
+    public int getPontosAdquiridos() {
+        return PontosAdquiridos;
+    }
+
+    public void setPontosAdquiridos(int pontosAdquiridos) {
+        PontosAdquiridos = pontosAdquiridos;
+    }
+
+    public com.ibititec.campeonatold.modelo.Usuario getUsuario() {
+        return Usuario;
+    }
+
+    public void setUsuario(com.ibititec.campeonatold.modelo.Usuario usuario) {
+        Usuario = usuario;
+    }
+
+    public com.ibititec.campeonatold.modelo.Partida getPartida() {
+        return Partida;
+    }
+
+    public void setPartida(com.ibititec.campeonatold.modelo.Partida partida) {
+        Partida = partida;
+    }
+
+    public Campeonato getCampeonatos() {
+        return Campeonatos;
+    }
+
+    public void setCampeonatos(Campeonato campeonatos) {
+        Campeonatos = campeonatos;
+    }
 }

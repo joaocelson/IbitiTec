@@ -1,9 +1,11 @@
 package com.ibititec.campeonatold.modelo;
 
+import java.io.Serializable;
+
 /**
  * Created by JOAOCELSON on 28/04/2016.
  */
-public class Usuario {
+public class Usuario  implements Serializable {
 
    private String LoginEmail ;
 

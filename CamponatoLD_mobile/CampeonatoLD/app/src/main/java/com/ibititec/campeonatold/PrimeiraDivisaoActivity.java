@@ -10,11 +10,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.appodeal.ads.Appodeal;
+import com.ibititec.campeonatold.bolao.BolaoPrincipalActivity;
 
 public class PrimeiraDivisaoActivity extends AppCompatActivity {
 
-    private ImageButton btnTabela, btnArtilharia, btnClassificacao, btnAjuda;
-    private TextView txtTabela, txtArtilharia, txtClassificacao, txtAjuda;
+    private ImageButton btnTabela, btnArtilharia, btnClassificacao, btnAjuda, btnBolao;
+    private TextView txtTabela, txtArtilharia, txtClassificacao, txtAjuda, txtBolao;
     private String divisao;
     Toolbar toolbar;
 
@@ -30,11 +31,13 @@ public class PrimeiraDivisaoActivity extends AppCompatActivity {
         btnTabela = (ImageButton) findViewById(R.id.btnPrimeiraDivisaoTabela);
         btnClassificacao = (ImageButton) findViewById(R.id.btnPrimeiraDivisaoClassificacao);
         btnAjuda = (ImageButton) findViewById(R.id.btnPrimeiraDivisaoSobre);
+        btnBolao = (ImageButton) findViewById(R.id.btnPalpitesBolao);
 
         txtArtilharia = (TextView) findViewById(R.id.txtArtilharia);
         txtTabela = (TextView) findViewById(R.id.txtTabela);
         txtClassificacao = (TextView) findViewById(R.id.txtClassificacao);
         txtAjuda = (TextView) findViewById(R.id.txtHelp);
+        txtBolao = (TextView) findViewById(R.id.txtPalpitesBolao);
 
         lerIntent();
         executarAcoes();
@@ -50,6 +53,7 @@ public class PrimeiraDivisaoActivity extends AppCompatActivity {
     private void iniciarAppodeal() {
         Appodeal.show(this, Appodeal.BANNER_BOTTOM);
     }
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent();
@@ -95,6 +99,13 @@ public class PrimeiraDivisaoActivity extends AppCompatActivity {
             }
         });
 
+        btnBolao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startarActivityBolao(divisao);
+            }
+        });
+
         txtArtilharia.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,12 +133,25 @@ public class PrimeiraDivisaoActivity extends AppCompatActivity {
                 startarActivityHelp(divisao, "sobre");
             }
         });
+
+        txtBolao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startarActivityBolao(divisao);
+            }
+        });
     }
 
     private void startarActivityHelp(String divisao, String funcionalidade) {
         Intent intent = new Intent(this, SobreActivity.class);
         intent.putExtra("divisao", divisao);
         intent.putExtra("funcionalidade", funcionalidade);
+        startActivity(intent);
+    }
+
+    private void startarActivityBolao(String divisao) {
+        Intent intent = new Intent(this, BolaoPrincipalActivity.class);
+        intent.putExtra("divisao", divisao);
         startActivity(intent);
     }
 

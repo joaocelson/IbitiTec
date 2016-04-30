@@ -1,11 +1,8 @@
 package com.ibititec.campeonatold;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -38,14 +35,14 @@ public class MainActivity extends AppCompatActivity
     private TextView txtPrimeiraDivisao, txtSegundaDivisao;
 
 
-    boolean haveConnectedWifi = false;
-    boolean haveConnectedMobile = false;
-
     // private ProgressDialog progressDialog;
 
     //CONSTANTES NOME DO JSON NA BASE DE DADOS
     public static final String PDARTILHARIA = "pdartilharia", PDTABELA = "pdtabela", PDCLASSIFICACAO = "pdclassificacao",
-            SDARTILHARIA = "sdartilharia", SDTABELA = "dstabela", SDCLASSIFICACAO = "sdclassificacao";
+            SDARTILHARIA = "sdartilharia", SDTABELA = "dstabela", SDCLASSIFICACAO = "sdclassificacao",
+            PDCLASSIFICACAOBOLAO = "pdclassificacaobolao", SDCLASSIFICACAOBOLAO = "sdclassificacaobolao",
+            PDJOGOSBOLAO= "pdjogosbolao", SDJOGOSBOLAO= "sdjogosbolao";
+
     public static final String TAG = "CAMPEONATOLD";
     public static final String PATH_FOTOS = "http://52.37.37.207:88/Campeonato/Image?nomeimagem=";
 
@@ -98,15 +95,20 @@ public class MainActivity extends AppCompatActivity
             //INCLUIR LOGICA PARA ATUALIZACAO AUTOMATICA
 
             if (JsonHelper.leJsonBancoLocal(MainActivity.PDTABELA, this) == "" || atualizar == true) {
-                if (existeConexao()) {
+                if (!HttpHelper.existeConexao(this)) {
+                    exibirMensagem();
+                    Log.i(TAG, "Sem conexão com a internet.");
+                } else {
                     donwnloadFromUrl(PDTABELA, getString(R.string.url_pdtabela));
                     donwnloadFromUrl(PDARTILHARIA, getString(R.string.url_pdartilharia));
                     donwnloadFromUrl(PDCLASSIFICACAO, getString(R.string.url_pdclassificacao));
                     donwnloadFromUrl(SDTABELA, getString(R.string.url_sdtabela));
                     donwnloadFromUrl(SDARTILHARIA, getString(R.string.url_sdartilharia));
                     donwnloadFromUrl(SDCLASSIFICACAO, getString(R.string.url_sdclassificacao));
-                } else {
-                    Log.i(TAG, "Sem conexão com a internet.");
+
+                    donwnloadFromUrl(PDCLASSIFICACAOBOLAO, getString(R.string.url_pdclassificacaobolao));
+
+                    donwnloadFromUrl(SDCLASSIFICACAOBOLAO, getString(R.string.url_sdclassificacaobolao));
                 }
             }
         } catch (Exception ex) {
@@ -269,7 +271,7 @@ public class MainActivity extends AppCompatActivity
         //define o titulo
         builder.setTitle("Atenção");
         //define a mensagem
-        builder.setMessage("Não identificado conexão com a internet, verifique sua conexão está ativa.");
+        builder.setMessage("Não identificado conexão com a internet, verifique se sua conexão está ativa.");
         //define um botão como positivo
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
@@ -284,29 +286,5 @@ public class MainActivity extends AppCompatActivity
         alerta.show();
     }
 
-    public boolean existeConexao() {
-        ConnectivityManager connectivity = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        try {
-            ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo[] netInfo = cm.getAllNetworkInfo();
-            for (NetworkInfo ni : netInfo) {
-                if (ni.getTypeName().equalsIgnoreCase("WIFI"))
-                    if (ni.isConnected())
-                        haveConnectedWifi = true;
-                if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
-                    if (ni.isConnected())
-                        haveConnectedMobile = true;
-            }
-            if (!haveConnectedWifi && !haveConnectedMobile) {
-                exibirMensagem();
-            }
-            return haveConnectedWifi || haveConnectedMobile;
-
-        } catch (Exception ex) {
-            Log.i(MainActivity.TAG, "Erro ao verificar conexao com a intenet." + ex.getMessage());
-            return false;
-        }
-    }
 
 }

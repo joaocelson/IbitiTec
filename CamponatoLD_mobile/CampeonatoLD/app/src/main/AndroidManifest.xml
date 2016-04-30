@@ -291,6 +291,26 @@
             android:label="@string/title_activity_login_usuario"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+        <activity
+            android:name=".bolao.BolaoPrincipalActivity"
+            android:label="@string/title_activity_bolao_principal"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".bolao.ClassificacaoActivity"
+            android:label="@string/title_activity_classificacao"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".bolao.PapliteActivity"
+            android:label="@string/title_activity_paplite"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".bolao.PalpitePorJogoActivity"
+            android:label="@string/title_activity_palpite_por_jogo"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>

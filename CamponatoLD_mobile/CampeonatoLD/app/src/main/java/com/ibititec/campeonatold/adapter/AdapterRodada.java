@@ -18,9 +18,8 @@ import com.ibititec.campeonatold.modelo.Rodada;
 import java.util.List;
 
 public class AdapterRodada extends BaseAdapter {
-
-    private List<Rodada> rodadaList= null;
     private Activity activity;
+    private List<Rodada> rodadaList= null;
 
     public  AdapterRodada(Activity activityParam, List<Rodada> rodadaListParam){
         this.rodadaList = rodadaListParam;
@@ -30,6 +29,7 @@ public class AdapterRodada extends BaseAdapter {
     public  AdapterRodada(){}
 
     @Override
+
     public int getCount() {
         return rodadaList.size();
     }

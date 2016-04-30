@@ -21,6 +21,18 @@
 
     <string name="url_cadastrar_usuario">http://52.37.37.207:94/Admin/Usuario/CadastrarJson</string>
     <string name="url_login_usuario">http://52.37.37.207:94/Admin/AdminHome/LoginJson</string>
+    <string name="title_activity_bolao_principal">BolaoPrincipalActivity</string>
+    <string name="title_activity_classificacao">ClassificacaoActivity</string>
+    <string name="title_activity_paplite">PapliteActivity</string>
+    <string name="title_activity_palpite_por_jogo">PalpitePorJogoActivity</string>
 
+
+    <string name="url_pdclassificacaobolao">http://52.37.37.207:88/Campeonato/getPDClassificacaoBolao</string>
+
+    <string name="url_sdclassificacaobolao">http://52.37.37.207:88/Campeonato/getSDClassificacaoBolao</string>
+
+    <string name="url_pd_jogos_bolao">http://52.37.37.207:88/Campeonato/getPDJogosBolao</string>
+
+    <string name="url_sd_jogos_bolao">http://52.37.37.207:88/Campeonato/getSDJogosBolao</string>
 
 </resources>
