@@ -1,7 +1,7 @@
 package com.ibititec.campeonatold.modelo;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.text.ParseException;
 
 /**
  * Created by JOAOCELSON on 28/04/2016.
@@ -16,17 +16,15 @@ public class Partida implements Serializable {
 
     private String IdTimeVisitante ;
 
-
     private String GolMandante ;
-
 
     private String GolVisitante ;
 
     private String LocalPartida ;
 
-    private Date  DataPartida ;
+    private String  DataPartida ;
 
-    private Date DataPartidaRemarcada ;
+    private String DataPartidaRemarcada ;
 
     private Boolean Remarcada ;
 
@@ -41,7 +39,6 @@ public class Partida implements Serializable {
     private Boolean InverterMandante ;
 
     private Boolean PontosComputados ;
-
 
     private String NomeCampeonato ;
 
@@ -109,19 +106,26 @@ public class Partida implements Serializable {
         LocalPartida = localPartida;
     }
 
-    public Date getDataPartida() {
+    public String getDataPartida() {
         return DataPartida;
     }
 
-    public void setDataPartida(Date dataPartida) {
-        DataPartida = dataPartida;
+    public void setDataPartida(String dataPartida) throws ParseException {
+
+//        DateFormat format = new SimpleDateFormat ("yyyy-MM-dd'T'HH:mm:ss'Z'");
+//        format.setTimeZone (TimeZone.getTimeZone ("UTC"));
+//
+//      //  DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+//       // inputFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+//        //DateFormat outputFormat = new SimpleDateFormat("yyyy-MMM-dd HH:mm:ss",Locale.ENGLISH);
+        this.DataPartida =dataPartida;
     }
 
-    public Date getDataPartidaRemarcada() {
+    public String getDataPartidaRemarcada() {
         return DataPartidaRemarcada;
     }
 
-    public void setDataPartidaRemarcada(Date dataPartidaRemarcada) {
+    public void setDataPartidaRemarcada(String dataPartidaRemarcada) {
         DataPartidaRemarcada = dataPartidaRemarcada;
     }
 

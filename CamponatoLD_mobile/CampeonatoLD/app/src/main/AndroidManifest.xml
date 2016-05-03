@@ -279,11 +279,13 @@
         <activity
             android:name=".SobreActivity"
             android:label="@string/title_activity_sobre"
+            android:parentActivityName=".PrimeiraDivisaoActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
             android:name=".admin.CadastroUsuarioActivity"
             android:label="@string/title_activity_cadastro_usuario"
+            android:parentActivityName=".admin.LoginUsuarioActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
@@ -294,21 +296,25 @@
         <activity
             android:name=".bolao.BolaoPrincipalActivity"
             android:label="@string/title_activity_bolao_principal"
+            android:parentActivityName=".PrimeiraDivisaoActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
             android:name=".bolao.ClassificacaoActivity"
             android:label="@string/title_activity_classificacao"
+            android:parentActivityName=".bolao.BolaoPrincipalActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".bolao.PapliteActivity"
+            android:name=".bolao.PalpiteActivity"
+            android:parentActivityName=".bolao.BolaoPrincipalActivity"
             android:label="@string/title_activity_paplite"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
             android:name=".bolao.PalpitePorJogoActivity"
             android:label="@string/title_activity_palpite_por_jogo"
+            android:parentActivityName=".bolao.PalpiteActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>

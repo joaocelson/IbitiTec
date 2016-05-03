@@ -63,9 +63,9 @@ public class SplashActivity extends AppCompatActivity {
     }
     private void iniciarAppodeal() {
         //String PRODUCAO
-         String appKey = "a7abb670bb95499ee0c535d3d8f3787704b48736d99fab89";
+        // String appKey = "a7abb670bb95499ee0c535d3d8f3787704b48736d99fab89";
         //String DESENVOLCIVMENTO
-       // String appKey = "a7abb670bb95499ee0c535d3d8f3787704b48736d99fab8ssdsddsd9";
+        String appKey = "a7abb670bb95499ee0c535d3d8f3787704b48736d99fab8ssdsddsd9";
         Appodeal.setBannerViewId(R.id.appodealBannerView);
         Appodeal.initialize(this, appKey, Appodeal.INTERSTITIAL | Appodeal.BANNER | Appodeal.MREC);
         //Appodeal.setTesting(true);

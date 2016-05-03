@@ -1,6 +1,7 @@
 ﻿using Campeonato.Aplicacao;
 using Campeonato.Dominio;
 using Campeonato.UI.WEB.Security;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +40,6 @@ namespace Campeonato.UI.WEB.Areas.Admin
         {
             usuario = new Usuario();
             usuario.LoginEmail = HttpContext.User.Identity.Name;
-
         }
 
         [PermissoesFiltro(Roles = "Visitante, Admin")]
@@ -52,7 +52,6 @@ namespace Campeonato.UI.WEB.Areas.Admin
             IEnumerable<Partida> listaPartidasPorBolao = appPartida.ListarProximaRodadaPorBolao(id);
             foreach (Partida partida in listaPartidasPorBolao)
             {
-
                 Bolao bolao = appBolao.ListarTodosPorUsuarioPartida(usuario.Id, partida.Id);
                 if (bolao != null)
                 {
@@ -67,7 +66,6 @@ namespace Campeonato.UI.WEB.Areas.Admin
                 }
 
             }
-
             return View(listaPartidasRegistrado);
         }
 
@@ -87,7 +85,7 @@ namespace Campeonato.UI.WEB.Areas.Admin
             partida.Campeonatos = appCampeonato.ListarPorId(partida.IdCampeonato);
             appBolao.Salvar(bolao);
             return RedirectToAction("Participar", new RouteValueDictionary(
-  new { controller = "Bolao", action = "Participar", Id = partida.Campeonatos.IdBola }));
+            new { controller = "Bolao", action = "Participar", Id = partida.Campeonatos.IdBola }));
         }
 
         public ActionResult Editar(List<object> listaPartidas)
@@ -136,7 +134,6 @@ namespace Campeonato.UI.WEB.Areas.Admin
         {
             return RedirectToAction("Cadastrar", new RouteValueDictionary(
                 new { controller = "Usuario", action = "Cadastrar" }));
-
         }
 
         [PermissoesFiltro(Roles = "Admin")]
@@ -158,10 +155,96 @@ namespace Campeonato.UI.WEB.Areas.Admin
             {
                 return RedirectToAction("PontuarBolao");
             }
-
-
         }
-        
+
+        //METODOS JSON
+        //================================================
+
+        //Lista os boloes
+        public String IndexJson()
+        {
+            Usuario usuario;
+            RecuperarUsuarioLogado(out usuario);
+
+            usuario = appUsuario.ValidarUsuarioEmail(usuario);
+            var listaBolao = appBolao.ListarBoloes();
+            return JsonConvert.SerializeObject(listaBolao, Formatting.Indented);
+        }
+
+        //Lista as partidas da proxima rodada.
+        public String ParticiparJson(string id, string  emailUsuario, string senha)
+        {
+            Usuario usuario = new Usuario();
+            //RecuperarUsuarioLogado(out usuario);
+            usuario.LoginEmail = emailUsuario;
+            usuario.Senha = senha;
+            usuario = appUsuario.ValidarUsuarioEmail(usuario);
+            List<Partida> listaPartidasRegistrado = new List<Partida>();
+            IEnumerable<Partida> listaPartidasPorBolao = appPartida.ListarProximaRodadaPorBolao(id);
+            foreach (Partida partida in listaPartidasPorBolao)
+            {
+                Bolao bolao = appBolao.ListarTodosPorUsuarioPartida(usuario.Id, partida.Id);
+                if (bolao != null)
+                {
+                    Partida partidaNova = partida;
+                    partidaNova.GolMandante = bolao.GolMandante.ToString();
+                    partidaNova.GolVisitante = bolao.GolVisitante.ToString();
+                    listaPartidasRegistrado.Add(partidaNova);
+                }
+                else
+                {
+                    listaPartidasRegistrado.Add(partida);
+                }
+
+            }
+            return JsonConvert.SerializeObject(listaPartidasRegistrado, Formatting.Indented);
+        }
+
+        //Lista a classificação geral do bolão
+        public String VencedorRodadaJson(string id)
+        {
+            IEnumerable<string> listaClassificacao = (IEnumerable<string>)appBolao.VencedorRodada(id);
+            var classificacao = listaClassificacao.Select(p => new
+            {
+                Posicao = p.ElementAt(0),
+                Time = p.ElementAt(1),
+                Pontos = p.ElementAt(2)
+            });
+            return JsonConvert.SerializeObject(listaClassificacao, Formatting.Indented);
+        }
+
+        //Habilita a partida para o usuário inserir os palpites da partida - Retorna uma partida
+        public String PalpiteJson(string id)
+        {
+            var partida = appPartida.ListarPorId(id);
+            return JsonConvert.SerializeObject(partida, Formatting.Indented);
+        }
+
+        //Salva o palpite do usuário e retorna OK caso tenha sido salvo
+        public String SalvarJson(Partida partida, string emailUsuario, string senha)
+        {
+            try
+            {
+                Usuario usuario = new Usuario();
+                //RecuperarUsuarioLogado(out usuario);
+                usuario.LoginEmail = emailUsuario;
+                usuario.Senha = senha;
+                usuario = appUsuario.ValidarUsuarioEmail(usuario);
+
+                Bolao bolao = new Bolao();
+                bolao.GolMandante = Convert.ToInt16(partida.GolMandante);
+                bolao.GolVisitante = Convert.ToInt16(partida.GolVisitante);
+                bolao.Usuario = appUsuario.ValidarUsuarioEmail(usuario);
+                bolao.Partida = partida;
+                partida.Campeonatos = appCampeonato.ListarPorId(partida.IdCampeonato);
+                appBolao.Salvar(bolao);
+                return "OK";
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
     }
 
 }

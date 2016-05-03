@@ -41,10 +41,10 @@ public class MainActivity extends AppCompatActivity
     public static final String PDARTILHARIA = "pdartilharia", PDTABELA = "pdtabela", PDCLASSIFICACAO = "pdclassificacao",
             SDARTILHARIA = "sdartilharia", SDTABELA = "dstabela", SDCLASSIFICACAO = "sdclassificacao",
             PDCLASSIFICACAOBOLAO = "pdclassificacaobolao", SDCLASSIFICACAOBOLAO = "sdclassificacaobolao",
-            PDJOGOSBOLAO= "pdjogosbolao", SDJOGOSBOLAO= "sdjogosbolao";
+            PDJOGOSBOLAO= "pdjogosbolao", SDJOGOSBOLAO= "sdjogosbolao", USUARIO = "usuario";
 
     public static final String TAG = "CAMPEONATOLD";
-    public static final String PATH_FOTOS = "http://52.37.37.207:88/Campeonato/Image?nomeimagem=";
+    public static final String PATH_FOTOS = "http://52.37.37.207:94/Admin/Time/Image?nomeimagem=";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

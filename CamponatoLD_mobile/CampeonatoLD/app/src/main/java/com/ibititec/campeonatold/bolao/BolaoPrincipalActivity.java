@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.ibititec.campeonatold.R;
+import com.ibititec.campeonatold.helpers.HttpHelper;
 
 public class BolaoPrincipalActivity extends AppCompatActivity {
 
@@ -22,16 +23,24 @@ public class BolaoPrincipalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bolao_principal);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        lerIntent();
         carregarComponentes();
         executarAcoes();
     }
 
+    private void lerIntent() {
+        if (HttpHelper.existeConexao(this)) {
+            Intent intent = getIntent();
+            divisao = intent.getStringExtra("divisao");
+        }
+    }
     private void executarAcoes() {
         if (divisao.equals("primeira")) {
-            this.setTitle("Primeira Divisão");
+            this.setTitle("Bolão 1ª Divisão");
         } else {
-            this.setTitle("Segunda Divisão");
+            this.setTitle("Bolão 2ª Divisão");
         }
 
         btnPalpite.setOnClickListener(new View.OnClickListener() {
@@ -75,10 +84,9 @@ public class BolaoPrincipalActivity extends AppCompatActivity {
     }
 
     private void carregarComponentes() {
-
         btnClassificacao = (ImageButton) findViewById(R.id.btnClassificaoBolao);
         btnPalpite = (ImageButton) findViewById(R.id.btnPalpitesBolao);
-        txtClassificacao = (TextView) findViewById(R.id.txtClassificacao);
+        txtClassificacao = (TextView) findViewById(R.id.txtClassificacaoBolao);
         txtPalpite = (TextView) findViewById(R.id.txtPalpitesBolao);
     }
 

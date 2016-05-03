@@ -16,23 +16,22 @@
     <string name="title_activity_adapter_rodada">AdapterRodada</string>
     <string name="title_activity_sobre">Sobre a Ibititec</string>
     <string name="sendToken">http://52.37.37.207:88/Campeonato/SendToken</string>
-    <string name="title_activity_login_usuario">LoginUsuarioActivity</string>
-    <string name="title_activity_cadastro_usuario">CadastroUsuarioActivity</string>
+    <string name="title_activity_login_usuario">Login Usuário</string>
+    <string name="title_activity_cadastro_usuario">Cadastro Usuário</string>
 
     <string name="url_cadastrar_usuario">http://52.37.37.207:94/Admin/Usuario/CadastrarJson</string>
     <string name="url_login_usuario">http://52.37.37.207:94/Admin/AdminHome/LoginJson</string>
-    <string name="title_activity_bolao_principal">BolaoPrincipalActivity</string>
-    <string name="title_activity_classificacao">ClassificacaoActivity</string>
-    <string name="title_activity_paplite">PapliteActivity</string>
-    <string name="title_activity_palpite_por_jogo">PalpitePorJogoActivity</string>
+    <string name="title_activity_bolao_principal">Bolão</string>
+    <string name="title_activity_classificacao">Classificação Bolão</string>
+    <string name="title_activity_paplite">Palpite por Partida</string>
+    <string name="title_activity_palpite_por_jogo">Partidas Liberadas</string>
 
+<!--BOLAO-->
+    <string name="url_pdclassificacaobolao">http://52.37.37.207:94/Admin/Bolao/VencedorRodadaJson</string>
+    <string name="url_sdclassificacaobolao">http://52.37.37.207:94/Admin/Bolao/VencedorRodadaJson</string>
+    <string name="url_jogos_bolao">http://52.37.37.207:94/Admin/Bolao/ParticiparJson</string>
+    <string name="url_sd_jogos_bolao">http://52.37.37.207:94/Admin/Bolao/getSDJogosBolao</string>
+    <string name="url_salvar_palpite_bolao">http://52.37.37.207:94/Admin/Bolao/SalvarJson</string>
 
-    <string name="url_pdclassificacaobolao">http://52.37.37.207:88/Campeonato/getPDClassificacaoBolao</string>
-
-    <string name="url_sdclassificacaobolao">http://52.37.37.207:88/Campeonato/getSDClassificacaoBolao</string>
-
-    <string name="url_pd_jogos_bolao">http://52.37.37.207:88/Campeonato/getPDJogosBolao</string>
-
-    <string name="url_sd_jogos_bolao">http://52.37.37.207:88/Campeonato/getSDJogosBolao</string>
 
 </resources>

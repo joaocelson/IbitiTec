@@ -31,13 +31,13 @@ public class PrimeiraDivisaoActivity extends AppCompatActivity {
         btnTabela = (ImageButton) findViewById(R.id.btnPrimeiraDivisaoTabela);
         btnClassificacao = (ImageButton) findViewById(R.id.btnPrimeiraDivisaoClassificacao);
         btnAjuda = (ImageButton) findViewById(R.id.btnPrimeiraDivisaoSobre);
-        btnBolao = (ImageButton) findViewById(R.id.btnPalpitesBolao);
+        btnBolao = (ImageButton) findViewById(R.id.btnPrimeiraDivisaoBolao);
 
         txtArtilharia = (TextView) findViewById(R.id.txtArtilharia);
         txtTabela = (TextView) findViewById(R.id.txtTabela);
         txtClassificacao = (TextView) findViewById(R.id.txtClassificacao);
         txtAjuda = (TextView) findViewById(R.id.txtHelp);
-        txtBolao = (TextView) findViewById(R.id.txtPalpitesBolao);
+        txtBolao = (TextView) findViewById(R.id.txtBolao);
 
         lerIntent();
         executarAcoes();
@@ -102,7 +102,7 @@ public class PrimeiraDivisaoActivity extends AppCompatActivity {
         btnBolao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startarActivityBolao(divisao);
+                                startarActivityBolao(divisao);
             }
         });
 

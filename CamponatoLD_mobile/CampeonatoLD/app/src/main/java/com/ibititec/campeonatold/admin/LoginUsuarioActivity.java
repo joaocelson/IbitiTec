@@ -97,7 +97,7 @@ public class LoginUsuarioActivity extends AppCompatActivity {
             SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(LoginUsuarioActivity.this);
             final String usuarioJson = JsonHelper.objectToJson(usuario);
             Log.i(MainActivity.TAG, "Json lido do banco local ao fazer o login: " + usuarioJson);
-            Usuario usuarioLocal = (Usuario) JsonHelper.getObject(sharedPreferences.getString("usuario.json", ""), Usuario.class);
+            Usuario usuarioLocal = (Usuario) JsonHelper.getObject(sharedPreferences.getString(MainActivity.USUARIO + ".json", ""), Usuario.class);
 
             if (usuarioLocal != null && usuario.getSenha() == usuarioLocal.getSenha() && usuario.getLoginEmail() == usuarioLocal.getLoginEmail()) {
                 Intent intent = new Intent(this, MainActivity.class);
@@ -124,7 +124,7 @@ public class LoginUsuarioActivity extends AppCompatActivity {
                             Log.i(MainActivity.TAG, "Json retornado ao fazer o login: " + json);
                             if (json != null) {
                                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(LoginUsuarioActivity.this);
-                                sharedPreferences.edit().putString("usuario.json", json).apply();
+                                sharedPreferences.edit().putString(MainActivity.USUARIO + ".json", json).apply();
                             }
 
                             Log.i(MainActivity.TAG, json);

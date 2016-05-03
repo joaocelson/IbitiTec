@@ -16,7 +16,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.ibititec.campeonatold.MainActivity;
 import com.ibititec.campeonatold.R;
 import com.ibititec.campeonatold.bolao.PalpitePorJogoActivity;
-import com.ibititec.campeonatold.modelo.Bolao;
+import com.ibititec.campeonatold.modelo.Partida;
 
 import java.io.Serializable;
 import java.util.List;
@@ -27,9 +27,9 @@ import java.util.List;
 public class AdapterJogosBolao extends BaseAdapter {
 
     private Activity activity;
-    private List<Bolao> bolaoList = null;
+    private List<Partida> bolaoList = null;
 
-    public AdapterJogosBolao(Activity activityParam, List<Bolao> bolaoList) {
+    public AdapterJogosBolao(Activity activityParam, List<Partida> bolaoList) {
         this.bolaoList = bolaoList;
         this.activity = activityParam;
     }
@@ -55,9 +55,9 @@ public class AdapterJogosBolao extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        final Partida rodadaObj = bolaoList.get(position);
         try {
-            final Bolao rodadaObj = bolaoList.get(position);
-            Log.i(MainActivity.TAG, "Vai setar o Adapter, número de registro: " + bolaoList.size() + " Position: " + position + " - ID PARTIDA " + rodadaObj.getId());
+           Log.i(MainActivity.TAG, "Vai setar o Adapter, número de registro: " + bolaoList.size() + " Position: " + position + " - ID PARTIDA " + rodadaObj.getId());
 
             LayoutInflater inflater = (LayoutInflater) activity.getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View layout = inflater.inflate(R.layout.adapter_jogos_bolao, null);
@@ -100,11 +100,11 @@ public class AdapterJogosBolao extends BaseAdapter {
 //            Log.i(MainActivity.TAG, "jogo2Array[0]: " +jogo2Array[0]);
 //            Log.i(MainActivity.TAG, "jogo2Array[1]: " +jogo2Array[1]);
 //
-            Uri imageUriMandante = Uri.parse(MainActivity.PATH_FOTOS + rodadaObj.getPartida().getTimeMandante().trim() + ".jpg");
+            Uri imageUriMandante = Uri.parse(MainActivity.PATH_FOTOS + rodadaObj.getEscudoPequenoMandante().trim());
             SimpleDraweeView draweeViewMandante = (SimpleDraweeView) layout.findViewById(R.id.img_time_mandante_bolao);
             draweeViewMandante.setImageURI(imageUriMandante);
 
-            Uri imageUriVisistante = Uri.parse(MainActivity.PATH_FOTOS + rodadaObj.getPartida().getTimeVisitante().trim() + ".jpg");
+            Uri imageUriVisistante = Uri.parse(MainActivity.PATH_FOTOS + rodadaObj.getEscudoPequenoVisitante().trim());
             SimpleDraweeView draweeViewVisistante = (SimpleDraweeView) layout.findViewById(R.id.img_time_visitante_bolao);
             draweeViewVisistante.setImageURI(imageUriVisistante);
 
@@ -129,13 +129,14 @@ public class AdapterJogosBolao extends BaseAdapter {
 
         } catch (Exception e) {
             Log.i(MainActivity.TAG, "Erro ao preecnher o getView: " + e.getMessage());
+            Log.i(MainActivity.TAG, "Valor da variável: " + rodadaObj.getId() + " - " + rodadaObj.toString());
         }
         return convertView;
     }
 
-    private void startarActivityPalpite(View v, Bolao rodadaObj) {
+    private void startarActivityPalpite(View v, Partida partida) {
         Intent intent = new Intent(activity.getApplication(), PalpitePorJogoActivity.class);
-        intent.putExtra("jogo_bolao", (Serializable) rodadaObj);
+        intent.putExtra("jogo_bolao", (Serializable) partida);
         activity.startActivity(intent);
     }
 

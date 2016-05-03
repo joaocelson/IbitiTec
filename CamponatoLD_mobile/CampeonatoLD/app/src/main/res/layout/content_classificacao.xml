@@ -8,8 +8,11 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.ibititec.campeonatold.bolao.ClassificacaoActivity"
     tools:showIn="@layout/activity_classificacao">
-
-    <LinearLayout android:id="@+id/cabecalho_classificacao_bola"
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+      <LinearLayout android:id="@+id/cabecalho_classificacao_bola"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -53,10 +56,11 @@
             android:layout_height="160dp"
             android:paddingBottom="40dp" />
 
-        <ProgressBar
-            android:id="@+id/progress_bolao_classificacao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+        <!--<ProgressBar-->
+            <!--android:id="@+id/progress_bolao_classificacao"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center" />-->
     </LinearLayout>
+</LinearLayout>
 </android.support.v4.widget.NestedScrollView>

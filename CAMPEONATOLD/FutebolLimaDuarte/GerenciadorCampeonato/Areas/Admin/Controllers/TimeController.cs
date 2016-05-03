@@ -115,6 +115,14 @@ namespace Campeonato.UI.WEB.Areas.Admin
             appTime.Excluir(Time);
             return RedirectToAction("Index");
         }
+
+        //GETIMAGENS
+        public ActionResult Image(string nomeImagem)
+        {
+            var dir = Server.MapPath("/Content/images/escudo");
+            var path = Path.Combine(dir, nomeImagem);
+            return base.File(path, "image/jpg");
+        }
     }
 
 }

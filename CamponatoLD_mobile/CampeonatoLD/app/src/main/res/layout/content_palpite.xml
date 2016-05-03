@@ -20,10 +20,10 @@
             android:layout_height="160dp"
             android:paddingBottom="40dp" />
 
-        <ProgressBar
-            android:id="@+id/progress_bolao_palpite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+        <!--<ProgressBar-->
+            <!--android:id="@+id/progress_bolao_palpite"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center" />-->
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
