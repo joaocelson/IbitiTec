@@ -89,5 +89,4 @@ public class BolaoPrincipalActivity extends AppCompatActivity {
         txtClassificacao = (TextView) findViewById(R.id.txtClassificacaoBolao);
         txtPalpite = (TextView) findViewById(R.id.txtPalpitesBolao);
     }
-
 }

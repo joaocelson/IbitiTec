@@ -1,5 +1,6 @@
 ﻿using Campeonato.Aplicacao;
 using Campeonato.Dominio;
+using Campeonato.Dominio.util;
 using Campeonato.UI.WEB.Security;
 using GerenciadorCampeonato.Models;
 using Newtonsoft.Json;
@@ -147,7 +148,7 @@ namespace Campeonato.UI.WEB.Areas.Admin
 
             return View(partida);
         }
-             
+
         public ActionResult Tabela(string id)
         {
             var partida = appPartida.ListaTabelaPorCampeonato(id);
@@ -208,12 +209,47 @@ namespace Campeonato.UI.WEB.Areas.Admin
         //JSON - Todos os métodos que retornam JSON
         //============================================
 
+        public String ObterTabelaJsonPD()
+        {
+            return ObterTabelaJson("2");
+        }
+
+        public String ObterTabelaJsonSD()
+        {
+            return ObterTabelaJson("3");
+        }
+
         public String ObterTabelaJson(string id)
         {
             Rodada rodada = new Rodada();
             var partida = rodada.ConverterPartidasParaRodada(appPartida.ListaTabelaPorCampeonato(id));
-
             return JsonConvert.SerializeObject(partida, Formatting.Indented);
+        }
+
+        public String AoVivo(string id)
+        {
+            List<AoVivo> comentariosList = (List<AoVivo>)appPartida.PartidaAoVivo(id);
+            Partida partida = appPartida.ListarPorId(id);
+            AoVivo aoVivo = new AoVivo();
+            aoVivo.Data = "Resultado";
+            aoVivo.Comentario = partida.GolMandante + "_" + partida.GolVisitante;
+            comentariosList.Add(aoVivo);
+
+            return JsonConvert.SerializeObject(comentariosList, Formatting.Indented);
+        }
+
+        public String ComentarJson(string id, string comentario)
+        {
+            try
+            {
+                appPartida.ComentarPartida(id, comentario);
+                return "OK";
+            }
+            catch (Exception ex)
+            {
+                TratamentoLog.GravarLog("PartidaController: Erro no comentário da partida." + ex.Message, TratamentoLog.NivelLog.Erro);
+                return "";
+            }
         }
     }
 }

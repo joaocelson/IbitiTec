@@ -103,6 +103,11 @@
                 fresco:roundedCornerRadius="5dp" />
         </LinearLayout>
     </LinearLayout>
+    <Button
+        android:id="@+id/btnTempoRealPartida1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Acompanhe Tempo Real"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -157,5 +162,11 @@
                 fresco:roundedCornerRadius="5dp" />
         </LinearLayout>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnTempoRealPartida2"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Acompanhe Tempo Real"/>
 
 </LinearLayout>

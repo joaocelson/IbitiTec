@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ibititec.campeonatold" >
+    package="com.ibititec.campeonatold">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -24,10 +24,10 @@
         android:icon="@drawable/ic_launcher_fut"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/Theme.AppCompat.Translucent" >
+            android:theme="@style/Theme.AppCompat.Translucent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,14 +37,13 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <!-- GCM - CLOUD MESSAGE GOOGLE -->
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
@@ -54,14 +53,14 @@
 
         <service
             android:name=".util.GcmMessageHandler"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
         </service>
         <service
             android:name=".util.MyInstanceIDListenerService"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.android.gms.iid.InstanceID" />
             </intent-filter>
@@ -83,7 +82,7 @@
         <receiver
             android:name="com.appodeal.ads.AppodealPackageAddedReceiver"
             android:enabled="true"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_ADDED" />
 
@@ -207,7 +206,7 @@
             android:name="com.yandex.metrica.MetricaService"
             android:enabled="true"
             android:exported="true"
-            android:process=":Metrica" >
+            android:process=":Metrica">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
 
@@ -224,7 +223,7 @@
         <receiver
             android:name="com.yandex.metrica.MetricaEventHandler"
             android:enabled="true"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.android.vending.INSTALL_REFERRER" />
             </intent-filter>
@@ -242,7 +241,7 @@
         <receiver
             android:name="com.inmobi.commons.core.utilities.uid.ImIdShareBroadCastReceiver"
             android:enabled="true"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.inmobi.share.id" />
             </intent-filter>
@@ -263,60 +262,57 @@
             android:name=".PrimeiraDivisaoActivity"
             android:label="@string/title_activity_primeira_divisao"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".PrimeiraDivisaoTabelaActivity"
             android:label="@string/title_activity_primeira_divisao_tabela"
             android:parentActivityName=".PrimeiraDivisaoActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".adapter.AdapterRodada"
             android:label="@string/title_activity_adapter_rodada"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".SobreActivity"
             android:label="@string/title_activity_sobre"
             android:parentActivityName=".PrimeiraDivisaoActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".admin.CadastroUsuarioActivity"
             android:label="@string/title_activity_cadastro_usuario"
             android:parentActivityName=".admin.LoginUsuarioActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".admin.LoginUsuarioActivity"
             android:label="@string/title_activity_login_usuario"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".bolao.BolaoPrincipalActivity"
             android:label="@string/title_activity_bolao_principal"
             android:parentActivityName=".PrimeiraDivisaoActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".bolao.ClassificacaoActivity"
             android:label="@string/title_activity_classificacao"
             android:parentActivityName=".bolao.BolaoPrincipalActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".bolao.PalpiteActivity"
-            android:parentActivityName=".bolao.BolaoPrincipalActivity"
             android:label="@string/title_activity_paplite"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:parentActivityName=".bolao.BolaoPrincipalActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".bolao.PalpitePorJogoActivity"
             android:label="@string/title_activity_palpite_por_jogo"
             android:parentActivityName=".bolao.PalpiteActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".aovivo.PartidaTempoRealActivity"
+            android:label="Partida Tempo Real"
+            android:parentActivityName=".PrimeiraDivisaoTabelaActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+
+
     </application>
 
 </manifest>

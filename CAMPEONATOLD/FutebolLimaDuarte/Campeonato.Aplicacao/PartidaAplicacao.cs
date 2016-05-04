@@ -121,5 +121,14 @@ namespace Campeonato.Aplicacao
             PartidaRepositorioADO partida = new PartidaRepositorioADO();
             return partida.ListarPartidasPorData(data);
         }
+
+       
+
+
+        public List<AoVivo> PartidaAoVivo(string id)
+        {
+            PartidaRepositorioADO partida = new PartidaRepositorioADO();
+            return partida.PartidaAoVivo(id);
+        }
     }
 }

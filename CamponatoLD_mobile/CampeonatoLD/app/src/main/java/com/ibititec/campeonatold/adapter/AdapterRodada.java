@@ -2,31 +2,37 @@ package com.ibititec.campeonatold.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.ibititec.campeonatold.MainActivity;
 import com.ibititec.campeonatold.R;
+import com.ibititec.campeonatold.aovivo.PartidaTempoRealActivity;
+import com.ibititec.campeonatold.modelo.Partida;
 import com.ibititec.campeonatold.modelo.Rodada;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class AdapterRodada extends BaseAdapter {
     private Activity activity;
-    private List<Rodada> rodadaList= null;
+    private List<Rodada> rodadaList = null;
 
-    public  AdapterRodada(Activity activityParam, List<Rodada> rodadaListParam){
+    public AdapterRodada(Activity activityParam, List<Rodada> rodadaListParam) {
         this.rodadaList = rodadaListParam;
         this.activity = activityParam;
     }
 
-    public  AdapterRodada(){}
+    public AdapterRodada() {
+    }
 
     @Override
 
@@ -67,21 +73,21 @@ public class AdapterRodada extends BaseAdapter {
             Data.setText("DATA: " + rodadaObj.getData());
             Campo.setText("CAMPO: " + rodadaObj.getCampo());
             hrJogo1.setText("Hr: " + rodadaObj.getHoraJogo1());
-           // jogo1.setText(rodadaObj.getJogo1());
+            // jogo1.setText(rodadaObj.getJogo1());
             hrJogo2.setText("Hr: " + rodadaObj.getHoraJogo2());
-           // jogo2.setText(rodadaObj.getJogo2());
+            // jogo2.setText(rodadaObj.getJogo2());
 
             //setando nome da imagem a ser exibida
             String[] jogo1Array = splitString(rodadaObj.getJogo1());
             String[] jogo2Array = splitString(rodadaObj.getJogo2());
 
-            if(jogo1Array == null){
+            if (jogo1Array == null) {
                 jogo1Array[0] = rodadaObj.getJogo1().trim();
-                jogo1Array[1] =rodadaObj.getJogo1().trim();
-                jogo1Array[2] =rodadaObj.getJogo1().trim();
+                jogo1Array[1] = rodadaObj.getJogo1().trim();
+                jogo1Array[2] = rodadaObj.getJogo1().trim();
 
             }
-            if(jogo2Array == null){
+            if (jogo2Array == null) {
                 jogo2Array[0] = rodadaObj.getJogo2().trim();
                 jogo2Array[1] = rodadaObj.getJogo2().trim();
                 jogo2Array[2] = rodadaObj.getJogo2().trim();
@@ -90,27 +96,43 @@ public class AdapterRodada extends BaseAdapter {
             vsJogo1.setText(jogo1Array[1]);
             vsJogo2.setText(jogo2Array[1]);
 
-            Log.i(MainActivity.TAG, "URL position: " + position + " - "+ MainActivity.PATH_FOTOS + jogo1Array[0].trim()+".jpg");
-            Log.i(MainActivity.TAG, "jogo1Array[0]: " +jogo1Array[0]);
-            Log.i(MainActivity.TAG, "jogo1Array[1]: " +jogo1Array[1]);
-            Log.i(MainActivity.TAG, "jogo2Array[0]: " +jogo2Array[0]);
-            Log.i(MainActivity.TAG, "jogo2Array[1]: " +jogo2Array[1]);
+            Log.i(MainActivity.TAG, "URL position: " + position + " - " + MainActivity.PATH_FOTOS + jogo1Array[0].trim() + ".jpg");
+            Log.i(MainActivity.TAG, "jogo1Array[0]: " + jogo1Array[0]);
+            Log.i(MainActivity.TAG, "jogo1Array[1]: " + jogo1Array[1]);
+            Log.i(MainActivity.TAG, "jogo2Array[0]: " + jogo2Array[0]);
+            Log.i(MainActivity.TAG, "jogo2Array[1]: " + jogo2Array[1]);
 
-            Uri imageUri = Uri.parse(MainActivity.PATH_FOTOS + jogo1Array[0].trim()+".jpg");
+            Uri imageUri = Uri.parse(MainActivity.PATH_FOTOS + jogo1Array[0].trim() + ".jpg");
             SimpleDraweeView draweeView = (SimpleDraweeView) layout.findViewById(R.id.imageView2);
             draweeView.setImageURI(imageUri);
 
-            Uri imageUri2 = Uri.parse(MainActivity.PATH_FOTOS + jogo1Array[2].trim()+".jpg");
+            Uri imageUri2 = Uri.parse(MainActivity.PATH_FOTOS + jogo1Array[2].trim() + ".jpg");
             SimpleDraweeView draweeView2 = (SimpleDraweeView) layout.findViewById(R.id.imageView3);
             draweeView2.setImageURI(imageUri2);
 
-            Uri imageUri3 = Uri.parse(MainActivity.PATH_FOTOS + jogo2Array[0].trim()+".jpg");
+            Uri imageUri3 = Uri.parse(MainActivity.PATH_FOTOS + jogo2Array[0].trim() + ".jpg");
             SimpleDraweeView draweeView3 = (SimpleDraweeView) layout.findViewById(R.id.imageView4);
             draweeView3.setImageURI(imageUri3);
 
-            Uri imageUri4 = Uri.parse(MainActivity.PATH_FOTOS + jogo2Array[2].trim()+".jpg");
+            Uri imageUri4 = Uri.parse(MainActivity.PATH_FOTOS + jogo2Array[2].trim() + ".jpg");
             SimpleDraweeView draweeView4 = (SimpleDraweeView) layout.findViewById(R.id.imageView5);
             draweeView4.setImageURI(imageUri4);
+
+            Button btnTempoReal = (Button) layout.findViewById(R.id.btnTempoRealPartida1);
+            btnTempoReal.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startarActivityPalpite(v, rodadaObj.getPartida1());
+                }
+            });
+
+            Button btnTempoReal2 = (Button) layout.findViewById(R.id.btnTempoRealPartida2);
+            btnTempoReal2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startarActivityPalpite(v, rodadaObj.getPartida2());
+                }
+            });
 
             //Appodeal.show(activity, Appodeal.BANNER_BOTTOM);
             return layout;
@@ -122,10 +144,16 @@ public class AdapterRodada extends BaseAdapter {
         return convertView;
     }
 
-    public String[] splitString(String param){
-        try{
+    private void startarActivityPalpite(View v, Partida partida) {
+        Intent intent = new Intent(activity.getApplication(), PartidaTempoRealActivity.class);
+        intent.putExtra("partida_tempo_real", (Serializable) partida);
+        activity.startActivity(intent);
+    }
+
+    public String[] splitString(String param) {
+        try {
             return param.split("-");
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.getMessage();
             return null;
         }

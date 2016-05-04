@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Campeonato.RepositorioADO
 {
@@ -605,6 +606,8 @@ namespace Campeonato.RepositorioADO
                 return null;
             }
         }
+             
+
 
         public void ComentarPartida(string id, string comentario)
         {
@@ -685,5 +688,37 @@ namespace Campeonato.RepositorioADO
             }
         }
 
+
+        public List<AoVivo> PartidaAoVivo(string id)
+        {
+            try
+            {  
+                using (contexto = new Contexto())
+                {
+                    var strQuery = string.Format("SELECT p.* "+
+                                    "FROM t_jogo_online p " +
+                                    "WHERE p.id_partida = " + id + 
+                                    "ORDER BY p.data_hora_comentario desc");
+                    var retornoDataReader = contexto.ExecutaComandoComRetorno(strQuery);
+                    List<AoVivo> listaComentarios = new List<AoVivo>();
+                    while (retornoDataReader.Read())
+                    {
+                        AoVivo aoVivo = new AoVivo();
+                        DateTime data = DateTime.Parse(retornoDataReader["data_hora_comentario"].ToString());
+                        aoVivo.Data = data.ToString("dd/MM/yyyy HH:mm:ss");
+                        aoVivo.Comentario = retornoDataReader["comentario"].ToString().Trim();
+                        listaComentarios.Add(aoVivo);
+                    }
+                    return listaComentarios;
+                }
+            }
+            catch (Exception ex)
+            {
+                TratamentoLog.GravarLog("PartidaRepositorioADO::PartidaAoVivo:. Erro ao PartidaAoVivo: " + ex.Message, TratamentoLog.NivelLog.Erro);
+                return null;
+            }
+        }
     }
+
+    
 }

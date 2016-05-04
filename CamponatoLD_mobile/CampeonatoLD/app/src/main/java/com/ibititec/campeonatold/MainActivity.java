@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity
     public static final String PDARTILHARIA = "pdartilharia", PDTABELA = "pdtabela", PDCLASSIFICACAO = "pdclassificacao",
             SDARTILHARIA = "sdartilharia", SDTABELA = "dstabela", SDCLASSIFICACAO = "sdclassificacao",
             PDCLASSIFICACAOBOLAO = "pdclassificacaobolao", SDCLASSIFICACAOBOLAO = "sdclassificacaobolao",
-            PDJOGOSBOLAO= "pdjogosbolao", SDJOGOSBOLAO= "sdjogosbolao", USUARIO = "usuario";
+            PDJOGOSBOLAO = "pdjogosbolao", SDJOGOSBOLAO = "sdjogosbolao", USUARIO = "usuario";
 
     public static final String TAG = "CAMPEONATOLD";
     public static final String PATH_FOTOS = "http://52.37.37.207:94/Admin/Time/Image?nomeimagem=";
@@ -240,6 +240,9 @@ public class MainActivity extends AppCompatActivity
                     String url = params[0];
                     json = HttpHelper.downloadFromURL(url);
                     Log.i(TAG, json);
+                    if (json == null) {
+                        Log.w(TAG, "JSON veio nulo na url : " + url);
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                     Log.e(TAG, String.format(getString(R.string.msg_erro_json), e.getMessage()));
@@ -254,7 +257,7 @@ public class MainActivity extends AppCompatActivity
                 progressDialog.dismiss();
 
                 if (json == null) {
-                    Log.w(TAG, "JSON veio nulo!");
+                    //Log.w(TAG, "JSON veio nulo!");
                     return;
                 }
 
