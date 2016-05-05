@@ -50,10 +50,22 @@ public class AdapterClassificacao extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) activity.getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View layout = inflater.inflate(R.layout.adapter_classificacao, null);
 
+
+
             TextView posicao = (TextView) layout.findViewById(R.id.txtPosicao);
             TextView pontos = (TextView) layout.findViewById(R.id.txtPontos);
             TextView time = (TextView) layout.findViewById(R.id.txtTime);
-
+//            if(classificacao.getIdCampeonato().equals("3") && position == 0){
+//                posicao.setText("");
+//                pontos.setText("");
+//                time.setText("GRUPO A");
+//            }
+//
+//            if(classificacao.getIdCampeonato().equals("4") && position == 7){
+//                posicao.setText("");
+//                pontos.setText("");
+//                time.setText("GRUPO A");
+//            }
             posicao.setText(classificacao.getPosicao());
             pontos.setText(classificacao.getPontos());
             time.setText(classificacao.getTime());

@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/Transparente"
-            android:src="@drawable/classificacao" />
+            android:src="@drawable/pdpalpite" />
 
         <TextView
             android:id="@+id/txtPalpitesBolao"
@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/Transparente"
-            android:src="@drawable/classificacao" />
+            android:src="@drawable/pdclassificacao" />
 
         <TextView
             android:id="@+id/txtClassificacaoBolao"

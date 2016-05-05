@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.appodeal.ads.Appodeal;
 import com.ibititec.campeonatold.helpers.HttpHelper;
 import com.ibititec.campeonatold.helpers.JsonHelper;
+import com.ibititec.campeonatold.noticias.FeedNoticiasActivity;
 import com.ibititec.campeonatold.util.AnalyticsApplication;
 
 import java.io.IOException;
@@ -31,8 +32,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     //DECLARACAO DOS OBJETOS DE TELA
-    private ImageButton btnPrimeiraDivisao, btnSegundaDivisao;
-    private TextView txtPrimeiraDivisao, txtSegundaDivisao;
+    private ImageButton btnPrimeiraDivisao, btnSegundaDivisao, btnNoticias;
+    private TextView txtPrimeiraDivisao, txtSegundaDivisao, txtNoticias;
 
 
     // private ProgressDialog progressDialog;
@@ -68,9 +69,12 @@ public class MainActivity extends AppCompatActivity
         //IDENTIFICACAO DOS OBJETOS DE LAYOUT
         btnPrimeiraDivisao = (ImageButton) findViewById(R.id.btnPrimeiraDivisao);
         btnSegundaDivisao = (ImageButton) findViewById(R.id.btnSegundaDivisao);
+        btnNoticias= (ImageButton) findViewById(R.id.btnNoticias);
 
         txtPrimeiraDivisao = (TextView) findViewById(R.id.txtPrimeiraDivisao);
         txtSegundaDivisao = (TextView) findViewById(R.id.txtSegundaDivisao);
+        txtNoticias = (TextView) findViewById(R.id.txtNoticias);
+
 
     }
 
@@ -99,16 +103,16 @@ public class MainActivity extends AppCompatActivity
                     exibirMensagem();
                     Log.i(TAG, "Sem conexão com a internet.");
                 } else {
-                    donwnloadFromUrl(PDTABELA, getString(R.string.url_pdtabela));
-                    donwnloadFromUrl(PDARTILHARIA, getString(R.string.url_pdartilharia));
-                    donwnloadFromUrl(PDCLASSIFICACAO, getString(R.string.url_pdclassificacao));
-                    donwnloadFromUrl(SDTABELA, getString(R.string.url_sdtabela));
-                    donwnloadFromUrl(SDARTILHARIA, getString(R.string.url_sdartilharia));
-                    donwnloadFromUrl(SDCLASSIFICACAO, getString(R.string.url_sdclassificacao));
+                    donwnloadFromUrl(PDTABELA, getString(R.string.url_pdtabela),"");
+                    donwnloadFromUrl(PDARTILHARIA, getString(R.string.url_pdartilharia),"");
+                    donwnloadFromUrl(PDCLASSIFICACAO, getString(R.string.url_pdclassificacao),"{\"id\": \"2\"}");
+                    donwnloadFromUrl(SDTABELA, getString(R.string.url_sdtabela),"");
+                    donwnloadFromUrl(SDARTILHARIA, getString(R.string.url_sdartilharia),"");
+                    donwnloadFromUrl(SDCLASSIFICACAO, getString(R.string.url_sdclassificacao), "{\"id\": \"3\"}");
 
-                    donwnloadFromUrl(PDCLASSIFICACAOBOLAO, getString(R.string.url_pdclassificacaobolao));
+                    donwnloadFromUrl(PDCLASSIFICACAOBOLAO, getString(R.string.url_pdclassificacaobolao),"");
 
-                    donwnloadFromUrl(SDCLASSIFICACAOBOLAO, getString(R.string.url_sdclassificacaobolao));
+                    donwnloadFromUrl(SDCLASSIFICACAOBOLAO, getString(R.string.url_sdclassificacaobolao),"");
                 }
             }
         } catch (Exception ex) {
@@ -190,6 +194,13 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        btnNoticias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startarActivityNoticia();
+            }
+        });
+
         txtPrimeiraDivisao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -203,11 +214,23 @@ public class MainActivity extends AppCompatActivity
                 startarActivity("segunda");
             }
         });
+
+        txtNoticias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startarActivityNoticia();
+            }
+        });
     }
 
     private void startarActivity(String divisao) {
         Intent intent = new Intent(this, PrimeiraDivisaoActivity.class);
         intent.putExtra("divisao", divisao);
+        startActivity(intent);
+    }
+
+    private void startarActivityNoticia() {
+        Intent intent = new Intent(this, FeedNoticiasActivity.class);
         startActivity(intent);
     }
 
@@ -222,7 +245,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void donwnloadFromUrl(final String nomeJsonParam, String urlJson) {
+    private void donwnloadFromUrl(final String nomeJsonParam, String urlJson, final String param) {
         (new AsyncTask<String, Void, String>() {
             ProgressDialog progressDialog;
 
@@ -238,7 +261,11 @@ public class MainActivity extends AppCompatActivity
 
                 try {
                     String url = params[0];
-                    json = HttpHelper.downloadFromURL(url);
+                    if(param.equals("")) {
+                        json = HttpHelper.downloadFromURL(url);
+                    }else{
+                        json = HttpHelper.POSTJson(url, param);
+                    }
                     Log.i(TAG, json);
                     if (json == null) {
                         Log.w(TAG, "JSON veio nulo na url : " + url);

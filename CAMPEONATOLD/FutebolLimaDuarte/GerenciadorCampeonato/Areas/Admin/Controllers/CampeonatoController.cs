@@ -187,7 +187,28 @@ namespace Campeonato.UI.WEB.Areas.Admin
 
         public String ObterClassificacaoJson(string id)
         {
-            var listaClassificacao = appClassificacao.ListarClassicacaoPorCampeonato(id);
+            List<Classificacao> listaClassificacao = (List<Classificacao>)appClassificacao.ListarClassicacaoPorCampeonato(id);
+           
+            if (id.Equals("3"))
+            {
+                Classificacao classificacaoA = new Classificacao();
+                classificacaoA.Posicao = "";
+                classificacaoA.NomeTime = "GRUPO A";
+                classificacaoA.Pontos = "";
+                listaClassificacao.Insert(0, classificacaoA);
+
+                List<Classificacao> listaClassificacaoB = (List<Classificacao>) appClassificacao.ListarClassicacaoPorCampeonato("4");
+                Classificacao classificacao = new Classificacao();
+                classificacao.Posicao = "";
+                classificacao.NomeTime = "GRUPO B";
+                classificacao.Pontos = "";
+                listaClassificacao.Add(classificacao);
+                 foreach (Classificacao b in listaClassificacaoB)
+                 {
+                     listaClassificacao.Add(b);
+                 }
+            
+            }
             return JsonConvert.SerializeObject(listaClassificacao, Formatting.Indented);
         }
 
@@ -195,6 +216,12 @@ namespace Campeonato.UI.WEB.Areas.Admin
         {
             var listaArtilheiros = appCampeonato.ArtilhariaPorCampeonato(id);
             return JsonConvert.SerializeObject(listaArtilheiros, Formatting.Indented);
+        }
+
+        public String Noticias()
+        {
+            var listaNoticias = appCampeonato.Noticias();
+            return JsonConvert.SerializeObject(listaNoticias, Formatting.Indented);
         }
     }
 }

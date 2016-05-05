@@ -56,5 +56,11 @@ namespace Campeonato.Aplicacao
             CampeonatoRepositorioADO campADO = new CampeonatoRepositorioADO();
             return campADO.ArtilhariaPorCampeonato(id);
         }
+
+        public List<Noticia> Noticias()
+        {
+            CampeonatoRepositorioADO campADO = new CampeonatoRepositorioADO();
+            return campADO.Noticias();
+        }
     }
 }

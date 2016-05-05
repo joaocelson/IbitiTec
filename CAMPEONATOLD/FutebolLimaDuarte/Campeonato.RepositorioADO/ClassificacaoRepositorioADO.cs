@@ -45,6 +45,8 @@ namespace Campeonato.RepositorioADO
                         GolPro = reader["gol_pro"].ToString(),
                         GolContra = reader["gol_contra"].ToString(),
                         SaldoGol = reader["saldo_gols"].ToString(),
+                        IdCampeonato = reader["id_campeonato"].ToString(),
+
                     };
                     classificacao.Add(temObjeto);
                 }
@@ -136,9 +138,10 @@ namespace Campeonato.RepositorioADO
 
                 using (contexto = new Contexto())
                 {
-                    var strQuery = "SELECT POSICAO = Row_Number() Over(Order by c.pontos Desc,  c.vitoria,( c.gol_pro - c.gol_contra) desc), c.*,c.gol_pro - c.gol_contra as saldo_gols, tm.nome tm_nome " +
+                    var strQuery = "SELECT POSICAO = Row_Number() Over(Order by c.pontos Desc,  c.vitoria,( c.gol_pro - c.gol_contra) desc), c.*,c.gol_pro - c.gol_contra as saldo_gols, tm.nome tm_nome, c.id_campeonato id_campeonato " +
                                    "FROM classificacao c INNER JOIN " +
-                                   "Times tm on tm.id = c.id_time";
+                                   "Times tm on tm.id = c.id_time INNER JOIN " +
+                                   "Campeonato ca on ca.id = c.id_campeonato ";
                     strQuery += string.Format(" WHERE c.id_campeonato  = '{0}' ", id);
                     var retornoDataReader = contexto.ExecutaComandoComRetorno(strQuery);
                     return TransformaReaderEmListaDeObjeto(retornoDataReader); //TransformaReaderEmListaDeObjeto(retornoDataReader);

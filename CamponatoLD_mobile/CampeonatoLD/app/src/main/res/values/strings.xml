@@ -7,10 +7,10 @@
     <string name="title_activity_primeira_divisao">PrimeiraDivisaoActivity</string>
     <string name="title_activity_primeira_divisao_tabela">PrimeiraDivisaoTabelaActivity</string>
     <string name="url_pdtabela">http://52.37.37.207:94/Admin/Partida/ObterTabelaJsonPD</string>
-    <string name="url_pdclassificacao">http://52.37.37.207:88/Campeonato/getPDClassificacao</string>
+    <string name="url_pdclassificacao">http://52.37.37.207:94/Campeonato/ObterClassificacaoJson</string>
     <string name="url_pdartilharia">http://52.37.37.207:88/Campeonato/getPDArtilharia</string>
     <string name="url_sdtabela">http://52.37.37.207:94/Admin/Partida/ObterTabelaJsonSD</string>
-    <string name="url_sdclassificacao">http://52.37.37.207:88/Campeonato/getSDClassificacao</string>
+    <string name="url_sdclassificacao">http://52.37.37.207:94/Campeonato/ObterClassificacaoJson</string>
     <string name="url_sdartilharia">http://52.37.37.207:88/Campeonato/getSDArtilharia</string>
     <string name="url_imagens">http://52.37.37.207:88/Campeonato/Image</string>
     <string name="title_activity_adapter_rodada">AdapterRodada</string>
@@ -33,6 +33,6 @@
     <string name="url_sd_jogos_bolao">http://52.37.37.207:94/Admin/Bolao/getSDJogosBolao</string>
     <string name="url_salvar_palpite_bolao">http://52.37.37.207:94/Admin/Bolao/SalvarJson</string>
     <string name="url_partida_ao_vivo">http://52.37.37.207:94/Admin/Partida/AoVivo</string>
-
-
+    <string name="title_activity_fees_noticias">FeesNoticiasActivity</string>
+    <string name="url_feed_noticias">http://52.37.37.207:94/Admin/Campeonato/Noticias</string>
 </resources>

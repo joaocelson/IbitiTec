@@ -177,7 +177,6 @@ public class ClassificacaoActivity extends AppCompatActivity {
                         .putString(nomeJsonParam + ".json", json)
                         .apply();
                 atualizarClassificacaoBolao();
-
             }
         }).execute(urlJson);
     }

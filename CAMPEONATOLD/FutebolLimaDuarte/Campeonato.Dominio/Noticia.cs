@@ -8,6 +8,11 @@ namespace Campeonato.Dominio
 {
     public class Noticia
     {
+        public string Titulo { get; set; }
+        public string Corpo { get; set; }
+        public String DataNoticia { get; set; }
+        public Time Time { get; set; }
+
         public int Id { get; set; }
         public string TituloChamada { get; set; }
         public string TextoChamada { get; set; }
@@ -15,7 +20,7 @@ namespace Campeonato.Dominio
         public FotosVideos ListaFotosVideos { get; set; }
         public string TextoNoticia { get; set; }
         public string FonteNoticia { get; set; }
-        public DateTime DataNoticia { get; set; }
-        public string Titulo { get; set; }
+        
+
     }
 }

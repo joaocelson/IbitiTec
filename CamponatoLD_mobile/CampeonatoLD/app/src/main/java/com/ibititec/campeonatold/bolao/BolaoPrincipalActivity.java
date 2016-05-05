@@ -41,6 +41,8 @@ public class BolaoPrincipalActivity extends AppCompatActivity {
             this.setTitle("Bolão 1ª Divisão");
         } else {
             this.setTitle("Bolão 2ª Divisão");
+            btnPalpite.setImageResource(R.drawable.sdpalpite);
+            btnClassificacao.setImageResource(R.drawable.sdclassificacao);
         }
 
         btnPalpite.setOnClickListener(new View.OnClickListener() {

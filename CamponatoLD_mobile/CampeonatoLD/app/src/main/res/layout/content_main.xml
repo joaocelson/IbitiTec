@@ -32,7 +32,7 @@
                 android:layout_alignLeft="@+id/btnSegundaDivisao"
                 android:layout_alignStart="@+id/btnSegundaDivisao"
                 android:background="@color/Transparente"
-                android:src="@drawable/primeirad" />
+                android:src="@drawable/pdivisao" />
 
             <TextView
                 android:id="@+id/txtPrimeiraDivisao"
@@ -46,10 +46,10 @@
         </LinearLayout>
 
         <LinearLayout
-            android:paddingTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="20dp">
 
 
             <ImageButton
@@ -59,15 +59,42 @@
                 android:layout_above="@+id/textView6"
                 android:layout_centerHorizontal="true"
                 android:background="@color/Transparente"
-                android:src="@drawable/segundad" />
+                android:src="@drawable/sddivisao" />
 
             <TextView
                 android:id="@+id/txtSegundaDivisao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:text="2ª Divisão"
                 android:textAlignment="center"
+                android:textSize="24sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="20dp">
+
+
+            <ImageButton
+                android:id="@+id/btnNoticias"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@color/Transparente"
+                android:src="@drawable/noticias" />
+
+            <TextView
+                android:id="@+id/txtNoticias"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:text="Notícias"
+                android:textAlignment="center"
                 android:textSize="24sp" />
 
             <com.appodeal.ads.BannerView
@@ -75,6 +102,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone" />
+
         </LinearLayout>
     </LinearLayout>
 

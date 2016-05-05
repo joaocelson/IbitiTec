@@ -69,6 +69,12 @@ public class PrimeiraDivisaoActivity extends AppCompatActivity {
             this.setTitle("Primeira Divisão");
         } else {
             this.setTitle("Segunda Divisão");
+
+            btnBolao.setImageResource(R.drawable.sdbolao);
+            btnAjuda.setImageResource(R.drawable.sdajuda);
+            btnTabela.setImageResource(R.drawable.sdtabela);
+            btnArtilharia.setImageResource(R.drawable.sdartilharia);
+            btnClassificacao.setImageResource(R.drawable.sdclassificacao);
         }
 
         btnArtilharia.setOnClickListener(new View.OnClickListener() {

@@ -82,11 +82,13 @@ namespace Campeonato.RepositorioADO
         {
             var Campeonato = new List<Campeonatos>();
             while (reader.Read())
-            {int idBolao = 0;
-                if(!reader["id_bolao"].ToString().Equals("")){
-                     idBolao = Convert.ToInt16(reader["id_bolao"].ToString());
+            {
+                int idBolao = 0;
+                if (!reader["id_bolao"].ToString().Equals(""))
+                {
+                    idBolao = Convert.ToInt16(reader["id_bolao"].ToString());
                 }
-                    
+
 
                 var temObjeto = new Campeonatos()
                 {
@@ -140,6 +142,39 @@ namespace Campeonato.RepositorioADO
                 var retornoDataReader = contexto.ExecutaComandoComRetorno(strQuery);
                 return TransformaReaderEmListaDeObjetoArtilharia(retornoDataReader);
             }
+
+        }
+
+        public List<Noticia> Noticias()
+        {
+            using (contexto = new Contexto())
+            {
+                var strQuery = @" SELECT n.*, t.* FROM noticia n
+                                    INNER JOIN times tm on (tm.id_time = n.id_time)
+                                    order by n.data_noticia desc";
+
+                var retornoDataReader = contexto.ExecutaComandoComRetorno(strQuery);
+                return TransformaReaderEmListaDeObjetoNoticia(retornoDataReader);
+            }
+
+        }
+
+        private List<Noticia> TransformaReaderEmListaDeObjetoNoticia(SqlDataReader reader)
+        {
+            List<Noticia> noticias = new List<Noticia>();
+            while (reader.Read())
+            {
+                Time time = new Time();
+                Noticia noticia = new Noticia();
+                noticia.Titulo = reader["titulo"].ToString();
+                noticia.Corpo = reader["noticia"].ToString();
+                noticia.DataNoticia = DateTime.Parse(reader["data_noticia"].ToString()).ToString("dd/MM/yyyy HH:mm:ss");
+                time.EscudoPequeno = reader["escudo"].ToString();
+                time.Nome = reader["Numero_Gols"].ToString();
+                noticias.Add(noticia);
+            }
+            reader.Close();
+            return noticias;
 
         }
 

@@ -90,7 +90,7 @@ namespace Campeonato.RepositorioADO
                     Id = Convert.ToInt32(reader["id"].ToString()),
                     FonteNoticia= reader["Nome"].ToString(),
                     
-                    DataNoticia = DateTime.Parse(reader["data_inicio"].ToString())
+                    DataNoticia = DateTime.Parse(reader["data_inicio"].ToString()).ToString("dd/MM/yyyy HH:mm:ss")
                 };
                 noticia.Add(temObjeto);
             }

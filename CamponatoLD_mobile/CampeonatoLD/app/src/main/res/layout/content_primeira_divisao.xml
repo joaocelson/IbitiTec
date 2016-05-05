@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/Transparente"
-                android:src="@drawable/tabela" />
+                android:src="@drawable/pdtabela" />
 
             <TextView
                 android:id="@+id/txtTabela"
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/Transparente"
-               android:src="@drawable/artilharia" />
+               android:src="@drawable/pdartilharia" />
 
             <TextView
                 android:id="@+id/txtArtilharia"
@@ -74,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/Transparente"
-                android:src="@drawable/classificacao" />
+                android:src="@drawable/pdbolao" />
 
             <TextView
                 android:id="@+id/txtBolao"
@@ -99,7 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/Transparente"
-                android:src="@drawable/classificacao" />
+                android:src="@drawable/pdclassificacao" />
 
             <TextView
                 android:id="@+id/txtClassificacao"
@@ -123,7 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/Transparente"
-                android:src="@drawable/help" />
+                android:src="@drawable/pdajuda" />
 
             <TextView
                 android:id="@+id/txtHelp"
