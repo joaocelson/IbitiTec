@@ -150,8 +150,7 @@ namespace Campeonato.RepositorioADO
             using (contexto = new Contexto())
             {
                 var strQuery = @" SELECT n.*, t.* FROM noticia n
-                                    INNER JOIN times tm on (tm.id_time = n.id_time)
-                                    order by n.data_noticia desc";
+                                    INNER JOIN times tm on (tm.id_time = n.id_time)";
 
                 var retornoDataReader = contexto.ExecutaComandoComRetorno(strQuery);
                 return TransformaReaderEmListaDeObjetoNoticia(retornoDataReader);

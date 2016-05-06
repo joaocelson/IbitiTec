@@ -61,53 +61,65 @@ public class PrimeiraDivisaoTabelaActivity extends AppCompatActivity {
     }
 
     private void iniciarAppodeal() {
-        try{
+        try {
             Appodeal.show(this, Appodeal.BANNER_BOTTOM);
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro: iniciarAppodeal: " + ex.getMessage());
         }
     }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent();
-        intent.putExtra("divisao", divisao);
+        try {
+            Intent intent = new Intent();
+            intent.putExtra("divisao", divisao);
 
-        // add data to Intent
-        setResult(PrimeiraDivisaoTabelaActivity.RESULT_OK, intent);
-        Appodeal.show(this, Appodeal.NATIVE);
-        super.onBackPressed();
+            // add data to Intent
+            setResult(PrimeiraDivisaoTabelaActivity.RESULT_OK, intent);
+            Appodeal.show(this, Appodeal.NATIVE);
+            super.onBackPressed();
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro: onBackPressedPrimeiraDivisaoTabela: " + ex.getMessage());
+        }
     }
 
     private void lerIntent() {
-        Intent intent = getIntent();
-        divisao = intent.getStringExtra("divisao");
-        funcionalidade = intent.getStringExtra("funcionalidade");
+        try {
+            Intent intent = getIntent();
+            divisao = intent.getStringExtra("divisao");
+            funcionalidade = intent.getStringExtra("funcionalidade");
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro: lerIntent PrimeiraDivisaoTabela: " + ex.getMessage());
+        }
     }
 
     private void executarAcoes() {
-        switch (funcionalidade) {
-            case "tabela":
-                if (divisao.equals("primeira")) {
-                    atualizarTabelaPrimeiraDivisao();
-                } else {
-                    atualizarTabelaSegundaDivisao();
-                }
-                break;
-            case "classificacao":
-                if (divisao.equals("primeira")) {
-                    atualizarClassificacaoPrimeiraDivisao();
-                } else {
-                    atualizarClassificacaoSegundaDivisao();
-                }
-                break;
-            case "artilharia":
-                if (divisao.equals("primeira")) {
-                    atualizarArtilhariaPrimeiraDivisao();
-                } else {
-                    atualizarArtilhariaSegundaDivisao();
-                }
-                break;
+        try {
+            switch (funcionalidade) {
+                case "tabela":
+                    if (divisao.equals("primeira")) {
+                        atualizarTabelaPrimeiraDivisao();
+                    } else {
+                        atualizarTabelaSegundaDivisao();
+                    }
+                    break;
+                case "classificacao":
+                    if (divisao.equals("primeira")) {
+                        atualizarClassificacaoPrimeiraDivisao();
+                    } else {
+                        atualizarClassificacaoSegundaDivisao();
+                    }
+                    break;
+                case "artilharia":
+                    if (divisao.equals("primeira")) {
+                        atualizarArtilhariaPrimeiraDivisao();
+                    } else {
+                        atualizarArtilhariaSegundaDivisao();
+                    }
+                    break;
+            }
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro: executarAcoes PrimeiraDivisaoTabela: " + ex.getMessage());
         }
     }
 

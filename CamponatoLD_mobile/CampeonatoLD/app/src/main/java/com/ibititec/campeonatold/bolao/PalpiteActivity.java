@@ -55,10 +55,14 @@ public class PalpiteActivity extends AppCompatActivity {
 
     @Override
     public void onResume() {
-        super.onResume();
-        lerIntent();
-        AnalyticsApplication.enviarGoogleAnalitcs(this);
-        iniciarAppodeal();
+        try {
+            super.onResume();
+            lerIntent();
+            AnalyticsApplication.enviarGoogleAnalitcs(this);
+            iniciarAppodeal();
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro OnResume Palpite: " + ex.getMessage());
+        }
     }
 
     private void iniciarAppodeal() {
@@ -71,30 +75,38 @@ public class PalpiteActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent();
-        intent.putExtra("divisao", divisao);
+        try {
+            Intent intent = new Intent();
+            intent.putExtra("divisao", divisao);
 
-        // add data to Intent
-        setResult(BolaoPrincipalActivity.RESULT_OK, intent);
-        Appodeal.show(this, Appodeal.NATIVE);
-        super.onBackPressed();
+            // add data to Intent
+            setResult(BolaoPrincipalActivity.RESULT_OK, intent);
+            Appodeal.show(this, Appodeal.NATIVE);
+            super.onBackPressed();
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro onBackPressed Palpite: " + ex.getMessage());
+        }
     }
 
     private void lerIntent() {
-        if (HttpHelper.existeConexao(this)) {
-            Intent intent = getIntent();
-            divisao = intent.getStringExtra("divisao");
-            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(PalpiteActivity.this);
+        try {
+            if (HttpHelper.existeConexao(this)) {
+                Intent intent = getIntent();
+                divisao = intent.getStringExtra("divisao");
+                SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(PalpiteActivity.this);
 
-            Usuario usuarioLogado = JsonHelper.getObject( sharedPreferences.getString(MainActivity.USUARIO + ".json", ""), Usuario.class);
+                Usuario usuarioLogado = JsonHelper.getObject(sharedPreferences.getString(MainActivity.USUARIO + ".json", ""), Usuario.class);
 
-            if (divisao.equals("primeira")) {
-                donwnloadFromUrl(MainActivity.PDJOGOSBOLAO, getString(R.string.url_jogos_bolao), "{\"id\":\"1\", \"emailUsuario\":\""+ usuarioLogado.getLoginEmail() + "\",\"senha\":\"" +usuarioLogado.getSenha()+"\"}");
+                if (divisao.equals("primeira")) {
+                    donwnloadFromUrl(MainActivity.PDJOGOSBOLAO, getString(R.string.url_jogos_bolao), "{\"id\":\"1\", \"emailUsuario\":\"" + usuarioLogado.getLoginEmail() + "\",\"senha\":\"" + usuarioLogado.getSenha() + "\"}");
+                } else {
+                    donwnloadFromUrl(MainActivity.SDJOGOSBOLAO, getString(R.string.url_jogos_bolao), "{\"id\":\"2\", \"emailUsuario\":\"" + usuarioLogado.getLoginEmail() + "\",\"senha\":\"" + usuarioLogado.getSenha() + "\"}");
+                }
             } else {
-                donwnloadFromUrl(MainActivity.SDJOGOSBOLAO, getString(R.string.url_jogos_bolao),"{\"id\":\"2\", \"emailUsuario\":\""+ usuarioLogado.getLoginEmail() + "\",\"senha\":\"" +usuarioLogado.getSenha()+"\"}");
+                exibirMensagem("Não identificado conexão com a internet, verifique se sua conexão está ativa.", "Atenção");
             }
-        } else {
-            exibirMensagem("Não identificado conexão com a internet, verifique se sua conexão está ativa.", "Atenção");
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro lerIntent Palpite: " + ex.getMessage());
         }
     }
 

@@ -32,78 +32,90 @@ public class LoginUsuarioActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_usuario);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        findViewByIdComponente();
-        executarAcoes();
-        validarUsuarioCadastrado();
+        try {
+            setContentView(R.layout.activity_login_usuario);
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            findViewByIdComponente();
+            executarAcoes();
+            validarUsuarioCadastrado();
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro: onCreate LoginUsuario: " + ex.getMessage());
+        }
     }
 
     private void validarUsuarioCadastrado() {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(LoginUsuarioActivity.this);
-        final String usuarioJson = sharedPreferences.getString("usuario.json", "");
+        try {
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(LoginUsuarioActivity.this);
+            final String usuarioJson = sharedPreferences.getString("usuario.json", "");
 
-        Usuario usuarioLocal = (Usuario) JsonHelper.getObject(usuarioJson, Usuario.class);
+            Usuario usuarioLocal = (Usuario) JsonHelper.getObject(usuarioJson, Usuario.class);
 
-        if (usuarioLocal != null) {
-            startarActivity();
+            if (usuarioLocal != null) {
+                startarActivity();
+            }
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro: validarUsuarioCadastrado LoginUsuario: " + ex.getMessage());
         }
     }
 
 
     private void executarAcoes() {
-        btnCadastrarUsuario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivityCadastro();
-                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(txtEmail.getWindowToken(), 0);
-                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-            }
-        });
+        try {
+            btnCadastrarUsuario.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivityCadastro();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(txtEmail.getWindowToken(), 0);
+                    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                }
+            });
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            btnLogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(txtEmail.getWindowToken(), 0);
-                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                    InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(txtEmail.getWindowToken(), 0);
+                    getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-                Usuario usuario = new Usuario();
-                usuario.setLoginEmail(txtEmail.getText().toString());
-                usuario.setSenha(txtSenha.getText().toString());
-                fazerLogin(usuario);
-            }
-        });
+                    Usuario usuario = new Usuario();
+                    usuario.setLoginEmail(txtEmail.getText().toString());
+                    usuario.setSenha(txtSenha.getText().toString());
+                    fazerLogin(usuario);
+                }
+            });
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro: executarAcoes LoginUsuario: " + ex.getMessage());
+        }
     }
 
     private void startActivityCadastro() {
-        Intent intent = new Intent(this, CadastroUsuarioActivity.class);
-        startActivity(intent);
+        try {
+            Intent intent = new Intent(this, CadastroUsuarioActivity.class);
+            startActivity(intent);
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro: startarActivityCadastro LoginUsuario: " + ex.getMessage());
+        }
     }
 
     private void findViewByIdComponente() {
-        btnLogin = (Button) findViewById(R.id.btnLogin_login);
-        btnCadastrarUsuario = (Button) findViewById(R.id.btnCadastrar_login);
-        txtEmail = (EditText) findViewById(R.id.txtEmailUsuario_login);
-        txtSenha = (EditText) findViewById(R.id.txtSenhaUsuario_login);
+        try {
+            btnLogin = (Button) findViewById(R.id.btnLogin_login);
+            btnCadastrarUsuario = (Button) findViewById(R.id.btnCadastrar_login);
+            txtEmail = (EditText) findViewById(R.id.txtEmailUsuario_login);
+            txtSenha = (EditText) findViewById(R.id.txtSenhaUsuario_login);
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro: findViewByIdComponente LoginUsuario: " + ex.getMessage());
+        }
     }
 
     private void fazerLogin(Usuario usuario) {
 
         try {
-            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(LoginUsuarioActivity.this);
-            final String usuarioJson = JsonHelper.objectToJson(usuario);
-            Log.i(MainActivity.TAG, "Json lido do banco local ao fazer o login: " + usuarioJson);
-            Usuario usuarioLocal = (Usuario) JsonHelper.getObject(sharedPreferences.getString(MainActivity.USUARIO + ".json", ""), Usuario.class);
-
-            if (usuarioLocal != null && usuario.getSenha() == usuarioLocal.getSenha() && usuario.getLoginEmail() == usuarioLocal.getLoginEmail()) {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-
-            } else {
+            final Usuario usuarioLocal = usuario;
+            if (HttpHelper.existeConexao(this)) {
                 (new AsyncTask<String, Void, String>() {
                     ProgressDialog progressDialog;
 
@@ -120,7 +132,7 @@ public class LoginUsuarioActivity extends AppCompatActivity {
                         try {
                             String url = params[0];
 
-                            json = HttpHelper.POSTJson(url, usuarioJson);
+                            json = HttpHelper.POSTJson(url, JsonHelper.objectToJson(usuarioLocal));
                             Log.i(MainActivity.TAG, "Json retornado ao fazer o login: " + json);
                             if (json != null) {
                                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(LoginUsuarioActivity.this);
@@ -150,13 +162,31 @@ public class LoginUsuarioActivity extends AppCompatActivity {
                     }
                 }).execute(getString(R.string.url_login_usuario));
             }
+
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(LoginUsuarioActivity.this);
+            final String usuarioJson = JsonHelper.objectToJson(usuario);
+            Log.i(MainActivity.TAG, "Json lido do banco local ao fazer o login: " + usuarioJson);
+            usuario = (Usuario) JsonHelper.getObject(sharedPreferences.getString(MainActivity.USUARIO + ".json", ""), Usuario.class);
+
+            if (usuarioLocal != null && usuario.getSenha() == usuarioLocal.getSenha() && usuario.getLoginEmail() == usuarioLocal.getLoginEmail()) {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+            }else{
+                String mensagem = "Usuário ou senha incorretos.";
+                Snackbar.make(findViewById(R.id.btnCadastrar_cadastro), mensagem, Snackbar.LENGTH_SHORT).show();
+            }
+
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro ao salvar usuario." + ex.getMessage());
         }
     }
 
     private void startarActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        try {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro: startarActivity LoginUsuario: " + ex.getMessage());
+        }
     }
 }

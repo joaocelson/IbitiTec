@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.ibititec.campeonatold.MainActivity;
+import com.ibititec.campeonatold.modelo.Usuario;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,6 +37,19 @@ public class JsonHelper {
             return json;
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro no metodo:  nomeJson: " + nomeJson + " - Erro: " + ex.getMessage());
+            return null;
+        }
+    }
+
+    public static Usuario ObterUsuarioBancoLocal(Activity activity) {
+        try {
+            String json = PreferenceManager.getDefaultSharedPreferences(activity)
+                    .getString(MainActivity.USUARIO + ".json", "");
+            Usuario usuario = JsonHelper.getObject(json, Usuario.class);
+            Log.i(MainActivity.TAG, "Lendo preferences: " + json);
+            return usuario;
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro no metodo:  ObterUsuarioBancoLocal: " + ex.getMessage());
             return null;
         }
     }

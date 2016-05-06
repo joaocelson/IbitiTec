@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Campeonato.Aplicacao
 {
-    public class NoticiaAplicacao
+    public class NoticiaAplicacao 
     {
         private readonly IRepositorio<Noticia> repositorio;
 
@@ -17,5 +17,26 @@ namespace Campeonato.Aplicacao
         {
             repositorio = repo;
         }
+
+        public void Salvar(Noticia noticia)
+        {
+            repositorio.Salvar(noticia);
+        }
+
+        public void Excluir(Noticia noticia)
+        {
+            repositorio.Excluir(noticia);
+        }
+
+        public IEnumerable<Noticia> ListarTodos()
+        {
+            return repositorio.ListarTodos();
+        }
+
+        public Noticia ListarPorId(string id)
+        {
+            return repositorio.ListarPorId(id);
+        }
+
     }
 }

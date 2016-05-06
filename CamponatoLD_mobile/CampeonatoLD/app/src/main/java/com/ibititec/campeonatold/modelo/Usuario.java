@@ -7,7 +7,10 @@ import java.io.Serializable;
  */
 public class Usuario  implements Serializable {
 
-   private String LoginEmail ;
+
+    private String Id ;
+
+    private String LoginEmail ;
 
     private String Senha ;
 
@@ -15,7 +18,25 @@ public class Usuario  implements Serializable {
 
     private String NomeUsuario;
 
+    private String TipoUsuario;
+
     private String Token;
+
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String id) {
+        Id = id;
+    }
+
+    public String getTipoUsuario() {
+        return TipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        TipoUsuario = tipoUsuario;
+    }
 
     public String getLoginEmail() {
         return LoginEmail;

@@ -35,4 +35,6 @@
     <string name="url_partida_ao_vivo">http://52.37.37.207:94/Admin/Partida/AoVivo</string>
     <string name="title_activity_fees_noticias">FeesNoticiasActivity</string>
     <string name="url_feed_noticias">http://52.37.37.207:94/Admin/Campeonato/Noticias</string>
+    <string name="url_feed_adicionar_noticias">http://52.37.37.207:94/Admin/Campeonato/AdicionarNoticia</string>
+    <string name="url_comentario_adcionar" >http://52.37.37.207:94/Admin/Partida/ComentarJson</string>
 </resources>

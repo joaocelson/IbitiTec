@@ -58,23 +58,28 @@ namespace Campeonato.UI.WEB.Areas.Admin.Controllers
         [HttpPost]
         public String CadastrarJson(Usuario usuario)
         {
+            //TIPO USUARIO = 0 SERÁ USUÁRIO VISITANTE
+
+            //TIPO USUARIO = 1 SERÁ USUÁRIO ADMINISTRADOR
+
+            //TIPO USUARIO = 2 SERÁ USUÁRIO ADMINISTRADOR_TIME
+
+            //TIPO USUARIO = 2 SERÁ USUÁRIO ADMINISTRADOR SEM VINCULO TIME
 
             try
             {
-
-            
-            if (appUsuario.ValidarUsuarioEmail(usuario) == null)
-            {
+                if (appUsuario.ValidarUsuarioEmail(usuario) == null)
+                {
                     usuario.TipoUsuario = 0;
                     appUsuario.Salvar(usuario);
 
                     return "OK";
-            }
-            else
-            {
-                ModelState.AddModelError("", "Login já cadastrado, tente outro login");
-                return "";
-            }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Login já cadastrado, tente outro login");
+                    return "";
+                }
             }
             catch (Exception ex)
             {

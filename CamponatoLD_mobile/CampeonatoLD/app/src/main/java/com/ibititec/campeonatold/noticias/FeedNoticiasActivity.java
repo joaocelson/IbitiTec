@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.ibititec.campeonatold.MainActivity;
@@ -31,39 +31,123 @@ import java.util.List;
 public class FeedNoticiasActivity extends AppCompatActivity {
 
     private ListView lvFeedNoticias;
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feed_noticias);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        try {
+            setContentView(R.layout.activity_feed_noticias);
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
 
-        //AQUI SERÁ O BOTÃO PARA ADICIONAR NOTÍCIA
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
-        lerIntent();
-        carregarComponentes();
-        executarAcoes();
-        donwnloadFromUrl("feedNoticias", getString(R.string.url_feed_noticias),"");
+            lerIntent();
+            carregarComponentes();
+            executarAcoes();
+            donwnloadFromUrl("feedNoticias", getString(R.string.url_feed_noticias), "");
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e(MainActivity.TAG, "Erro onCreate FeedNoticias" + e.getMessage());
+        }
     }
 
     private void lerIntent() {
-        if (HttpHelper.existeConexao(this)) {
-            Intent intent = getIntent();
+        try {
+            if (HttpHelper.existeConexao(this)) {
+                Intent intent = getIntent();
 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e(MainActivity.TAG, "Erro onCreate FeedNoticias" + e.getMessage());
         }
     }
 
     private void executarAcoes() {
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                abrirDialogNoticia();
+            }
+        });
     }
+
+    private void abrirDialogNoticia() {
+        try {
+            final View viewDialog = getLayoutInflater().inflate(R.layout.dialog_noticia, null);
+
+            final EditText editTituloAdicionar = ((EditText) viewDialog.findViewById(R.id.txtTituloNoticia));
+            final EditText editCorpoAdicionar = ((EditText) viewDialog.findViewById(R.id.txtCorpoNoticia));
+
+            final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(FeedNoticiasActivity.this)
+                    .setTitle("Comentário")
+                            //.setIcon(R.mipmap.ic_launcher_auteasy)
+                    .setPositiveButton("SALVAR", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (!editTituloAdicionar.getText().toString().equals("") && !editCorpoAdicionar.getText().toString().equals("")) {
+                                Noticia noticia = new Noticia();
+                                noticia.setTitulo(editTituloAdicionar.getText().toString());
+                                noticia.setCorpo(editCorpoAdicionar.getText().toString());
+                                noticia.setUsuario(JsonHelper.ObterUsuarioBancoLocal(FeedNoticiasActivity.this));
+                                salvarNoticiaBancoRemoto(noticia);
+                            }
+                        }
+                    })
+                    .setNegativeButton("CANCELAR", null)
+                    .setView(viewDialog)
+                    .show();
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro: abrirDialoComentario PartidaTempoReal: " + ex.getMessage());
+        }
+    }
+
+    private void salvarNoticiaBancoRemoto(final Noticia noticia) {
+
+        (new AsyncTask<String, Void, String>() {
+            ProgressDialog progressDialog;
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog = ProgressDialog.show(FeedNoticiasActivity.this, "Aguarde", "Atualizando dados");
+            }
+
+            @Override
+            protected String doInBackground(String... params) {
+                String json = null;
+                try {
+                    String url = params[0];
+                    //json = HttpHelper.POSTJson(url, parametro);
+
+                    if (!HttpHelper.existeConexao(FeedNoticiasActivity.this)) {
+                        exibirMensagem("Não identificado conexão com a internet, verifique se sua conexão está ativa.", "Atenção");
+                    } else {
+                        json = HttpHelper.POSTJson(url, JsonHelper.objectToJson(noticia));
+                    }
+                    Log.i(MainActivity.TAG, json);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Log.e(MainActivity.TAG, String.format(getString(R.string.msg_erro_json), e.getMessage()));
+                }
+                return json;
+            }
+
+            @Override
+            protected void onPostExecute(String json) {
+                super.onPostExecute(json);
+
+                if (json.equals("")) {
+                    exibirMensagemOK("Não foi possível enviar o comentário", "Ao Vivo");
+                } else {
+                    donwnloadFromUrl("feedNoticias", getString(R.string.url_feed_noticias), "");
+                }
+                progressDialog.dismiss();
+            }
+        }).execute(getString(R.string.url_feed_adicionar_noticias));
+    }
+
 
     private void exibirMensagem(String mensagem, String titulo) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -105,8 +189,23 @@ public class FeedNoticiasActivity extends AppCompatActivity {
         //Exibe
         alerta.show();
     }
+
     private void carregarComponentes() {
-        lvFeedNoticias = (ListView) findViewById(R.id.lvFeedNoticias);
+        try {
+            lvFeedNoticias = (ListView) findViewById(R.id.lvFeedNoticias);
+            fab = (FloatingActionButton) findViewById(R.id.fabAddNoticia);
+
+            if (JsonHelper.ObterUsuarioBancoLocal(this).getTipoUsuario().equals("0")) {
+                fab.setVisibility(View.INVISIBLE);
+            } else {
+                fab.setVisibility(View.VISIBLE);
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e(MainActivity.TAG, "Erro carregarComponentes FeedNoticias" + e.getMessage());
+        }
     }
 
     private void donwnloadFromUrl(final String nomeJsonParam, String urlJson, final String parametro) {
@@ -129,7 +228,7 @@ public class FeedNoticiasActivity extends AppCompatActivity {
                     if (!HttpHelper.existeConexao(FeedNoticiasActivity.this)) {
                         exibirMensagem("Não identificado conexão com a internet, verifique se sua conexão está ativa.", "Atenção");
                     } else {
-                        json = HttpHelper.POSTJson(getString(R.string.url_partida_ao_vivo), parametro);
+                        json = HttpHelper.POSTJson(url, parametro);
                     }
                     Log.i(MainActivity.TAG, json);
                 } catch (IOException e) {
@@ -142,7 +241,6 @@ public class FeedNoticiasActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(String json) {
                 super.onPostExecute(json);
-
 
                 if (json.equals("")) {
                     exibirMensagem("Nenhuma notícia cadastrada.", "Notícias");
@@ -166,7 +264,7 @@ public class FeedNoticiasActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_atualizar_aoVivo:
-                donwnloadFromUrl("aovivo", getString(R.string.url_feed_noticias),"");
+                donwnloadFromUrl("feednoticias", getString(R.string.url_feed_noticias), "");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -184,7 +282,7 @@ public class FeedNoticiasActivity extends AppCompatActivity {
             } else {
                 exibirMensagemOK("Nenhuma notícia cadastrada", "Notícias");
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro ao carregar lista de notícias.");
         }
     }

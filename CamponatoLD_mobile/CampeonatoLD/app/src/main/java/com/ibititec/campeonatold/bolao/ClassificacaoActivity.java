@@ -33,21 +33,30 @@ public class ClassificacaoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_classificacao);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        carregarComponentes();
-        lerIntent();
-        carregarPartidasPalpite();
+        try {
+            setContentView(R.layout.activity_classificacao);
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+            carregarComponentes();
+            lerIntent();
+            carregarPartidasPalpite();
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro ONCreate ClassificacaoActivity: " + ex.getMessage());
+        }
     }
 
     private void carregarPartidasPalpite() {
-        if (divisao.equals("primeira")) {
-            donwnloadFromUrlParam(MainActivity.PDCLASSIFICACAOBOLAO, getString(R.string.url_pdclassificacaobolao), "1");
-        } else {
-            donwnloadFromUrlParam(MainActivity.SDCLASSIFICACAOBOLAO, getString(R.string.url_sdclassificacaobolao), "2");
+        try {
+            if (divisao.equals("primeira")) {
+                donwnloadFromUrlParam(MainActivity.PDCLASSIFICACAOBOLAO, getString(R.string.url_pdclassificacaobolao), "1");
+            } else {
+                donwnloadFromUrlParam(MainActivity.SDCLASSIFICACAOBOLAO, getString(R.string.url_sdclassificacaobolao), "2");
+            }
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro carregarPalpite: " + ex.getMessage());
         }
     }
 
@@ -57,9 +66,13 @@ public class ClassificacaoActivity extends AppCompatActivity {
 
     @Override
     public void onResume() {
-        super.onResume();
-        AnalyticsApplication.enviarGoogleAnalitcs(this);
-        iniciarAppodeal();
+        try {
+            super.onResume();
+            AnalyticsApplication.enviarGoogleAnalitcs(this);
+            iniciarAppodeal();
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro ONResume Classficacao: " + ex.getMessage());
+        }
     }
 
     private void iniciarAppodeal() {
@@ -72,18 +85,26 @@ public class ClassificacaoActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent();
-        intent.putExtra("divisao", divisao);
+        try {
+            Intent intent = new Intent();
+            intent.putExtra("divisao", divisao);
 
-        // add data to Intent
-        setResult(BolaoPrincipalActivity.RESULT_OK, intent);
-        Appodeal.show(this, Appodeal.NATIVE);
-        super.onBackPressed();
+            // add data to Intent
+            setResult(BolaoPrincipalActivity.RESULT_OK, intent);
+            Appodeal.show(this, Appodeal.NATIVE);
+            super.onBackPressed();
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro OnBack Classificacao : " + ex.getMessage());
+        }
     }
 
     private void lerIntent() {
-        Intent intent = getIntent();
-        divisao = intent.getStringExtra("divisao");
+        try {
+            Intent intent = getIntent();
+            divisao = intent.getStringExtra("divisao");
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro Le Intent Classificacao: " + ex.getMessage());
+        }
     }
 
     private void atualizarClassificacaoBolao() {
@@ -163,20 +184,23 @@ public class ClassificacaoActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(String json) {
                 super.onPostExecute(json);
+                try {
+                    progressDialog.dismiss();
 
-                progressDialog.dismiss();
 
+                    if (json == null) {
+                        Log.w(MainActivity.TAG, "JSON veio nulo!");
+                        atualizarClassificacaoBolao();
+                        return;
+                    }
 
-                if (json == null) {
-                    Log.w(MainActivity.TAG, "JSON veio nulo!");
+                    PreferenceManager.getDefaultSharedPreferences(ClassificacaoActivity.this).edit()
+                            .putString(nomeJsonParam + ".json", json)
+                            .apply();
                     atualizarClassificacaoBolao();
-                    return;
+                } catch (Exception ex) {
+                    Log.i(MainActivity.TAG, "Erro PostExecute Classificacao : " + ex.getMessage());
                 }
-
-                PreferenceManager.getDefaultSharedPreferences(ClassificacaoActivity.this).edit()
-                        .putString(nomeJsonParam + ".json", json)
-                        .apply();
-                atualizarClassificacaoBolao();
             }
         }).execute(urlJson);
     }

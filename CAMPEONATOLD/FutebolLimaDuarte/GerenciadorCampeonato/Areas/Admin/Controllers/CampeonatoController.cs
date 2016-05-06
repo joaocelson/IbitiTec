@@ -19,6 +19,7 @@ namespace Campeonato.UI.WEB.Areas.Admin
 
         private readonly CampeonatoAplicacao appCampeonato;
         private readonly TimeAplicacao appTimes;
+        private readonly NoticiaAplicacao appNoticia;
 
         private readonly ClassificacaoAplicacao appClassificacao;
 
@@ -26,8 +27,7 @@ namespace Campeonato.UI.WEB.Areas.Admin
         {
             appCampeonato = CampeonatoAplicacaoConstrutor.CampeonatoAplicacaoADO();
             appClassificacao = ClassificacaoAplicacaoConstrutor.ClassificacaoAplicacaoADO();
-
-            appTimes = TimeAplicacaoConstrutor.TimeAplicacaoADO();
+            appNoticia = NoticiaAplicacaoConstrutor.NoticiaAplicacaoADO();
         }
 
         public ActionResult Index()
@@ -188,7 +188,7 @@ namespace Campeonato.UI.WEB.Areas.Admin
         public String ObterClassificacaoJson(string id)
         {
             List<Classificacao> listaClassificacao = (List<Classificacao>)appClassificacao.ListarClassicacaoPorCampeonato(id);
-           
+
             if (id.Equals("3"))
             {
                 Classificacao classificacaoA = new Classificacao();
@@ -197,17 +197,17 @@ namespace Campeonato.UI.WEB.Areas.Admin
                 classificacaoA.Pontos = "";
                 listaClassificacao.Insert(0, classificacaoA);
 
-                List<Classificacao> listaClassificacaoB = (List<Classificacao>) appClassificacao.ListarClassicacaoPorCampeonato("4");
+                List<Classificacao> listaClassificacaoB = (List<Classificacao>)appClassificacao.ListarClassicacaoPorCampeonato("4");
                 Classificacao classificacao = new Classificacao();
                 classificacao.Posicao = "";
                 classificacao.NomeTime = "GRUPO B";
                 classificacao.Pontos = "";
                 listaClassificacao.Add(classificacao);
-                 foreach (Classificacao b in listaClassificacaoB)
-                 {
-                     listaClassificacao.Add(b);
-                 }
-            
+                foreach (Classificacao b in listaClassificacaoB)
+                {
+                    listaClassificacao.Add(b);
+                }
+
             }
             return JsonConvert.SerializeObject(listaClassificacao, Formatting.Indented);
         }
@@ -220,8 +220,23 @@ namespace Campeonato.UI.WEB.Areas.Admin
 
         public String Noticias()
         {
-            var listaNoticias = appCampeonato.Noticias();
+            var listaNoticias = appNoticia.ListarTodos();
             return JsonConvert.SerializeObject(listaNoticias, Formatting.Indented);
         }
+
+        public String AdicionarNoticia(Noticia noticia)
+        {
+            try
+            {
+                appNoticia.Salvar(noticia);
+                return "OK";
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
+
+
     }
 }

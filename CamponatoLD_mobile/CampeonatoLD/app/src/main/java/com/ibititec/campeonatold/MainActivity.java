@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity
         //IDENTIFICACAO DOS OBJETOS DE LAYOUT
         btnPrimeiraDivisao = (ImageButton) findViewById(R.id.btnPrimeiraDivisao);
         btnSegundaDivisao = (ImageButton) findViewById(R.id.btnSegundaDivisao);
-        btnNoticias= (ImageButton) findViewById(R.id.btnNoticias);
+        btnNoticias = (ImageButton) findViewById(R.id.btnNoticias);
 
         txtPrimeiraDivisao = (TextView) findViewById(R.id.txtPrimeiraDivisao);
         txtSegundaDivisao = (TextView) findViewById(R.id.txtSegundaDivisao);
@@ -103,16 +103,16 @@ public class MainActivity extends AppCompatActivity
                     exibirMensagem();
                     Log.i(TAG, "Sem conexão com a internet.");
                 } else {
-                    donwnloadFromUrl(PDTABELA, getString(R.string.url_pdtabela),"");
-                    donwnloadFromUrl(PDARTILHARIA, getString(R.string.url_pdartilharia),"");
-                    donwnloadFromUrl(PDCLASSIFICACAO, getString(R.string.url_pdclassificacao),"{\"id\": \"2\"}");
-                    donwnloadFromUrl(SDTABELA, getString(R.string.url_sdtabela),"");
-                    donwnloadFromUrl(SDARTILHARIA, getString(R.string.url_sdartilharia),"");
+                    donwnloadFromUrl(PDTABELA, getString(R.string.url_pdtabela), "");
+                    donwnloadFromUrl(PDARTILHARIA, getString(R.string.url_pdartilharia), "");
+                    donwnloadFromUrl(PDCLASSIFICACAO, getString(R.string.url_pdclassificacao), "{\"id\": \"2\"}");
+                    donwnloadFromUrl(SDTABELA, getString(R.string.url_sdtabela), "");
+                    donwnloadFromUrl(SDARTILHARIA, getString(R.string.url_sdartilharia), "");
                     donwnloadFromUrl(SDCLASSIFICACAO, getString(R.string.url_sdclassificacao), "{\"id\": \"3\"}");
 
-                    donwnloadFromUrl(PDCLASSIFICACAOBOLAO, getString(R.string.url_pdclassificacaobolao),"");
+                    donwnloadFromUrl(PDCLASSIFICACAOBOLAO, getString(R.string.url_pdclassificacaobolao), "");
 
-                    donwnloadFromUrl(SDCLASSIFICACAOBOLAO, getString(R.string.url_sdclassificacaobolao),"");
+                    donwnloadFromUrl(SDCLASSIFICACAOBOLAO, getString(R.string.url_sdclassificacaobolao), "");
                 }
             }
         } catch (Exception ex) {
@@ -179,59 +179,70 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void executarAcoes() {
+        try {
+            btnPrimeiraDivisao.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startarActivity("primeira");
+                }
+            });
 
-        btnPrimeiraDivisao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startarActivity("primeira");
-            }
-        });
+            btnSegundaDivisao.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startarActivity("segunda");
+                }
+            });
 
-        btnSegundaDivisao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startarActivity("segunda");
-            }
-        });
+            btnNoticias.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startarActivityNoticia();
+                }
+            });
 
-        btnNoticias.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startarActivityNoticia();
-            }
-        });
+            txtPrimeiraDivisao.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startarActivity("primeira");
+                }
+            });
 
-        txtPrimeiraDivisao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startarActivity("primeira");
-            }
-        });
+            txtSegundaDivisao.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startarActivity("segunda");
+                }
+            });
 
-        txtSegundaDivisao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startarActivity("segunda");
-            }
-        });
-
-        txtNoticias.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startarActivityNoticia();
-            }
-        });
+            txtNoticias.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startarActivityNoticia();
+                }
+            });
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro: executarAcoes MainActivity: " + ex.getMessage());
+        }
     }
 
     private void startarActivity(String divisao) {
-        Intent intent = new Intent(this, PrimeiraDivisaoActivity.class);
-        intent.putExtra("divisao", divisao);
-        startActivity(intent);
+        try {
+            Intent intent = new Intent(this, PrimeiraDivisaoActivity.class);
+            intent.putExtra("divisao", divisao);
+            startActivity(intent);
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro: statarActivity MainActivity: " + ex.getMessage());
+        }
     }
 
     private void startarActivityNoticia() {
-        Intent intent = new Intent(this, FeedNoticiasActivity.class);
-        startActivity(intent);
+        try {
+            Intent intent = new Intent(this, FeedNoticiasActivity.class);
+            startActivity(intent);
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro: startartActivityNoticia MainActivity: " + ex.getMessage());
+        }
     }
 
     private void gravarJson(String nomeJson, String json) {
@@ -261,9 +272,9 @@ public class MainActivity extends AppCompatActivity
 
                 try {
                     String url = params[0];
-                    if(param.equals("")) {
+                    if (param.equals("")) {
                         json = HttpHelper.downloadFromURL(url);
-                    }else{
+                    } else {
                         json = HttpHelper.POSTJson(url, param);
                     }
                     Log.i(TAG, json);

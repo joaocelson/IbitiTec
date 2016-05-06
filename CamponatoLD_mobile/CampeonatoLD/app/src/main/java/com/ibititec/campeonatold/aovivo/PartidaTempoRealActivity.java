@@ -3,9 +3,9 @@ package com.ibititec.campeonatold.aovivo;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,7 +13,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -38,31 +40,116 @@ public class PartidaTempoRealActivity extends AppCompatActivity {
     private ListView lvComentarioAoVivo;
     private String jogosBolao, divisao;
     private Partida partida;
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_partida_tempo_real);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        try {
+            setContentView(R.layout.activity_partida_tempo_real);
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        lerIntent();
-        carregarComponentes();
-        executarAcoes();
-        donwnloadFromUrl("aovivo", getString(R.string.url_partida_ao_vivo),"{\"id\": \""+ String.valueOf(partida.getId())+"\"}");
+            lerIntent();
+            carregarComponentes();
+            executarAcoes();
+            donwnloadFromUrl("aovivo", getString(R.string.url_partida_ao_vivo), "{\"id\": \"" + String.valueOf(partida.getId()) + "\"}");
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro: onCreate PartidaTempoReal: " + ex.getMessage());
+        }
     }
 
     private void lerIntent() {
-        if (HttpHelper.existeConexao(this)) {
-            Intent intent = getIntent();
-            divisao = intent.getStringExtra("divisao");
-            partida = (Partida) intent.getSerializableExtra("partida_tempo_real");
+        try {
+            if (HttpHelper.existeConexao(this)) {
+                Intent intent = getIntent();
+                divisao = intent.getStringExtra("divisao");
+                partida = (Partida) intent.getSerializableExtra("partida_tempo_real");
+            }
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro: lerIntent PartidaTempoReal: " + ex.getMessage());
         }
     }
 
     private void executarAcoes() {
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                abrirDialoComentario();
+            }
+        });
+    }
 
+    private void abrirDialoComentario() {
+        try {
+            final View viewDialog = getLayoutInflater().inflate(R.layout.dialog_comentario, null);
+
+            final EditText editComentarioAdicionar = ((EditText) viewDialog.findViewById(R.id.txtComentarioAdicionar));
+
+            final android.app.AlertDialog alertDialog = new android.app.AlertDialog.Builder(PartidaTempoRealActivity.this)
+                    .setTitle("Comentário")
+                            //.setIcon(R.mipmap.ic_launcher_auteasy)
+                    .setPositiveButton("SALVAR", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (!editComentarioAdicionar.getText().toString().equals("")) {
+                                salvarComentarioBancoRemoto(editComentarioAdicionar.getText().toString());
+                            }
+                        }
+                    })
+                    .setNegativeButton("CANCELAR", null)
+                    .setView(viewDialog)
+                    .show();
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro: abrirDialoComentario PartidaTempoReal: " + ex.getMessage());
+        }
+    }
+
+    private void salvarComentarioBancoRemoto(final String texto) {
+
+        (new AsyncTask<String, Void, String>() {
+            ProgressDialog progressDialog;
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog = ProgressDialog.show(PartidaTempoRealActivity.this, "Aguarde", "Atualizando dados");
+            }
+
+            @Override
+            protected String doInBackground(String... params) {
+                String json = null;
+                try {
+                    String url = params[0];
+                    //json = HttpHelper.POSTJson(url, parametro);
+
+                    if (!HttpHelper.existeConexao(PartidaTempoRealActivity.this)) {
+                        exibirMensagem("Não identificado conexão com a internet, verifique se sua conexão está ativa.", "Atenção");
+                    } else {
+                        json = HttpHelper.POSTJson(url, "{\"id\": \"" + partida.getId() +"\",\"comentario\": \"" + texto + "\"}");
+                    }
+                    Log.i(MainActivity.TAG, json);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Log.e(MainActivity.TAG, String.format(getString(R.string.msg_erro_json), e.getMessage()));
+                }
+                return json;
+            }
+
+            @Override
+            protected void onPostExecute(String json) {
+                super.onPostExecute(json);
+
+                if (json.equals("")) {
+                    exibirMensagemOK("Não foi possível enviar o comentário", "Ao Vivo");
+
+                } else {
+                    donwnloadFromUrl("aovivo", getString(R.string.url_partida_ao_vivo), "{\"id\": \"" + String.valueOf(partida.getId()) + "\"}");
+                }
+                progressDialog.dismiss();
+            }
+        }).execute(getString(R.string.url_comentario_adcionar));
     }
 
 
@@ -106,23 +193,36 @@ public class PartidaTempoRealActivity extends AppCompatActivity {
         //Exibe
         alerta.show();
     }
+
     private void carregarComponentes() {
-        txtGolsTimeMandante = (TextView) findViewById(R.id.txtTempoRealGolsTimeMandante);
-        txtGolsTimeVisitante = (TextView) findViewById(R.id.txtTempoRealGolsTimeVisitante);
-        escudoMandante = (SimpleDraweeView) findViewById(R.id.img_time_mandante_tempo_real);
-        escudoVisitante = (SimpleDraweeView) findViewById(R.id.img_time_visitante_tempo_real);
-        nomeTimePalpitePorJogoMandante = (TextView) findViewById(R.id.nomeTimeMandanteTempoReal);
-        nomeTimePalpitePorJogoVisitante = (TextView) findViewById(R.id.nomeTimeVisitanteTempoReal);
-        lvComentarioAoVivo = (ListView) findViewById(R.id.lvTempoReal);
+        try {
+//            txtGolsTimeMandante = (TextView) findViewById(R.id.txtTempoRealGolsTimeMandante);
+//            txtGolsTimeVisitante = (TextView) findViewById(R.id.txtTempoRealGolsTimeVisitante);
+//            escudoMandante = (SimpleDraweeView) findViewById(R.id.img_time_mandante_tempo_real);
+//            escudoVisitante = (SimpleDraweeView) findViewById(R.id.img_time_visitante_tempo_real);
+            nomeTimePalpitePorJogoMandante = (TextView) findViewById(R.id.nomeTimeMandanteTempoReal);
+            nomeTimePalpitePorJogoVisitante = (TextView) findViewById(R.id.nomeTimeVisitanteTempoReal);
+            lvComentarioAoVivo = (ListView) findViewById(R.id.lvTempoReal);
+            fab = (FloatingActionButton) findViewById(R.id.fabAddComentario);
 
-        Uri imageUriMandante = Uri.parse(MainActivity.PATH_FOTOS + partida.getEscudoPequenoMandante().trim());
-        Uri imageUriVisitante = Uri.parse(MainActivity.PATH_FOTOS + partida.getEscudoPequenoVisitante().trim());
+            //Uri imageUriMandante = Uri.parse(MainActivity.PATH_FOTOS + partida.getEscudoPequenoMandante().trim());
+           // Uri imageUriVisitante = Uri.parse(MainActivity.PATH_FOTOS + partida.getEscudoPequenoVisitante().trim());
 
-        nomeTimePalpitePorJogoMandante.setText(partida.getTimeMandante());
-        nomeTimePalpitePorJogoVisitante.setText(partida.getTimeVisitante());
+            nomeTimePalpitePorJogoMandante.setText(partida.getTimeMandante());
+            nomeTimePalpitePorJogoVisitante.setText(partida.getTimeVisitante());
 
-        escudoMandante.setImageURI(imageUriMandante);
-        escudoVisitante.setImageURI(imageUriVisitante);
+           // escudoMandante.setImageURI(imageUriMandante);
+          //  escudoVisitante.setImageURI(imageUriVisitante);
+
+            if(JsonHelper.ObterUsuarioBancoLocal(this).getTipoUsuario().equals("0") || JsonHelper.ObterUsuarioBancoLocal(this).getTipoUsuario().equals("2")){
+                fab.setVisibility(View.INVISIBLE);
+            }else{
+                fab.setVisibility(View.VISIBLE);
+            }
+
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro: carregarComponente PartidaTempoReal: " + ex.getMessage());
+        }
     }
 
     private void donwnloadFromUrl(final String nomeJsonParam, String urlJson, final String parametro) {
@@ -182,7 +282,7 @@ public class PartidaTempoRealActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_atualizar_aoVivo:
-                donwnloadFromUrl("aovivo", getString(R.string.url_partida_ao_vivo),"{\"id\": \""+ String.valueOf(partida.getId())+"\"}");
+                donwnloadFromUrl("aovivo", getString(R.string.url_partida_ao_vivo), "{\"id\": \"" + String.valueOf(partida.getId()) + "\"}");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -198,14 +298,14 @@ public class PartidaTempoRealActivity extends AppCompatActivity {
                 lvComentarioAoVivo.setAdapter(adapterAoVivo);
                 UIHelper.setListViewHeightBasedOnChildren(lvComentarioAoVivo);
 
-                AoVivo aoVivo = listComentariosAoVivo.get(listComentariosAoVivo.size()-1);
+                AoVivo aoVivo = listComentariosAoVivo.get(listComentariosAoVivo.size() - 1);
                 String[] resultado = aoVivo.getComentario().split("_");
-                txtGolsTimeMandante.setText(resultado[0] == null ? "" : resultado[0] );
-                txtGolsTimeVisitante.setText(resultado[1] == null ? "" : resultado[1]);
+                //txtGolsTimeMandante.setText(resultado[0] == null ? "" : resultado[0]);
+                //txtGolsTimeVisitante.setText(resultado[1] == null ? "" : resultado[1]);
             } else {
                 exibirMensagemOK("Nenhum comentário para a partida.", "Ao Vivo");
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro ao carregar lista de comentarios ao vivo.");
         }
     }

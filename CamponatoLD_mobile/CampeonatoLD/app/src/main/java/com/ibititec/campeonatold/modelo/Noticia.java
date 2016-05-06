@@ -8,6 +8,15 @@ public class Noticia {
     private String Corpo;
     private String DataNoticia;
     private Time Time;
+    private Usuario Usuario;
+
+    public com.ibititec.campeonatold.modelo.Usuario getUsuario() {
+        return Usuario;
+    }
+
+    public void setUsuario(com.ibititec.campeonatold.modelo.Usuario usuario) {
+        Usuario = usuario;
+    }
 
     public String getDataNoticia() {
         return DataNoticia;

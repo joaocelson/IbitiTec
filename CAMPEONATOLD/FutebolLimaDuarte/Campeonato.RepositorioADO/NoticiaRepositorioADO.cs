@@ -18,22 +18,30 @@ namespace Campeonato.RepositorioADO
         private void Inserir(Noticia noticia)
         {
             var strQuery = "";
-            strQuery += " INSERT INTO Campeonato (nome, data_inicio) ";
-            strQuery += string.Format(" VALUES ('{0}','{1}') "
-                //,Campeonato.Nome, Campeonato.DataInicio
-                );
-            using (contexto = new Contexto())
+            strQuery += " INSERT INTO noticia (titulo, noticia, data_noticia, id_usuario, id_time) ";
+            strQuery += string.Format(" VALUES ('{0}','{1}','{2}',{3},{4})", noticia.Titulo, noticia.Corpo, DateTime.Now, noticia.Usuario.Id, (noticia.Time != null && noticia.Time.Id != null) ? noticia.Time.Id : System.Data.SqlTypes.SqlInt32.Null);
+            try
             {
-                contexto.ExecutaComando(strQuery);
+                using (contexto = new Contexto())
+                {
+                    contexto.ExecutaComando(strQuery);
+                }
+            }
+            catch (Exception ex)
+            {
+                ex = ex;
             }
         }
 
         private void Alterar(Noticia noticia)
         {
             var strQuery = "";
-            strQuery += " UPDATE Campeonato SET ";
-            strQuery += string.Format(" Nome = '{0}', ", noticia.FonteNoticia);
-            strQuery += string.Format(" data_inicio = '{0}', ", noticia.TextoChamada);
+            strQuery += " UPDATE noticia SET ";
+            strQuery += string.Format(" titulo = '{0}', ", noticia.Titulo);
+            strQuery += string.Format(" noticia = '{0}', ", noticia.Corpo);
+            strQuery += string.Format(" data_noticia = '{0}', ", noticia.DataNoticia);
+            strQuery += string.Format(" id_usuario = '{0}', ", noticia.Usuario.Id);
+            strQuery += string.Format(" id_time = '{0}', ", noticia.Time.Id);
             strQuery += string.Format(" WHERE Id = {0} ", noticia.Id);
             using (contexto = new Contexto())
             {
@@ -53,7 +61,7 @@ namespace Campeonato.RepositorioADO
         {
             using (contexto = new Contexto())
             {
-                var strQuery = string.Format(" DELETE FROM Campeonato WHERE Id = {0}", noticia.Id);
+                var strQuery = string.Format(" DELETE FROM noticia WHERE Id = {0}", noticia.Id);
                 contexto.ExecutaComando(strQuery);
             }
         }
@@ -72,7 +80,7 @@ namespace Campeonato.RepositorioADO
         {
             using (contexto = new Contexto())
             {
-                var strQuery = string.Format(" SELECT * FROM Campeonato WHERE Id = {0} ", id);
+                var strQuery = string.Format(" SELECT * FROM noticia WHERE Id = {0} ", id);
                 var retornoDataReader = contexto.ExecutaComandoComRetorno(strQuery);
                 return TransformaReaderEmListaDeObjeto(retornoDataReader).FirstOrDefault();
             }
@@ -81,27 +89,28 @@ namespace Campeonato.RepositorioADO
         private List<Noticia> TransformaReaderEmListaDeObjeto(SqlDataReader reader)
         {
             var noticia = new List<Noticia>();
+            UsuarioRepositorioADO usuario = new UsuarioRepositorioADO();
+            TimeRepositorioADO time = new TimeRepositorioADO();
+
             while (reader.Read())
             {
-                    
-
                 var temObjeto = new Noticia()
                 {
                     Id = Convert.ToInt32(reader["id"].ToString()),
-                    FonteNoticia= reader["Nome"].ToString(),
-                    
-                    DataNoticia = DateTime.Parse(reader["data_inicio"].ToString()).ToString("dd/MM/yyyy HH:mm:ss")
+                    Titulo = reader["titulo"].ToString(),
+                    Corpo = reader["noticia"].ToString(),
+                    Usuario = usuario.ListarPorId(reader["id_usuario"].ToString()),
+                    DataNoticia = DateTime.Parse(reader["data_noticia"].ToString()).ToString("dd/MM/yyyy HH:mm:ss")
+
                 };
+                if (!reader["id_time"].ToString().Equals(""))
+                {
+                    temObjeto.Time = time.ListarPorId(reader["id_time"].ToString());
+                }
                 noticia.Add(temObjeto);
             }
             reader.Close();
             return noticia;
-        }
-
-
-        Noticia IRepositorio<Noticia>.ListarPorId(string id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

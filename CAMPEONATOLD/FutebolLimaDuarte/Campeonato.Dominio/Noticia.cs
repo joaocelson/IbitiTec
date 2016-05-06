@@ -12,6 +12,7 @@ namespace Campeonato.Dominio
         public string Corpo { get; set; }
         public String DataNoticia { get; set; }
         public Time Time { get; set; }
+        public Usuario Usuario { get; set; }
 
         public int Id { get; set; }
         public string TituloChamada { get; set; }
