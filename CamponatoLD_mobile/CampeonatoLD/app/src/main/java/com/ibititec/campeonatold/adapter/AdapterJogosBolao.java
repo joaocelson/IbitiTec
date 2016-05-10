@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -28,10 +28,14 @@ public class AdapterJogosBolao extends BaseAdapter {
 
     private Activity activity;
     private List<Partida> bolaoList = null;
+    Boolean PalpiteVisivel = true;
+    private String divisao;
 
-    public AdapterJogosBolao(Activity activityParam, List<Partida> bolaoList) {
+    public AdapterJogosBolao(Activity activityParam, List<Partida> bolaoList, String divisao, Boolean PalpiteVisivel) {
         this.bolaoList = bolaoList;
         this.activity = activityParam;
+        this.divisao = divisao;
+        this.PalpiteVisivel = PalpiteVisivel;
     }
 
     public AdapterJogosBolao() {
@@ -50,7 +54,7 @@ public class AdapterJogosBolao extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
@@ -108,23 +112,18 @@ public class AdapterJogosBolao extends BaseAdapter {
             SimpleDraweeView draweeViewVisistante = (SimpleDraweeView) layout.findViewById(R.id.img_time_visitante_bolao);
             draweeViewVisistante.setImageURI(imageUriVisistante);
 
-            Button btnPalpite = (Button) layout.findViewById(R.id.btnPalpiteJogoBolao);
+            ImageButton btnPalpite = (ImageButton) layout.findViewById(R.id.btnPalpiteJogoBolao);
+            if(!PalpiteVisivel){
+                btnPalpite.setVisibility(View.INVISIBLE);
+            }
+            //btnPalpite.setImageResource(R.drawable.palpite);
             btnPalpite.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     startarActivityPalpite(v, rodadaObj);
                 }
             });
-//
-//            Uri imageUri3 = Uri.parse(MainActivity.PATH_FOTOS + jogo2Array[0].trim()+".jpg");
-//            SimpleDraweeView draweeView3 = (SimpleDraweeView) layout.findViewById(R.id.imageView4);
-//            draweeView3.setImageURI(imageUri3);
-//
-//            Uri imageUri4 = Uri.parse(MainActivity.PATH_FOTOS + jogo2Array[2].trim()+".jpg");
-//            SimpleDraweeView draweeView4 = (SimpleDraweeView) layout.findViewById(R.id.imageView5);
-//            draweeView4.setImageURI(imageUri4);
 
-            //Appodeal.show(activity, Appodeal.BANNER_BOTTOM);
             return layout;
 
         } catch (Exception e) {
@@ -137,6 +136,7 @@ public class AdapterJogosBolao extends BaseAdapter {
     private void startarActivityPalpite(View v, Partida partida) {
         Intent intent = new Intent(activity.getApplication(), PalpitePorJogoActivity.class);
         intent.putExtra("jogo_bolao", (Serializable) partida);
+        intent.putExtra("divisao", divisao);
         activity.startActivity(intent);
     }
 

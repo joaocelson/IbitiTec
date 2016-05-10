@@ -48,6 +48,7 @@ public class PrimeiraDivisaoActivity extends AppCompatActivity {
     public void onResume() {
         try {
             super.onResume();
+            lerIntent();
 //        AnalyticsApplication.enviarGoogleAnalitcs(this);
             iniciarAppodeal();
         } catch (Exception ex) {
@@ -204,15 +205,8 @@ public class PrimeiraDivisaoActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         onBackPressed();
-        //noinspection SimplifiableIfStatement
-//        if (id == R.id.home) {
-//            onBackPressed();
-//            return true;
         return true;
     }
 }

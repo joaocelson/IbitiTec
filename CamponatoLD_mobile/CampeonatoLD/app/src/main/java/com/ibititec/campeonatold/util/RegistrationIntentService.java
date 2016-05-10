@@ -48,10 +48,10 @@ public class RegistrationIntentService extends IntentService {
 
                 // Fetch token here
                 // save token
-                sharedPreferences.edit().putString(GCM_TOKEN, token).apply();
-
-                // pass along this data
-                sendRegistrationToServer(token);
+                String idBancoLocal = sharedPreferences.getString(GCM_TOKEN + ".json", "");
+                if (!idBancoLocal.equals(token)) {
+                    sendRegistrationToServer(token);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (JSONException e) {
@@ -63,7 +63,7 @@ public class RegistrationIntentService extends IntentService {
     private void sendRegistrationToServer(String token) throws IOException, JSONException {
         // send network request
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String stringEnviado = sharedPreferences.getString(SENT_TOKEN_TO_SERVER, "");
+        String stringEnviado = sharedPreferences.getString(SENT_TOKEN_TO_SERVER + ".json", "");
 
         JSONObject json = new JSONObject();
         json.put("token", token);
@@ -71,6 +71,8 @@ public class RegistrationIntentService extends IntentService {
         if (!stringEnviado.equals("OK")) {
             String result = HttpHelper.POST(getString(R.string.sendToken), json.toString());
             if (result.equals("OK")) {
+
+                sharedPreferences.edit().putString(GCM_TOKEN + ".json", token).apply();
                 sharedPreferences.edit().putString(SENT_TOKEN_TO_SERVER, "OK").apply();
             }
         }

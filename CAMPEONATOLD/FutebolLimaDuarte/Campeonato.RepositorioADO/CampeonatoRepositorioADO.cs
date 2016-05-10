@@ -137,8 +137,12 @@ namespace Campeonato.RepositorioADO
             {
                 var strQuery = @" SELECT t.Nome Nome, ar.numero_gols Numero_Gols, tm.Nome Time  FROM artilharia ar
                                     INNER JOIN t_jogador t on (t.id = ar.id_jogador)
-                                    INNER JOIN times tm on (tm.id_time = ar.id_time)
+                                    INNER JOIN times tm on (tm.id = ar.id_time)
                                     WHERE ar.id_campeonato = " + idCampeonato;
+                if (idCampeonato.Equals("3"))
+                {
+                    strQuery += @" OR ar.id_campeonato = 4";
+                }
                 var retornoDataReader = contexto.ExecutaComandoComRetorno(strQuery);
                 return TransformaReaderEmListaDeObjetoArtilharia(retornoDataReader);
             }
@@ -192,6 +196,51 @@ namespace Campeonato.RepositorioADO
             }
             reader.Close();
             return artilharia;
+        }
+
+        public bool GravarToken(String token, String idUsuario)
+        {
+            try
+            {
+                using (contexto = new Contexto())
+                {
+                    var strQuery = "";
+                    strQuery += " INSERT INTO token (token, id_usuario) ";
+                    strQuery += string.Format(" VALUES ('{0}','{1}') ", token, idUsuario);
+                    contexto.ExecutaComando(strQuery);
+                    TratamentoLog.GravarLog("Token: " + token + " associado ao usuarioID: " + idUsuario);
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                TratamentoLog.GravarLog("PartidaRepositorioADO::GravarToken:. Erro ao geras Partidas" + ex.Message, TratamentoLog.NivelLog.Erro);
+                return false;
+            }
+        }
+
+        public List<String> ObterTokens()
+        {
+            try
+            {
+                List<String> tokens = new List<String>();
+                using (contexto = new Contexto())
+                {
+                    var strQuery = @" SELECT DISTINCT * FROM token";
+
+                    var retornoDataReader = contexto.ExecutaComandoComRetorno(strQuery);
+                    while (retornoDataReader.Read())
+                    {
+                        tokens.Add(retornoDataReader["token"].ToString());
+                    }
+                }
+                return tokens;
+            }
+            catch (Exception ex)
+            {
+                TratamentoLog.GravarLog("PartidaRepositorioADO::ObterTokens:. Erro ao geras Partidas" + ex.Message, TratamentoLog.NivelLog.Erro);
+                return new List<string>();
+            }
         }
     }
 }

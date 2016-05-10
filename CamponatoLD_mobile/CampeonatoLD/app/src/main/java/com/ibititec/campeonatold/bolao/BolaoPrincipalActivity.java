@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.appodeal.ads.Appodeal;
 import com.ibititec.campeonatold.MainActivity;
 import com.ibititec.campeonatold.R;
 import com.ibititec.campeonatold.helpers.HttpHelper;
@@ -88,6 +90,21 @@ public class BolaoPrincipalActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        try {
+            Intent intent = new Intent();
+            intent.putExtra("divisao", divisao);
+
+            // add data to Intent
+            setResult(BolaoPrincipalActivity.RESULT_OK, intent);
+            Appodeal.show(this, Appodeal.NATIVE);
+            super.onBackPressed();
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro: onBackPressedPrimeiraDivisaoTabela: " + ex.getMessage());
+        }
+    }
+
     private void startarActivityClassificacao(String divisao) {
         try {
             Intent intent = new Intent(this, ClassificacaoActivity.class);
@@ -117,5 +134,20 @@ public class BolaoPrincipalActivity extends AppCompatActivity {
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro Bolao Principal CarregagarComponetes: " + ex.getMessage());
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        onBackPressed();
+        //noinspection SimplifiableIfStatement
+//        if (id == R.id.home) {
+//            onBackPressed();
+//            return true;
+//        }
+        return true;
     }
 }

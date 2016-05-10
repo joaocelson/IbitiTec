@@ -19,8 +19,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.appodeal.ads.Appodeal;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.ibititec.campeonatold.MainActivity;
+import com.ibititec.campeonatold.PrimeiraDivisaoTabelaActivity;
 import com.ibititec.campeonatold.R;
 import com.ibititec.campeonatold.adapter.AdapterAoVivo;
 import com.ibititec.campeonatold.helpers.HttpHelper;
@@ -28,6 +30,7 @@ import com.ibititec.campeonatold.helpers.JsonHelper;
 import com.ibititec.campeonatold.helpers.UIHelper;
 import com.ibititec.campeonatold.modelo.AoVivo;
 import com.ibititec.campeonatold.modelo.Partida;
+import com.ibititec.campeonatold.util.AnalyticsApplication;
 
 import java.io.IOException;
 import java.util.List;
@@ -38,7 +41,7 @@ public class PartidaTempoRealActivity extends AppCompatActivity {
     private TextView txtGolsTimeMandante, txtGolsTimeVisitante;
     private SimpleDraweeView escudoMandante, escudoVisitante;
     private ListView lvComentarioAoVivo;
-    private String jogosBolao, divisao;
+    private String jogosBolao, divisao, funcionalidade;
     private Partida partida;
     FloatingActionButton fab;
 
@@ -60,12 +63,29 @@ public class PartidaTempoRealActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        AnalyticsApplication.enviarGoogleAnalitcs(this);
+        lerIntent();
+        iniciarAppodeal();
+    }
+
+    private void iniciarAppodeal() {
+        try {
+            Appodeal.show(this, Appodeal.BANNER_BOTTOM);
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro: iniciarAppodeal: " + ex.getMessage());
+        }
+    }
+
     private void lerIntent() {
         try {
             if (HttpHelper.existeConexao(this)) {
                 Intent intent = getIntent();
                 divisao = intent.getStringExtra("divisao");
                 partida = (Partida) intent.getSerializableExtra("partida_tempo_real");
+                funcionalidade = intent.getStringExtra("funcionalidade");
             }
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro: lerIntent PartidaTempoReal: " + ex.getMessage());
@@ -79,6 +99,22 @@ public class PartidaTempoRealActivity extends AppCompatActivity {
                 abrirDialoComentario();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        try {
+
+            Intent intent = new Intent(this, PrimeiraDivisaoTabelaActivity.class);
+            intent.putExtra("divisao", divisao);
+            intent.putExtra("funcionalidade", funcionalidade);
+            // add data to Intent
+            setResult(PrimeiraDivisaoTabelaActivity.RESULT_OK, intent);
+            Appodeal.show(this, Appodeal.NATIVE);
+            super.onBackPressed();
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro OnBack Classificacao : " + ex.getMessage());
+        }
     }
 
     private void abrirDialoComentario() {
@@ -280,12 +316,14 @@ public class PartidaTempoRealActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
+
         switch (item.getItemId()) {
             case R.id.action_atualizar_aoVivo:
                 donwnloadFromUrl("aovivo", getString(R.string.url_partida_ao_vivo), "{\"id\": \"" + String.valueOf(partida.getId()) + "\"}");
-                return true;
+                return  true;
             default:
-                return super.onOptionsItemSelected(item);
+                onBackPressed();
+                return true;
         }
     }
 
@@ -309,4 +347,6 @@ public class PartidaTempoRealActivity extends AppCompatActivity {
             Log.i(MainActivity.TAG, "Erro ao carregar lista de comentarios ao vivo.");
         }
     }
+
+
 }

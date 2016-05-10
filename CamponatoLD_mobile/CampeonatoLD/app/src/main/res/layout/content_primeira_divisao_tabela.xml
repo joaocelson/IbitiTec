@@ -14,6 +14,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="40dp"
         android:orientation="vertical">
 
         <LinearLayout android:id="@+id/cabecalho_artilahria"
@@ -83,8 +84,8 @@
         <ListView
             android:id="@+id/listview_primeira_tabela"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="40dp" />
+            android:layout_height="fill_parent"
+            android:paddingBottom="50dp" />
 
         <ProgressBar
             android:id="@+id/progress_primeira_tabela"

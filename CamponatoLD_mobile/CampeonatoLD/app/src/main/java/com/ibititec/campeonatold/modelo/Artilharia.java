@@ -4,9 +4,19 @@ package com.ibititec.campeonatold.modelo;
  * Created by JOAOCELSON on 05/04/2016.
  */
 public class Artilharia {
-    private String Gols;
+
+    private String NumeroGols;
     private String Nome;
     private String Time;
+
+    public String getNumeroGols() {
+        return NumeroGols;
+    }
+
+    public void setNumeroGols(String numeroGols) {
+        NumeroGols = numeroGols;
+    }
+
 
     public String getTime() {
         return Time;
@@ -16,13 +26,6 @@ public class Artilharia {
         Time = time;
     }
 
-    public String getGols() {
-        return Gols;
-    }
-
-    public void setGols(String gols) {
-        Gols = gols;
-    }
 
     public String getNome() {
         return Nome;

@@ -34,15 +34,13 @@ public class MainActivity extends AppCompatActivity
     //DECLARACAO DOS OBJETOS DE TELA
     private ImageButton btnPrimeiraDivisao, btnSegundaDivisao, btnNoticias;
     private TextView txtPrimeiraDivisao, txtSegundaDivisao, txtNoticias;
-
-
     // private ProgressDialog progressDialog;
 
     //CONSTANTES NOME DO JSON NA BASE DE DADOS
     public static final String PDARTILHARIA = "pdartilharia", PDTABELA = "pdtabela", PDCLASSIFICACAO = "pdclassificacao",
             SDARTILHARIA = "sdartilharia", SDTABELA = "dstabela", SDCLASSIFICACAO = "sdclassificacao",
             PDCLASSIFICACAOBOLAO = "pdclassificacaobolao", SDCLASSIFICACAOBOLAO = "sdclassificacaobolao",
-            PDJOGOSBOLAO = "pdjogosbolao", SDJOGOSBOLAO = "sdjogosbolao", USUARIO = "usuario";
+            PDJOGOSBOLAO = "pdjogosbolao", SDJOGOSBOLAO = "sdjogosbolao", USUARIO = "usuario", PDJOGOSRODADA = "pdjogosRODADA", SDJOGOSRODADA = "sdjogosRODADA";
 
     public static final String TAG = "CAMPEONATOLD";
     public static final String PATH_FOTOS = "http://52.37.37.207:94/Admin/Time/Image?nomeimagem=";
@@ -75,7 +73,6 @@ public class MainActivity extends AppCompatActivity
         txtSegundaDivisao = (TextView) findViewById(R.id.txtSegundaDivisao);
         txtNoticias = (TextView) findViewById(R.id.txtNoticias);
 
-
     }
 
     private void iniciarAppodeal() {
@@ -104,10 +101,10 @@ public class MainActivity extends AppCompatActivity
                     Log.i(TAG, "Sem conexão com a internet.");
                 } else {
                     donwnloadFromUrl(PDTABELA, getString(R.string.url_pdtabela), "");
-                    donwnloadFromUrl(PDARTILHARIA, getString(R.string.url_pdartilharia), "");
+                    donwnloadFromUrl(PDARTILHARIA, getString(R.string.url_pdartilharia), "{\"id\": \"2\"}");
                     donwnloadFromUrl(PDCLASSIFICACAO, getString(R.string.url_pdclassificacao), "{\"id\": \"2\"}");
                     donwnloadFromUrl(SDTABELA, getString(R.string.url_sdtabela), "");
-                    donwnloadFromUrl(SDARTILHARIA, getString(R.string.url_sdartilharia), "");
+                    donwnloadFromUrl(SDARTILHARIA, getString(R.string.url_sdartilharia), "{\"id\": \"3\"}");
                     donwnloadFromUrl(SDCLASSIFICACAO, getString(R.string.url_sdclassificacao), "{\"id\": \"3\"}");
 
                     donwnloadFromUrl(PDCLASSIFICACAOBOLAO, getString(R.string.url_pdclassificacaobolao), "");
@@ -326,6 +323,4 @@ public class MainActivity extends AppCompatActivity
         //Exibe
         alerta.show();
     }
-
-
 }

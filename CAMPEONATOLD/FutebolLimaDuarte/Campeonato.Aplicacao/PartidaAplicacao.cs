@@ -122,7 +122,11 @@ namespace Campeonato.Aplicacao
             return partida.ListarPartidasPorData(data);
         }
 
-       
+        public IEnumerable<Partida> ListaTabelaPorCampeonatoSegundaDivisao(string id)
+        {
+            PartidaRepositorioADO partida = new PartidaRepositorioADO();
+            return partida.ListaTabelaPorCampeonatoSegundaDivisao(id);
+        }
 
 
         public List<AoVivo> PartidaAoVivo(string id)
@@ -130,5 +134,7 @@ namespace Campeonato.Aplicacao
             PartidaRepositorioADO partida = new PartidaRepositorioADO();
             return partida.PartidaAoVivo(id);
         }
+
+        
     }
 }

@@ -86,7 +86,8 @@
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:inputType="numberDecimal"/>
 
         <TextView
             android:id="@+id/txtBolaoVersus"
@@ -102,7 +103,8 @@
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:inputType="numberDecimal" />
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/img_time_visitante_palpite"

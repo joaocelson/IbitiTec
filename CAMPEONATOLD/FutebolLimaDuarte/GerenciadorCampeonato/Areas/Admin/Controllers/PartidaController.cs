@@ -216,13 +216,100 @@ namespace Campeonato.UI.WEB.Areas.Admin
 
         public String ObterTabelaJsonSD()
         {
-            return ObterTabelaJson("3");
+            return ObterTabelaJsonSegunda("3");
         }
 
         public String ObterTabelaJson(string id)
         {
             Rodada rodada = new Rodada();
             var partida = rodada.ConverterPartidasParaRodada(appPartida.ListaTabelaPorCampeonato(id));
+
+            Rodada rodadaSemfinal = new Rodada();
+            rodadaSemfinal.Jogo1 = "SemiFinal - X - SemiFinal";
+            rodadaSemfinal.HoraJogo1 = "13:15";
+
+            rodadaSemfinal.Jogo2 = "SemiFinal - X - SemiFinal";
+            rodadaSemfinal.HoraJogo2 = "15:00";
+
+            rodadaSemfinal.Campo = "A DEFINIR";
+
+            rodadaSemfinal.Data = "18/09/2016";
+            rodadaSemfinal.Numero = "Semi-Final";
+            
+            Rodada rodadaFinal2 = new Rodada();
+            rodadaFinal2.Jogo1 = "Final - X - Final";
+            rodadaFinal2.HoraJogo1 = "13:15";
+
+            rodadaFinal2.Jogo2 = "Final - X - Final";
+            rodadaFinal2.HoraJogo2 = "15:00";
+
+            rodadaFinal2.Campo = "A DEFINIR";
+
+            rodadaFinal2.Data = "25/09/2016";
+            rodadaFinal2.Numero = "1ª Final";
+
+            Rodada rodadaFinal1 = new Rodada();
+            rodadaFinal1.Jogo1 = "Final - X - Final";
+            rodadaFinal1.HoraJogo1 = "13:15";
+
+            rodadaFinal1.Jogo2 = "Final - X - Final";
+            rodadaFinal1.HoraJogo2 = "15:00";
+
+            rodadaFinal1.Campo = "A DEFINIR";
+            rodadaFinal1.Numero = "2ª Final";
+
+            rodadaFinal1.Data = "09/10/2016";
+            partida.Add(rodadaSemfinal);
+            partida.Add(rodadaFinal2);
+            partida.Add(rodadaFinal1);
+
+            return JsonConvert.SerializeObject(partida, Formatting.Indented);
+        }
+
+        public String ObterTabelaJsonSegunda(string id)
+        {
+            Rodada rodada = new Rodada();
+            var partida = rodada.ConverterPartidasParaRodada(appPartida.ListaTabelaPorCampeonatoSegundaDivisao(id));
+
+            Rodada rodadaSemfinal = new Rodada();
+            rodadaSemfinal.Jogo1 = "SemiFinal - X - SemiFinal";
+            rodadaSemfinal.HoraJogo1 = "09:20";
+
+            rodadaSemfinal.Jogo2 = "SemiFinal - X - SemiFinal";
+            rodadaSemfinal.HoraJogo2 = "11:20";
+
+            rodadaSemfinal.Campo = "A DEFINIR";
+
+            rodadaSemfinal.Data = "18/09/2016";
+            rodadaSemfinal.Numero = "Semi-Final";
+
+            Rodada rodadaFinal2 = new Rodada();
+            rodadaFinal2.Jogo1 = "Final - X - Final";
+            rodadaFinal2.HoraJogo1 = "13:15";
+
+            rodadaFinal2.Jogo2 = "Final - X - Final";
+            rodadaFinal2.HoraJogo2 = "15:00";
+
+            rodadaFinal2.Campo = "A DEFINIR";
+
+            rodadaFinal2.Data = "25/09/2016";
+            rodadaFinal2.Numero = "1ª Final";
+
+            Rodada rodadaFinal1 = new Rodada();
+            rodadaFinal1.Jogo1 = "Final - X - Final";
+            rodadaFinal1.HoraJogo1 = "13:15";
+
+            rodadaFinal1.Jogo2 = "Final - X - Final";
+            rodadaFinal1.HoraJogo2 = "15:00";
+
+            rodadaFinal1.Campo = "A DEFINIR";
+            rodadaFinal1.Numero = "2ª Final";
+
+            rodadaFinal1.Data = "09/10/2016";
+            partida.Add(rodadaSemfinal);
+            partida.Add(rodadaFinal2);
+            partida.Add(rodadaFinal1);
+
             return JsonConvert.SerializeObject(partida, Formatting.Indented);
         }
 
@@ -250,6 +337,13 @@ namespace Campeonato.UI.WEB.Areas.Admin
                 TratamentoLog.GravarLog("PartidaController: Erro no comentário da partida." + ex.Message, TratamentoLog.NivelLog.Erro);
                 return "";
             }
+        }
+
+        public String ListarUltimaRodadaJson()
+        {
+            var listaUltimaRodada = appPartida.ListarUltimaRodada();            
+            return JsonConvert.SerializeObject(listaUltimaRodada, Formatting.Indented);
+        
         }
     }
 }

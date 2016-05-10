@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.appodeal.ads.Appodeal;
@@ -25,6 +26,7 @@ import com.ibititec.campeonatold.modelo.Usuario;
 import com.ibititec.campeonatold.util.AnalyticsApplication;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 
 public class PalpiteActivity extends AppCompatActivity {
@@ -97,10 +99,17 @@ public class PalpiteActivity extends AppCompatActivity {
 
                 Usuario usuarioLogado = JsonHelper.getObject(sharedPreferences.getString(MainActivity.USUARIO + ".json", ""), Usuario.class);
 
-                if (divisao.equals("primeira")) {
-                    donwnloadFromUrl(MainActivity.PDJOGOSBOLAO, getString(R.string.url_jogos_bolao), "{\"id\":\"1\", \"emailUsuario\":\"" + usuarioLogado.getLoginEmail() + "\",\"senha\":\"" + usuarioLogado.getSenha() + "\"}");
+                Calendar c = Calendar.getInstance();
+                int day = c.get(Calendar.DAY_OF_WEEK);
+                int hour = c.get(Calendar.HOUR);
+                if (day >= 4 || (day == 1 && hour < 9)) {
+                    if (divisao.equals("primeira")) {
+                        donwnloadFromUrl(MainActivity.PDJOGOSBOLAO, getString(R.string.url_jogos_bolao), "{\"id\":\"1\", \"emailUsuario\":\"" + usuarioLogado.getLoginEmail() + "\",\"senha\":\"" + usuarioLogado.getSenha() + "\"}");
+                    } else {
+                        donwnloadFromUrl(MainActivity.SDJOGOSBOLAO, getString(R.string.url_jogos_bolao), "{\"id\":\"2\", \"emailUsuario\":\"" + usuarioLogado.getLoginEmail() + "\",\"senha\":\"" + usuarioLogado.getSenha() + "\"}");
+                    }
                 } else {
-                    donwnloadFromUrl(MainActivity.SDJOGOSBOLAO, getString(R.string.url_jogos_bolao), "{\"id\":\"2\", \"emailUsuario\":\"" + usuarioLogado.getLoginEmail() + "\",\"senha\":\"" + usuarioLogado.getSenha() + "\"}");
+                    donwnloadFromUrl(MainActivity.SDJOGOSBOLAO, getString(R.string.url_jogos_rodada), "");
                 }
             } else {
                 exibirMensagem("Não identificado conexão com a internet, verifique se sua conexão está ativa.", "Atenção");
@@ -138,6 +147,7 @@ public class PalpiteActivity extends AppCompatActivity {
             } else {
                 //cabecalhoLayout = (LinearLayout) findViewById(R.id.cabecalho_artilahria);
                 //cabecalhoLayout.setVisibility(View.VISIBLE);
+
                 if (divisao.equals("primeira")) {
                     this.setTitle("Jogos 1ª Divisão");
                     jogosBolao = JsonHelper.leJsonBancoLocal(MainActivity.PDJOGOSBOLAO, this);
@@ -148,7 +158,7 @@ public class PalpiteActivity extends AppCompatActivity {
                 if (!jogosBolao.equals("")) {
                     List<Partida> partidaList = JsonHelper.getList(jogosBolao, Partida[].class);
                     if (partidaList.size() > 0) {
-                        AdapterJogosBolao adapterJogosBolao = new AdapterJogosBolao(this, partidaList);
+                        AdapterJogosBolao adapterJogosBolao = new AdapterJogosBolao(this, partidaList, divisao, false);
                         lvJogosBolao.setAdapter(adapterJogosBolao);
                         UIHelper.setListViewHeightBasedOnChildren(lvJogosBolao);
                     } else {
@@ -157,6 +167,7 @@ public class PalpiteActivity extends AppCompatActivity {
                 } else {
                     exibirMensagem("Bolão ainda não liberado.", "Bolão");
                 }
+
             }
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro ao preencher listView: " + ex.getMessage());
@@ -208,4 +219,18 @@ public class PalpiteActivity extends AppCompatActivity {
         }).execute(urlJson);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        onBackPressed();
+        //noinspection SimplifiableIfStatement
+//        if (id == R.id.home) {
+//            onBackPressed();
+//            return true;
+//        }
+        return true;
+    }
 }

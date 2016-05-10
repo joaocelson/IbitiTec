@@ -12,11 +12,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.appodeal.ads.Appodeal;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.ibititec.campeonatold.MainActivity;
 import com.ibititec.campeonatold.R;
@@ -54,6 +56,21 @@ public class PalpitePorJogoActivity extends AppCompatActivity {
             Intent intent = getIntent();
             divisao = intent.getStringExtra("divisao");
             partida = (Partida) intent.getSerializableExtra("jogo_bolao");
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        try {
+            Intent intent = new Intent();
+            intent.putExtra("divisao", divisao);
+
+            // add data to Intent
+            setResult(PalpitePorJogoActivity.RESULT_OK, intent);
+            Appodeal.show(this, Appodeal.NATIVE);
+            super.onBackPressed();
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro: onBackPressedPrimeiraDivisaoTabela: " + ex.getMessage());
         }
     }
 
@@ -185,5 +202,20 @@ public class PalpitePorJogoActivity extends AppCompatActivity {
                 }
             }
         }).execute(urlJson);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        onBackPressed();
+        //noinspection SimplifiableIfStatement
+//        if (id == R.id.home) {
+//            onBackPressed();
+//            return true;
+//        }
+        return true;
     }
 }

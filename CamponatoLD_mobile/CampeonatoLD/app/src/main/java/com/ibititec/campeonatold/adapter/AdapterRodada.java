@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -25,17 +25,19 @@ import java.util.List;
 public class AdapterRodada extends BaseAdapter {
     private Activity activity;
     private List<Rodada> rodadaList = null;
+    String divisao, funcionalidade;
 
-    public AdapterRodada(Activity activityParam, List<Rodada> rodadaListParam) {
+    public AdapterRodada(Activity activityParam, List<Rodada> rodadaListParam, String divisao, String funcionalidade) {
         this.rodadaList = rodadaListParam;
         this.activity = activityParam;
+        this.funcionalidade = funcionalidade;
+        this.divisao = divisao;
     }
 
     public AdapterRodada() {
     }
 
     @Override
-
     public int getCount() {
         return rodadaList.size();
     }
@@ -47,7 +49,7 @@ public class AdapterRodada extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
@@ -118,19 +120,22 @@ public class AdapterRodada extends BaseAdapter {
             SimpleDraweeView draweeView4 = (SimpleDraweeView) layout.findViewById(R.id.imageView5);
             draweeView4.setImageURI(imageUri4);
 
-            Button btnTempoReal = (Button) layout.findViewById(R.id.btnTempoRealPartida1);
+            ImageButton btnTempoReal = (ImageButton) layout.findViewById(R.id.btnTempoRealPartida1);
+
+            // btnTempoReal.setImageResource(R.drawable.temporeal);
             btnTempoReal.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startarActivityPalpite(v, rodadaObj.getPartida1());
+                    startarActivityTempoReal(v, rodadaObj.getPartida1());
                 }
             });
 
-            Button btnTempoReal2 = (Button) layout.findViewById(R.id.btnTempoRealPartida2);
+            ImageButton btnTempoReal2 = (ImageButton) layout.findViewById(R.id.btnTempoRealPartida2);
+            // btnTempoReal2.setImageResource(R.drawable.temporeal);
             btnTempoReal2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startarActivityPalpite(v, rodadaObj.getPartida2());
+                    startarActivityTempoReal(v, rodadaObj.getPartida2());
                 }
             });
 
@@ -144,9 +149,12 @@ public class AdapterRodada extends BaseAdapter {
         return convertView;
     }
 
-    private void startarActivityPalpite(View v, Partida partida) {
+    private void startarActivityTempoReal(View v, Partida partida) {
         Intent intent = new Intent(activity.getApplication(), PartidaTempoRealActivity.class);
         intent.putExtra("partida_tempo_real", (Serializable) partida);
+        intent.putExtra("divisao", divisao);
+        intent.putExtra("funcionalidade", funcionalidade);
+
         activity.startActivity(intent);
     }
 

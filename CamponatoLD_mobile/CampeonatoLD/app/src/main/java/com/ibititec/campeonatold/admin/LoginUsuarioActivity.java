@@ -26,7 +26,7 @@ import java.io.IOException;
 
 public class LoginUsuarioActivity extends AppCompatActivity {
 
-    private Button btnLogin, btnCadastrarUsuario;
+    private Button btnLogin,btnSemCadastroLogin, btnCadastrarUsuario;
     private EditText txtEmail, txtSenha;
 
     @Override
@@ -86,6 +86,14 @@ public class LoginUsuarioActivity extends AppCompatActivity {
                     fazerLogin(usuario);
                 }
             });
+
+            btnSemCadastroLogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    startarActivity();
+                }
+            });
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro: executarAcoes LoginUsuario: " + ex.getMessage());
         }
@@ -104,6 +112,8 @@ public class LoginUsuarioActivity extends AppCompatActivity {
         try {
             btnLogin = (Button) findViewById(R.id.btnLogin_login);
             btnCadastrarUsuario = (Button) findViewById(R.id.btnCadastrar_login);
+            btnSemCadastroLogin = (Button) findViewById(R.id.btnSemCadastrro_login);
+
             txtEmail = (EditText) findViewById(R.id.txtEmailUsuario_login);
             txtSenha = (EditText) findViewById(R.id.txtSenhaUsuario_login);
         } catch (Exception ex) {

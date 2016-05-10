@@ -4,18 +4,14 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_primeira_divisao">PrimeiraDivisaoActivity</string>
-    <string name="title_activity_primeira_divisao_tabela">PrimeiraDivisaoTabelaActivity</string>
+    <string name="title_activity_primeira_divisao">Primeira Divisão</string>
+    <string name="title_activity_primeira_divisao_tabela">Primeira Divisao Tabela</string>
     <string name="url_pdtabela">http://52.37.37.207:94/Admin/Partida/ObterTabelaJsonPD</string>
     <string name="url_pdclassificacao">http://52.37.37.207:94/Campeonato/ObterClassificacaoJson</string>
-    <string name="url_pdartilharia">http://52.37.37.207:88/Campeonato/getPDArtilharia</string>
     <string name="url_sdtabela">http://52.37.37.207:94/Admin/Partida/ObterTabelaJsonSD</string>
     <string name="url_sdclassificacao">http://52.37.37.207:94/Campeonato/ObterClassificacaoJson</string>
-    <string name="url_sdartilharia">http://52.37.37.207:88/Campeonato/getSDArtilharia</string>
-    <string name="url_imagens">http://52.37.37.207:88/Campeonato/Image</string>
     <string name="title_activity_adapter_rodada">AdapterRodada</string>
     <string name="title_activity_sobre">Sobre a Ibititec</string>
-    <string name="sendToken">http://52.37.37.207:88/Campeonato/SendToken</string>
     <string name="title_activity_login_usuario">Login Usuário</string>
     <string name="title_activity_cadastro_usuario">Cadastro Usuário</string>
 
@@ -26,14 +22,23 @@
     <string name="title_activity_paplite">Palpite por Partida</string>
     <string name="title_activity_palpite_por_jogo">Partidas Liberadas</string>
 
+    <!--Artilharia-->
+
+    <string name="url_pdartilharia">http://52.37.37.207:94/Campeonato/ObterArtilhariaJson</string>
+    <string name="url_sdartilharia">http://52.37.37.207:94/Campeonato/ObterArtilhariaJson</string>
+    <string name="sendToken">http://52.37.37.207:94/Campeonato/SendToken</string>
+    <string name="url_imagens">http://52.37.37.207:94/Campeonato/Image</string>
+
 <!--BOLAO-->
     <string name="url_pdclassificacaobolao">http://52.37.37.207:94/Admin/Bolao/VencedorRodadaJson</string>
     <string name="url_sdclassificacaobolao">http://52.37.37.207:94/Admin/Bolao/VencedorRodadaJson</string>
     <string name="url_jogos_bolao">http://52.37.37.207:94/Admin/Bolao/ParticiparJson</string>
+
+    <string name="url_jogos_rodada">http://52.37.37.207:94/Admin/Partida/ListarUltimaRodadaJson</string>
     <string name="url_sd_jogos_bolao">http://52.37.37.207:94/Admin/Bolao/getSDJogosBolao</string>
     <string name="url_salvar_palpite_bolao">http://52.37.37.207:94/Admin/Bolao/SalvarJson</string>
     <string name="url_partida_ao_vivo">http://52.37.37.207:94/Admin/Partida/AoVivo</string>
-    <string name="title_activity_fees_noticias">FeesNoticiasActivity</string>
+    <string name="title_activity_fees_noticias">Feed Noticias</string>
     <string name="url_feed_noticias">http://52.37.37.207:94/Admin/Campeonato/Noticias</string>
     <string name="url_feed_adicionar_noticias">http://52.37.37.207:94/Admin/Campeonato/AdicionarNoticia</string>
     <string name="url_comentario_adcionar" >http://52.37.37.207:94/Admin/Partida/ComentarJson</string>

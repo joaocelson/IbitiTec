@@ -607,8 +607,6 @@ namespace Campeonato.RepositorioADO
             }
         }
              
-
-
         public void ComentarPartida(string id, string comentario)
         {
             using (contexto = new Contexto())
@@ -688,6 +686,27 @@ namespace Campeonato.RepositorioADO
             }
         }
 
+        public IEnumerable<Partida> ListaTabelaPorCampeonatoSegundaDivisao(string id)
+        {
+            try
+            {
+                using (contexto = new Contexto())
+                {
+                    var strQuery = string.Format("SELECT p.*, tm.nome tm_nome, tm.escudo tm_escudo, tv.nome tv_nome, tv.escudo tv_escudo, c.nome nome_campeonato " +
+                                   "FROM partida p INNER JOIN " +
+                                   "times tm on tm.id = p.id_time_mandante INNER JOIN " +
+                                   "times tv on tv.id = p.id_time_visitante INNER JOIN " +
+                                   "campeonato c on c.id = p.id_campeonato where c.id = {0} or c.id = {1} ORDER BY CAST(p.rodada AS INT) ", id, "4");
+                    var retornoDataReader = contexto.ExecutaComandoComRetorno(strQuery);
+                    return TransformaReaderEmListaDeObjeto(retornoDataReader);
+                }
+            }
+            catch (Exception ex)
+            {
+                TratamentoLog.GravarLog("PartidaRepositorioADO::ListarTabelPorCampeonato:. Erro ao consultar tabela");
+                return null;
+            }
+        }
 
         public List<AoVivo> PartidaAoVivo(string id)
         {

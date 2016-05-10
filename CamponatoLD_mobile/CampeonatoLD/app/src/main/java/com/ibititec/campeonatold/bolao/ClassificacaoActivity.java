@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.appodeal.ads.Appodeal;
@@ -90,7 +91,7 @@ public class ClassificacaoActivity extends AppCompatActivity {
             intent.putExtra("divisao", divisao);
 
             // add data to Intent
-            setResult(BolaoPrincipalActivity.RESULT_OK, intent);
+            setResult(ClassificacaoActivity.RESULT_OK, intent);
             Appodeal.show(this, Appodeal.NATIVE);
             super.onBackPressed();
         } catch (Exception ex) {
@@ -205,5 +206,19 @@ public class ClassificacaoActivity extends AppCompatActivity {
         }).execute(urlJson);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        onBackPressed();
+        //noinspection SimplifiableIfStatement
+//        if (id == R.id.home) {
+//            onBackPressed();
+//            return true;
+//        }
+        return true;
+    }
 
 }

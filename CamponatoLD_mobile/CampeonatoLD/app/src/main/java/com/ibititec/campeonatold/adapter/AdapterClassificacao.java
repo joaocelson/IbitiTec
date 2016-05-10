@@ -38,7 +38,7 @@ public class AdapterClassificacao extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
@@ -50,31 +50,18 @@ public class AdapterClassificacao extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) activity.getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View layout = inflater.inflate(R.layout.adapter_classificacao, null);
 
-
-
             TextView posicao = (TextView) layout.findViewById(R.id.txtPosicao);
             TextView pontos = (TextView) layout.findViewById(R.id.txtPontos);
             TextView time = (TextView) layout.findViewById(R.id.txtTime);
-//            if(classificacao.getIdCampeonato().equals("3") && position == 0){
-//                posicao.setText("");
-//                pontos.setText("");
-//                time.setText("GRUPO A");
-//            }
-//
-//            if(classificacao.getIdCampeonato().equals("4") && position == 7){
-//                posicao.setText("");
-//                pontos.setText("");
-//                time.setText("GRUPO A");
-//            }
+
             posicao.setText(classificacao.getPosicao());
             pontos.setText(classificacao.getPontos());
             time.setText(classificacao.getTime());
-
-            //Appodeal.show(activity, Appodeal.BANNER_BOTTOM);
             return layout;
         } catch (Exception e) {
             Log.i(MainActivity.TAG, "Erro ao preecnher o getView: " + e.getMessage());
         }
+        Log.i(MainActivity.TAG, "Vlauew convertView: " + convertView);
         return convertView;
     }
 }

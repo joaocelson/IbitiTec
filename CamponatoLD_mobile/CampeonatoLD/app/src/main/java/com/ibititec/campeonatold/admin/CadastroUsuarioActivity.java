@@ -84,7 +84,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                     String token = sharedPreferences.getString(RegistrationIntentService.GCM_TOKEN, "");
                     usuario.setToken(token);
 
-                    if (usuario.getSenha() != usuario.getConfirmaSenha()) {
+                    if (usuario.getSenha() == usuario.getConfirmaSenha()) {
                         String mensagem = "Senhas não conferem.";
                         Snackbar.make(findViewById(R.id.btnCadastrar_cadastro), mensagem, Snackbar.LENGTH_SHORT).show();
                     } else if (usuario.getLoginEmail().contains("@")) {

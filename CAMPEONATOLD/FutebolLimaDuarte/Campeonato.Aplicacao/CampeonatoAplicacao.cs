@@ -62,5 +62,17 @@ namespace Campeonato.Aplicacao
             CampeonatoRepositorioADO campADO = new CampeonatoRepositorioADO();
             return campADO.Noticias();
         }
+
+        public bool GravarToken(string token, String idUsuario)
+        {
+            CampeonatoRepositorioADO campADO = new CampeonatoRepositorioADO();
+           return campADO.GravarToken(token, idUsuario);
+        }
+
+        public List<String> ObterTokens()
+        {
+            CampeonatoRepositorioADO campADO = new CampeonatoRepositorioADO();
+            return campADO.ObterTokens();
+        }
     }
 }
