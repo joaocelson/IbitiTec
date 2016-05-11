@@ -39,7 +39,7 @@ public class AdapterArtilharia extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class AdapterArtilharia extends BaseAdapter {
             TextView time = (TextView) layout.findViewById(R.id.txtTime);
 
             nome.setText( artilharia.getNome());
-            gols.setText(artilharia.getGols());
+            gols.setText(artilharia.getNumeroGols());
             time.setText(artilharia.getTime());
 
             //Appodeal.show(activity, Appodeal.BANNER_BOTTOM);

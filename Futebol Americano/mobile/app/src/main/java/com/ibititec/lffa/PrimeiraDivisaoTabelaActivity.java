@@ -123,7 +123,7 @@ public class PrimeiraDivisaoTabelaActivity extends AppCompatActivity {
             this.setTitle("Equipes");
             tabela = JsonHelper.leJsonBancoLocal(MainActivity.PDCLASSIFICACAO, this);
             List<Classificacao> listClassificacao = JsonHelper.getList(tabela, Classificacao[].class);
-            AdapterClassificacao adapterClassificacao = new AdapterClassificacao(this, listClassificacao, false);
+            AdapterClassificacao adapterClassificacao = new AdapterClassificacao(this, listClassificacao,false);
             lvTabela.setAdapter(adapterClassificacao);
             UIHelper.setListViewHeightBasedOnChildren(lvTabela);
         } catch (Exception ex) {
@@ -196,7 +196,7 @@ public class PrimeiraDivisaoTabelaActivity extends AppCompatActivity {
             this.setTitle("Tabela 2ª Divisão");
             tabela = JsonHelper.leJsonBancoLocal(MainActivity.SDTABELA, this);
             List<Rodada> listRodada = JsonHelper.getList(tabela, Rodada[].class);
-            AdapterRodada adapterRodada = new AdapterRodada(this, listRodada);
+            AdapterRodada adapterRodada = new AdapterRodada(this, listRodada, divisao,funcionalidade);
             lvTabela.setAdapter(adapterRodada);
             UIHelper.setListViewHeightBasedOnChildren(lvTabela);
 
@@ -210,7 +210,7 @@ public class PrimeiraDivisaoTabelaActivity extends AppCompatActivity {
             this.setTitle("Tabela Geral");
             String tabela = JsonHelper.leJsonBancoLocal(MainActivity.PDTABELA, this);
             List<Rodada> listRodada = JsonHelper.getList(tabela, Rodada[].class);
-            AdapterRodada adapterRodada = new AdapterRodada(this, listRodada);
+            AdapterRodada adapterRodada = new AdapterRodada(this, listRodada, divisao,funcionalidade);
             lvTabela.setAdapter(adapterRodada);
             UIHelper.setListViewHeightBasedOnChildren(lvTabela);
         } catch (Exception ex) {

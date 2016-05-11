@@ -21,7 +21,7 @@ import com.ibititec.lffa.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class GcmMessageHandler extends GcmListenerService {
+public class  GcmMessageHandler extends GcmListenerService {
     public static final int MESSAGE_NOTIFICATION_ID = 435345;
 
     @Override
@@ -43,33 +43,29 @@ public class GcmMessageHandler extends GcmListenerService {
 
     // Creates notification based on title and body received
     private void createNotification(String title, String body) {
-        try {
-            Context context = getBaseContext();
-            Intent myIntent = new Intent(context, MainActivity.class);
-            Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        Context context = getBaseContext();
+        Intent myIntent = new Intent(context, MainActivity.class);
+        Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-            PendingIntent pendingIntent = PendingIntent.getActivity(context,
-                    0,
-                    myIntent,
-                    PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context,
+                0,
+                myIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
 
-            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
-                    .setSmallIcon(R.drawable.bola_ico)
-                    .setContentTitle(body)
-                    .setContentText(title)
-                    .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
-                    .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
-                    .setPriority(NotificationCompat.PRIORITY_LOW)
-                    .setAutoCancel(true)
-                    .setContentIntent(pendingIntent);
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
+                .setSmallIcon(R.drawable.bola_ico)
+                .setContentTitle(body)
+                .setContentText(title)
+                .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
+                .setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
+                .setPriority(NotificationCompat.PRIORITY_LOW)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent);
 
 
-            NotificationManager mNotificationManager = (NotificationManager) context
-                    .getSystemService(Context.NOTIFICATION_SERVICE);
-            mNotificationManager.notify(MESSAGE_NOTIFICATION_ID, mBuilder.build());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        NotificationManager mNotificationManager = (NotificationManager) context
+                .getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.notify(MESSAGE_NOTIFICATION_ID, mBuilder.build());
     }
 
    /* private int getNotificationIcon() {

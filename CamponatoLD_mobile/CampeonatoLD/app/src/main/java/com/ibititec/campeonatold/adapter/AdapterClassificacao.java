@@ -43,12 +43,13 @@ public class AdapterClassificacao extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        View layout = null;
         try {
             final Classificacao classificacao = classificacaoList.get(position);
             Log.i(MainActivity.TAG, "Vai setar o Adapter, número de registro: " + classificacaoList.size() + " Position: " + position + " - Nome Rodada " + classificacao.getTime());
 
             LayoutInflater inflater = (LayoutInflater) activity.getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View layout = inflater.inflate(R.layout.adapter_classificacao, null);
+            layout = inflater.inflate(R.layout.adapter_classificacao, null);
 
             TextView posicao = (TextView) layout.findViewById(R.id.txtPosicao);
             TextView pontos = (TextView) layout.findViewById(R.id.txtPontos);
@@ -60,8 +61,7 @@ public class AdapterClassificacao extends BaseAdapter {
             return layout;
         } catch (Exception e) {
             Log.i(MainActivity.TAG, "Erro ao preecnher o getView: " + e.getMessage());
+            return  convertView;
         }
-        Log.i(MainActivity.TAG, "Vlauew convertView: " + convertView);
-        return convertView;
     }
 }

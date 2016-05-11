@@ -29,8 +29,7 @@ public class AdapterClassificacao extends BaseAdapter {
         this.exibirPontuacao = exibirPontuacao;
     }
 
-    public AdapterClassificacao() {
-    }
+    public AdapterClassificacao(){}
 
     @Override
     public int getCount() {
@@ -44,12 +43,13 @@ public class AdapterClassificacao extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         try {
+
             final Classificacao classificacao = classificacaoList.get(position);
             Log.i(MainActivity.TAG, "Vai setar o Adapter, número de registro: " + classificacaoList.size() + " Position: " + position + " - Nome Rodada " + classificacao.getTime());
 
@@ -67,26 +67,16 @@ public class AdapterClassificacao extends BaseAdapter {
             TextView pontospc = (TextView) layout.findViewById(R.id.txtPC);
             //TextView time = (TextView) layout.findViewById(R.id.txtTime);
 
-            if (classificacao.getTime().equals("GRUPOA") || classificacao.getTime().equals("GRUPOB")) {
-            //    posicao.setText("");
-//                pontos.setText("");
-//                jogos.setText("");
-//                vitoria.setText("");
-//                derrotas.setText("");
-//                empates.setText("");
-
-                //time.setText(classificacao.getTime());
-            }
-
             if(exibirPontuacao){
-             //   posicao.setText(classificacao.getPosicao());
+                //   posicao.setText(classificacao.getPosicao());
                 pontos.setText(classificacao.getPontos());
                 jogos.setText(classificacao.getJogos());
-                vitoria.setText(classificacao.getVitorias());
-                derrotas.setText(classificacao.getDerrotas());
-                empates.setText(classificacao.getEmpate());
-                pontospp.setText(classificacao.getPontosPC());
-                pontospc.setText(classificacao.getPontosPC());
+                vitoria.setText(classificacao.getVitoria());
+                derrotas.setText(classificacao.getDerrota());
+                //empates.setText(classificacao.getEmpate());
+                empates.setVisibility(View.INVISIBLE);
+                pontospp.setText(classificacao.getGolPro());
+                pontospc.setText(classificacao.getGolContra());
                 Uri imageUri = Uri.parse(MainActivity.PATH_FOTOS + classificacao.getTime() + "_escudo.png");
                 SimpleDraweeView draweeView = (SimpleDraweeView) layout.findViewById(R.id.ivClassificacao);
                 draweeView.setImageURI(imageUri);
@@ -114,5 +104,23 @@ public class AdapterClassificacao extends BaseAdapter {
             Log.i(MainActivity.TAG, "Erro ao preecnher o getView: " + e.getMessage());
         }
         return convertView;
+
+//            final Classificacao classificacao = classificacaoList.get(position);
+//            Log.i(MainActivity.TAG, "Vai setar o Adapter, número de registro: " + classificacaoList.size() + " Position: " + position + " - Nome Rodada " + classificacao.getTime());
+//
+//            LayoutInflater inflater = (LayoutInflater) activity.getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//            layout = inflater.inflate(R.layout.adapter_classificacao, null);
+//
+//            TextView posicao = (TextView) layout.findViewById(R.id.txtPosicao);
+//            TextView pontos = (TextView) layout.findViewById(R.id.txtPontos);
+//            TextView time = (TextView) layout.findViewById(R.id.txtTime);
+//
+//            posicao.setText(classificacao.getPosicao());
+//            pontos.setText(classificacao.getPontos());
+//            time.setText(classificacao.getTime());
+//            return layout;
+//        } catch (Exception e) {
+//            Log.i(MainActivity.TAG, "Erro ao preecnher o getView: " + e.getMessage());
+//            return  convertView;
     }
 }

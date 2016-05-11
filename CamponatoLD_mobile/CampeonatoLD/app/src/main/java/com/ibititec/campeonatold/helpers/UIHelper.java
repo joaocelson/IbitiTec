@@ -36,6 +36,8 @@ public class UIHelper {
 
             listView.setLayoutParams(params);
             listView.requestLayout();
+            Log.i(MainActivity.TAG, " Após ListLayouParams, total de itens listView: " + listView.getCount());
+
         }catch (Exception e){
             Log.i(MainActivity.TAG, "Erro - setListViewHeightBasedOnChildren: " + e.getMessage());
 

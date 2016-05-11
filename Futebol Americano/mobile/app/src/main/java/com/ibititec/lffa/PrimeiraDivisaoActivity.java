@@ -4,17 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.appodeal.ads.Appodeal;
+import com.ibititec.lffa.bolao.BolaoPrincipalActivity;
 
 public class PrimeiraDivisaoActivity extends AppCompatActivity {
 
-    private ImageButton btnTabela, btnArtilharia, btnClassificacao, btnAjuda;
-    private TextView txtTabela, txtMaiorPontuador, txtClassificacao, txtAjuda;
+    private ImageButton btnTabela, btnArtilharia, btnClassificacao, btnAjuda, btnBolao;
+    private TextView txtTabela, txtMaiorPontuador, txtClassificacao, txtAjuda, txtBolao;
 
     private String divisao;
     Toolbar toolbar;
@@ -37,6 +39,8 @@ public class PrimeiraDivisaoActivity extends AppCompatActivity {
         txtClassificacao = (TextView) findViewById(R.id.txtClassificacao);
         txtAjuda = (TextView) findViewById(R.id.txtAjuda);
 
+        txtBolao = (TextView) findViewById(R.id.txtBolao);
+        btnBolao = (ImageButton) findViewById(R.id.btnPrimeiraDivisaoBolao);
 
         lerIntent();
         executarAcoes();
@@ -90,6 +94,13 @@ public class PrimeiraDivisaoActivity extends AppCompatActivity {
             }
         });
 
+        btnBolao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startarActivityBolao(divisao);
+            }
+        });
+
         btnAjuda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,6 +135,13 @@ public class PrimeiraDivisaoActivity extends AppCompatActivity {
                 startarActivityHelp(divisao, "sobre");
             }
         });
+
+        txtBolao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startarActivityBolao(divisao);
+            }
+        });
     }
 
     private void startarActivityHelp(String divisao, String funcionalidade) {
@@ -133,6 +151,15 @@ public class PrimeiraDivisaoActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void startarActivityBolao(String divisao) {
+        try {
+            Intent intent = new Intent(this, BolaoPrincipalActivity.class);
+            intent.putExtra("divisao", divisao);
+            startActivity(intent);
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro: startarActivityBolao PrimeiraDivisao: " + ex.getMessage());
+        }
+    }
     private void startarActivity(String divisao, String funcionalidade) {
         Intent intent = new Intent(this, PrimeiraDivisaoTabelaActivity.class);
         intent.putExtra("divisao", divisao);

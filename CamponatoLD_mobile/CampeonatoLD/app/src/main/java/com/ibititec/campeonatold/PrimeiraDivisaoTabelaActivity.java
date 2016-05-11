@@ -160,6 +160,7 @@ public class PrimeiraDivisaoTabelaActivity extends AppCompatActivity {
             cabecalhoLayout.setVisibility(View.VISIBLE);
             this.setTitle("Classificação 2ª Divisão");
             tabela = JsonHelper.leJsonBancoLocal(MainActivity.SDCLASSIFICACAO, this);
+
             List<Classificacao> listClassificacao = JsonHelper.getList(tabela, Classificacao[].class);
             AdapterClassificacao adapterClassificacao = new AdapterClassificacao(this, listClassificacao);
             lvTabela.setAdapter(adapterClassificacao);

@@ -1,6 +1,12 @@
 package com.ibititec.lffa.helpers;
 
-import org.json.JSONObject;
+import android.app.Activity;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.util.Log;
+
+import com.ibititec.lffa.MainActivity;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -65,7 +71,7 @@ public class HttpHelper {
                 response = "";
             }
         } catch (Exception ex) {
-
+            Log.i(MainActivity.TAG, "Erro ao post json usuario." + ex.getMessage());
         }
         return response;
     }
@@ -109,5 +115,33 @@ public class HttpHelper {
 
         }
         return response;
+    }
+
+    public static boolean existeConexao(Activity activity) {
+
+        boolean haveConnectedWifi = false;
+        boolean haveConnectedMobile = false;
+        ConnectivityManager connectivity = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        try {
+            ConnectivityManager cm = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+            for (NetworkInfo ni : netInfo) {
+                if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                    if (ni.isConnected())
+                        haveConnectedWifi = true;
+                if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                    if (ni.isConnected())
+                        haveConnectedMobile = true;
+            }
+            if (!haveConnectedWifi && !haveConnectedMobile) {
+                return false;
+            }
+            return haveConnectedWifi || haveConnectedMobile;
+
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro ao verificar conexao com a intenet." + ex.getMessage());
+            return false;
+        }
     }
 }

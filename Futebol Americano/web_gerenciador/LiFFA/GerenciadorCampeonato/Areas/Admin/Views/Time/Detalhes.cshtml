@@ -1,0 +1,122 @@
+﻿@model Campeonato.Dominio.Time
+
+@{
+    ViewBag.Title = "Futebol Lima Duarte";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var i = 0;
+
+}
+<link rel="stylesheet" type="text/css" href="~/Content/galeria/style.css" />
+<script type="text/javascript" src="~/Content/galeria/jquery.js"></script>
+
+
+<h2>Detalhes Time</h2>
+
+<fieldset>
+
+    <div class="display-label">
+        <img src="~/Content/images/escudo/@Model.EscudoPequeno" height="40">
+    </div>
+    <div class="display-label">
+        <b> @Html.DisplayNameFor(model => model.Nome):</b> @Html.DisplayFor(model => model.Nome)
+    </div>
+
+    <div class="display-field">
+        <b> Data Fundação:</b>  @Html.DisplayFor(model => model.DataFundacao)
+    </div>
+
+    <div class="display-label">
+        <b>  @Html.DisplayNameFor(model => model.Presidente):</b>  @Html.DisplayFor(model => model.Presidente)
+    </div>
+
+    <div class="display-label">
+        <b>  @Html.DisplayNameFor(model => model.Telefone):</b>  @Html.DisplayFor(model => model.Telefone)
+    </div>
+    <div class="display-label">
+        <b>    Descrição: </b> @Html.DisplayFor(model => model.Descricao)
+    </div>
+</fieldset>
+
+@*<div id="wowslider-container1">
+    <div class="ws_images">
+        <ul>
+            @foreach (var item2 in Model.ListaFotosVideos)
+            {
+                if (item2.Video.Equals("1"))
+                {
+                  
+                }
+                else
+                {
+                    <li><img src="@item2.Caminho" alt="@item2.Descricao" title="@item2.Descricao" id="wows1_0" /></li>
+                }
+            }
+
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/Content/galeria/wowslider.js"></script>
+<script type="text/javascript" src="~/Content/galeria/script.js"></script>
+<br />
+<br />
+
+@foreach (var item in Model.ListaFotosVideos)
+{
+    if (item.Video.Equals("1"))
+    {<div style="text-align:center">
+        <iframe width="560" height="315" src="@item.Caminho" frameborder="0" allowfullscreen></iframe>
+    </div>
+    }
+}*@
+
+<script>
+    !function ($) {
+        $(function () {
+            // carousel demo
+            $('#myCarousel').carousel({ interval: 3000 })
+
+        })
+    }(window.jQuery)
+</script>
+<div style="margin:0 auto;">
+    <div id="myCarousel" class="carousel slide">
+        <div class="carousel-inner">
+            @foreach (var item in Model.ListaFotosVideos)
+            {
+                if (item.Video.Equals("0"))
+                {
+                    if (i == 0)
+                    {
+                        i++;
+                        <div class="item active">
+                            <img src="@item.Caminho" alt="" width="100%">
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="item">
+                            <img src="@item.Caminho" alt="" width="100%">
+                        </div>
+                    }
+                }
+            }
+        </div>
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="icon-prev"></span></a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="icon-next"></span></a>
+    </div>
+</div>
+<br />
+@foreach (var item in Model.ListaFotosVideos)
+{
+    if (item.Video.Equals("1"))
+    {<div style="text-align:center">
+        <iframe width="560" height="315" src="@item.Caminho" frameborder="0" allowfullscreen></iframe>
+    </div>
+    }
+}
+
+<br />
+<p>
+    @Html.ActionLink("Voltar", "Index")
+</p>

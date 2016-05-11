@@ -213,13 +213,25 @@ namespace Campeonato.UI.WEB.Areas.Admin
                 }
 
             }
+            Classificacao classificacao2 = new Classificacao();
+            classificacao2.Posicao = " ";
+            classificacao2.NomeTime = " ";
+            classificacao2.Pontos = " ";
+            listaClassificacao.Add(classificacao2);
+
             return JsonConvert.SerializeObject(listaClassificacao, Formatting.Indented);
         }
 
         public String ObterArtilhariaJson(string id)
         {
             var listaArtilheiros = appCampeonato.ArtilhariaPorCampeonato(id);
-            return JsonConvert.SerializeObject(listaArtilheiros, Formatting.Indented);
+            Artilheiro artilheiro = new Artilheiro();
+            artilheiro.Nome = " ";
+            artilheiro.NumeroGols = "0";
+            artilheiro.Time = " ";
+            List<Artilheiro> artilheiros =  listaArtilheiros.ToList<Artilheiro>();
+            artilheiros.Add(artilheiro);
+            return JsonConvert.SerializeObject(artilheiros, Formatting.Indented);
         }
 
         public String Noticias()

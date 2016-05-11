@@ -46,8 +46,13 @@ public class MainActivity extends AppCompatActivity
     // private ProgressDialog progressDialog;
 
     //CONSTANTES NOME DO JSON NA BASE DE DADOS
+    //CONSTANTES NOME DO JSON NA BASE DE DADOS
     public static final String PDARTILHARIA = "pdartilharia", PDTABELA = "pdtabela", PDCLASSIFICACAO = "pdclassificacao",
-            SDARTILHARIA = "sdartilharia", SDTABELA = "dstabela", SDCLASSIFICACAO = "sdclassificacao";
+            SDARTILHARIA = "sdartilharia", SDTABELA = "dstabela", SDCLASSIFICACAO = "sdclassificacao",
+            PDCLASSIFICACAOBOLAO = "pdclassificacaobolao", SDCLASSIFICACAOBOLAO = "sdclassificacaobolao",
+            PDJOGOSBOLAO = "pdjogosbolao", SDJOGOSBOLAO = "sdjogosbolao", USUARIO = "usuario", PDJOGOSRODADA = "pdjogosRODADA", SDJOGOSRODADA = "sdjogosRODADA";
+
+
     public static final String TAG = "CAMPEONATOLD";
     public static final String PATH_FOTOS = "http://52.37.37.207:92/Campeonato/Image?nomeimagem=";
 
@@ -126,12 +131,16 @@ public class MainActivity extends AppCompatActivity
 
             if (JsonHelper.leJsonBancoLocal(MainActivity.PDTABELA, this) == "" || atualizar == true) {
                 if (existeConexao()) {
-                    donwnloadFromUrl(PDTABELA, getString(R.string.url_pdtabela));
-                    donwnloadFromUrl(PDARTILHARIA, getString(R.string.url_pdartilharia));
-                    donwnloadFromUrl(PDCLASSIFICACAO, getString(R.string.url_pdclassificacao));
-                    donwnloadFromUrl(SDTABELA, getString(R.string.url_sdtabela));
-                    donwnloadFromUrl(SDARTILHARIA, getString(R.string.url_sdartilharia));
-                    donwnloadFromUrl(SDCLASSIFICACAO, getString(R.string.url_sdclassificacao));
+                    donwnloadFromUrl(PDTABELA, getString(R.string.url_pdtabela), "");
+                    donwnloadFromUrl(PDARTILHARIA, getString(R.string.url_pdartilharia), "{\"id\": \"1\"}");
+                    donwnloadFromUrl(PDCLASSIFICACAO, getString(R.string.url_pdclassificacao), "{\"id\": \"1\"}");
+                    //donwnloadFromUrl(SDTABELA, getString(R.string.url_sdtabela), "");
+                    //donwnloadFromUrl(SDARTILHARIA, getString(R.string.url_sdartilharia), "{\"id\": \"3\"}");
+                    //donwnloadFromUrl(SDCLASSIFICACAO, getString(R.string.url_sdclassificacao), "{\"id\": \"3\"}");
+
+                    donwnloadFromUrl(PDCLASSIFICACAOBOLAO, getString(R.string.url_pdclassificacaobolao), "");
+
+                    donwnloadFromUrl(SDCLASSIFICACAOBOLAO, getString(R.string.url_sdclassificacaobolao), "");
                 } else {
                     Log.i(TAG, "Sem conexão com a internet.");
                 }
@@ -281,7 +290,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void donwnloadFromUrl(final String nomeJsonParam, String urlJson) {
+    private void donwnloadFromUrl(final String nomeJsonParam, String urlJson, final String param) {
         (new AsyncTask<String, Void, String>() {
             ProgressDialog progressDialog;
 
@@ -297,8 +306,15 @@ public class MainActivity extends AppCompatActivity
 
                 try {
                     String url = params[0];
-                    json = HttpHelper.downloadFromURL(url);
+                    if (param.equals("")) {
+                        json = HttpHelper.downloadFromURL(url);
+                    } else {
+                        json = HttpHelper.POSTJson(url, param);
+                    }
                     Log.i(TAG, json);
+                    if (json == null) {
+                        Log.w(TAG, "JSON veio nulo na url : " + url);
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                     Log.e(TAG, String.format(getString(R.string.msg_erro_json), e.getMessage()));
@@ -313,7 +329,7 @@ public class MainActivity extends AppCompatActivity
                 progressDialog.dismiss();
 
                 if (json == null) {
-                    Log.w(TAG, "JSON veio nulo!");
+                    //Log.w(TAG, "JSON veio nulo!");
                     return;
                 }
 

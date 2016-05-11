@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import com.appodeal.ads.Appodeal;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.ibititec.lffa.admin.LoginUsuarioActivity;
 
 public class SplashActivity extends AppCompatActivity {
     private  final int DURACAO_TELA = 5000;
@@ -22,7 +23,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent novaTela = new Intent(SplashActivity.this, MainActivity.class);
+                Intent novaTela = new Intent(SplashActivity.this, LoginUsuarioActivity.class);
                 SplashActivity.this.startActivity(novaTela);
                 SplashActivity.this.finish();
             }
@@ -35,9 +36,9 @@ public class SplashActivity extends AppCompatActivity {
 
     private void iniciarAppodeal() {
         //String PRODUCAO
-        String appKey = "ab31007920a45b71ea2c8fa0dc9026bae336c763428a8c6e";
+        //String appKey = "ab31007920a45b71ea2c8fa0dc9026bae336c763428a8c6e";
         //String DESENVOLCIVMENTO
-       //String appKey = "a7abb670bb95499ee0c535d3d8f3787704b48736d99fab8ssdsddsd9";
+       String appKey = "a7abb670bb95499ee0c535d3d8f3787704b48736d99fab8ssdsddsd9";
         Appodeal.setBannerViewId(R.id.appodealBannerView);
         Appodeal.initialize(this, appKey, Appodeal.INTERSTITIAL | Appodeal.BANNER | Appodeal.MREC);
         //Appodeal.setTesting(true);

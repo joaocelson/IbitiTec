@@ -80,6 +80,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                     usuario.setSenha(txtSenha.getText().toString());
                     usuario.setNomeUsuario(txtNome.getText().toString());
                     usuario.setConfirmaSenha(txtConfSenha.getText().toString());
+                    usuario.setTipoUsuario("0");
                     SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(CadastroUsuarioActivity.this);
                     String token = sharedPreferences.getString(RegistrationIntentService.GCM_TOKEN, "");
                     usuario.setToken(token);
@@ -87,7 +88,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                     if (usuario.getSenha() == usuario.getConfirmaSenha()) {
                         String mensagem = "Senhas não conferem.";
                         Snackbar.make(findViewById(R.id.btnCadastrar_cadastro), mensagem, Snackbar.LENGTH_SHORT).show();
-                    } else if (usuario.getLoginEmail().contains("@")) {
+                    } else if (!usuario.getLoginEmail().contains("@")) {
                         String mensagem = "Digite um e-mail válido.";
                         Snackbar.make(findViewById(R.id.btnCadastrar_cadastro), mensagem, Snackbar.LENGTH_SHORT).show();
                     } else if (usuario.getNomeUsuario().length() <= 4) {

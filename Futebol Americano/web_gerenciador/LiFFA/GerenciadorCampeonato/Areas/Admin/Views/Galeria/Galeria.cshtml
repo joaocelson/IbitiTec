@@ -1,0 +1,157 @@
+﻿@model IEnumerable<Campeonato.Dominio.FotosVideos>
+    <!--Importar os scripst e css-->
+    @*<link rel="stylesheet" type="text/css" href="~/Content/galeria/style.css" />
+        <script type="text/
+                script" src="~/Content/galeria/jquery.js"></script>
+
+        <div id="wowslider-container1">
+            <div class="ws_images">
+
+                <ul>
+                    @foreach (var item in Model)
+                    {
+                        if (item.Video.Equals("1"))
+                        {
+                            <iframe width="560" height="315" src="@item.Caminho" frameborder="0" allowfullscreen></iframe>
+                        }
+                        else
+                        {
+                            <li><img src="@item.Caminho" alt="@item.Descricao" title="@item.Descricao" id="wows1_0" /></li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        <script type="text/javascript" src="~/Content/galeria/wowslider.js"></script>
+        <script type="text/javascript" src="~/Content/galeria/script.js"></script>
+        <br />
+        <br />
+
+        @foreach (var item in Model)
+        {
+            if (item.Video.Equals("1"))
+            {<div style="text-align:center">
+                <iframe width="560" height="315" src="@item.Caminho" frameborder="0" allowfullscreen></iframe>
+            </div>
+            }
+        }*@
+
+
+    <!-- FIM DA GALERIA -->
+    @{
+        ViewBag.Title = "Futebol Lima Duarte";
+        var i = 0;
+    }
+
+    @*<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-carousel.js"></script>
+                      <script>
+                          !function ($) {
+                              $(function () {
+                                  // carousel demo
+                                  $('#carrossel').carousel()
+                              })
+                          }(window.jQuery)
+                      </script>
+
+        <!--Importar os scripst e css-->
+        <div>
+            <div id="slide">
+                <header class="page-header"></header>
+                <div id="carrossel" class="carousel slide">
+                    <div class="carousel-inner">
+                        @foreach (var item in Model)
+                        {
+                            if (item.Video.Equals("1"))
+                            {
+                           <!-- <iframe width="560" height="315" src="@item.Caminho" frameborder="0" allowfullscreen></iframe>-->
+                            }
+                            else
+                            {
+                                if (i == 0)
+                                {
+                                    <section class="active item">
+                                        <img src="@item.Caminho " alt="@item.Descricao" />
+                                        <div class="carousel-caption">
+                                            <h4>Teste</h4>
+                                        </div>
+                                    </section>
+                                }
+                                else
+                                {
+                                    <section class="item">
+                                        <img src="@item.Caminho " alt="@item.Descricao" />
+                                        <div class="carousel-caption">
+                                            <h4>Teste</h4>
+                                        </div>
+                                    </section>
+                                }
+                            }
+                        }
+                    </div>
+                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                        <span class="icon-prev"></span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                        <span class="icon-next"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <br />
+        @foreach (var item in Model)
+        {
+            if (item.Video.Equals("1"))
+            {<div style="text-align:center">
+                <iframe width="560" height="315" src="@item.Caminho" frameborder="0" allowfullscreen></iframe>
+            </div>
+            }
+        }*@
+
+
+
+    <script>
+        !function ($) {
+            $(function () {
+                // carousel demo
+                $('#myCarousel').carousel({ interval: 3000})
+                
+            })
+        }(window.jQuery)
+    </script>
+    <div style="margin:0 auto;">
+        <div id="myCarousel" class="carousel slide">
+            <div class="carousel-inner">
+                @foreach (var item in Model)
+                {
+                    if (item.Video.Equals("0"))
+                    {
+                        if (i == 0)
+                        {
+                            i++;
+                            <div class="item active">
+                                <img src="@item.Caminho" alt="" width="100%">
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="item">
+                                <img src="@item.Caminho" alt="" width="100%">
+                            </div>
+                        }
+                    }
+                }
+            </div>
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="icon-prev"></span></a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="icon-next"></span></a>
+        </div>
+    </div>
+    <br />
+    @foreach (var item in Model)
+    {
+        if (item.Video.Equals("1"))
+        {<div style="text-align:center">
+            <iframe width="560" height="315" src="@item.Caminho" frameborder="0" allowfullscreen></iframe>
+        </div>
+        }
+    }
+

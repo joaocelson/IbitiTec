@@ -286,6 +286,47 @@
             android:label="@string/title_activity_aliga"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
+
+        <activity
+            android:name=".admin.CadastroUsuarioActivity"
+            android:label="@string/title_activity_cadastro_usuario"
+            android:parentActivityName=".admin.LoginUsuarioActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".admin.LoginUsuarioActivity"
+            android:label="@string/title_activity_login_usuario"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".bolao.BolaoPrincipalActivity"
+            android:label="@string/title_activity_bolao_principal"
+            android:parentActivityName=".PrimeiraDivisaoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".bolao.ClassificacaoActivity"
+            android:label="@string/title_activity_classificacao"
+            android:parentActivityName=".bolao.BolaoPrincipalActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".bolao.PalpiteActivity"
+            android:label="@string/title_activity_paplite"
+            android:parentActivityName=".bolao.BolaoPrincipalActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".bolao.PalpitePorJogoActivity"
+            android:label="@string/title_activity_palpite_por_jogo"
+            android:parentActivityName=".bolao.PalpiteActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".aovivo.PartidaTempoRealActivity"
+            android:label="Partida Tempo Real"
+            android:parentActivityName=".PrimeiraDivisaoTabelaActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".noticias.FeedNoticiasActivity"
+            android:label="@string/title_activity_fees_noticias"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>

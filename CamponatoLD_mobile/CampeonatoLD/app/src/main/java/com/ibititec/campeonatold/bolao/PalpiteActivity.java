@@ -109,7 +109,13 @@ public class PalpiteActivity extends AppCompatActivity {
                         donwnloadFromUrl(MainActivity.SDJOGOSBOLAO, getString(R.string.url_jogos_bolao), "{\"id\":\"2\", \"emailUsuario\":\"" + usuarioLogado.getLoginEmail() + "\",\"senha\":\"" + usuarioLogado.getSenha() + "\"}");
                     }
                 } else {
-                    donwnloadFromUrl(MainActivity.SDJOGOSBOLAO, getString(R.string.url_jogos_rodada), "");
+                    if (divisao.equals("primeira")) {
+
+                        donwnloadFromUrl(MainActivity.PDJOGOSBOLAO, getString(R.string.url_jogos_rodada), "");
+                    } else {
+
+                        donwnloadFromUrl(MainActivity.SDJOGOSBOLAO, getString(R.string.url_jogos_rodada), "");
+                    }
                 }
             } else {
                 exibirMensagem("Não identificado conexão com a internet, verifique se sua conexão está ativa.", "Atenção");

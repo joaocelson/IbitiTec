@@ -104,6 +104,31 @@
                 android:textSize="20sp" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <ImageButton
+                android:id="@+id/btnPrimeiraDivisaoBolao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/Transparente"
+                android:src="@drawable/pdbolao" />
+
+            <TextView
+                android:id="@+id/txtBolao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BOLÃO"
+                android:paddingLeft="10dp"
+                android:textColor="@color/White"
+                android:layout_gravity="center_vertical"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="20dp"
+                android:layout_weight="1.15" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

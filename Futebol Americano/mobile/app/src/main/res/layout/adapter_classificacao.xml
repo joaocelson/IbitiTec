@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1"
-    android:background="@color/Black">
+    android:background="@color/Black"
+    android:orientation="vertical"
+    android:weightSum="1">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,67 +27,76 @@
             fresco:roundedCornerRadius="5dp" />
 
         <TextView
+            android:id="@+id/txtPontos"
             android:layout_width="wrap_content"
-            android:textSize="20sp"
             android:layout_height="match_parent"
             android:layout_gravity="right"
-            android:id="@+id/txtPontos"
-            android:text="P"
             android:layout_weight="0.12"
-            android:textColor="@color/White" />
+            android:text="P"
+            android:textColor="@color/White"
+            android:textSize="20sp" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:textSize="20sp"
-            android:layout_height="match_parent"
             android:id="@+id/txtJogos"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.12"
             android:text="J"
             android:textColor="@color/White"
-            android:layout_weight="0.12" />
+            android:textSize="20sp" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:textSize="20sp"
-            android:layout_height="match_parent"
             android:id="@+id/txtVitorias"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.12"
             android:text="V"
-            android:layout_weight="0.12"
-            android:textColor="@color/White" />
+            android:textColor="@color/White"
+            android:textSize="20sp" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:textSize="20sp"
-            android:layout_height="match_parent"
             android:id="@+id/txtDerrotas"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.12"
             android:text="D"
-            android:layout_weight="0.12"
-            android:textColor="@color/White" />
+            android:textColor="@color/White"
+            android:textSize="20sp" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:textSize="20sp"
-            android:layout_height="match_parent"
             android:id="@+id/txtEmpates"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.12"
             android:text="E"
-            android:layout_weight="0.12"
-            android:textColor="@color/White" />
+            android:textColor="@color/White"
+            android:textSize="20sp" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:textSize="20sp"
-            android:layout_height="match_parent"
             android:id="@+id/txtPP"
-            android:text="PP"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.12"
-            android:textColor="@color/White" />
+            android:text="PP"
+            android:textColor="@color/White"
+            android:textSize="20sp" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:textSize="20sp"
-            android:layout_height="match_parent"
             android:id="@+id/txtPC"
-            android:text="PC"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.12"
-            android:textColor="@color/White" />
+            android:text="PC"
+            android:textColor="@color/White"
+            android:textSize="20sp" />
     </LinearLayout>
 </LinearLayout>
+
+
+    <!--<?xml version="1.0" encoding="utf-8"?>--><!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"--><!--android:orientation="vertical"--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent">-->
+
+    <!--<LinearLayout--><!--android:layout_width="match_parent"--><!--android:layout_height="match_parent"--><!--android:orientation="horizontal"--><!--android:weightSum="1">--><!--<TextView--><!--android:layout_width="80dp"--><!--android:textSize="20dp"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="left"--><!--android:id="@+id/txtPosicao"--><!--android:text="Posicao" android:paddingBottom="20dp" />-->
+
+    <!--<TextView--><!--android:layout_width="210dp"--><!--android:textSize="20dp"--><!--android:layout_height="wrap_content"--><!--android:layout_gravity="right"--><!--android:id="@+id/txtTime"--><!--android:text="Time"/>-->
+
+    <!--<TextView--><!--android:layout_width="73dp"--><!--android:textSize="20dp"--><!--android:layout_height="match_parent"--><!--android:layout_gravity="right"--><!--android:id="@+id/txtPontos"--><!--android:text="Pontos"/>--><!--</LinearLayout>--><!--</LinearLayout>-->

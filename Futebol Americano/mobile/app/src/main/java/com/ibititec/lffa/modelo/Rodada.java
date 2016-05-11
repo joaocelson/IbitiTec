@@ -11,6 +11,24 @@ public class Rodada {
     private String Jogo1 ;
     private String HoraJogo2 ;
     private String Jogo2 ;
+    private Partida Partida1 ;
+    private Partida Partida2 ;
+
+    public Partida getPartida1() {
+        return Partida1;
+    }
+
+    public void setPartida1(Partida partida1) {
+        Partida1 = partida1;
+    }
+
+    public Partida getPartida2() {
+        return Partida2;
+    }
+
+    public void setPartida2(Partida partida2) {
+        Partida2 = partida2;
+    }
 
     public String getNumero() {
         return Numero;

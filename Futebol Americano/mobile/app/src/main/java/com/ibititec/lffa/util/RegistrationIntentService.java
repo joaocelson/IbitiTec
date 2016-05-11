@@ -35,10 +35,9 @@ public class RegistrationIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         synchronized (TAG) {
-            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
             // Make a call to Instance API
             InstanceID instanceID = InstanceID.getInstance(this);
             String senderId = getResources().getString(R.string.gcm_defaultSenderId);
@@ -49,41 +48,33 @@ public class RegistrationIntentService extends IntentService {
 
                 // Fetch token here
                 // save token
-                sharedPreferences.edit().putString(GCM_TOKEN, token).apply();
-                Log.d(TAG, "Gravou o GCM Registration Token: ");
-
-                // pass along this data
-                sendRegistrationToServer(token);
-            } catch (IOException ex) {
-                Log.d(TAG, "Erro ao Gravar o Token:  valor do Toketn: " + token);
-                        ex.printStackTrace();
-            } catch (JSONException ex) {
-                ex.printStackTrace();
-                Log.d(TAG, "Erro ao Gravar o Token:  valor do Toketn: " + token);
-                ex.printStackTrace();
+                String idBancoLocal = sharedPreferences.getString(GCM_TOKEN + ".json", "");
+                if (!idBancoLocal.equals(token)) {
+                    sendRegistrationToServer(token);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         }
     }
 
     private void sendRegistrationToServer(String token) throws IOException, JSONException {
         // send network request
-        try {
-            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String stringEnviado = sharedPreferences.getString(SENT_TOKEN_TO_SERVER + ".json", "");
 
-            String stringEnviado = sharedPreferences.getString(SENT_TOKEN_TO_SERVER, "");
+        JSONObject json = new JSONObject();
+        json.put("token", token);
 
-            if (!stringEnviado.equals("OK")) {
-                JSONObject json = new JSONObject();
-                json.put("token", token);
-                String result = HttpHelper.POST(getString(R.string.sendToken), json.toString());
-                if (result.equals("OK")) {
-                    sharedPreferences.edit().putString(SENT_TOKEN_TO_SERVER, "OK").apply();
-                }
+        if (!stringEnviado.equals("OK")) {
+            String result = HttpHelper.POST(getString(R.string.sendToken), json.toString());
+            if (result.equals("OK")) {
+
+                sharedPreferences.edit().putString(GCM_TOKEN + ".json", token).apply();
+                sharedPreferences.edit().putString(SENT_TOKEN_TO_SERVER, "OK").apply();
             }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            Log.d(TAG, "Erro ao Enviar o Token:  valor do Toketn: " + token);
         }
     }
-
 }

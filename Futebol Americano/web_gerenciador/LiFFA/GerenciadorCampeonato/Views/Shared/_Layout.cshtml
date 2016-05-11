@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="~/Content/images/icons/Gol.png">
+    <title>Futebol Lima Duarte</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+    <script>
+        (function (d, s, id) {
+            var ifr = document.getElementById('sm_frm1');
+
+            if (ifr) {
+                ifr.parentNode.removeChild(ifr);
+            }
+        });</script>
+
+
+    <!-- GOOGLE ANALITCS-->
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-50618625-1', 'futebollimaduarte.com');
+        ga('send', 'pageview');
+
+    </script>
+
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-image: linear-gradient(green, green, #0B4917 60px)">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" style="color:white">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Futebol Lima Duarte", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse" style="color:white">
+                <ul class="nav navbar-nav">
+
+                    <li>@Html.ActionLink("Campeonato", "Index", "Campeonato", new { area = "Admin" }, htmlAttributes: new { id = "" })</li>
+                    <li>@Html.ActionLink("Fotos", "Index", "Galeria", new { area = "Admin" }, htmlAttributes: new { id = "" })</li>
+                    <li>@Html.ActionLink("Times", "Index", "Time", new { area = "Admin" }, htmlAttributes: new { id = "" })</li>
+                    <li>@Html.ActionLink("Bolão", "Index", "Bolao", new { area = "Admin" }, htmlAttributes: new { id = "" })</li>
+                    <li>@Html.ActionLink("Sobre", "About", "Home", new { area = "" },null)</li>
+
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+
+        @*<footer>
+            <p><a href="https://www.facebook.com/groups/602547396436819/#" target="_blank"><img src="~/Content/images/facebook.png" border="0" /></a>&nbsp;&nbsp; &copy; @DateTime.Now.Year - futebollimaduarte.com</p>
+
+            <!--COMPARTILHAR FACEBOOK-->
+            <div class="pull-left">
+                <div class="fb-like " data-href="http://futebollimaduarte.com/" data-width="100%" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+            </div>
+            <!--COMENTARIO FACEBOOK-->
+            <div class="pagination-centered">
+                <div class="fb-comments" data-href="http://futebollimaduarte.com/" data-numposts="5" data-colorscheme="light"></div>
+            </div>
+            
+
+        </footer>*@
+    </div>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
