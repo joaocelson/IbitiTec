@@ -197,14 +197,26 @@ namespace Campeonato.UI.WEB.Areas.Admin
                 Classificacao classificacaoA = new Classificacao();
                 classificacaoA.Posicao = "";
                 classificacaoA.NomeTime = "GRUPOA";
-                classificacaoA.Pontos = "";
+                classificacaoA.Pontos = "P";
+                classificacaoA.Jogos = "J";
+                classificacaoA.Vitoria = "V";
+                classificacaoA.Derrota = "D";
+                classificacaoA.GolContra = "PS";
+                classificacaoA.GolPro = "PM";
+
+
                 listaClassificacao.Insert(0, classificacaoA);
 
                 List<Classificacao> listaClassificacaoB = (List<Classificacao>)appClassificacao.ListarClassicacaoPorCampeonato("1,4,7");
                 Classificacao classificacao = new Classificacao();
                 classificacao.Posicao = "";
                 classificacao.NomeTime = "GRUPOB";
-                classificacao.Pontos = "";
+                classificacao.Pontos = "P";
+                classificacao.Jogos = "J";
+                classificacao.Vitoria = "V";
+                classificacao.Derrota = "D";
+                classificacao.GolContra = "PS";
+                classificacao.GolPro = "PM";
                 listaClassificacao.Add(classificacao);
                 foreach (Classificacao b in listaClassificacaoB)
                 {

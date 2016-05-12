@@ -113,7 +113,7 @@ public class ClassificacaoActivity extends AppCompatActivity {
             //cabecalhoLayout = (LinearLayout) findViewById(R.id.cabecalho_artilahria);
             //cabecalhoLayout.setVisibility(View.VISIBLE);
             if (divisao.equals("primeira")) {
-                this.setTitle("Clas. Bolão 1ª Divisão");
+                this.setTitle("Classificação Bolão");
                 classificacao = JsonHelper.leJsonBancoLocal(MainActivity.PDCLASSIFICACAOBOLAO, this);
             } else {
                 this.setTitle("Clas. Bolão 2ª Divisão");

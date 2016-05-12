@@ -164,7 +164,7 @@ public class PalpiteActivity extends AppCompatActivity {
                 if (!jogosBolao.equals("")) {
                     List<Partida> partidaList = JsonHelper.getList(jogosBolao, Partida[].class);
                     if (partidaList.size() > 0) {
-                        AdapterJogosBolao adapterJogosBolao = new AdapterJogosBolao(this, partidaList, divisao, false);
+                        AdapterJogosBolao adapterJogosBolao = new AdapterJogosBolao(this, partidaList, divisao, true);
                         lvJogosBolao.setAdapter(adapterJogosBolao);
                         UIHelper.setListViewHeightBasedOnChildren(lvJogosBolao);
                     } else {

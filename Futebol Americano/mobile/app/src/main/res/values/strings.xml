@@ -7,7 +7,7 @@
     <string name="title_activity_primeira_divisao">PrimeiraDivisaoActivity</string>
     <string name="title_activity_primeira_divisao_tabela">PrimeiraDivisaoTabelaActivity</string>
     <string name="url_pdtabela">http://52.37.37.207:96/Admin/Partida/ObterTabelaJsonPD</string>
-    <string name="url_pdclassificacao">http://52.37.37.207:96/Campeonato/ObterClassificacaoJson</string>
+    <string name="url_pdclassificacao">http://52.37.37.207:96/Campeonato/</string>
      <string name="url_sdtabela">http://52.37.37.207:96/Campeonato/getSDTabela</string>
     <string name="url_sdclassificacao">http://52.37.37.207:96/Campeonato/getSDClassificacao</string>
 

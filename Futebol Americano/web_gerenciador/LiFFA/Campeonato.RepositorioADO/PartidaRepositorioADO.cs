@@ -281,7 +281,7 @@ namespace Campeonato.RepositorioADO
 
                 if (Convert.ToInt16(partida.GolMandante) > Convert.ToInt16(partida.GolVisitante))
                 {
-                    pontos = Convert.ToInt16(classificacaoMandante.Pontos) - 3;
+                    pontos = Convert.ToInt16(classificacaoMandante.Pontos) - 1;
                     vitorias = Convert.ToInt16(classificacaoMandante.Vitoria) - 1;
                     derrotas = Convert.ToInt16(classificacaoMandante.Derrota);
                     empates = Convert.ToInt16(classificacaoMandante.Empate);
@@ -467,7 +467,7 @@ namespace Campeonato.RepositorioADO
 
                 if (Convert.ToInt16(partida.GolMandante) > Convert.ToInt16(partida.GolVisitante))
                 {
-                    pontos = Convert.ToInt16(classificacaoMandante.Pontos) + 3;
+                    pontos = Convert.ToInt16(classificacaoMandante.Pontos) + 1;
                     vitorias = Convert.ToInt16(classificacaoMandante.Vitoria) + 1;
                     derrotas = Convert.ToInt16(classificacaoMandante.Derrota);
                     empates = Convert.ToInt16(classificacaoMandante.Empate);

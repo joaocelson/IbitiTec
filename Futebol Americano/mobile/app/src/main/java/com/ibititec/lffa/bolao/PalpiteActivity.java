@@ -92,9 +92,12 @@ public class PalpiteActivity extends AppCompatActivity {
 
     private void lerIntent() {
         try {
-            if (HttpHelper.existeConexao(this)) {
-                Intent intent = getIntent();
-                divisao = intent.getStringExtra("divisao");
+            Intent intent = getIntent();
+            divisao = intent.getStringExtra("divisao");
+            if (!HttpHelper.existeConexao(this)) {
+                exibirMensagem("Não identificado conexão com a internet, verifique sua conexão está ativa.", "Atenção");
+            } else {
+
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(PalpiteActivity.this);
 
                 Usuario usuarioLogado = JsonHelper.getObject(sharedPreferences.getString(MainActivity.USUARIO + ".json", ""), Usuario.class);
@@ -117,8 +120,6 @@ public class PalpiteActivity extends AppCompatActivity {
                         donwnloadFromUrl(MainActivity.SDJOGOSBOLAO, getString(R.string.url_jogos_rodada), "");
                     }
                 }
-            } else {
-                exibirMensagem("Não identificado conexão com a internet, verifique se sua conexão está ativa.", "Atenção");
             }
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro lerIntent Palpite: " + ex.getMessage());
@@ -135,7 +136,7 @@ public class PalpiteActivity extends AppCompatActivity {
         //define um botão como positivo
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
-                return;
+                onBackPressed();
                 // Toast.makeText(MainActivity.this, "positivo=" + arg1, Toast.LENGTH_SHORT).show();
             }
         });
@@ -164,7 +165,7 @@ public class PalpiteActivity extends AppCompatActivity {
                 if (!jogosBolao.equals("")) {
                     List<Partida> partidaList = JsonHelper.getList(jogosBolao, Partida[].class);
                     if (partidaList.size() > 0) {
-                        AdapterJogosBolao adapterJogosBolao = new AdapterJogosBolao(this, partidaList, divisao, false);
+                        AdapterJogosBolao adapterJogosBolao = new AdapterJogosBolao(this, partidaList, divisao, true);
                         lvJogosBolao.setAdapter(adapterJogosBolao);
                         UIHelper.setListViewHeightBasedOnChildren(lvJogosBolao);
                     } else {

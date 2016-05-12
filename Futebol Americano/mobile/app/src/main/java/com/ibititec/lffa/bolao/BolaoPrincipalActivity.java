@@ -1,7 +1,9 @@
 package com.ibititec.lffa.bolao;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -40,9 +42,11 @@ public class BolaoPrincipalActivity extends AppCompatActivity {
 
     private void lerIntent() {
         try {
-            if (HttpHelper.existeConexao(this)) {
-                Intent intent = getIntent();
-                divisao = intent.getStringExtra("divisao");
+            Intent intent = getIntent();
+            divisao = intent.getStringExtra("divisao");
+            if (!HttpHelper.existeConexao(this)) {
+                exibirMensagem("Não identificado conexão com a internet, verifique sua conexão está ativa.", "Atenção");
+
             }
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro leIntent BolaoPrincipal : " + ex.getMessage());
@@ -149,5 +153,25 @@ public class BolaoPrincipalActivity extends AppCompatActivity {
 //            return true;
 //        }
         return true;
+    }
+
+    private void exibirMensagem(String mensagem, String titulo) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        //define o titulo
+        builder.setTitle(titulo);
+        //define a mensagem
+        builder.setMessage(mensagem);
+        //define um botão como positivo
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                onBackPressed();
+                // Toast.makeText(MainActivity.this, "positivo=" + arg1, Toast.LENGTH_SHORT).show();
+            }
+        });
+        //cria o AlertDialog
+        AlertDialog alerta = builder.create();
+        //Exibe
+        alerta.show();
     }
 }

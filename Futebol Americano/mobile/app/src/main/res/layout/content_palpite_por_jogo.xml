@@ -14,128 +14,136 @@
     tools:showIn="@layout/activity_palpite_por_jogo">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingBottom="20dp"
+                android:text="FAÇA SEU PALPITE"
+                android:textAlignment="center"
+                android:textColor="@color/Black"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="20dp"
-            android:text="FAÇA SEU PALPITE"
-            android:textAlignment="center"
-            android:textColor="@color/Black"
-            android:textSize="20sp" />
-    </LinearLayout>
+            android:gravity="center"
+            android:orientation="horizontal">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:gravity="center">
+            <TextView
+                android:id="@+id/nomeTimePalpitePorJogoMandante"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/Black"
+                android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/nomeTimePalpitePorJogoMandante"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/Black"
-        android:textSize="20sp"
-        android:layout_marginRight="10dp"/>
-    <TextView
-        android:text="X"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/Black"
-        android:textSize="20sp" />
-    <TextView
-        android:layout_marginLeft="10dp"
-        android:id="@+id/nomeTimePalpitePorVisitante"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/Black"
-        android:textSize="20sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="X"
+                android:textColor="@color/Black"
+                android:textSize="20sp" />
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/nomeTimePalpitePorVisitante"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/Black"
+                android:textSize="20sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
+
+        </LinearLayout>
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/img_time_mandante_palpite"
-            android:layout_width="72dp"
-            android:layout_height="64dp"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
             android:layout_gravity="center_horizontal"
             fresco:actualImageScaleType="centerCrop"
             fresco:failureImage="@drawable/error_img"
             fresco:failureImageScaleType="centerInside"
             fresco:placeholderImage="@drawable/loading_img"
             fresco:retryImage="@drawable/retry_img"
-            fresco:roundedCornerRadius="5dp" />
-
-        <EditText
-            android:id="@+id/txtBolaoGolsTimeMandante"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            android:inputType="numberDecimal"/>
-
-        <TextView
-            android:id="@+id/txtBolaoVersus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            fresco:roundedCornerRadius="5dp"
             android:paddingBottom="10dp"
-            android:paddingTop="30dp"
-            android:text="X"
-            android:textAlignment="center" />
+            android:paddingTop="20dp"/>
 
-        <EditText
-            android:id="@+id/txtBolaoGolsTimeVisitante"
-            android:layout_width="40dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            android:inputType="numberDecimal" />
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <EditText
+                android:id="@+id/txtBolaoGolsTimeMandante"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:inputType="numberDecimal"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/txtBolaoVersus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingTop="30dp"
+                android:text="X"
+                android:textAlignment="center" />
+
+            <EditText
+                android:id="@+id/txtBolaoGolsTimeVisitante"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:inputType="numberDecimal"
+                android:textAlignment="center" />
+
+
+            <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:id="@+id/txtBolaoTimeVisitante"/>-->
+        </LinearLayout>
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/img_time_visitante_palpite"
-            android:layout_width="72dp"
-            android:layout_height="64dp"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
             android:layout_gravity="center_horizontal"
-            android:paddingBottom="10dp"
             fresco:actualImageScaleType="centerCrop"
             fresco:failureImage="@drawable/error_img"
             fresco:failureImageScaleType="centerInside"
             fresco:placeholderImage="@drawable/loading_img"
             fresco:retryImage="@drawable/retry_img"
-            fresco:roundedCornerRadius="5dp" />
+            fresco:roundedCornerRadius="5dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"/>
 
-        <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:id="@+id/txtBolaoTimeVisitante"/>-->
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btnSalvarPalpiteBolao"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Salvar" />
-    </LinearLayout>
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnSalvarPalpiteBolao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Salvar" />
+        </LinearLayout>
 
     </LinearLayout>
 

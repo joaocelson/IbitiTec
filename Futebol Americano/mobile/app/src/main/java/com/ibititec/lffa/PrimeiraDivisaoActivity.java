@@ -29,12 +29,12 @@ public class PrimeiraDivisaoActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        btnArtilharia = (ImageButton) findViewById(R.id.btnPrimeiraDivisaoArtilharia);
+        //btnArtilharia = (ImageButton) findViewById(R.id.btnPrimeiraDivisaoArtilharia);
         btnTabela = (ImageButton) findViewById(R.id.btnPrimeiraDivisaoTabela);
         btnClassificacao = (ImageButton) findViewById(R.id.btnPrimeiraDivisaoClassificacao);
         btnAjuda = (ImageButton) findViewById(R.id.btnPrimeiraDivisaoSobre);
 
-        txtMaiorPontuador = (TextView) findViewById(R.id.txtMaiorPontuador);
+        //txtMaiorPontuador = (TextView) findViewById(R.id.txtMaiorPontuador);
         txtTabela = (TextView) findViewById(R.id.txtTabela);
         txtClassificacao = (TextView) findViewById(R.id.txtClassificacao);
         txtAjuda = (TextView) findViewById(R.id.txtAjuda);
@@ -73,12 +73,12 @@ public class PrimeiraDivisaoActivity extends AppCompatActivity {
             this.setTitle("Segunda Divisão");
         }
 
-        btnArtilharia.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startarActivity(divisao, "artilharia");
-            }
-        });
+//        btnArtilharia.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startarActivity(divisao, "artilharia");
+//            }
+//        });
 
         btnTabela.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,12 +108,12 @@ public class PrimeiraDivisaoActivity extends AppCompatActivity {
             }
         });
 
-        txtMaiorPontuador.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startarActivity(divisao, "artilharia");
-            }
-        });
+//        txtMaiorPontuador.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startarActivity(divisao, "artilharia");
+//            }
+//        });
 
         txtTabela.setOnClickListener(new View.OnClickListener() {
             @Override

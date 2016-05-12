@@ -28,6 +28,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.ibititec.lffa.helpers.HttpHelper;
 import com.ibititec.lffa.helpers.JsonHelper;
+import com.ibititec.lffa.noticia.FeedNoticiasActivity;
 import com.ibititec.lffa.util.RegistrationIntentService;
 
 import java.io.IOException;
@@ -36,8 +37,8 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     //DECLARACAO DOS OBJETOS DE TELA
-    private ImageButton btnPrimeiraDivisao, btnSegundaDivisao, btnAliga;
-    private TextView txtEquipes, txtNopad, txtALiga;
+    private ImageButton btnPrimeiraDivisao, btnSegundaDivisao, btnAliga,btnNoticias;
+    private TextView txtEquipes, txtNopad, txtALiga,txtNoticias;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
     boolean haveConnectedWifi = false;
@@ -86,7 +87,8 @@ public class MainActivity extends AppCompatActivity
 
         inicializarPushMessage();
         btnAliga= (ImageButton) findViewById(R.id.btnAliga);
-
+        btnNoticias = (ImageButton) findViewById(R.id.btnNoticias);
+        txtNoticias = (TextView) findViewById(R.id.txtNoticias);
     }
 
     private boolean checkPlayServices() {
@@ -258,6 +260,18 @@ public class MainActivity extends AppCompatActivity
                 startarActivity("primeira", "");
             }
         });
+
+        txtNoticias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startarActivityNoticia();
+            }
+        });   btnNoticias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startarActivityNoticia();
+            }
+        });
     }
 
     private void startarActivityALiga() {
@@ -277,6 +291,15 @@ public class MainActivity extends AppCompatActivity
         intent.putExtra("divisao", divisao);
         intent.putExtra("funcionalidade", funcionalidade);
         startActivity(intent);
+    }
+
+    private void startarActivityNoticia() {
+        try {
+            Intent intent = new Intent(this, FeedNoticiasActivity.class);
+            startActivity(intent);
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro: startartActivityNoticia MainActivity: " + ex.getMessage());
+        }
     }
 
     private void gravarJson(String nomeJson, String json) {

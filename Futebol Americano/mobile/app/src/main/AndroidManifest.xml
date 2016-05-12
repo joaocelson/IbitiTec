@@ -322,7 +322,7 @@
             android:parentActivityName=".PrimeiraDivisaoTabelaActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".noticias.FeedNoticiasActivity"
+            android:name=".noticia.FeedNoticiasActivity"
             android:label="@string/title_activity_fees_noticias"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" >

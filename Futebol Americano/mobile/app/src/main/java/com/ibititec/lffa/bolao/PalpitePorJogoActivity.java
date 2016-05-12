@@ -52,10 +52,12 @@ public class PalpitePorJogoActivity extends AppCompatActivity {
     }
 
     private void lerIntent() {
-        if (HttpHelper.existeConexao(this)) {
-            Intent intent = getIntent();
-            divisao = intent.getStringExtra("divisao");
-            partida = (Partida) intent.getSerializableExtra("jogo_bolao");
+        Intent intent = getIntent();
+        divisao = intent.getStringExtra("divisao");
+        partida = (Partida) intent.getSerializableExtra("jogo_bolao");
+        if (!HttpHelper.existeConexao(this)) {
+            exibirMensagem("Não identificado conexão com a internet, verifique sua conexão está ativa.", "Atenção");
+
         }
     }
 

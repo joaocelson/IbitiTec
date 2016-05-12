@@ -142,7 +142,7 @@ namespace Campeonato.RepositorioADO
                                    "FROM classificacao c INNER JOIN " +
                                    "Times tm on tm.id = c.id_time INNER JOIN " +
                                    "Campeonato ca on ca.id = c.id_campeonato ";
-                    strQuery += string.Format(" WHERE tm.id  IN ({0}) ", id);
+                    strQuery += string.Format(" WHERE tm.id  IN ({0}) ", id); //sera listado por time a classificacao devido os grupos
                     var retornoDataReader = contexto.ExecutaComandoComRetorno(strQuery);
                     return TransformaReaderEmListaDeObjeto(retornoDataReader); //TransformaReaderEmListaDeObjeto(retornoDataReader);
                 }
