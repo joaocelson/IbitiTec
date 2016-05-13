@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.appodeal.ads.Appodeal;
 import com.ibititec.campeonatold.MainActivity;
 import com.ibititec.campeonatold.R;
 import com.ibititec.campeonatold.adapter.AdapterNoticia;
@@ -41,10 +42,10 @@ public class FeedNoticiasActivity extends AppCompatActivity {
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
 
-
             lerIntent();
             carregarComponentes();
             executarAcoes();
+            Appodeal.show(this, Appodeal.BANNER_BOTTOM);
             donwnloadFromUrl("feedNoticias", getString(R.string.url_feed_noticias), "");
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,7 +57,8 @@ public class FeedNoticiasActivity extends AppCompatActivity {
         try {
             if (HttpHelper.existeConexao(this)) {
                 Intent intent = getIntent();
-
+            } else {
+                exibirMensagem("Não identificado conexão com a internet, verifique se sua conexão está ativa.", "Atenção");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -138,8 +140,8 @@ public class FeedNoticiasActivity extends AppCompatActivity {
             protected void onPostExecute(String json) {
                 super.onPostExecute(json);
 
-                if (json.equals("")) {
-                    exibirMensagemOK("Não foi possível enviar o comentário", "Ao Vivo");
+                if (json == null || json.equals("")) {
+                    exibirMensagemOK("Não foi possível gravar a notícia", "Notícia");
                 } else {
                     donwnloadFromUrl("feedNoticias", getString(R.string.url_feed_noticias), "");
                 }

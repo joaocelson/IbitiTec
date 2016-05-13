@@ -65,7 +65,7 @@
             android:id="@+id/btnPalpiteJogoBolao"
             android:layout_width="192dp"
             android:layout_height="48dp"
-            android:src="@drawable/palpite"
+            android:src="@drawable/palpite_btn"
             android:layout_gravity="center"
             android:paddingBottom="10dp"
             android:paddingTop="10dp"

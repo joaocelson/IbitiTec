@@ -70,7 +70,7 @@ public class ClassificacaoActivity extends AppCompatActivity {
         try {
             super.onResume();
             AnalyticsApplication.enviarGoogleAnalitcs(this);
-            iniciarAppodeal();
+
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro ONResume Classficacao: " + ex.getMessage());
         }
@@ -78,7 +78,8 @@ public class ClassificacaoActivity extends AppCompatActivity {
 
     private void iniciarAppodeal() {
         try {
-            Appodeal.show(this, Appodeal.BANNER_TOP);
+            Appodeal.setBannerViewId(R.id.appodealBannerView_classificacao);
+            Appodeal.show(this, Appodeal.BANNER);
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro: iniciarAppodeal: " + ex.getMessage());
         }
@@ -103,6 +104,7 @@ public class ClassificacaoActivity extends AppCompatActivity {
         try {
             Intent intent = getIntent();
             divisao = intent.getStringExtra("divisao");
+            iniciarAppodeal();
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro Le Intent Classificacao: " + ex.getMessage());
         }

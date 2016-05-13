@@ -57,6 +57,7 @@ public class PartidaTempoRealActivity extends AppCompatActivity {
             lerIntent();
             carregarComponentes();
             executarAcoes();
+            iniciarAppodeal();
             donwnloadFromUrl("aovivo", getString(R.string.url_partida_ao_vivo), "{\"id\": \"" + String.valueOf(partida.getId()) + "\"}");
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro: onCreate PartidaTempoReal: " + ex.getMessage());

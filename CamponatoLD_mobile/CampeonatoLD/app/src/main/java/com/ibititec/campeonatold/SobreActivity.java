@@ -18,6 +18,7 @@ public class SobreActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         lerIntent();
+        Appodeal.show(this, Appodeal.BANNER_BOTTOM);
     }
     private void iniciarAppodeal() {
         Appodeal.show(this, Appodeal.BANNER_BOTTOM);

@@ -1,7 +1,9 @@
 package com.ibititec.campeonatold.bolao;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -13,12 +15,11 @@ import android.widget.TextView;
 import com.appodeal.ads.Appodeal;
 import com.ibititec.campeonatold.MainActivity;
 import com.ibititec.campeonatold.R;
-import com.ibititec.campeonatold.helpers.HttpHelper;
 
 public class BolaoPrincipalActivity extends AppCompatActivity {
 
-    private ImageButton btnClassificacao, btnPalpite;
-    private TextView txtClassificacao, txtPalpite;
+    private ImageButton btnClassificacao, btnPalpite, btnRegras;
+    private TextView txtClassificacao, txtPalpite, txtRegras;
     private String divisao;
 
     @Override
@@ -40,10 +41,10 @@ public class BolaoPrincipalActivity extends AppCompatActivity {
 
     private void lerIntent() {
         try {
-            if (HttpHelper.existeConexao(this)) {
-                Intent intent = getIntent();
-                divisao = intent.getStringExtra("divisao");
-            }
+            Appodeal.show(this, Appodeal.BANNER_BOTTOM);
+            Intent intent = getIntent();
+            divisao = intent.getStringExtra("divisao");
+
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro leIntent BolaoPrincipal : " + ex.getMessage());
         }
@@ -51,13 +52,7 @@ public class BolaoPrincipalActivity extends AppCompatActivity {
 
     private void executarAcoes() {
         try {
-            if (divisao.equals("primeira")) {
-                this.setTitle("Bolão 1ª Divisão");
-            } else {
-                this.setTitle("Bolão 2ª Divisão");
-                btnPalpite.setImageResource(R.drawable.sdpalpite);
-                btnClassificacao.setImageResource(R.drawable.sdclassificacao);
-            }
+
 
             btnPalpite.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -83,6 +78,19 @@ public class BolaoPrincipalActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     startarActivityClassificacao(divisao);
+                }
+            });
+
+            btnRegras.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startarActivityRegras(divisao);
+                }
+            });
+            txtRegras.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startarActivityRegras(divisao);
                 }
             });
         } catch (Exception ex) {
@@ -115,6 +123,16 @@ public class BolaoPrincipalActivity extends AppCompatActivity {
         }
     }
 
+    private void startarActivityRegras(String divisao) {
+        try {
+            Intent intent = new Intent(this, RegrasActivity.class);
+            intent.putExtra("divisao", divisao);
+            startActivity(intent);
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro startarActivityRegras: " + ex.getMessage());
+        }
+    }
+
     private void startarActivityPalpites(String divisao) {
         try {
             Intent intent = new Intent(this, PalpiteActivity.class);
@@ -131,6 +149,18 @@ public class BolaoPrincipalActivity extends AppCompatActivity {
             btnPalpite = (ImageButton) findViewById(R.id.btnPalpitesBolao);
             txtClassificacao = (TextView) findViewById(R.id.txtClassificacaoBolao);
             txtPalpite = (TextView) findViewById(R.id.txtPalpitesBolao);
+
+            btnRegras = (ImageButton) findViewById(R.id.btnRegrasBolao);
+            txtRegras = (TextView) findViewById(R.id.txtRegrasBolao);
+
+            if (divisao.equals("primeira")) {
+                this.setTitle("Primeira Divisão");
+            } else {
+                this.setTitle("Segunda Divisão");
+                btnClassificacao.setImageResource(R.drawable.sdclassificacao);
+                btnPalpite.setImageResource(R.drawable.sdpalpite);
+                btnRegras.setImageResource(R.drawable.sdregulamento);
+            }
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro Bolao Principal CarregagarComponetes: " + ex.getMessage());
         }
@@ -149,5 +179,25 @@ public class BolaoPrincipalActivity extends AppCompatActivity {
 //            return true;
 //        }
         return true;
+    }
+
+    private void exibirMensagem(String mensagem, String titulo) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        //define o titulo
+        builder.setTitle(titulo);
+        //define a mensagem
+        builder.setMessage(mensagem);
+        //define um botão como positivo
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                onBackPressed();
+                // Toast.makeText(MainActivity.this, "positivo=" + arg1, Toast.LENGTH_SHORT).show();
+            }
+        });
+        //cria o AlertDialog
+        AlertDialog alerta = builder.create();
+        //Exibe
+        alerta.show();
     }
 }

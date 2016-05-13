@@ -49,6 +49,7 @@ public class PalpitePorJogoActivity extends AppCompatActivity {
         lerIntent();
         carregarComponentes();
         executarAcoes();
+        iniciarAppodeal();
     }
 
     private void lerIntent() {
@@ -58,7 +59,13 @@ public class PalpitePorJogoActivity extends AppCompatActivity {
             partida = (Partida) intent.getSerializableExtra("jogo_bolao");
         }
     }
-
+    private void iniciarAppodeal() {
+        try {
+            Appodeal.show(this, Appodeal.BANNER);
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro: iniciarAppodeal: " + ex.getMessage());
+        }
+    }
     @Override
     public void onBackPressed() {
         try {

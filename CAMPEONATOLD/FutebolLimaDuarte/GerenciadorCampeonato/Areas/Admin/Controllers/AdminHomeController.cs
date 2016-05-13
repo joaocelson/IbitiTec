@@ -124,7 +124,7 @@ namespace Campeonato.UI.WEB.Areas.Admin.Controllers
         [HttpPost]
         public String LoginJson(Usuario usuario)
         {
-            var usa = appUsuario.ValidarUsuarioEmail(usuario);
+            var usa = appUsuario.ValidarUsuario(usuario);
             if (usa != null)
             {
                 return JsonConvert.SerializeObject(usa, Formatting.Indented);

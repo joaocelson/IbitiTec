@@ -22,8 +22,8 @@ import com.ibititec.lffa.helpers.HttpHelper;
 import com.ibititec.lffa.helpers.JsonHelper;
 import com.ibititec.lffa.helpers.UIHelper;
 import com.ibititec.lffa.modelo.Partida;
-import com.ibititec.lffa.util.AnalyticsApplication;
 import com.ibititec.lffa.modelo.Usuario;
+import com.ibititec.lffa.util.AnalyticsApplication;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -45,6 +45,7 @@ public class PalpiteActivity extends AppCompatActivity {
         lerIntent();
         carregarComponentes();
         executarAcoes();
+        carregarPartidas();
     }
 
     private void executarAcoes() {
@@ -69,7 +70,8 @@ public class PalpiteActivity extends AppCompatActivity {
 
     private void iniciarAppodeal() {
         try {
-            Appodeal.show(this, Appodeal.BANNER_TOP);
+            Appodeal.setBannerViewId(R.id.appodealBannerView_palpite);
+            Appodeal.show(this, Appodeal.BANNER);
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro: iniciarAppodeal: " + ex.getMessage());
         }
@@ -91,34 +93,46 @@ public class PalpiteActivity extends AppCompatActivity {
     }
 
     private void lerIntent() {
+       // Appodeal.show(this, Appodeal.BANNER_TOP);
+        Intent intent = getIntent();
+        divisao = intent.getStringExtra("divisao");
+
+    }
+
+    public void carregarPartidas(){
         try {
-            Intent intent = getIntent();
-            divisao = intent.getStringExtra("divisao");
+
+
             if (!HttpHelper.existeConexao(this)) {
-                exibirMensagem("Não identificado conexão com a internet, verifique sua conexão está ativa.", "Atenção");
+                exibirMensagem("Não identificado conexão com a internet, verifique se sua conexão está ativa.", "Atenção");
             } else {
 
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(PalpiteActivity.this);
 
                 Usuario usuarioLogado = JsonHelper.getObject(sharedPreferences.getString(MainActivity.USUARIO + ".json", ""), Usuario.class);
 
-                Calendar c = Calendar.getInstance();
-                int day = c.get(Calendar.DAY_OF_WEEK);
-                int hour = c.get(Calendar.HOUR);
-                if (day >= 4 || (day == 1 && hour < 9)) {
-                    if (divisao.equals("primeira")) {
-                        donwnloadFromUrl(MainActivity.PDJOGOSBOLAO, getString(R.string.url_jogos_bolao), "{\"id\":\"1\", \"emailUsuario\":\"" + usuarioLogado.getLoginEmail() + "\",\"senha\":\"" + usuarioLogado.getSenha() + "\"}");
-                    } else {
-                        donwnloadFromUrl(MainActivity.SDJOGOSBOLAO, getString(R.string.url_jogos_bolao), "{\"id\":\"2\", \"emailUsuario\":\"" + usuarioLogado.getLoginEmail() + "\",\"senha\":\"" + usuarioLogado.getSenha() + "\"}");
-                    }
-                } else {
-                    if (divisao.equals("primeira")) {
+                if(usuarioLogado!=null) {
 
-                        donwnloadFromUrl(MainActivity.PDJOGOSBOLAO, getString(R.string.url_jogos_rodada), "");
+                    Calendar c = Calendar.getInstance();
+                    int day = c.get(Calendar.DAY_OF_WEEK);
+                    int hour = c.get(Calendar.HOUR);
+                    if (day >= 4 || (day == 1 && hour < 9)) {
+                        if (divisao.equals("primeira")) {
+                            donwnloadFromUrl(MainActivity.PDJOGOSBOLAO, getString(R.string.url_jogos_bolao), "{\"id\":\"1\", \"emailUsuario\":\"" + usuarioLogado.getLoginEmail() + "\",\"senha\":\"" + usuarioLogado.getSenha() + "\"}");
+                        } else {
+                            donwnloadFromUrl(MainActivity.SDJOGOSBOLAO, getString(R.string.url_jogos_bolao), "{\"id\":\"2\", \"emailUsuario\":\"" + usuarioLogado.getLoginEmail() + "\",\"senha\":\"" + usuarioLogado.getSenha() + "\"}");
+                        }
                     } else {
+                        if (divisao.equals("primeira")) {
 
-                        donwnloadFromUrl(MainActivity.SDJOGOSBOLAO, getString(R.string.url_jogos_rodada), "");
+                            donwnloadFromUrl(MainActivity.PDJOGOSBOLAO, getString(R.string.url_jogos_rodada), "");
+                        } else {
+
+                            donwnloadFromUrl(MainActivity.SDJOGOSBOLAO, getString(R.string.url_jogos_rodada), "");
+                        }
                     }
+                }else {
+                    exibirMensagem("Para participar do bolão é necessário fazer cadastro no aplicativo.","Atenção");
                 }
             }
         } catch (Exception ex) {
@@ -156,7 +170,7 @@ public class PalpiteActivity extends AppCompatActivity {
                 //cabecalhoLayout.setVisibility(View.VISIBLE);
 
                 if (divisao.equals("primeira")) {
-                    this.setTitle("Jogos 1ª Divisão");
+                    //  this.setTitle("Jogos 1ª Divisão");
                     jogosBolao = JsonHelper.leJsonBancoLocal(MainActivity.PDJOGOSBOLAO, this);
                 } else {
                     this.setTitle("Jogos 2ª Divisão");

@@ -13,7 +13,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.ibititec.lffa.adapter.AdapterRodada"
     tools:showIn="@layout/activity_adapter_rodada"
-    android:background="@color/Black">
+    >
 
     <LinearLayout
         android:layout_width="match_parent"

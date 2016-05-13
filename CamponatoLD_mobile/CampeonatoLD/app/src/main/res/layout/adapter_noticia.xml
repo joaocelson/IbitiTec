@@ -18,17 +18,17 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/img_time_FeedNoticias"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_gravity="right"
-        fresco:actualImageScaleType="centerCrop"
-        fresco:failureImage="@drawable/error_img"
-        fresco:failureImageScaleType="centerInside"
-        fresco:placeholderImage="@drawable/loading_img"
-        fresco:retryImage="@drawable/retry_img"
-        fresco:roundedCornerRadius="5dp" />
+    <!--<com.facebook.drawee.view.SimpleDraweeView-->
+        <!--android:id="@+id/img_time_FeedNoticias"-->
+        <!--android:layout_width="48dp"-->
+        <!--android:layout_height="48dp"-->
+        <!--android:layout_gravity="right"-->
+        <!--fresco:actualImageScaleType="centerCrop"-->
+        <!--fresco:failureImage="@drawable/error_img"-->
+        <!--fresco:failureImageScaleType="centerInside"-->
+        <!--fresco:placeholderImage="@drawable/loading_img"-->
+        <!--fresco:retryImage="@drawable/retry_img"-->
+        <!--fresco:roundedCornerRadius="5dp" />-->
 
     <TextView
         android:id="@+id/txtTituloFeedNoticias"

@@ -51,7 +51,17 @@ public class PalpitePorJogoActivity extends AppCompatActivity {
         executarAcoes();
     }
 
+    private void iniciarAppodeal() {
+        try {
+            Appodeal.setBannerViewId(R.id.appodealBannerView_palpiteporjogo);
+            Appodeal.show(this, Appodeal.BANNER);
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro: iniciarAppodeal: " + ex.getMessage());
+        }
+    }
+
     private void lerIntent() {
+        iniciarAppodeal();
         Intent intent = getIntent();
         divisao = intent.getStringExtra("divisao");
         partida = (Partida) intent.getSerializableExtra("jogo_bolao");
@@ -59,6 +69,7 @@ public class PalpitePorJogoActivity extends AppCompatActivity {
             exibirMensagem("Não identificado conexão com a internet, verifique sua conexão está ativa.", "Atenção");
 
         }
+
     }
 
     @Override
@@ -69,7 +80,7 @@ public class PalpitePorJogoActivity extends AppCompatActivity {
 
             // add data to Intent
             setResult(PalpitePorJogoActivity.RESULT_OK, intent);
-            Appodeal.show(this, Appodeal.NATIVE);
+            Appodeal.show(this, Appodeal.BANNER_TOP);
             super.onBackPressed();
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro: onBackPressedPrimeiraDivisaoTabela: " + ex.getMessage());

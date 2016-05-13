@@ -287,13 +287,13 @@ namespace Campeonato.UI.WEB.Areas.Admin
                 String response = "";
                 List<String> tokens = appCampeonato.ObterTokens();
 
-                string text = System.IO.File.ReadAllText((Server.MapPath("/docs/tokens.txt")));
+                //string text = System.IO.File.ReadAllText((Server.MapPath("/docs/tokens.txt")));
 
                 foreach (string str in tokens)
                 {
                     if (!str.Equals(""))
                     {
-                        deviceId = str;
+                        deviceId = str.Trim();
                         string postData =
                         "{ \"registration_ids\": [ \"" + deviceId + "\" ], " +
                           "\"data\": {\"tickerText\":\"" + tickerText + "\", " +
@@ -308,7 +308,7 @@ namespace Campeonato.UI.WEB.Areas.Admin
             }
             catch (Exception ex)
             {
-                return "";
+                return "NOK";
             }
         }
 

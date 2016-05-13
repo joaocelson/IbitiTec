@@ -44,7 +44,8 @@ public class ClassificacaoActivity extends AppCompatActivity {
             carregarComponentes();
             lerIntent();
             carregarPartidasPalpite();
-        } catch (Exception ex) {
+            iniciarAppodeal();
+        } catch (Exception ex) {    ;
             Log.i(MainActivity.TAG, "Erro ONCreate ClassificacaoActivity: " + ex.getMessage());
         }
     }
@@ -70,7 +71,6 @@ public class ClassificacaoActivity extends AppCompatActivity {
         try {
             super.onResume();
             AnalyticsApplication.enviarGoogleAnalitcs(this);
-            iniciarAppodeal();
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro ONResume Classficacao: " + ex.getMessage());
         }

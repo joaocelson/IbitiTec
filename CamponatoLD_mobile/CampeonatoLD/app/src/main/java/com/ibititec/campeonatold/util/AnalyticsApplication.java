@@ -21,6 +21,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.ibititec.campeonatold.MainActivity;
 import com.ibititec.campeonatold.R;
@@ -52,11 +53,11 @@ public class AnalyticsApplication extends Application {
 
     public static void enviarGoogleAnalitcs(Activity activity) {
         try {
-//            AnalyticsApplication application = (AnalyticsApplication) activity.getApplication();
-//            Tracker mTracker = application.getDefaultTracker();
-//            Log.i(MainActivity.TAG, "Setting screen name: " + activity.getTitle());
-//            mTracker.setScreenName("Tela: " + activity.getTitle());
-//            mTracker.send(new HitBuilders.ScreenViewBuilder().build());
+            AnalyticsApplication application = (AnalyticsApplication) activity.getApplication();
+            Tracker mTracker = application.getDefaultTracker();
+            Log.i(MainActivity.TAG, "Setting screen name: " + activity.getTitle());
+            mTracker.setScreenName("Tela: " + activity.getTitle());
+            mTracker.send(new HitBuilders.ScreenViewBuilder().build());
         } catch (Exception e) {
             Log.i(MainActivity.TAG, "Erro: Setting screen name: " + activity.getTitle() + " - " + e.getMessage());
         }

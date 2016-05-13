@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.appodeal.ads.Appodeal;
 import com.ibititec.lffa.MainActivity;
 import com.ibititec.lffa.R;
 import com.ibititec.lffa.adapter.AdapterNoticia;
@@ -45,6 +46,7 @@ public class FeedNoticiasActivity extends AppCompatActivity {
             lerIntent();
             carregarComponentes();
             executarAcoes();
+            iniciarAppodeal();
             donwnloadFromUrl("feedNoticias", getString(R.string.url_feed_noticias), "");
         } catch (Exception e) {
             e.printStackTrace();
@@ -52,11 +54,19 @@ public class FeedNoticiasActivity extends AppCompatActivity {
         }
     }
 
+    private void iniciarAppodeal() {
+        try {
+            Appodeal.show(this, Appodeal.BANNER_BOTTOM);
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro: iniciarAppodeal: " + ex.getMessage());
+        }
+    }
     private void lerIntent() {
         try {
             if (HttpHelper.existeConexao(this)) {
                 Intent intent = getIntent();
-
+            }else{
+                exibirMensagem("Não identificado conexão com a internet, verifique se sua conexão está ativa.", "Atenção", true);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -92,6 +102,8 @@ public class FeedNoticiasActivity extends AppCompatActivity {
                                 noticia.setCorpo(editCorpoAdicionar.getText().toString());
                                 noticia.setUsuario(JsonHelper.ObterUsuarioBancoLocal(FeedNoticiasActivity.this));
                                 salvarNoticiaBancoRemoto(noticia);
+                            } else {
+                                exibirMensagem("Título ou notícia em branco, favor preencher", "Atenção", false);
                             }
                         }
                     })
@@ -122,7 +134,7 @@ public class FeedNoticiasActivity extends AppCompatActivity {
                     //json = HttpHelper.POSTJson(url, parametro);
 
                     if (!HttpHelper.existeConexao(FeedNoticiasActivity.this)) {
-                        exibirMensagem("Não identificado conexão com a internet, verifique se sua conexão está ativa.", "Atenção");
+                        exibirMensagem("Não identificado conexão com a internet, verifique se sua conexão está ativa.", "Atenção", true);
                     } else {
                         json = HttpHelper.POSTJson(url, JsonHelper.objectToJson(noticia));
                     }
@@ -139,7 +151,7 @@ public class FeedNoticiasActivity extends AppCompatActivity {
                 super.onPostExecute(json);
 
                 if (json.equals("")) {
-                    exibirMensagemOK("Não foi possível enviar o comentário", "Ao Vivo");
+                    exibirMensagemOK("Não foi possível gravar a notícia", "Notícia");
                 } else {
                     donwnloadFromUrl("feedNoticias", getString(R.string.url_feed_noticias), "");
                 }
@@ -149,7 +161,7 @@ public class FeedNoticiasActivity extends AppCompatActivity {
     }
 
 
-    private void exibirMensagem(String mensagem, String titulo) {
+    private void exibirMensagem(String mensagem, String titulo, final boolean returnPrincipal) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         //define o titulo
@@ -159,7 +171,11 @@ public class FeedNoticiasActivity extends AppCompatActivity {
         //define um botão como positivo
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
-                onBackPressed();
+                if (returnPrincipal) {
+                    onBackPressed();
+                } else {
+                    return;
+                }
                 // Toast.makeText(MainActivity.this, "positivo=" + arg1, Toast.LENGTH_SHORT).show();
             }
         });
@@ -225,7 +241,7 @@ public class FeedNoticiasActivity extends AppCompatActivity {
                     //json = HttpHelper.POSTJson(url, parametro);
 
                     if (!HttpHelper.existeConexao(FeedNoticiasActivity.this)) {
-                        exibirMensagem("Não identificado conexão com a internet, verifique se sua conexão está ativa.", "Atenção");
+                        exibirMensagem("Não identificado conexão com a internet, verifique se sua conexão está ativa.", "Atenção", true);
                     } else {
                         json = HttpHelper.POSTJson(url, parametro);
                     }
@@ -242,7 +258,7 @@ public class FeedNoticiasActivity extends AppCompatActivity {
                 super.onPostExecute(json);
 
                 if (json.equals("")) {
-                    exibirMensagem("Nenhuma notícia cadastrada.", "Notícias");
+                    exibirMensagem("Nenhuma notícia cadastrada.", "Notícias", true);
 
                 } else {
                     carregaListaNoticias(json);

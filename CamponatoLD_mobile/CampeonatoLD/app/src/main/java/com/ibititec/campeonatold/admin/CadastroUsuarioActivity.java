@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.appodeal.ads.Appodeal;
 import com.ibititec.campeonatold.MainActivity;
 import com.ibititec.campeonatold.R;
 import com.ibititec.campeonatold.helpers.HttpHelper;
@@ -37,8 +38,11 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
             setContentView(R.layout.activity_cadastro_usuario);
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
+
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             findViewByIdComponente();
             executarAcoes();
+            Appodeal.show(this, Appodeal.BANNER_BOTTOM);
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro: onCreate CadastroUsuario: " + ex.getMessage());
         }
@@ -85,7 +89,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                     String token = sharedPreferences.getString(RegistrationIntentService.GCM_TOKEN, "");
                     usuario.setToken(token);
 
-                    if (usuario.getSenha() == usuario.getConfirmaSenha()) {
+                    if (usuario.getSenha() != usuario.getConfirmaSenha()) {
                         String mensagem = "Senhas não conferem.";
                         Snackbar.make(findViewById(R.id.btnCadastrar_cadastro), mensagem, Snackbar.LENGTH_SHORT).show();
                     } else if (!usuario.getLoginEmail().contains("@")) {

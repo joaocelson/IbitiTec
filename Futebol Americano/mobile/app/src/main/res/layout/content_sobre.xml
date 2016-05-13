@@ -10,8 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.ibititec.lffa.SobreActivity"
-    tools:showIn="@layout/activity_sobre"
-    android:background="@color/Black">
+    tools:showIn="@layout/activity_sobre">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +30,7 @@
             android:text="Sobre a IBITITEC"
             android:textAlignment="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/White"
+            android:textColor="@color/Black"
             android:textSize="24sp" />
 
         <TextView
@@ -44,7 +43,7 @@
             android:layout_marginTop="44dp"
             android:text="Empresa de desenvolvimento de software."
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/White"
+            android:textColor="@color/Black"
             android:textIsSelectable="false"
             android:textSize="24sp" />
 
@@ -59,7 +58,7 @@
             android:layout_centerVertical="true"
             android:text="Contato: (32) 98821-3243"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/White"
+            android:textColor="@color/Black"
             android:textSize="24sp"
             android:textIsSelectable="false" />
 
@@ -74,7 +73,7 @@
             android:layout_below="@+id/textView10"
             android:text="E-mail: ibititec@gmail.com"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/White"
+            android:textColor="@color/Black"
             android:textSize="24sp"
             android:textIsSelectable="false" />
 
@@ -89,7 +88,7 @@
             android:layout_below="@+id/textView11"
             android:text="Site: www.ibititec.com"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/White"
+            android:textColor="@color/Black"
             android:textSize="24sp"
             android:textIsSelectable="false" />
 
@@ -102,7 +101,7 @@
             android:layout_below="@+id/textView9"
             android:text="Em parceria com a Liga Fluminense Futebol Americano para deixar você por dentro da classificação da liga."
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/White"
+            android:textColor="@color/Black"
             android:textSize="24sp"
             android:textIsSelectable="false" />
     </LinearLayout>

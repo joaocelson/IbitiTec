@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/Transparente"
-            android:src="@drawable/pdpalpite" />
+            android:src="@drawable/palpite" />
 
         <TextView
             android:id="@+id/txtPalpitesBolao"
@@ -48,13 +48,38 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/Transparente"
-            android:src="@drawable/pdclassificacao" />
+            android:src="@drawable/classificacao" />
 
         <TextView
             android:id="@+id/txtClassificacaoBolao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="CLASSIFICAÇÃO"
+            android:paddingLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="20dp"
+            android:layout_weight="1.15" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <ImageButton
+            android:id="@+id/btnRegrasBolao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/Transparente"
+            android:src="@drawable/regulamento" />
+
+        <TextView
+            android:id="@+id/txtRegrasBolao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="REGRAS BOLÃO"
             android:paddingLeft="10dp"
             android:layout_gravity="center_vertical"
             android:textAppearance="?android:attr/textAppearanceLarge"

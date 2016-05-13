@@ -45,11 +45,15 @@ public class PalpiteActivity extends AppCompatActivity {
         lerIntent();
         carregarComponentes();
         executarAcoes();
+        carregarPartidas();
+        iniciarAppodeal();
     }
 
     private void executarAcoes() {
 
     }
+
+
 
     private void carregarComponentes() {
         lvJogosBolao = (ListView) findViewById(R.id.listview_bolao_palpite);
@@ -90,11 +94,11 @@ public class PalpiteActivity extends AppCompatActivity {
         }
     }
 
-    private void lerIntent() {
+    private void carregarPartidas() {
         try {
-            if (HttpHelper.existeConexao(this)) {
-                Intent intent = getIntent();
-                divisao = intent.getStringExtra("divisao");
+            if (!HttpHelper.existeConexao(this)) {
+                exibirMensagem("Não identificado conexão com a internet, verifique se sua conexão está ativa.", "Atenção");
+            } else {
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(PalpiteActivity.this);
 
                 Usuario usuarioLogado = JsonHelper.getObject(sharedPreferences.getString(MainActivity.USUARIO + ".json", ""), Usuario.class);
@@ -117,12 +121,18 @@ public class PalpiteActivity extends AppCompatActivity {
                         donwnloadFromUrl(MainActivity.SDJOGOSBOLAO, getString(R.string.url_jogos_rodada), "");
                     }
                 }
-            } else {
-                exibirMensagem("Não identificado conexão com a internet, verifique se sua conexão está ativa.", "Atenção");
             }
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro lerIntent Palpite: " + ex.getMessage());
         }
+    }
+
+    private void lerIntent() {
+
+
+        Intent intent = getIntent();
+        divisao = intent.getStringExtra("divisao");
+
     }
 
     private void exibirMensagem(String mensagem, String titulo) {

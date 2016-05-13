@@ -271,10 +271,10 @@ namespace Campeonato.UI.WEB.Areas.Admin
             return base.File(path, "image/png");
         }
 
-        public FileResult DownloadFutebolLD()
+        public FileResult DownloadApk()
         {
             byte[] fileBytes = System.IO.File.ReadAllBytes(Server.MapPath("/apk/apk.apk"));
-            string fileName = "FutebolLD.apk";
+            string fileName = "Liffa.apk";
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
 
@@ -297,13 +297,13 @@ namespace Campeonato.UI.WEB.Areas.Admin
                 String response = "";
                 List<String> tokens = appCampeonato.ObterTokens();
 
-                string text = System.IO.File.ReadAllText((Server.MapPath("/docs/tokens.txt")));
+                //string text = System.IO.File.ReadAllText((Server.MapPath("/docs/tokens.txt")));
 
                 foreach (string str in tokens)
                 {
                     if (!str.Equals(""))
                     {
-                        deviceId = str;
+                        deviceId = str.Trim();
                         string postData =
                         "{ \"registration_ids\": [ \"" + deviceId + "\" ], " +
                           "\"data\": {\"tickerText\":\"" + tickerText + "\", " +
@@ -318,7 +318,7 @@ namespace Campeonato.UI.WEB.Areas.Admin
             }
             catch (Exception ex)
             {
-                return "";
+                return "NOK";
             }
         }
 
@@ -326,7 +326,7 @@ namespace Campeonato.UI.WEB.Areas.Admin
         {
             try
             {
-                string SERVER_API_KEY = "AIzaSyDdtnM5NR9L7d2HEy63bjcX4FIi2-bPMw0";
+                string SERVER_API_KEY = "AIzaSyAidNF4G4Ecr3ma7E_e-Wnp4d-okoFv5YI";
                 var SENDER_ID = deviceId; //"application number";
                 var value = message;
                 WebRequest tRequest;

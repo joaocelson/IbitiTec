@@ -19,8 +19,8 @@ import com.ibititec.lffa.helpers.HttpHelper;
 
 public class BolaoPrincipalActivity extends AppCompatActivity {
 
-    private ImageButton btnClassificacao, btnPalpite;
-    private TextView txtClassificacao, txtPalpite;
+    private ImageButton btnClassificacao, btnPalpite, btnRegulamento;
+    private TextView txtClassificacao, txtPalpite, txtRegulamento;
     private String divisao;
 
     @Override
@@ -42,10 +42,11 @@ public class BolaoPrincipalActivity extends AppCompatActivity {
 
     private void lerIntent() {
         try {
+            Appodeal.show(this, Appodeal.BANNER_BOTTOM);
             Intent intent = getIntent();
             divisao = intent.getStringExtra("divisao");
             if (!HttpHelper.existeConexao(this)) {
-                exibirMensagem("Não identificado conexão com a internet, verifique sua conexão está ativa.", "Atenção");
+                exibirMensagem("Não identificado conexão com a internet, verifique se sua conexão está ativa.", "Atenção");
 
             }
         } catch (Exception ex) {
@@ -56,11 +57,7 @@ public class BolaoPrincipalActivity extends AppCompatActivity {
     private void executarAcoes() {
         try {
             if (divisao.equals("primeira")) {
-                this.setTitle("Bolão 1ª Divisão");
-            } else {
-                this.setTitle("Bolão 2ª Divisão");
-                btnPalpite.setImageResource(R.drawable.sdpalpite);
-                btnClassificacao.setImageResource(R.drawable.sdclassificacao);
+                this.setTitle("Bolão LiFFA");
             }
 
             btnPalpite.setOnClickListener(new View.OnClickListener() {
@@ -89,6 +86,19 @@ public class BolaoPrincipalActivity extends AppCompatActivity {
                     startarActivityClassificacao(divisao);
                 }
             });
+
+            btnRegulamento.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startarActivityRegulamento();
+                }
+            });
+            txtRegulamento.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startarActivityRegulamento();
+                }
+            });
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro Bolao Principal : " + ex.getMessage());
         }
@@ -102,10 +112,18 @@ public class BolaoPrincipalActivity extends AppCompatActivity {
 
             // add data to Intent
             setResult(BolaoPrincipalActivity.RESULT_OK, intent);
-            Appodeal.show(this, Appodeal.NATIVE);
             super.onBackPressed();
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro: onBackPressedPrimeiraDivisaoTabela: " + ex.getMessage());
+        }
+    }
+
+    private void startarActivityRegulamento() {
+        try {
+            Intent intent = new Intent(this, RegrasActivity.class);
+            startActivity(intent);
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro StartarActivityClassificacao: " + ex.getMessage());
         }
     }
 
@@ -135,6 +153,8 @@ public class BolaoPrincipalActivity extends AppCompatActivity {
             btnPalpite = (ImageButton) findViewById(R.id.btnPalpitesBolao);
             txtClassificacao = (TextView) findViewById(R.id.txtClassificacaoBolao);
             txtPalpite = (TextView) findViewById(R.id.txtPalpitesBolao);
+            btnRegulamento = (ImageButton) findViewById(R.id.btnRegrasBolao);
+            txtRegulamento = (TextView) findViewById(R.id.txtRegrasBolao);
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro Bolao Principal CarregagarComponetes: " + ex.getMessage());
         }

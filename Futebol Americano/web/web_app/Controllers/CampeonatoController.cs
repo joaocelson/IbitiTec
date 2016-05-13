@@ -325,23 +325,19 @@ namespace CampeonatoLD_app.Controllers
         //GOOGLE CLOUD MESSAGE  -- SEND MESSAGE FOR SERVER
 
         // POST: /Campeonato/Create
-        public String EnviarMensagemGoogleCloud()
+        public String EnviarMensagemGoogleCloud(String message, String tickerText, String contentTitle)
         {
             try
             {
+                //string deviceId = "f0tnwv5yu5w:APA91bH9NbXK-FeCvDw1gBSnq_sKNRxrv20iPEF1p6aC_zZ4z3LSFF7Fv5KY1UQGiL-f4LO954FQWbooOQL_rJFJ8FcvNlnIy9yItmb4Yp-sX-EAVMb2dBAuk_-JO2Vf73S0V3GxIxOp";
+                string deviceId;
+                //string message = "Atualizado os resultados da última rodada";
+                //string tickerText = "Atualização Classificação Campeonato";
+                //string contentTitle = "FUTEBOL LD - Atualização Resultados e Classificação";
+                String response = "";
+                List<String> tokens = appCampeonato.ObterTokens();
 
-
-                string deviceId = "f0tnwv5yu5w:APA91bH9NbXK-FeCvDw1gBSnq_sKNRxrv20iPEF1p6aC_zZ4z3LSFF7Fv5KY1UQGiL-f4LO954FQWbooOQL_rJFJ8FcvNlnIy9yItmb4Yp-sX-EAVMb2dBAuk_-JO2Vf73S0V3GxIxOp";
-
-                string message = "Atualizado os resultados da última rodada";
-                string tickerText = "Atualização Classificação Campeonato";
-                string contentTitle = "LiFFA - Atualização Resultados e Classificação";
-
-                string text = System.IO.File.ReadAllText((Server.MapPath("/docs/tokens.txt")));
-
-
-                string[] tokens = text.Split('|');
-                string response = "";
+                //string text = System.IO.File.ReadAllText((Server.MapPath("/docs/tokens.txt")));
 
                 foreach (string str in tokens)
                 {
@@ -362,44 +358,51 @@ namespace CampeonatoLD_app.Controllers
             }
             catch (Exception ex)
             {
-                return "";
+                return "NOK";
             }
         }
 
         public string SendNotification(string deviceId, string message)
         {
-            string SERVER_API_KEY = "AIzaSyAidNF4G4Ecr3ma7E_e-Wnp4d-okoFv5YI";
-            var SENDER_ID = deviceId; //"application number";
-            var value = message;
-            WebRequest tRequest;
-            tRequest = WebRequest.Create("https://android.googleapis.com/gcm/send");
-            tRequest.Method = "post";
-            tRequest.ContentType = " application/x-www-form-urlencoded;charset=UTF-8";
-            tRequest.Headers.Add(string.Format("Authorization: key={0}", SERVER_API_KEY));
+            try
+            {
+                string SERVER_API_KEY = "AIzaSyDdtnM5NR9L7d2HEy63bjcX4FIi2-bPMw0";
+                var SENDER_ID = deviceId; //"application number";
+                var value = message;
+                WebRequest tRequest;
+                tRequest = WebRequest.Create("https://android.googleapis.com/gcm/send");
+                tRequest.Method = "post";
+                tRequest.ContentType = " application/x-www-form-urlencoded;charset=UTF-8";
+                tRequest.Headers.Add(string.Format("Authorization: key={0}", SERVER_API_KEY));
 
-            tRequest.Headers.Add(string.Format("Sender: id={0}", SENDER_ID));
+                tRequest.Headers.Add(string.Format("Sender: id={0}", SENDER_ID));
 
-            string postData = "collapse_key=score_update&time_to_live=108&delay_while_idle=1&data.message=" + value + "&data.time=" + System.DateTime.Now.ToString() + "&registration_id=" + deviceId + "";
-            Console.WriteLine(postData);
-            Byte[] byteArray = Encoding.UTF8.GetBytes(postData);
-            tRequest.ContentLength = byteArray.Length;
+                string postData = "collapse_key=score_update&time_to_live=108&delay_while_idle=1&data.message=" + value + "&data.time=" + System.DateTime.Now.ToString() + "&registration_id=" + deviceId + "";
+                Console.WriteLine(postData);
+                Byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+                tRequest.ContentLength = byteArray.Length;
 
-            Stream dataStream = tRequest.GetRequestStream();
-            dataStream.Write(byteArray, 0, byteArray.Length);
-            dataStream.Close();
+                Stream dataStream = tRequest.GetRequestStream();
+                dataStream.Write(byteArray, 0, byteArray.Length);
+                dataStream.Close();
 
-            WebResponse tResponse = tRequest.GetResponse();
+                WebResponse tResponse = tRequest.GetResponse();
 
-            dataStream = tResponse.GetResponseStream();
+                dataStream = tResponse.GetResponseStream();
 
-            StreamReader tReader = new StreamReader(dataStream);
+                StreamReader tReader = new StreamReader(dataStream);
 
-            String sResponseFromServer = tReader.ReadToEnd();
+                String sResponseFromServer = tReader.ReadToEnd();
 
-            tReader.Close();
-            dataStream.Close();
-            tResponse.Close();
-            return sResponseFromServer;
+                tReader.Close();
+                dataStream.Close();
+                tResponse.Close();
+                return sResponseFromServer;
+            }
+            catch (Exception)
+            {
+                return "";
+            }
         }
 
         public static bool ValidateServerCertificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
@@ -412,21 +415,15 @@ namespace CampeonatoLD_app.Controllers
         {
             try
             {
-               if (!System.IO.File.Exists(Server.MapPath("/docs/tokens.txt")))
+                bool retorno = appCampeonato.GravarToken(token, null);
+
+                if (retorno)
                 {
-                    var file = System.IO.File.Create(Server.MapPath("/docs/tokens.txt"));
-                    file.Dispose();
+                    return "OK";
                 }
-                using (StreamWriter sw = new StreamWriter(Server.MapPath("/docs/tokens.txt"), true))
+                else
                 {
-                    //Pass the filepath and filename to the StreamWriter Constructor
-                    //StreamWriter sw = new StreamWriter(Server.MapPath("/docs/tokens.txt"), true);
-
-                    //Write a line of text
-                    sw.Write(token + "|");
-
-                    //Close the file
-                    sw.Close();
+                    return "";
                 }
             }
             catch (Exception e)
@@ -434,13 +431,8 @@ namespace CampeonatoLD_app.Controllers
                 // Console.WriteLine("Exception: " + e.Message);
                 return "";
             }
-            finally
-            {
-                Console.WriteLine("Executing finally block.");
-            }
-            string ok = "OK";
-            return ok;
         }
+
 
     }
 }

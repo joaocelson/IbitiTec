@@ -57,6 +57,7 @@ public class PartidaTempoRealActivity extends AppCompatActivity {
             lerIntent();
             carregarComponentes();
             executarAcoes();
+            iniciarAppodeal();
             donwnloadFromUrl("aovivo", getString(R.string.url_partida_ao_vivo), "{\"id\": \"" + String.valueOf(partida.getId()) + "\"}");
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro: onCreate PartidaTempoReal: " + ex.getMessage());
@@ -250,7 +251,7 @@ public class PartidaTempoRealActivity extends AppCompatActivity {
            // escudoMandante.setImageURI(imageUriMandante);
           //  escudoVisitante.setImageURI(imageUriVisitante);
 
-            if(JsonHelper.ObterUsuarioBancoLocal(this).getTipoUsuario().equals("0") || JsonHelper.ObterUsuarioBancoLocal(this).getTipoUsuario().equals("2")){
+            if(JsonHelper.ObterUsuarioBancoLocal(this).getTipoUsuario().equals("0") || JsonHelper.ObterUsuarioBancoLocal(this).getTipoUsuario().equals("3")){
                 fab.setVisibility(View.INVISIBLE);
             }else{
                 fab.setVisibility(View.VISIBLE);

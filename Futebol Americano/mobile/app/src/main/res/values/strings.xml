@@ -7,7 +7,7 @@
     <string name="title_activity_primeira_divisao">PrimeiraDivisaoActivity</string>
     <string name="title_activity_primeira_divisao_tabela">PrimeiraDivisaoTabelaActivity</string>
     <string name="url_pdtabela">http://52.37.37.207:96/Admin/Partida/ObterTabelaJsonPD</string>
-    <string name="url_pdclassificacao">http://52.37.37.207:96/Campeonato/</string>
+    <string name="url_pdclassificacao">http://52.37.37.207:96/Campeonato/ObterClassificacaoJson</string>
      <string name="url_sdtabela">http://52.37.37.207:96/Campeonato/getSDTabela</string>
     <string name="url_sdclassificacao">http://52.37.37.207:96/Campeonato/getSDClassificacao</string>
 
@@ -46,4 +46,31 @@
     <string name="url_feed_noticias">http://52.37.37.207:96/Admin/Campeonato/Noticias</string>
     <string name="url_feed_adicionar_noticias">http://52.37.37.207:96/Admin/Campeonato/AdicionarNoticia</string>
     <string name="url_comentario_adcionar" >http://52.37.37.207:96/Admin/Partida/ComentarJson</string>
+
+    <string name="regulamento">
+        <![CDATA[
+            <p><b>I: Premiação</b></p>
+            <br><p>** Os prêmios serão anunciados em breve.</p></br>
+            <br><p>** O usuário pode participar dos dois bolões."</p></br>
+            <p><b>II: Pontuação</b></p>
+            <br><p>** Todos os membros iniciam com 0 (zero) pontos.</p></br>
+            <br><p>** 1 ponto para quem acertar o vencedor da partida ou empate.</p></br>
+            <br><p>** 2 pontos para quem acertar o placar da partida.</p></br>
+            <br><p>** 3 pontos para quem acertar o placar da partida com mais de três gols para o vencedor.</p></br>
+            <br><p></p></br>
+            <br><p></p></br>
+            <p><b>III: Critérios de desempate</b></p>
+            <br><p>** Maior numero de pontos.</p></br>
+            <br><p>** Maior numero de rodadas com participação.</p></br>
+            <br><p>** Maior numero de rodadas como vencedor.</p></br>
+            <br><p>** Maior numero de acertos numa mesma rodada.</p></br>
+            <br><p>** Membro cadastrado a mais tempo no Fórum.</p></br>
+            <br><p>** As mensagens poderão ser enviadas até as 09:00 horas (horário de Brasilia) do dia do primeiro jogo de cada rodada.</p></br>
+            <br><p>** Para efeito de acerto nos palpites serão considerados apenas os resultados finais obtidos em campo, sendo totalmente descartadas as mudanças de resultados obtidas na Justiça Desportiva e/ou Justiça Comum ou por qualquer outro meio.</p></br>
+            <br><p>** O Palpite de cada usuário só poderá ser visualizado pelo próprio usuário.</p></br>
+            <br><p>** Os membros podem iniciar sua participação em qualquer rodada.</p></br>
+            ]]>
+    </string>
+    <string name="title_activity_regras">RegrasActivity</string>
+
 </resources>

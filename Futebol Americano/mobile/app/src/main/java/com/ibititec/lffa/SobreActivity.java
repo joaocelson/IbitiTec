@@ -17,7 +17,9 @@ public class SobreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sobre);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lerIntent();
+        iniciarAppodeal();
     }
     private void iniciarAppodeal() {
         Appodeal.show(this, Appodeal.BANNER_BOTTOM);

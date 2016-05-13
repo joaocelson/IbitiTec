@@ -20,10 +20,14 @@ public class JsonHelper {
     }
 
     public static <T> T getObject(String json, Class<T> tClass) {
-        return (new Gson()).fromJson(json, tClass);
+        try {
+            return (new Gson()).fromJson(json, tClass);
+        } catch (Exception ex) {
+            return  null;
+        }
     }
 
-    public static String objectToJson(Object object){
+    public static String objectToJson(Object object) {
         Gson gson = new Gson();
         String json = gson.toJson(object);
         return json;
