@@ -9,8 +9,8 @@ android {
         applicationId "com.ibititec.lffa"
         minSdkVersion 9
         targetSdkVersion 23
-        versionCode 13
-        versionName "2.1"
+        versionCode 16
+        versionName "2.4"
     }
     buildTypes {
         release {

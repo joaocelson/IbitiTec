@@ -205,8 +205,8 @@ namespace Campeonato.RepositorioADO
                 using (contexto = new Contexto())
                 {
                     var strQuery = "";
-                    strQuery += " INSERT INTO token (token, id_usuario) ";
-                    strQuery += string.Format(" VALUES ('{0}','{1}') ", token, idUsuario);
+                    strQuery += " INSERT INTO token (token) ";
+                    strQuery += string.Format(" VALUES ('{0}') ", token, idUsuario);
                     contexto.ExecutaComando(strQuery);
                     TratamentoLog.GravarLog("Token: " + token + " associado ao usuarioID: " + idUsuario);
                     return true;

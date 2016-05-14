@@ -13,14 +13,12 @@
 
     <EditText
         android:hint="E-mail"
-        android:text="joaocelson@gmail.com"
         android:id="@+id/txtEmailUsuario_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/txtSenhaUsuario_login"
-        android:text="ibititec"
         android:password="true"
         android:hint="Senha"
         android:layout_width="match_parent"

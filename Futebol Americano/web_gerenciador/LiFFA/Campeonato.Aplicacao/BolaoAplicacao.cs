@@ -60,8 +60,8 @@ namespace Campeonato.Aplicacao
             return repo.PontuarBolao(listaPartidas); 
 
         }
-        
-        public object VencedorRodada(string id)
+
+        public List<string[]>  VencedorRodada(string id)
         {
             BolaoRepositorioADO repo = new BolaoRepositorioADO();
             return repo.VencedorRodada(id);

@@ -336,6 +336,7 @@
         <activity
             android:name=".bolao.RegrasActivity"
             android:label="@string/title_activity_regras"
+            android:parentActivityName=".bolao.BolaoPrincipalActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>

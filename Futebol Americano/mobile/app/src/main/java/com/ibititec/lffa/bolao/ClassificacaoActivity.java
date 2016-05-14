@@ -16,7 +16,7 @@ import android.widget.ListView;
 import com.appodeal.ads.Appodeal;
 import com.ibititec.lffa.MainActivity;
 import com.ibititec.lffa.R;
-import com.ibititec.lffa.adapter.AdapterClassificacao;
+import com.ibititec.lffa.adapter.AdapterClassificacaoBolao;
 import com.ibititec.lffa.helpers.HttpHelper;
 import com.ibititec.lffa.helpers.JsonHelper;
 import com.ibititec.lffa.helpers.UIHelper;
@@ -44,6 +44,7 @@ public class ClassificacaoActivity extends AppCompatActivity {
             carregarComponentes();
             lerIntent();
             carregarPartidasPalpite();
+            atualizarClassificacaoBolao();
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro ONCreate ClassificacaoActivity: " + ex.getMessage());
         }
@@ -52,9 +53,9 @@ public class ClassificacaoActivity extends AppCompatActivity {
     private void carregarPartidasPalpite() {
         try {
             if (divisao.equals("primeira")) {
-                donwnloadFromUrlParam(MainActivity.PDCLASSIFICACAOBOLAO, getString(R.string.url_pdclassificacaobolao), "1");
+                donwnloadFromUrlParam(MainActivity.PDCLASSIFICACAOBOLAO, getString(R.string.url_pdclassificacaobolao), "{\"id\": \"1\"}");
             } else {
-                donwnloadFromUrlParam(MainActivity.SDCLASSIFICACAOBOLAO, getString(R.string.url_sdclassificacaobolao), "2");
+                donwnloadFromUrlParam(MainActivity.SDCLASSIFICACAOBOLAO, getString(R.string.url_sdclassificacaobolao), "{\"id\": \"2\"}");
             }
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro carregarPalpite: " + ex.getMessage());
@@ -104,6 +105,14 @@ public class ClassificacaoActivity extends AppCompatActivity {
         try {
             Intent intent = getIntent();
             divisao = intent.getStringExtra("divisao");
+
+            if (divisao.equals("primeira")) {
+                this.setTitle("Classificação Bolão");
+                classificacao = JsonHelper.leJsonBancoLocal(MainActivity.PDCLASSIFICACAOBOLAO, this);
+            } else {
+                this.setTitle("Clas. Bolão 2ª Divisão");
+                classificacao = JsonHelper.leJsonBancoLocal(MainActivity.SDCLASSIFICACAOBOLAO, this);
+            }
             iniciarAppodeal();
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro Le Intent Classificacao: " + ex.getMessage());
@@ -112,20 +121,15 @@ public class ClassificacaoActivity extends AppCompatActivity {
 
     private void atualizarClassificacaoBolao() {
         try {
-            //cabecalhoLayout = (LinearLayout) findViewById(R.id.cabecalho_artilahria);
-            //cabecalhoLayout.setVisibility(View.VISIBLE);
-            if (divisao.equals("primeira")) {
-                this.setTitle("Classificação Bolão");
-                classificacao = JsonHelper.leJsonBancoLocal(MainActivity.PDCLASSIFICACAOBOLAO, this);
-            } else {
-                this.setTitle("Clas. Bolão 2ª Divisão");
-                classificacao = JsonHelper.leJsonBancoLocal(MainActivity.SDCLASSIFICACAOBOLAO, this);
-            }
             if (!classificacao.equals("")) {
+
                 List<Classificacao> listClassificacao = JsonHelper.getList(classificacao, Classificacao[].class);
+
+                Classificacao[] classificacaos = new Classificacao[listClassificacao.size()];
+                listClassificacao.toArray(classificacaos);
                 if (listClassificacao != null && listClassificacao.size() > 0) {
 
-                    AdapterClassificacao adapterArtilharia = new AdapterClassificacao(this, listClassificacao, true);
+                    AdapterClassificacaoBolao adapterArtilharia = new AdapterClassificacaoBolao(ClassificacaoActivity.this, classificacaos);
                     lvClassificacao.setAdapter(adapterArtilharia);
                     UIHelper.setListViewHeightBasedOnChildren(lvClassificacao);
                 } else {
@@ -134,6 +138,7 @@ public class ClassificacaoActivity extends AppCompatActivity {
             } else {
                 exibirMensagem("Classificação ainda não disponível.", "Classificação");
             }
+
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro ao preencher listView: " + ex.getMessage());
         }
@@ -177,6 +182,8 @@ public class ClassificacaoActivity extends AppCompatActivity {
                     String url = params[0];
                     json = HttpHelper.POSTJson(url, parametro);
                     Log.i(MainActivity.TAG, json);
+
+
                 } catch (IOException e) {
                     e.printStackTrace();
                     Log.e(MainActivity.TAG, String.format(getString(R.string.msg_erro_json), e.getMessage()));
@@ -200,6 +207,9 @@ public class ClassificacaoActivity extends AppCompatActivity {
                     PreferenceManager.getDefaultSharedPreferences(ClassificacaoActivity.this).edit()
                             .putString(nomeJsonParam + ".json", json)
                             .apply();
+
+
+
                     atualizarClassificacaoBolao();
                 } catch (Exception ex) {
                     Log.i(MainActivity.TAG, "Erro PostExecute Classificacao : " + ex.getMessage());

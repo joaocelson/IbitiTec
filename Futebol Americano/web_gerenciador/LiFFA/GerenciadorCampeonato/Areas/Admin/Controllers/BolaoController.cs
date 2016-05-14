@@ -203,14 +203,19 @@ namespace Campeonato.UI.WEB.Areas.Admin
         //Lista a classificação geral do bolão
         public String VencedorRodadaJson(string id)
         {
-            IEnumerable<string> listaClassificacao = (IEnumerable<string>)appBolao.VencedorRodada(id);
+            List<string[]> listaClassificacao = appBolao.VencedorRodada(id);
+            String[] strin = new string[] { "", "", "" };
+            listaClassificacao.Add(strin);
             var classificacao = listaClassificacao.Select(p => new
             {
                 Posicao = p.ElementAt(0),
-                Time = p.ElementAt(1),
+                NomeTime = p.ElementAt(1),
                 Pontos = p.ElementAt(2)
             });
-            return JsonConvert.SerializeObject(listaClassificacao, Formatting.Indented);
+
+            
+
+            return JsonConvert.SerializeObject(classificacao, Formatting.Indented);
         }
 
         //Habilita a partida para o usuário inserir os palpites da partida - Retorna uma partida

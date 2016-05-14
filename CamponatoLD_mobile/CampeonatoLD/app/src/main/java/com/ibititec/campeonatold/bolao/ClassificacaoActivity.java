@@ -53,9 +53,9 @@ public class ClassificacaoActivity extends AppCompatActivity {
     private void carregarPartidasPalpite() {
         try {
             if (divisao.equals("primeira")) {
-                donwnloadFromUrlParam(MainActivity.PDCLASSIFICACAOBOLAO, getString(R.string.url_pdclassificacaobolao), "1");
+                donwnloadFromUrlParam(MainActivity.PDCLASSIFICACAOBOLAO, getString(R.string.url_pdclassificacaobolao),  "{\"id\": \"1\"}");
             } else {
-                donwnloadFromUrlParam(MainActivity.SDCLASSIFICACAOBOLAO, getString(R.string.url_sdclassificacaobolao), "2");
+                donwnloadFromUrlParam(MainActivity.SDCLASSIFICACAOBOLAO, getString(R.string.url_sdclassificacaobolao),  "{\"id\": \"1\"}");
             }
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro carregarPalpite: " + ex.getMessage());

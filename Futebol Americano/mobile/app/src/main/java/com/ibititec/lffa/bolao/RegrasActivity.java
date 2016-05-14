@@ -19,7 +19,6 @@ public class RegrasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_regras);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         TextView tx =(TextView) findViewById(R.id.txtRegulamento);

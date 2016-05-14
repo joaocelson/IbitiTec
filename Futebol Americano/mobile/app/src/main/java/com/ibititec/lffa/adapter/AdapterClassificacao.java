@@ -57,11 +57,11 @@ public class AdapterClassificacao extends BaseAdapter {
             View layout = inflater.inflate(R.layout.adapter_classificacao, null);
 
             //TextView posicao = (TextView) layout.findViewById(R.id.txtPosicao);
-            TextView pontos = (TextView) layout.findViewById(R.id.txtPontos);
+            //TextView pontos = (TextView) layout.findViewById(R.id.txtPontos);
             TextView jogos = (TextView) layout.findViewById(R.id.txtJogos);
             TextView vitoria = (TextView) layout.findViewById(R.id.txtVitorias);
             TextView derrotas = (TextView) layout.findViewById(R.id.txtDerrotas);
-            TextView empates = (TextView) layout.findViewById(R.id.txtEmpates);
+            //TextView empates = (TextView) layout.findViewById(R.id.txtEmpates);
 
             TextView pontospp = (TextView) layout.findViewById(R.id.txtPP);
             TextView pontospc = (TextView) layout.findViewById(R.id.txtPC);
@@ -69,12 +69,12 @@ public class AdapterClassificacao extends BaseAdapter {
 
             if(exibirPontuacao){
                 //   posicao.setText(classificacao.getPosicao());
-                pontos.setText(classificacao.getPontos());
+                //pontos.setText(classificacao.getPontos());
                 jogos.setText(classificacao.getJogos());
                 vitoria.setText(classificacao.getVitoria());
                 derrotas.setText(classificacao.getDerrota());
                 //empates.setText(classificacao.getEmpate());
-                empates.setVisibility(View.INVISIBLE);
+                //empates.setVisibility(View.INVISIBLE);
                 pontospp.setText(classificacao.getGolPro());
                 pontospc.setText(classificacao.getGolContra());
                 Uri imageUri = Uri.parse(MainActivity.PATH_FOTOS + classificacao.getTime() + "_escudo.png");
@@ -87,11 +87,11 @@ public class AdapterClassificacao extends BaseAdapter {
                 Uri imageUri = Uri.parse(MainActivity.PATH_FOTOS + classificacao.getTime() + ".png");
                 SimpleDraweeView draweeView = (SimpleDraweeView) layout.findViewById(R.id.ivClassificacao);
                 draweeView.setImageURI(imageUri);
-                pontos.setVisibility(View.INVISIBLE);
+                //pontos.setVisibility(View.INVISIBLE);
                 jogos.setVisibility(View.INVISIBLE);
                 vitoria.setVisibility(View.INVISIBLE);
                 derrotas.setVisibility(View.INVISIBLE);
-                empates.setVisibility(View.INVISIBLE);
+                //empates.setVisibility(View.INVISIBLE);
                 pontospc.setVisibility(View.INVISIBLE);
                 pontospp.setVisibility(View.INVISIBLE);
                 ViewGroup.LayoutParams params=draweeView.getLayoutParams();

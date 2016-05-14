@@ -49,6 +49,8 @@ public class PrimeiraDivisaoActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
+
+        lerIntent();
 //        AnalyticsApplication.enviarGoogleAnalitcs(this);
         iniciarAppodeal();
     }

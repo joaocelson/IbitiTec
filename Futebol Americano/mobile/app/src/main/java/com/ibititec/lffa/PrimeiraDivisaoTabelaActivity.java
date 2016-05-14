@@ -118,8 +118,8 @@ public class PrimeiraDivisaoTabelaActivity extends AppCompatActivity {
 
     private void atualizarEquipesPrimeiraDivisao() {
         try {
-            cabecalhoLayout = (LinearLayout) findViewById(R.id.cabecalho_classificacao);
-            cabecalhoLayout.setVisibility(View.VISIBLE);
+            //cabecalhoLayout = (LinearLayout) findViewById(R.id.cabecalho_classificacao);
+            //cabecalhoLayout.setVisibility(View.VISIBLE);
             this.setTitle("Equipes");
             tabela = JsonHelper.leJsonBancoLocal(MainActivity.PDCLASSIFICACAO, this);
             List<Classificacao> listClassificacao = JsonHelper.getList(tabela, Classificacao[].class);
@@ -178,8 +178,8 @@ public class PrimeiraDivisaoTabelaActivity extends AppCompatActivity {
 
     private void atualizarClassificacaoPrimeiraDivisao() {
         try {
-            cabecalhoLayout = (LinearLayout) findViewById(R.id.cabecalho_classificacao);
-            cabecalhoLayout.setVisibility(View.VISIBLE);
+            //cabecalhoLayout = (LinearLayout) findViewById(R.id.cabecalho_classificacao);
+            //cabecalhoLayout.setVisibility(View.VISIBLE);
             this.setTitle("Classificação Geral");
             tabela = JsonHelper.leJsonBancoLocal(MainActivity.PDCLASSIFICACAO, this);
             List<Classificacao> listClassificacao = JsonHelper.getList(tabela, Classificacao[].class);

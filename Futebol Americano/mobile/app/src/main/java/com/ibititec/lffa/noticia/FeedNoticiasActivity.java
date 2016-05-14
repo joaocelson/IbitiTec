@@ -258,7 +258,7 @@ public class FeedNoticiasActivity extends AppCompatActivity {
                 super.onPostExecute(json);
 
                 if (json.equals("")) {
-                    exibirMensagem("Nenhuma notícia cadastrada.", "Notícias", true);
+                    exibirMensagem("Nenhuma notícia cadastrada.", "Notícias", false);
 
                 } else {
                     carregaListaNoticias(json);
@@ -295,7 +295,7 @@ public class FeedNoticiasActivity extends AppCompatActivity {
                 lvFeedNoticias.setAdapter(adapterNoticia);
                 UIHelper.setListViewHeightBasedOnChildren(lvFeedNoticias);
             } else {
-                exibirMensagemOK("Nenhuma notícia cadastrada", "Notícias");
+                exibirMensagem("Nenhuma notícia cadastrada", "Notícias", false);
             }
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro ao carregar lista de notícias.");

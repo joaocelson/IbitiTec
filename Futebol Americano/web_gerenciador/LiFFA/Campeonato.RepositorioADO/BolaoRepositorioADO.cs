@@ -212,54 +212,51 @@ namespace Campeonato.RepositorioADO
                     {
                         if (!partida.GolMandante.Equals("") || !partida.GolVisitante.Equals(""))
                         {
-                            if ((Convert.ToInt16(partida.GolMandante) > Convert.ToInt16(partida.GolVisitante)) && (bolao.GolMandante > bolao.GolVisitante))
-                            {
-                                bolao.PontosAdquiridos = 1;
-
+                            if (Convert.ToInt16(partida.GolMandante) > Convert.ToInt16(partida.GolVisitante))
+                            {                                
                                 if (bolao.GolMandante == Convert.ToInt16(partida.GolMandante) && bolao.GolVisitante == Convert.ToInt16(partida.GolVisitante))
                                 {
-                                    if (Convert.ToInt16(partida.GolMandante) >= 3 && bolao.GolMandante >= 3)
-                                    {
-                                        bolao.PontosAdquiridos = bolao.PontosAdquiridos + 2;
-                                    }
-                                    else
-                                    {
-                                        bolao.PontosAdquiridos = bolao.PontosAdquiridos + 1;
-                                    }
+                                    //Acertou o resultado da partida
+                                    bolao.PontosAdquiridos = 30;
+
+                                }else if(bolao.GolMandante == Convert.ToInt16(partida.GolMandante) && bolao.GolMandante > bolao.GolVisitante)
+                                {
+                                    bolao.PontosAdquiridos = 20;
+
+                                }
+                                else if (bolao.GolMandante > bolao.GolVisitante)
+                                {
+                                    bolao.PontosAdquiridos = 10;
+                                }
+                                else if (bolao.GolMandante < bolao.GolVisitante && bolao.GolVisitante == Convert.ToInt16(partida.GolVisitante))
+                                {
+                                    bolao.PontosAdquiridos = 5;
                                 }
 
                             }
-                            else if ((Convert.ToInt16(partida.GolMandante) < Convert.ToInt16(partida.GolVisitante)) && (bolao.GolMandante < bolao.GolVisitante))
+                            else if ((Convert.ToInt16(partida.GolMandante) < Convert.ToInt16(partida.GolVisitante)))
                             {
-                                bolao.PontosAdquiridos = 1;
                                 if (bolao.GolMandante == Convert.ToInt16(partida.GolMandante) && bolao.GolVisitante == Convert.ToInt16(partida.GolVisitante))
                                 {
-                                    if (Convert.ToInt16(partida.GolVisitante) >= 3 && bolao.GolVisitante >= 3)
-                                    {
-                                        bolao.PontosAdquiridos = bolao.PontosAdquiridos + 2;
-                                    }
-                                    else
-                                    {
-                                        bolao.PontosAdquiridos = bolao.PontosAdquiridos + 1;
-                                    }
-                                }
-                            }
-                            else if (Convert.ToInt16(partida.GolMandante) == Convert.ToInt16(partida.GolVisitante) && (bolao.GolMandante == bolao.GolVisitante))
-                            {
-                                bolao.PontosAdquiridos = 1;
-                                if (bolao.GolMandante == Convert.ToInt16(partida.GolMandante) && bolao.GolVisitante == Convert.ToInt16(partida.GolVisitante))
-                                {
-                                    if (Convert.ToInt16(partida.GolVisitante) >= 3 && bolao.GolVisitante >= 3)
-                                    {
-                                        bolao.PontosAdquiridos = bolao.PontosAdquiridos + 2;
-                                    }
-                                    else
-                                    {
-                                        bolao.PontosAdquiridos = bolao.PontosAdquiridos + 1;
-                                    }
-                                }
-                            }
+                                    //Acertou o resultado da partida
+                                    bolao.PontosAdquiridos = 30;
 
+                                }
+                                else if (bolao.GolVisitante == Convert.ToInt16(partida.GolVisitante) && bolao.GolMandante < bolao.GolVisitante)
+                                {
+                                    bolao.PontosAdquiridos = 20;
+
+                                }
+                                else if (bolao.GolMandante < bolao.GolVisitante)
+                                {
+                                    bolao.PontosAdquiridos = 10;
+                                }
+                                else if (bolao.GolMandante > bolao.GolVisitante && bolao.GolMandante == Convert.ToInt16(partida.GolMandante))
+                                {
+                                    bolao.PontosAdquiridos = 5;
+                                }
+                            }
+                            
                             var strQuery = string.Format("UPDATE T_BOLAO SET pontos_adquiridos = {0} WHERE id = {1}", bolao.PontosAdquiridos, bolao.Id);
                             using (contexto = new Contexto())
                             {
@@ -285,7 +282,7 @@ namespace Campeonato.RepositorioADO
 
 
 
-        public object VencedorRodada(string id)
+        public List<string[]> VencedorRodada(string id)
         {
             var listaUsuarios = new List<string[]>();
             using (contexto = new Contexto())
@@ -303,9 +300,9 @@ namespace Campeonato.RepositorioADO
 
                 Bolao bolao = ListarBolaoPorId(id);
                 string[] usuario = new string[3];
-                usuario[0] = "POSIÇÃO";
-                usuario[1] = bolao.Nome.ToUpper();
-                usuario[2] = "PONTOS";
+                usuario[0] = "POS";
+                usuario[1] = "NOME";
+                usuario[2] = "PON";
                 listaUsuarios.Add(usuario);
                 while (retornoDataReader.Read())
                 {

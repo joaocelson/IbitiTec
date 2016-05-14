@@ -94,6 +94,7 @@ public class LoginUsuarioActivity extends AppCompatActivity {
                     Usuario usuario = new Usuario();
                     usuario.setLoginEmail(txtEmail.getText().toString());
                     usuario.setSenha(txtSenha.getText().toString());
+
                     fazerLogin(usuario);
                 }
             });
@@ -152,8 +153,12 @@ public class LoginUsuarioActivity extends AppCompatActivity {
 
                         try {
                             String url = params[0];
+                            if(HttpHelper.existeConexao(LoginUsuarioActivity.this)) {
+                                json = HttpHelper.POSTJson(url, JsonHelper.objectToJson(usuarioLocal));
+                            }else{
+                                json = "";
+                            }
 
-                            json = HttpHelper.POSTJson(url, JsonHelper.objectToJson(usuarioLocal));
                             Log.i(MainActivity.TAG, "Json retornado ao fazer o login: " + json);
                             if (json != null) {
                                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(LoginUsuarioActivity.this);
