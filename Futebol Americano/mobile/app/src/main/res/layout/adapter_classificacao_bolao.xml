@@ -25,7 +25,7 @@
             android:textColor="@color/Black" />
         <TextView
             android:id="@+id/txtNomeUsuarioBolao"
-            android:layout_width="210dp"
+            android:layout_width="190dp"
             android:layout_height="wrap_content"
             android:text="POS"
             android:textSize="16sp"

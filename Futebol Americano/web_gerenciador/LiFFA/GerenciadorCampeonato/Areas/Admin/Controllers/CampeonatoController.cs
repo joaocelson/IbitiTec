@@ -247,6 +247,12 @@ namespace Campeonato.UI.WEB.Areas.Admin
         public String Noticias()
         {
             var listaNoticias = appNoticia.ListarTodos();
+            //List<Noticia> list = listaNoticias.ToList<Noticia>();
+            //Noticia not = new Noticia();
+            //not.Corpo = "";
+            //not.Titulo = "";
+            //list.Add(not);
+
             return JsonConvert.SerializeObject(listaNoticias, Formatting.Indented);
         }
 

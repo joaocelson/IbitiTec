@@ -55,9 +55,9 @@
             <br><p>** Todos os membros iniciam com 0 (zero) pontos.</p></br>
             <br><p>** 30 ponto para quem acertar o placar da partida.</p></br>
             <br><p>** 20 pontos para quem acertar o vencedor e o total de pontos do vencedor.</p></br>
-            <br><p>** 10 pontos para quem acertar o vencedor da partida.</p></br>
-            <br><p>** 5 pontos para quem errar o vencedor da partida, mas que tenha acertado o placar do time perdedor.</p></br>
-            <br><p></p></br>
+            <br><p>** 10 pontos para quem acertar o vencedor da partida, mas errar a quantidade de pontos do mesmo.</p></br>
+            <br><p>** 5 pontos para quem errar o vencedor da partida, mas que tenha acertado a quantidade de pontos do time perdedor.</p></br>
+            <br><p>** os pontos não são acumulativos para uma mesma partida.</p></br>
             <br><p></p></br>
             <p><b>III: Critérios de desempate</b></p>
             <br><p>** Maior numero de pontos.</p></br>

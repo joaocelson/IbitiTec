@@ -129,5 +129,26 @@
 
         </LinearLayout>
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingTop="30dp"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/txtSair"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/Black"
+                android:text="SAIR"
+                android:paddingLeft="114dp"
+                android:textSize="24sp"
+                android:layout_weight="0.23"/>
+
+        </LinearLayout>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

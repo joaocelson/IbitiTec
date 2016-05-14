@@ -3,6 +3,7 @@ package com.ibititec.lffa.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,17 +54,19 @@ public class AdapterNoticia extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         try {
             final Noticia noticia = noticiaList.get(position);
-            Log.i(MainActivity.TAG, "Vai setar o Adapter, número de registro: " + noticiaList.size() + " Position: " + position + " - Titulo Noticia " + noticia.getTitulo());
+            Log.i(MainActivity.TAG, "Vai setar o Adapter, número de registro: " + noticiaList.size() + " Position: " + position + " - Titulo Noticia " + noticia.getTitulo()+ " - Corpo Noticia " + noticia.getCorpo());
 
             LayoutInflater inflater = (LayoutInflater) activity.getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View layout = inflater.inflate(R.layout.adapter_noticia, null);
 
             TextView titulo = (TextView) layout.findViewById(R.id.txtTituloFeedNoticias);
+            titulo.setTypeface(null, Typeface.BOLD);
+
             TextView Corpo = (TextView) layout.findViewById(R.id.txtCorpoFeedNoticias);
 
 
-            titulo.setText(noticia.getTitulo());
-            Corpo.setText(noticia.getCorpo() + " - " + noticia.getDataNoticia());
+            titulo.setText("Título: " + noticia.getTitulo());
+            Corpo.setText(noticia.getCorpo() + " Data: " + noticia.getDataNoticia().substring(0, 10));
 //            if(noticia.getTime() != null && !noticia.getTime().getEscudoPequeno().equals("")) {
 //                Uri imageUri = Uri.parse(MainActivity.PATH_FOTOS + noticia.getTime().getEscudoPequeno() + ".jpg");
 //                SimpleDraweeView draweeView = (SimpleDraweeView) layout.findViewById(R.id.img_time_FeedNoticias);

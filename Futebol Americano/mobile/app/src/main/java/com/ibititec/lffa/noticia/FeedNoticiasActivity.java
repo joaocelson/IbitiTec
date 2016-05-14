@@ -41,6 +41,7 @@ public class FeedNoticiasActivity extends AppCompatActivity {
             setContentView(R.layout.activity_feed_noticias);
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
             lerIntent();
@@ -282,6 +283,7 @@ public class FeedNoticiasActivity extends AppCompatActivity {
                 donwnloadFromUrl("feednoticias", getString(R.string.url_feed_noticias), "");
                 return true;
             default:
+                onBackPressed();
                 return super.onOptionsItemSelected(item);
         }
     }

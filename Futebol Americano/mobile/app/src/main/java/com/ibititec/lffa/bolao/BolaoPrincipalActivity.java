@@ -40,6 +40,16 @@ public class BolaoPrincipalActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onResume() {
+        try {
+            super.onResume();
+            lerIntent();
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro ONResume Classficacao: " + ex.getMessage());
+        }
+    }
+
     private void lerIntent() {
         try {
             Appodeal.show(this, Appodeal.BANNER_BOTTOM);

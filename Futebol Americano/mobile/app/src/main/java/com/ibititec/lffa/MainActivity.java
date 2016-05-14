@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity
 
     //DECLARACAO DOS OBJETOS DE TELA
     private ImageButton btnPrimeiraDivisao, btnSegundaDivisao, btnAliga,btnNoticias;
-    private TextView txtEquipes, txtNopad, txtALiga,txtNoticias;
+    private TextView txtEquipes, txtNopad, txtALiga,txtNoticias, txtSair;
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
     boolean haveConnectedWifi = false;
@@ -89,6 +89,8 @@ public class MainActivity extends AppCompatActivity
         btnAliga= (ImageButton) findViewById(R.id.btnAliga);
         btnNoticias = (ImageButton) findViewById(R.id.btnNoticias);
         txtNoticias = (TextView) findViewById(R.id.txtNoticias);
+        txtSair = (TextView) findViewById(R.id.txtSair);
+
     }
 
     private boolean checkPlayServices() {
@@ -266,12 +268,35 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v) {
                 startarActivityNoticia();
             }
-        });   btnNoticias.setOnClickListener(new View.OnClickListener() {
+        });
+        btnNoticias.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startarActivityNoticia();
             }
         });
+
+
+
+        txtSair.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                  
+                    finish();
+
+                } catch (Exception exx) {
+                    Log.i("ERRO", "Erro ao finish");
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void onDestroy(){
+        android.os.Process.killProcess(android.os.Process.myPid());
+        super.onDestroy();
     }
 
     private void startarActivityALiga() {
