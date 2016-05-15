@@ -61,30 +61,12 @@ public class AdapterNoticia extends BaseAdapter {
 
             TextView titulo = (TextView) layout.findViewById(R.id.txtTituloFeedNoticias);
             titulo.setTypeface(null, Typeface.BOLD);
-
             TextView Corpo = (TextView) layout.findViewById(R.id.txtCorpoFeedNoticias);
+            if(noticia.getDataNoticia()!=null) {
+                titulo.setText("Título: " + noticia.getTitulo());
 
-
-            titulo.setText("Título: " + noticia.getTitulo());
-            Corpo.setText(noticia.getCorpo() + " Data: " + noticia.getDataNoticia().substring(0, 10));
-//            if(noticia.getTime() != null && !noticia.getTime().getEscudoPequeno().equals("")) {
-//                Uri imageUri = Uri.parse(MainActivity.PATH_FOTOS + noticia.getTime().getEscudoPequeno() + ".jpg");
-//                SimpleDraweeView draweeView = (SimpleDraweeView) layout.findViewById(R.id.img_time_FeedNoticias);
-//                draweeView.setImageURI(imageUri);
-//            }else {
-//                SimpleDraweeView draweeView = (SimpleDraweeView) layout.findViewById(R.id.img_time_FeedNoticias);
-//                draweeView.setVisibility(View.INVISIBLE);
-//            }
-
-//            Button btnTempoReal = (Button) layout.findViewById(R.id.btnTempoRealPartida1);
-//            btnTempoReal.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    startarActivityPalpite(v, noticia);
-//                }
-//            });
-
-            //Appodeal.show(activity, Appodeal.BANNER_BOTTOM);
+                Corpo.setText(noticia.getCorpo() + " Data: " + noticia.getDataNoticia().substring(0, 10));
+            }
             return layout;
 
         } catch (Exception e) {

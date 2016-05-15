@@ -5,9 +5,13 @@
 
 @using (Html.BeginForm("Logoff", "AdminHome"))
 {
-    @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-
+    
+    
+    <div class="pull-left">
+        <a href="~/Admin/Campeonato/EnviarMensagemGoogle">Enviar Mensagem</a>
+    </div>
+    <br />
     <div class="pull-left">
         <a href="~/Admin/Partida/PaginaInicial">Partidas</a>
     </div>
@@ -23,6 +27,11 @@
     <br />
     <div class="pull-left">
         <a href="~/Admin/Galeria/PaginaInicial">Fotos/Vídeos</a>
+    </div>
+    
+    <br />
+    <div class="pull-left">
+        <a href="~/Admin/Campeonato/EnviarMensagemGoogle">Enviar Mensagem</a>
     </div>
 }
 

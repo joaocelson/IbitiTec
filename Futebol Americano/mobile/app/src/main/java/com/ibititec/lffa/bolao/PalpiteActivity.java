@@ -93,13 +93,13 @@ public class PalpiteActivity extends AppCompatActivity {
     }
 
     private void lerIntent() {
-       // Appodeal.show(this, Appodeal.BANNER_TOP);
+        // Appodeal.show(this, Appodeal.BANNER_TOP);
         Intent intent = getIntent();
         divisao = intent.getStringExtra("divisao");
 
     }
 
-    public void carregarPartidas(){
+    public void carregarPartidas() {
         try {
 
 
@@ -111,18 +111,20 @@ public class PalpiteActivity extends AppCompatActivity {
 
                 Usuario usuarioLogado = JsonHelper.getObject(sharedPreferences.getString(MainActivity.USUARIO + ".json", ""), Usuario.class);
 
-                if(usuarioLogado!=null) {
+                if (usuarioLogado != null) {
 
                     Calendar c = Calendar.getInstance();
                     int day = c.get(Calendar.DAY_OF_WEEK);
-                    int hour = c.get(Calendar.HOUR);
-                    if (day >= 4 || (day == 1 && hour < 9)) {
+                    int hour = c.get(Calendar.HOUR_OF_DAY);
+
+                    if (day >= 4 || (day == 1 && hour < 14)) {
                         if (divisao.equals("primeira")) {
                             donwnloadFromUrl(MainActivity.PDJOGOSBOLAO, getString(R.string.url_jogos_bolao), "{\"id\":\"1\", \"emailUsuario\":\"" + usuarioLogado.getLoginEmail() + "\",\"senha\":\"" + usuarioLogado.getSenha() + "\"}");
                         } else {
                             donwnloadFromUrl(MainActivity.SDJOGOSBOLAO, getString(R.string.url_jogos_bolao), "{\"id\":\"2\", \"emailUsuario\":\"" + usuarioLogado.getLoginEmail() + "\",\"senha\":\"" + usuarioLogado.getSenha() + "\"}");
                         }
                     } else {
+
                         if (divisao.equals("primeira")) {
 
                             donwnloadFromUrl(MainActivity.PDJOGOSBOLAO, getString(R.string.url_jogos_rodada), "");
@@ -131,8 +133,8 @@ public class PalpiteActivity extends AppCompatActivity {
                             donwnloadFromUrl(MainActivity.SDJOGOSBOLAO, getString(R.string.url_jogos_rodada), "");
                         }
                     }
-                }else {
-                    exibirMensagem("Para participar do bolão é necessário fazer cadastro no aplicativo.","Atenção");
+                } else {
+                    exibirMensagem("Para participar do bolão é necessário fazer cadastro no aplicativo.", "Atenção");
                 }
             }
         } catch (Exception ex) {
@@ -179,7 +181,15 @@ public class PalpiteActivity extends AppCompatActivity {
                 if (!jogosBolao.equals("")) {
                     List<Partida> partidaList = JsonHelper.getList(jogosBolao, Partida[].class);
                     if (partidaList.size() > 0) {
-                        AdapterJogosBolao adapterJogosBolao = new AdapterJogosBolao(this, partidaList, divisao, true);
+                        Calendar c = Calendar.getInstance();
+                        int day = c.get(Calendar.DAY_OF_WEEK);
+                        int hour = c.get(Calendar.HOUR_OF_DAY);
+                        AdapterJogosBolao adapterJogosBolao;
+                        if (day >= 4 || (day == 1 && hour < 14)) {
+                            adapterJogosBolao = new AdapterJogosBolao(this, partidaList, divisao, true);
+                        } else {
+                            adapterJogosBolao = new AdapterJogosBolao(this, partidaList, divisao, false);
+                        }
                         lvJogosBolao.setAdapter(adapterJogosBolao);
                         UIHelper.setListViewHeightBasedOnChildren(lvJogosBolao);
                     } else {

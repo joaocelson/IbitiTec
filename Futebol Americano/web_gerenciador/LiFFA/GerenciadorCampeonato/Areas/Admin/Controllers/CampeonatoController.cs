@@ -185,6 +185,10 @@ namespace Campeonato.UI.WEB.Areas.Admin
             return View(listaCampeos);
         }
 
+        public ActionResult EnviarMensagemGoogle()
+        {
+            return View();
+        }
 
         //JSON - Retorna todos os dados JSON
         //=======================================================
@@ -247,13 +251,13 @@ namespace Campeonato.UI.WEB.Areas.Admin
         public String Noticias()
         {
             var listaNoticias = appNoticia.ListarTodos();
-            //List<Noticia> list = listaNoticias.ToList<Noticia>();
-            //Noticia not = new Noticia();
-            //not.Corpo = "";
-            //not.Titulo = "";
-            //list.Add(not);
+            List<Noticia> list = listaNoticias.ToList<Noticia>();
+            Noticia not = new Noticia();
+            not.Corpo = "";
+            not.Titulo = "";
+            list.Add(not);
 
-            return JsonConvert.SerializeObject(listaNoticias, Formatting.Indented);
+            return JsonConvert.SerializeObject(list, Formatting.Indented);
         }
 
         public String AdicionarNoticia(Noticia noticia)
@@ -284,6 +288,7 @@ namespace Campeonato.UI.WEB.Areas.Admin
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
 
+       
 
         //SEND TOKEN 
         //=======================================================================================
