@@ -63,10 +63,10 @@ namespace Campeonato.Aplicacao
             return campADO.Noticias();
         }
 
-        public bool GravarToken(string token, String idUsuario)
+        public bool GravarToken(string token)
         {
             CampeonatoRepositorioADO campADO = new CampeonatoRepositorioADO();
-           return campADO.GravarToken(token, idUsuario);
+           return campADO.GravarToken(token);
         }
 
         public List<String> ObterTokens()

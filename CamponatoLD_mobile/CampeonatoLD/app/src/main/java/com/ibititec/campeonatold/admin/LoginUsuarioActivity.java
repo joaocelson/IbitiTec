@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -182,12 +181,13 @@ public class LoginUsuarioActivity extends AppCompatActivity {
             Log.i(MainActivity.TAG, "Json lido do banco local ao fazer o login: " + usuarioJson);
             usuario = (Usuario) JsonHelper.getObject(sharedPreferences.getString(MainActivity.USUARIO + ".json", ""), Usuario.class);
 
-            if (usuarioLocal != null && usuario.getSenha() == usuarioLocal.getSenha() && usuario.getLoginEmail() == usuarioLocal.getLoginEmail()) {
+            if (usuarioLocal != null && usuario.getSenha().equals(usuarioLocal.getSenha()) && usuario.getLoginEmail().equals(usuarioLocal.getLoginEmail())) {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
             }else{
                 String mensagem = "Usuário ou senha incorretos.";
-                Snackbar.make(findViewById(R.id.btnCadastrar_cadastro), mensagem, Snackbar.LENGTH_SHORT).show();
+                exibirMensagem(mensagem, "Atenção",false);
+                //Snackbar.make(findViewById(R.id.btnCadastrar_cadastro), mensagem, Snackbar.LENGTH_SHORT).show();
             }
 
         } catch (Exception ex) {

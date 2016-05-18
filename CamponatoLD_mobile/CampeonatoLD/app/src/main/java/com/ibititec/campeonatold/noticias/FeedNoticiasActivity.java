@@ -25,6 +25,7 @@ import com.ibititec.campeonatold.helpers.HttpHelper;
 import com.ibititec.campeonatold.helpers.JsonHelper;
 import com.ibititec.campeonatold.helpers.UIHelper;
 import com.ibititec.campeonatold.modelo.Noticia;
+import com.ibititec.campeonatold.modelo.Usuario;
 
 import java.io.IOException;
 import java.util.List;
@@ -196,8 +197,8 @@ public class FeedNoticiasActivity extends AppCompatActivity {
         try {
             lvFeedNoticias = (ListView) findViewById(R.id.lvFeedNoticias);
             fab = (FloatingActionButton) findViewById(R.id.fabAddNoticia);
-
-            if (JsonHelper.ObterUsuarioBancoLocal(this).getTipoUsuario().equals("0")) {
+            Usuario usuario = JsonHelper.ObterUsuarioBancoLocal(this);
+            if (usuario== null || usuario.getTipoUsuario().equals("0")) {
                 fab.setVisibility(View.INVISIBLE);
             } else {
                 fab.setVisibility(View.VISIBLE);
@@ -282,7 +283,7 @@ public class FeedNoticiasActivity extends AppCompatActivity {
                 lvFeedNoticias.setAdapter(adapterNoticia);
                 UIHelper.setListViewHeightBasedOnChildren(lvFeedNoticias);
             } else {
-                exibirMensagemOK("Nenhuma notícia cadastrada", "Notícias");
+                exibirMensagem("Nenhuma notícia cadastrada", "Notícias");
             }
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro ao carregar lista de notícias.");

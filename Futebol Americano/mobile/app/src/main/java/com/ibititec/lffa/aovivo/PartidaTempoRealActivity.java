@@ -30,6 +30,7 @@ import com.ibititec.lffa.helpers.JsonHelper;
 import com.ibititec.lffa.helpers.UIHelper;
 import com.ibititec.lffa.modelo.AoVivo;
 import com.ibititec.lffa.modelo.Partida;
+import com.ibititec.lffa.modelo.Usuario;
 import com.ibititec.lffa.util.AnalyticsApplication;
 
 import java.io.IOException;
@@ -251,9 +252,10 @@ public class PartidaTempoRealActivity extends AppCompatActivity {
            // escudoMandante.setImageURI(imageUriMandante);
           //  escudoVisitante.setImageURI(imageUriVisitante);
 
-            if(JsonHelper.ObterUsuarioBancoLocal(this).getTipoUsuario().equals("0") || JsonHelper.ObterUsuarioBancoLocal(this).getTipoUsuario().equals("3")){
+            Usuario usuario = JsonHelper.ObterUsuarioBancoLocal(this);
+            if (usuario== null || usuario.getTipoUsuario().equals("0") || usuario.getTipoUsuario().equals("3")) {
                 fab.setVisibility(View.INVISIBLE);
-            }else{
+            } else {
                 fab.setVisibility(View.VISIBLE);
             }
 

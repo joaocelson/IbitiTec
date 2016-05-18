@@ -198,17 +198,17 @@ namespace Campeonato.RepositorioADO
             return artilharia;
         }
 
-        public bool GravarToken(String token, String idUsuario)
+        public bool GravarToken(String token)
         {
             try
             {
                 using (contexto = new Contexto())
                 {
                     var strQuery = "";
-                    strQuery += " INSERT INTO token (token, id_usuario) ";
-                    strQuery += string.Format(" VALUES ('{0}','{1}') ", token, idUsuario);
+                    strQuery += " INSERT INTO token (token) ";
+                    strQuery += string.Format(" VALUES ('{0}') ", token);
                     contexto.ExecutaComando(strQuery);
-                    TratamentoLog.GravarLog("Token: " + token + " associado ao usuarioID: " + idUsuario);
+                    TratamentoLog.GravarLog("Token: " + token + " associado ao usuarioID: ");
                     return true;
                 }
             }

@@ -288,6 +288,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Areas\Admin\Views\Campeonato\EnviarMensagemGoogle.cshtml" />
     <None Include="Properties\PublishProfiles\futebollimaduarte.pubxml" />
     <None Include="Properties\PublishProfiles\publish_local.pubxml" />
     <Content Include="Scripts\bootstrap.js" />

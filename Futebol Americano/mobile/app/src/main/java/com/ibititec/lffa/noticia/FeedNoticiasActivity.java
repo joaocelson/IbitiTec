@@ -25,6 +25,7 @@ import com.ibititec.lffa.helpers.HttpHelper;
 import com.ibititec.lffa.helpers.JsonHelper;
 import com.ibititec.lffa.helpers.UIHelper;
 import com.ibititec.lffa.modelo.Noticia;
+import com.ibititec.lffa.modelo.Usuario;
 
 import java.io.IOException;
 import java.util.List;
@@ -211,12 +212,12 @@ public class FeedNoticiasActivity extends AppCompatActivity {
             lvFeedNoticias = (ListView) findViewById(R.id.lvFeedNoticias);
             fab = (FloatingActionButton) findViewById(R.id.fabAddNoticia);
 
-            if (JsonHelper.ObterUsuarioBancoLocal(this).getTipoUsuario().equals("0")) {
+            Usuario usuario = JsonHelper.ObterUsuarioBancoLocal(this);
+            if (usuario== null || usuario.getTipoUsuario().equals("0")) {
                 fab.setVisibility(View.INVISIBLE);
             } else {
                 fab.setVisibility(View.VISIBLE);
             }
-
 
         } catch (Exception e) {
             e.printStackTrace();

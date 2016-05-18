@@ -198,7 +198,7 @@ namespace Campeonato.RepositorioADO
             return artilharia;
         }
 
-        public bool GravarToken(String token, String idUsuario)
+        public bool GravarToken(String token)
         {
             try
             {
@@ -206,9 +206,9 @@ namespace Campeonato.RepositorioADO
                 {
                     var strQuery = "";
                     strQuery += " INSERT INTO token (token) ";
-                    strQuery += string.Format(" VALUES ('{0}') ", token, idUsuario);
+                    strQuery += string.Format(" VALUES ('{0}') ", token);
                     contexto.ExecutaComando(strQuery);
-                    TratamentoLog.GravarLog("Token: " + token + " associado ao usuarioID: " + idUsuario);
+                    TratamentoLog.GravarLog("Token: " + token + " associado ao usuarioID: " );
                     return true;
                 }
             }

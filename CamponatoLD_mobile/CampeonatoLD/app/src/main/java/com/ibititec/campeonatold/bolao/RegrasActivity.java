@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.appodeal.ads.Appodeal;
@@ -58,5 +59,20 @@ public class RegrasActivity extends AppCompatActivity {
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro: onBackPressedPrimeiraDivisaoTabela: " + ex.getMessage());
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        onBackPressed();
+        //noinspection SimplifiableIfStatement
+//        if (id == R.id.home) {
+//            onBackPressed();
+//            return true;
+//        }
+        return true;
     }
 }

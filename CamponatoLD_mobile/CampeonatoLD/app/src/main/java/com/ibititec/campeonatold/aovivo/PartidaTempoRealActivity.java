@@ -30,6 +30,7 @@ import com.ibititec.campeonatold.helpers.JsonHelper;
 import com.ibititec.campeonatold.helpers.UIHelper;
 import com.ibititec.campeonatold.modelo.AoVivo;
 import com.ibititec.campeonatold.modelo.Partida;
+import com.ibititec.campeonatold.modelo.Usuario;
 import com.ibititec.campeonatold.util.AnalyticsApplication;
 
 import java.io.IOException;
@@ -249,11 +250,12 @@ public class PartidaTempoRealActivity extends AppCompatActivity {
             nomeTimePalpitePorJogoVisitante.setText(partida.getTimeVisitante());
 
            // escudoMandante.setImageURI(imageUriMandante);
-          //  escudoVisitante.setImageURI(imageUriVisitante);
+           // escudoVisitante.setImageURI(imageUriVisitante);
 
-            if(JsonHelper.ObterUsuarioBancoLocal(this).getTipoUsuario().equals("0") || JsonHelper.ObterUsuarioBancoLocal(this).getTipoUsuario().equals("2")){
+            Usuario usuario = JsonHelper.ObterUsuarioBancoLocal(this);
+            if (usuario== null || usuario.getTipoUsuario().equals("0") || usuario.getTipoUsuario().equals("3")) {
                 fab.setVisibility(View.INVISIBLE);
-            }else{
+            } else {
                 fab.setVisibility(View.VISIBLE);
             }
 

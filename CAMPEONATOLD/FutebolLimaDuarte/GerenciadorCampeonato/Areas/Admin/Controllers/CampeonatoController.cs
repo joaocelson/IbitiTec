@@ -365,7 +365,7 @@ namespace Campeonato.UI.WEB.Areas.Admin
         {
             try
             {
-                bool retorno = appCampeonato.GravarToken(token, null);
+                bool retorno = appCampeonato.GravarToken(token);
 
                 if (retorno)
                 {
