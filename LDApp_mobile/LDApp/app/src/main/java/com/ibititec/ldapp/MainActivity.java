@@ -341,8 +341,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_ibitipoca) {
             Intent i = new Intent(this, IbitipocaMainActivity.class);
             startActivity(i);
-        } else if (id == R.id.nav_share) {
-        } else if (id == R.id.nav_send) {
+        }else if (id == R.id.sair) {
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_empresas" android:icon="@android:drawable/ic_menu_camera"
+        <item
+            android:id="@+id/nav_empresas"
+            android:icon="@drawable/ic_empresa"
             android:title="Empresas" />
-        <item android:id="@+id/nav_cidade" android:icon="@android:drawable/ic_menu_gallery"
+        <item
+            android:id="@+id/nav_cidade"
+            android:icon="@drawable/ic_home"
             android:title="Nossa Cidade" />
-        <item android:id="@+id/nav_utilidade_publica" android:icon="@android:drawable/ic_menu_slideshow"
+        <item
+            android:id="@+id/nav_utilidade_publica"
+            android:icon="@drawable/ic_local_phone"
             android:title="Utilidade Pública" />
-        <item android:id="@+id/nav_ibitipoca" android:icon="@android:drawable/ic_menu_manage"
+        <item
+            android:id="@+id/nav_ibitipoca"
+            android:icon="@drawable/ic_ibitipoca"
             android:title="Ibitipoca" />
+        <item
+            android:id="@+id/sair"
+            android:icon="@drawable/power"
+            android:title="Sair" />
     </group>
-
-    <item android:title="Communicate">
-        <menu>
-            <item android:id="@+id/nav_share" android:icon="@android:drawable/ic_menu_share"
-                android:title="Share" />
-            <item android:id="@+id/nav_send" android:icon="@android:drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
-
 </menu>

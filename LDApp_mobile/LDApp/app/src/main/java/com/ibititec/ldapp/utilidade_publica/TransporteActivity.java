@@ -1,8 +1,10 @@
 package com.ibititec.ldapp.utilidade_publica;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,9 +13,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.ibititec.ldapp.R;
 import com.ibititec.ldapp.adapter.UtilidadeAdapter;
+import com.ibititec.ldapp.adapter.UtilidadeAdapterTransporte;
 import com.ibititec.ldapp.helpers.UIHelper;
 import com.ibititec.ldapp.models.UtilidadePublica;
 import com.ibititec.ldapp.utilidade_publica.transporte.BassamarActivity;
@@ -46,9 +50,9 @@ public class TransporteActivity extends AppCompatActivity {
         utilidadeArray.add(new UtilidadePublica("Sertaneja", "(32) 3276-1125"));
         utilidadeArray.add(new UtilidadePublica("Taxi", "(32) 3281-1200"));
 
-        UtilidadeAdapter utilidadeAdater = new UtilidadeAdapter(this, utilidadeArray, this);
+        UtilidadeAdapterTransporte utilidadeAdaterTransporte = new UtilidadeAdapterTransporte(this, utilidadeArray, this);
         final ListView listView = (ListView) findViewById(R.id.listview_utilidades_transporte_lista  );
-        listView.setAdapter(utilidadeAdater);
+        listView.setAdapter(utilidadeAdaterTransporte);
         UIHelper.setListViewHeightBasedOnChildren(listView);
 
 
@@ -72,6 +76,14 @@ public class TransporteActivity extends AppCompatActivity {
         } else if (getListName.getNomeUtilidade() == "Sertaneja") {
             Intent intent = new Intent(this, SertanejaActivity.class);
             startActivity(intent);
+        } else if (getListName.getNomeUtilidade() == "Taxi") {
+            Snackbar snackbar;
+            snackbar = Snackbar.make(findViewById(R.id.txt), "Não existe horários cadastrados para taxistas.", Snackbar.LENGTH_SHORT);
+            View snackBarView = snackbar.getView();
+            snackBarView.setBackgroundColor(Color.BLUE);
+            TextView textView = (TextView) snackBarView.findViewById(android.support.design.R.id.snackbar_text);
+            textView.setTextColor(Color.WHITE);
+            snackbar.show();
         }
     }
 
