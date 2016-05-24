@@ -285,7 +285,7 @@ namespace Campeonato.RepositorioADO
 
 
 
-        public object VencedorRodada(string id)
+        public List<string[]> VencedorRodada(string id)
         {
             var listaUsuarios = new List<string[]>();
             using (contexto = new Contexto())

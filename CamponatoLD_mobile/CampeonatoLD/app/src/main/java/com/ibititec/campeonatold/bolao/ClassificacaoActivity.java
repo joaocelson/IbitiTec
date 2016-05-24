@@ -55,7 +55,7 @@ public class ClassificacaoActivity extends AppCompatActivity {
             if (divisao.equals("primeira")) {
                 donwnloadFromUrlParam(MainActivity.PDCLASSIFICACAOBOLAO, getString(R.string.url_pdclassificacaobolao),  "{\"id\": \"1\"}");
             } else {
-                donwnloadFromUrlParam(MainActivity.SDCLASSIFICACAOBOLAO, getString(R.string.url_sdclassificacaobolao),  "{\"id\": \"1\"}");
+                donwnloadFromUrlParam(MainActivity.SDCLASSIFICACAOBOLAO, getString(R.string.url_sdclassificacaobolao),  "{\"id\": \"2\"}");
             }
         } catch (Exception ex) {
             Log.i(MainActivity.TAG, "Erro carregarPalpite: " + ex.getMessage());

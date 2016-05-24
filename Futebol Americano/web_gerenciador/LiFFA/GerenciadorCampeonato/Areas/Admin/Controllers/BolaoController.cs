@@ -250,6 +250,11 @@ namespace Campeonato.UI.WEB.Areas.Admin
                 return "";
             }
         }
+
+        public String ObterResultadoJogoPorPalpite(String id)
+        {
+            return "";
+        }
     }
 
 }

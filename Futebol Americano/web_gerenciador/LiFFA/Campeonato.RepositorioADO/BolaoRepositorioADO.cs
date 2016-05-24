@@ -277,11 +277,7 @@ namespace Campeonato.RepositorioADO
                 return false;
             }
         }
-
-
-
-
-
+        
         public List<string[]> VencedorRodada(string id)
         {
             var listaUsuarios = new List<string[]>();
@@ -317,5 +313,8 @@ namespace Campeonato.RepositorioADO
             }
             return listaUsuarios;
         }
+    
+        
+    
     }
 }

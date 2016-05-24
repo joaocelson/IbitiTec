@@ -105,7 +105,8 @@ public class PalpiteActivity extends AppCompatActivity {
 
                 Calendar c = Calendar.getInstance();
                 int day = c.get(Calendar.DAY_OF_WEEK);
-                int hour = c.get(Calendar.HOUR);
+                int hour = c.get(Calendar.HOUR_OF_DAY);
+                AdapterJogosBolao adapterJogosBolao;
                 if (day >= 4 || (day == 1 && hour < 9)) {
                     if (divisao.equals("primeira")) {
                         donwnloadFromUrl(MainActivity.PDJOGOSBOLAO, getString(R.string.url_jogos_bolao), "{\"id\":\"1\", \"emailUsuario\":\"" + usuarioLogado.getLoginEmail() + "\",\"senha\":\"" + usuarioLogado.getSenha() + "\"}");
@@ -174,7 +175,16 @@ public class PalpiteActivity extends AppCompatActivity {
                 if (!jogosBolao.equals("")) {
                     List<Partida> partidaList = JsonHelper.getList(jogosBolao, Partida[].class);
                     if (partidaList.size() > 0) {
-                        AdapterJogosBolao adapterJogosBolao = new AdapterJogosBolao(this, partidaList, divisao, true);
+                        Calendar c = Calendar.getInstance();
+                        int day = c.get(Calendar.DAY_OF_WEEK);
+                        int hour = c.get(Calendar.HOUR_OF_DAY);
+                        AdapterJogosBolao adapterJogosBolao;
+                        if (day >= 4 || (day == 1 && hour < 9)) {
+                            adapterJogosBolao = new AdapterJogosBolao(this, partidaList, divisao, true);
+                        } else {
+                            adapterJogosBolao = new AdapterJogosBolao(this, partidaList, divisao, false);
+                        }
+                        //AdapterJogosBolao adapterJogosBolao = new AdapterJogosBolao(this, partidaList, divisao, true);
                         lvJogosBolao.setAdapter(adapterJogosBolao);
                         UIHelper.setListViewHeightBasedOnChildren(lvJogosBolao);
                     } else {

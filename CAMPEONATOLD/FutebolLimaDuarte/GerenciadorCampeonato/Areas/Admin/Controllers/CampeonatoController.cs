@@ -185,6 +185,11 @@ namespace Campeonato.UI.WEB.Areas.Admin
             return View(listaCampeos);
         }
 
+        public ActionResult EnviarMensagemGoogle()
+        {
+            return View();
+        }
+
 
         //JSON - Retorna todos os dados JSON
         //=======================================================
