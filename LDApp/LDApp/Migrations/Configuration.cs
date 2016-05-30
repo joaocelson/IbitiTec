@@ -9,7 +9,7 @@ namespace LDApp.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(LDApp.Models.ApplicationDbContext context)
