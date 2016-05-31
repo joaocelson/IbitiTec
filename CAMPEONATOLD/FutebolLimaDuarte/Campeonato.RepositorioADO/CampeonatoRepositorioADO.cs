@@ -143,6 +143,7 @@ namespace Campeonato.RepositorioADO
                 {
                     strQuery += @" OR ar.id_campeonato = 4";
                 }
+                strQuery += @" ORDER BY ar.numero_gols desc";
                 var retornoDataReader = contexto.ExecutaComandoComRetorno(strQuery);
                 return TransformaReaderEmListaDeObjetoArtilharia(retornoDataReader);
             }

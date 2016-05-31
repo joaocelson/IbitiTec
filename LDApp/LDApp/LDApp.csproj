@@ -208,6 +208,7 @@
     <Content Include="docs\farmacia_7.csv" />
     <Content Include="docs\farmacia_8.csv" />
     <Content Include="docs\farmacia_9.csv" />
+    <Content Include="docs\file.csv" />
     <None Include="Properties\PublishProfiles\FTP_LDApp.pubxml" />
     <None Include="Properties\PublishProfiles\publhis.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -222,7 +223,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
