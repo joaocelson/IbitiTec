@@ -7,8 +7,9 @@
     android:layout_height="match_parent"
     android:paddingBottom="30dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_parque"
-    tools:context="com.ibititec.ldapp.Ibitipoca.ParqueActivity">
+    tools:context="com.ibititec.ldapp.Ibitipoca.ParqueActivity"
+    tools:showIn="@layout/activity_parque">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,4 +19,5 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
+
 </android.support.v4.widget.NestedScrollView >

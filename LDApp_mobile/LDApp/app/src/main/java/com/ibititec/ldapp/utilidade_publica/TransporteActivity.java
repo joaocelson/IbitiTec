@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.ibititec.ldapp.R;
 import com.ibititec.ldapp.adapter.UtilidadeAdapter;
 import com.ibititec.ldapp.adapter.UtilidadeAdapterTransporte;
+import com.ibititec.ldapp.helpers.AlertMensage;
 import com.ibititec.ldapp.helpers.UIHelper;
 import com.ibititec.ldapp.models.UtilidadePublica;
 import com.ibititec.ldapp.utilidade_publica.transporte.BassamarActivity;
@@ -77,13 +78,7 @@ public class TransporteActivity extends AppCompatActivity {
             Intent intent = new Intent(this, SertanejaActivity.class);
             startActivity(intent);
         } else if (getListName.getNomeUtilidade() == "Taxi") {
-            Snackbar snackbar;
-            snackbar = Snackbar.make(findViewById(R.id.txt), "Não existe horários cadastrados para taxistas.", Snackbar.LENGTH_SHORT);
-            View snackBarView = snackbar.getView();
-            snackBarView.setBackgroundColor(Color.BLUE);
-            TextView textView = (TextView) snackBarView.findViewById(android.support.design.R.id.snackbar_text);
-            textView.setTextColor(Color.WHITE);
-            snackbar.show();
+            AlertMensage.setMessageAlert("Não existe horários cadastrados para taxistas.", this, "Aviso");
         }
     }
 

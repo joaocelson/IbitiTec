@@ -3,6 +3,7 @@ package com.ibititec.ldapp;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.ibititec.ldapp.helpers.AlertMensage;
 import com.ibititec.ldapp.models.Comerciante;
 import com.ibititec.ldapp.models.Endereco;
 import com.ibititec.ldapp.models.Telefone;
@@ -117,7 +119,10 @@ public class DetalheActivity extends AppCompatActivity {
                 layout.addView(txEnderecoBairro);
 
                 TextView txComplemento = new TextView(this);
-                txComplemento.setText("Complemento: " + endereco.getComplemento());
+                if(endereco.getComplemento() != null)
+                    txComplemento.setText("Complemento: " + endereco.getComplemento());
+                else
+                    txComplemento.setText("Complemento: ");
                 txComplemento.setTextSize(14);
                 layout.addView(txComplemento);
             }
@@ -208,7 +213,10 @@ public class DetalheActivity extends AppCompatActivity {
     }
 
     private void exibirMsgAtualizacao(String mensagem) {
-        // Snackbar.make(findViewById(R.id.fab), String.format("%d Dados atualizados.", patios.size()), Snackbar.LENGTH_SHORT).show();
-        Snackbar.make(findViewById(R.id.fab), mensagem, Snackbar.LENGTH_SHORT).show();
+        AlertMensage.setMessageAlert(mensagem, this, "Aviso");
+    }
+
+    public Context getActivity() {
+        return this;
     }
 }

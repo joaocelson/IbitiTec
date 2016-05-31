@@ -25,12 +25,13 @@
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:layout_alignParentTop="true"
+            android:src="@drawable/limaduarte_2"
             fresco:actualImageScaleType="centerCrop"
             fresco:failureImage="@drawable/error_img"
             fresco:failureImageScaleType="centerInside"
             fresco:placeholderImage="@drawable/loading_img"
             fresco:retryImage="@drawable/retry_img"
-            fresco:roundAsCircle="true"/>
+            fresco:roundAsCircle="false"/>
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

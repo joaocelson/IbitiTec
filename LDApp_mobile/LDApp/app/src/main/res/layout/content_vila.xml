@@ -7,16 +7,18 @@
     android:layout_height="match_parent"
     android:paddingBottom="35dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_vila"
-    tools:context="com.ibititec.ldapp.Ibitipoca.VilaActivity">
+    tools:context="com.ibititec.ldapp.Ibitipoca.VilaActivity"
+    tools:showIn="@layout/activity_vila">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <ListView
             android:id="@+id/listview_vila"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-</LinearLayout>
+    </LinearLayout>
 
-</android.support.v4.widget.NestedScrollView >
+</android.support.v4.widget.NestedScrollView>

@@ -8,9 +8,9 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.ibititec.ldapp.R;
-import com.ibititec.ldapp.adapter.CidadeAdapter;
+import com.ibititec.ldapp.adapter.TextoImagemAdapter;
 import com.ibititec.ldapp.helpers.UIHelper;
-import com.ibititec.ldapp.models.Cidade;
+import com.ibititec.ldapp.models.ObjetoTextoImagem;
 
 import java.util.ArrayList;
 
@@ -20,27 +20,25 @@ public class VilaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vila);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ArrayList<Cidade> cidades = getTextoCidade();
+        ArrayList<ObjetoTextoImagem> vilas = getTextoCidade();
 
-        CidadeAdapter cidadeAdapter = new CidadeAdapter(this, cidades);
+        TextoImagemAdapter vilaAdapter = new TextoImagemAdapter(this, vilas);
         final ListView listView = (ListView) findViewById(R.id.listview_vila);
-        listView.setAdapter(cidadeAdapter);
+        listView.setAdapter(vilaAdapter);
         UIHelper.setListViewHeightBasedOnChildren(listView);
-
-        //Appodeal.show(this, Appodeal.BANNER_BOTTOM);
     }
 
-    private ArrayList<Cidade> getTextoCidade(){
-        ArrayList<Cidade> cidades = new ArrayList<Cidade>();
-        cidades.add(new Cidade(R.string.txtIbitipoca_vila_1,R.drawable.limaduarte));
-        cidades.add(new Cidade(R.string.txtIbitipoca_vila_2,R.drawable.limaduarte_2));
-        cidades.add(new Cidade(R.string.txtIbitipoca_vila_1,R.drawable.limaduarte_3));
-        cidades.add(new Cidade(R.string.txtIbitipoca_vila_2,R.drawable.limaduarte_4));
-        return cidades;
+    private ArrayList<ObjetoTextoImagem> getTextoCidade(){
+        ArrayList<ObjetoTextoImagem> vila = new ArrayList<ObjetoTextoImagem>();
+        vila.add(new ObjetoTextoImagem(getResources().getString(R.string.txtIbitipoca_vila_1),R.drawable.limaduarte));
+        vila.add(new ObjetoTextoImagem(getResources().getString(R.string.txtIbitipoca_vila_2),R.drawable.limaduarte_2));
+        vila.add(new ObjetoTextoImagem(getResources().getString(R.string.txtIbitipoca_vila_1),R.drawable.limaduarte_3));
+        vila.add(new ObjetoTextoImagem(getResources().getString(R.string.txtIbitipoca_vila_2),R.drawable.limaduarte_4));
+        return vila;
     }
 
     @Override
@@ -56,8 +54,6 @@ public class VilaActivity extends AppCompatActivity {
                 NavUtils.navigateUpFromSameTask(this);
                 return true;
         }
-
-
         return super.onOptionsItemSelected(item);
     }
 }

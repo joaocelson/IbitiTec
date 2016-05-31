@@ -43,7 +43,7 @@
         </activity>
         <activity
             android:name=".ListComercianteActivity"
-            android:label="@string/title_activity_listaComerciante"
+            android:label="@string/title_activity_listaEmpresas"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" >
 >
@@ -308,31 +308,31 @@
         <activity
             android:name=".utilidade_publica.transporte.VimaraActivity"
             android:label="@string/title_activity_vimara"
-            android:parentActivityName=".utilidade_publica.UtilidadePulicaActivity"
+            android:parentActivityName=".utilidade_publica.TransporteActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
             android:name=".utilidade_publica.transporte.BassamarActivity"
             android:label="@string/title_activity_bassamar"
-            android:parentActivityName=".utilidade_publica.UtilidadePulicaActivity"
+            android:parentActivityName=".utilidade_publica.TransporteActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
             android:name=".utilidade_publica.transporte.SertanejaActivity"
             android:label="@string/title_activity_sertaneja"
-            android:parentActivityName=".utilidade_publica.UtilidadePulicaActivity"
+            android:parentActivityName=".utilidade_publica.TransporteActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
             android:name=".utilidade_publica.transporte.TaxistasActivity"
             android:label="@string/title_activity_taxistas"
-            android:parentActivityName=".utilidade_publica.UtilidadePulicaActivity"
+            android:parentActivityName=".utilidade_publica.TransporteActivity"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity android:name=".adapter.TransporteAdapter" >
         </activity>
         <activity
-            android:name=".adapter.CidadeAdapter"
+            android:name=".adapter.TextoImagemAdapter"
             android:label="@string/title_activity_cidade_adapter"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>

@@ -22,6 +22,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -29,6 +30,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.ibititec.ldapp.adapter.ComercianteAdapter;
+import com.ibititec.ldapp.helpers.AlertMensage;
 import com.ibititec.ldapp.helpers.HttpHelper;
 import com.ibititec.ldapp.helpers.JsonHelper;
 import com.ibititec.ldapp.helpers.UIHelper;
@@ -46,9 +48,13 @@ public class ListComercianteActivity extends AppCompatActivity {
     ArrayList<Comerciante> comerciantesArray = new ArrayList<Comerciante>();
     private ListView lsViewComerciantes;
     private ProgressBar progressBar;
-    private  Comerciante comerciante;
+    private Comerciante comerciante;
+    List<Comerciante> comerciantesList;
     private List<String> listComerciantes;
+    ArrayList<Comerciante> comerciantesArrayBusca = new ArrayList<Comerciante>();
     FloatingActionButton fab;
+    ImageView imgBuscarEmpresa;
+    private AutoCompleteTextView actv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +78,7 @@ public class ListComercianteActivity extends AppCompatActivity {
         progressBar.setVisibility(View.GONE);
 
         setupFab();
+        buscarComercianteEvento();
 
         lsViewComerciantes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> myAdapter, View myView, int myItemInt, long mylng) {
@@ -131,13 +138,14 @@ public class ListComercianteActivity extends AppCompatActivity {
     private void setupComerciantes() {
         String json = leJsonComerciantes();
 
-        if (json.isEmpty()) {
+        if (json.isEmpty() || json.equals("[]")) {
             Log.i(TAG, "Baixou comerciantes.");
             AtualizarComerciantes();
+            preencherListComerciantesBusca(leJsonComerciantes());
         } else {
             Log.i(TAG, "Carregou comerciantes salvos");
             preencherListComerciantes(json);
-            //marcaPatios();
+            preencherListComerciantesBusca(leJsonComerciantes());
         }
     }
 
@@ -146,6 +154,33 @@ public class ListComercianteActivity extends AppCompatActivity {
                 .getString("comerciantes.json", "");
         Log.i(TAG, "Lendo preferences: " + json);
         return json;
+    }
+
+    private void preencherListComerciantesBusca(String json) {
+        try {
+            listComerciantes = new ArrayList<String>();
+            comerciantesList = JsonHelper.getList(json, Comerciante[].class);
+            comerciantesArrayBusca = new ArrayList<>(comerciantesList);
+            for (int i =0; i< comerciantesArrayBusca.size(); i++){
+                //listComerciantes.add(comerciantesArrayBusca.get(i).getTipoComercio().getDescricacao() + " - "
+                //                    + comerciantesArrayBusca.get(i).getNome());
+                listComerciantes.add(comerciantesArrayBusca.get(i).getNome());
+            }
+        } catch (Exception e) {
+            Log.e(TAG, String.format("Erro ao mostrar comerciantes: %s", e.getMessage()));
+        }
+    }
+
+    private void buscarComercianteEvento() {
+        if(actv != null) {
+            actv.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    buscaComerciante(actv.getText().toString().trim());
+                    return true;
+                }
+            });
+        }
     }
 
     private void AtualizarComerciantes() {
@@ -179,8 +214,6 @@ public class ListComercianteActivity extends AppCompatActivity {
             protected void onPostExecute(String json) {
                 super.onPostExecute(json);
 
-                progressDialog.dismiss();
-
                 if (json == null) {
                     Log.w(TAG, "JSON veio nulo!");
                     return;
@@ -191,6 +224,7 @@ public class ListComercianteActivity extends AppCompatActivity {
                         .apply();
 
                 preencherListComerciantes(json);
+                progressDialog.dismiss();
                 exibirMsgAtualizacao(String.format("%d Empresas atualizadas.", comerciantesArray.size()));
                 //marcaPatios()
             }
@@ -200,8 +234,7 @@ public class ListComercianteActivity extends AppCompatActivity {
     }
 
     private void exibirMsgAtualizacao(String mensagem) {
-       // Snackbar.make(findViewById(R.id.fab), String.format("%d Dados atualizados.", patios.size()), Snackbar.LENGTH_SHORT).show();
-        Snackbar.make(findViewById(R.id.fab), mensagem, Snackbar.LENGTH_SHORT).show();
+        AlertMensage.setMessageAlert(mensagem, this, "Aviso");
     }
 
     private void preencherListComerciantes(String json) {
@@ -213,8 +246,6 @@ public class ListComercianteActivity extends AppCompatActivity {
             listView.setAdapter(comercianteAdapter);
             listComerciantes = comercianteAdapter.listComerciantes;
             UIHelper.setListViewHeightBasedOnChildren(listView);
-
-
         } catch (Exception e) {
             Log.e(TAG, String.format("Erro ao mostrar comerciantes: %s", e.getMessage()));
         }
@@ -223,19 +254,29 @@ public class ListComercianteActivity extends AppCompatActivity {
     private void buscaComerciante(String comerciante) {
         Log.i(TAG, String.format("Busca: %s", comerciante));
 
+        String comercianteBusca;
+        if(comerciante.contains("-")) {
+            comercianteBusca = comerciante.split("-")[1].trim();
+        }else{
+            comercianteBusca = comerciante;
+        }
         if (comerciante.isEmpty()) {
-            Snackbar.make(findViewById(R.id.fab), "Busca vazia!", Snackbar.LENGTH_SHORT).show();
+            AlertMensage.setMessageAlert("Digite o nome de uma empresa.", this, "Atenção");
             return;
+        }else {
+            boolean encontrouregistro =false;
+            for (Comerciante c : comerciantesArrayBusca) {
+                if(c.getNome().equals(comercianteBusca)){
+                    this.comerciante = c;
+                    encontrouregistro = true;
+                    StartarActivityDetalhe();
+                }
+            }
+            if(!encontrouregistro) {
+                exibirMsgAtualizacao("Nenhum resultado encontrado na pesquisa.");
+                actv.setText("");
+            }
         }
-
-        if (!listComerciantes.contains(comerciante)) {
-            Snackbar.make(findViewById(R.id.fab), "Empresa não encontrado.", Snackbar.LENGTH_SHORT).show();
-            return;
-        }else
-        {
-            Snackbar.make(findViewById(R.id.fab), "Comerciante encontrado." + comerciante, Snackbar.LENGTH_SHORT).show();
-        }
-
     }
 
     private void setupFab() {
@@ -243,7 +284,7 @@ public class ListComercianteActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                final AutoCompleteTextView actv = new AutoCompleteTextView(ListComercianteActivity.this);
+                actv = new AutoCompleteTextView(ListComercianteActivity.this);
                 actv.setSingleLine();
                 actv.setThreshold(1);
                 actv.setAllCaps(true);
@@ -278,8 +319,6 @@ public class ListComercianteActivity extends AppCompatActivity {
                     @Override
                     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                         buscaComerciante(actv.getText().toString().trim());
-                        alertDialog.dismiss();
-
                         return true;
                     }
                 });

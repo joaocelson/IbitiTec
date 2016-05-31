@@ -19,11 +19,14 @@ import android.widget.ProgressBar;
 import com.ibititec.ldapp.R;
 import com.ibititec.ldapp.adapter.ComercianteAdapter;
 import com.ibititec.ldapp.adapter.UtilidadeAdapter;
+import com.ibititec.ldapp.adapter.UtilidadeAdapterFarmacia;
+import com.ibititec.ldapp.helpers.AlertMensage;
 import com.ibititec.ldapp.helpers.HttpHelper;
 import com.ibititec.ldapp.helpers.JsonHelper;
 import com.ibititec.ldapp.helpers.UIHelper;
 import com.ibititec.ldapp.models.Comerciante;
 import com.ibititec.ldapp.models.UtilidadePublica;
+import com.ibititec.ldapp.models.UtilidadePublicaFarmacia;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -133,8 +136,7 @@ public class FarmaciasPlantaoActivity extends AppCompatActivity {
     }
 
     private void exibirMsgAtualizacao(String mensagem) {
-        // Snackbar.make(findViewById(R.id.fab), String.format("%d Dados atualizados.", patios.size()), Snackbar.LENGTH_SHORT).show();
-        Snackbar.make(findViewById(R.id.listview_farmacia_plantao), mensagem, Snackbar.LENGTH_SHORT).show();
+        AlertMensage.setMessageAlert(mensagem, this, "Aviso");
     }
 
     private void preencherListFarmacias(String json) {
@@ -145,14 +147,22 @@ public class FarmaciasPlantaoActivity extends AppCompatActivity {
             ListView listView = (ListView) findViewById(R.id.listview_farmacia_plantao);
             UIHelper.setListViewHeightBasedOnChildren(listView);
 
-            ArrayList<UtilidadePublica> utilidadeArray = new ArrayList<UtilidadePublica>();
+            ArrayList<UtilidadePublicaFarmacia> utilidadeArray = new ArrayList<UtilidadePublicaFarmacia>();
 
             for (int i = 0; i < comerciantesList.size(); i++) {
-                UtilidadePublica utilidadePublica = new UtilidadePublica(comerciantesList.get(i).getNome(), comerciantesList.get(i).getTelefones().get(0).getNumero());
+                String dia = null;
+                String nome = null;
+                if(comerciantesList.get(i).getNome() != null){
+                    String[] nomes = comerciantesList.get(i).getNome().split("-");
+                    dia = nomes[0] + "-"+ nomes[1] + " - "+ nomes[2];
+                    nome = nomes[3].trim();
+                }
+
+                UtilidadePublicaFarmacia utilidadePublica = new UtilidadePublicaFarmacia(dia, nome, comerciantesList.get(i).getTelefones().get(0).getNumero());
                 utilidadeArray.add(utilidadePublica);
             }
 
-            UtilidadeAdapter utilidadeAdater = new UtilidadeAdapter(this, utilidadeArray, this);
+            UtilidadeAdapterFarmacia utilidadeAdater = new UtilidadeAdapterFarmacia(this, utilidadeArray, this);
             listView.setAdapter(utilidadeAdater);
             UIHelper.setListViewHeightBasedOnChildren(listView);
 

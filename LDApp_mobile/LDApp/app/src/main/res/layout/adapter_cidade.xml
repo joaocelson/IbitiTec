@@ -11,30 +11,6 @@ android:paddingBottom="@dimen/activity_vertical_margin"
 tools:context="com.ibititec.ldapp.CidadeActivity"
 android:orientation="vertical">
 
-<!-- <ImageView
-     android:id="@+id/ivComerciante"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"/>-->
-
-    <!--<ImageView-->
-        <!--android:adjustViewBounds="true"-->
-        <!--android:id="@+id/img_cidade_adapter"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:src="@drawable/limaduarte"/>-->
-
-    <!--<com.facebook.drawee.view.SimpleDraweeView-->
-        <!--android:id="@+id/img_cidade_adapter"-->
-        <!--android:layout_width="130dp"-->
-        <!--android:layout_height="130dp"-->
-        <!--android:layout_alignParentTop="true"-->
-        <!--fresco:actualImageScaleType="centerCrop"-->
-        <!--fresco:failureImage="@drawable/error_img"-->
-        <!--fresco:failureImageScaleType="centerInside"-->
-        <!--fresco:placeholderImage="@drawable/loading_img"-->
-        <!--fresco:retryImage="@drawable/retry_img"-->
-        <!--fresco:roundAsCircle="true" />-->
-
     <ImageView
         android:adjustViewBounds="true"
         android:id="@+id/img_cidade"

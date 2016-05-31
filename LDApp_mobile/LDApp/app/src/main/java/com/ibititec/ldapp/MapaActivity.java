@@ -23,6 +23,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.ibititec.ldapp.helpers.AlertMensage;
 import com.ibititec.ldapp.models.Comerciante;
 
 import java.util.ArrayList;
@@ -222,8 +223,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                 if (!empresaPorMarker.containsKey(marker)) {
                     Log.e(TAG, "Pátio não localizado!");
-                    Snackbar.make(findViewById(R.id.fab), "Erro ao abrir informações do pátio!",
-                            Snackbar.LENGTH_SHORT).show();
+                    AlertMensage.setMessageAlert("Erro ao abrir informações do pátio!", MapaActivity.this, "Atenção");
                     return;
                 }
 

@@ -8,9 +8,9 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.ibititec.ldapp.R;
-import com.ibititec.ldapp.adapter.CidadeAdapter;
+import com.ibititec.ldapp.adapter.TextoImagemAdapter;
 import com.ibititec.ldapp.helpers.UIHelper;
-import com.ibititec.ldapp.models.Cidade;
+import com.ibititec.ldapp.models.ObjetoTextoImagem;
 
 import java.util.ArrayList;
 
@@ -20,27 +20,27 @@ public class ParqueActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parque);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ArrayList<Cidade> cidades = getTextoCidade();
+        ArrayList<ObjetoTextoImagem> parque = getTextoParque();
 
-        CidadeAdapter cidadeAdapter = new CidadeAdapter(this, cidades);
+        TextoImagemAdapter parqueAdapter = new TextoImagemAdapter(this, parque);
         final ListView listView = (ListView) findViewById(R.id.listview_parque);
-        listView.setAdapter(cidadeAdapter);
+        listView.setAdapter(parqueAdapter);
         UIHelper.setListViewHeightBasedOnChildren(listView);
 
-        //Appodeal.show(this, Appodeal.BANNER_BOTTOM);
+
     }
 
-    private ArrayList<Cidade> getTextoCidade(){
-        ArrayList<Cidade> cidades = new ArrayList<Cidade>();
-        cidades.add(new Cidade(R.string.txtIbitipoca_pq_1,R.drawable.limaduarte));
-        cidades.add(new Cidade(R.string.txtIbitipoca_pq_2,R.drawable.limaduarte_2));
-        cidades.add(new Cidade(R.string.txtIbitipoca_pq_3,R.drawable.limaduarte_3));
-        cidades.add(new Cidade(R.string.txtIbitipoca_pq_4,R.drawable.limaduarte_4));
-        return cidades;
+    private ArrayList<ObjetoTextoImagem> getTextoParque(){
+        ArrayList<ObjetoTextoImagem> parque = new ArrayList<ObjetoTextoImagem>();
+        parque.add(new ObjetoTextoImagem(getResources().getString(R.string.txtIbitipoca_pq_1),R.drawable.parque));
+        parque.add(new ObjetoTextoImagem(getResources().getString(R.string.txtIbitipoca_pq_2),R.drawable.parque_2));
+        parque.add(new ObjetoTextoImagem(getResources().getString(R.string.txtIbitipoca_pq_3),R.drawable.parque_3));
+        parque.add(new ObjetoTextoImagem(getResources().getString(R.string.txtIbitipoca_pq_4),R.drawable.parque_4));
+        return parque;
     }
 
     @Override

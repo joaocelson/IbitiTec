@@ -1,10 +1,12 @@
 package com.ibititec.ldapp;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -17,10 +19,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -28,12 +33,14 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.appodeal.ads.Appodeal;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.android.gms.ads.AdRequest;
 import com.ibititec.ldapp.Ibitipoca.IbitipocaMainActivity;
 import com.ibititec.ldapp.adapter.ComercianteAdapter;
+import com.ibititec.ldapp.helpers.AlertMensage;
 import com.ibititec.ldapp.helpers.HttpHelper;
 import com.ibititec.ldapp.helpers.JsonHelper;
 import com.ibititec.ldapp.helpers.UIHelper;
@@ -59,6 +66,7 @@ public class MainActivity extends AppCompatActivity
     private List<String> listComerciantes;
     ImageView imgBuscarEmpresa;
     private AutoCompleteTextView actv;
+    private AlertDialog alerta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +75,12 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         actv = (AutoCompleteTextView)findViewById(R.id.text_view_procurar_empresa);//new AutoCompleteTextView(MainActivity.this);
+
+        abrirAlerta();
+
+        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(actv.getWindowToken(), 0);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         //APPODEAL
         String appKey = "6ebf1bff27e0009e1dda34ee520c5bb456ddf692359e1628";
@@ -168,6 +182,25 @@ public class MainActivity extends AppCompatActivity
         startActivity(i);
     }
 
+    public void abrirAlerta() {
+
+        LayoutInflater li = getLayoutInflater();
+        //inflamos o layout alerta.xml na view
+        View view = li.inflate(R.layout.alerta, null);
+        //definimos para o botão do layout um clickListener
+        view.findViewById(R.id.bt).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View arg0) {
+                alerta.dismiss();
+            }
+        });
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Propaganda");
+        builder.setView(view);
+        alerta = builder.create();
+        alerta.show();
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -214,7 +247,8 @@ public class MainActivity extends AppCompatActivity
                             AtualizarComerciantes();
                             AtualizarRestaurantesIbitipoca();
                             AtualizarCasasIbitipoca();
-                            AtualizarFarmaciasPlantao ();
+                            AtualizarFarmaciasPlantao();
+                            AtualizarPousadas();
                         }
                     })
                     .setNegativeButton("Cancelar", null)
@@ -227,7 +261,7 @@ public class MainActivity extends AppCompatActivity
     private void setupComerciantes() {
         String json = leJsonComerciantes();
 
-        if (json.isEmpty()) {
+        if (json.isEmpty() || json.equals("[]")) {
             Log.i(TAG, "Baixou comerciantes.");
             AtualizarEmpresasPublicidade();
             preencherListComerciantesBusca(leJsonComerciantesBusca());
@@ -255,7 +289,7 @@ public class MainActivity extends AppCompatActivity
     private void exibirMsgAtualizacao(String mensagem) {
         // Snackbar.make(findViewById(R.id.fab), String.format("%d Dados atualizados.", patios.size()), Snackbar.LENGTH_SHORT).show();
        try {
-           Snackbar.make(findViewById(R.id.listview_comerciantes_main), mensagem, Snackbar.LENGTH_SHORT).show();
+           AlertMensage.setMessageAlert(mensagem, this, "Aviso");
        }catch (Exception e) {
         Log.i(TAG, " Erro ao mostrar mensagem " + e.getMessage());
        }
@@ -281,9 +315,9 @@ public class MainActivity extends AppCompatActivity
              comerciantesList = JsonHelper.getList(json, Comerciante[].class);
             comerciantesArrayBusca = new ArrayList<>(comerciantesList);
             for (int i =0; i< comerciantesArrayBusca.size(); i++){
-                //listComerciantes.add(comerciantesArrayBusca.get(i).getNome());
-                listComerciantes.add(comerciantesArrayBusca.get(i).getTipoComercio().getDescricacao() + " - "
-                                    + comerciantesArrayBusca.get(i).getNome());
+                //listComerciantes.add(comerciantesArrayBusca.get(i).getTipoComercio().getDescricacao() + " - "
+                //                    + comerciantesArrayBusca.get(i).getNome());
+                listComerciantes.add(comerciantesArrayBusca.get(i).getNome());
             }
         } catch (Exception e) {
             Log.e(TAG, String.format("Erro ao mostrar comerciantes: %s", e.getMessage()));
@@ -300,7 +334,7 @@ public class MainActivity extends AppCompatActivity
             comercianteBusca = comerciante;
         }
         if (comerciante.isEmpty()) {
-            Snackbar.make(findViewById(R.id.listview_comerciantes_main), "Digite o nome de uma empresa.", Snackbar.LENGTH_SHORT).show();
+            AlertMensage.setMessageAlert("Digite o nome de uma empresa.", this, "Atenção");
             return;
         }else {
             boolean encontrouregistro =false;
@@ -601,5 +635,60 @@ public class MainActivity extends AppCompatActivity
                 //marcaPatios()
             }
         }).execute(getString(R.string.url_farmacias_plantao));
+    }
+
+    public void AtualizarPousadas() {
+        (new AsyncTask<String, Void, String>() {
+
+            private ProgressDialog progressDialog;
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                progressDialog = ProgressDialog.show(MainActivity.this, "Aguarde", "Atualizando dados");
+            }
+
+            @Override
+            protected String doInBackground(String... params) {
+                String json = null;
+
+                try {
+                    String url = params[0];
+                    json = HttpHelper.downloadFromURL(url);
+                    Log.i(TAG, json);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Log.e(TAG, String.format(getString(R.string.msg_erro_json), e.getMessage()));
+                }
+
+                return json;
+            }
+
+            @Override
+            protected void onPostExecute(String json) {
+                super.onPostExecute(json);
+
+                progressDialog.dismiss();
+
+                if (json == null) {
+                    Log.w(TAG, "JSON veio nulo!");
+                    return;
+                }
+
+                PreferenceManager.getDefaultSharedPreferences(MainActivity.this).edit()
+                        .putString("pousadas.json", json)
+                        .apply();
+
+                preencherListComerciantes(json);
+                exibirMsgAtualizacao(String.format("%d Empresas atualizadas.", comerciantesArray.size()));
+                //marcaPatios()
+            }
+
+
+        }).execute(getString(R.string.url_pousadas));
+    }
+
+    public Context getActivity() {
+        return this;
     }
 }

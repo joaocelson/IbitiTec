@@ -11,16 +11,16 @@ import android.widget.TextView;
 
 import com.ibititec.ldapp.ListComercianteActivity;
 import com.ibititec.ldapp.R;
-import com.ibititec.ldapp.models.Cidade;
+import com.ibititec.ldapp.models.ObjetoTextoImagem;
 
 import java.util.ArrayList;
 
-public class CidadeAdapter  extends BaseAdapter {
+public class TextoImagemAdapter extends BaseAdapter {
     private Context context;
-    private ArrayList<Cidade> listaItensCidade;
+    private ArrayList<ObjetoTextoImagem> listaItensCidade;
     public ArrayList<String> listaItensCidadeString;
 
-    public CidadeAdapter(Context context, ArrayList<Cidade> listaItensCidade) {
+    public TextoImagemAdapter(Context context, ArrayList<ObjetoTextoImagem> listaItensCidade) {
         this.context = context;
         this.listaItensCidade = listaItensCidade;
         this.listaItensCidadeString = new ArrayList<String>();
@@ -47,7 +47,7 @@ public class CidadeAdapter  extends BaseAdapter {
         try {
             Log.i(ListComercianteActivity.TAG, "Vai setar o Adapter, número de registro " + listaItensCidade.size() + " Position" + position);
 
-            Cidade cidade = listaItensCidade.get(position);
+            ObjetoTextoImagem cidade = listaItensCidade.get(position);
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View layout = inflater.inflate(R.layout.adapter_cidade, null);
 

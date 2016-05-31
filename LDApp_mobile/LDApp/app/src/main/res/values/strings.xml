@@ -13,7 +13,7 @@
     <string name="title_activity_main">LDApp</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="title_activity_listaComerciante">Lista Comerciantes</string>
+    <string name="title_activity_listaEmpresas">Lista Empresas</string>
     <string name="a_cidade"></string>
     <string name="title_activity_cidade">Cidade</string>
     <string name="title_activity_utilidade_pulica">Utilidade Pública</string>

@@ -1,14 +1,19 @@
 package com.ibititec.ldapp.Ibitipoca;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -18,6 +23,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.ibititec.ldapp.DetalheActivity;
 import com.ibititec.ldapp.R;
 import com.ibititec.ldapp.adapter.ComercianteAdapter;
+import com.ibititec.ldapp.helpers.AlertMensage;
 import com.ibititec.ldapp.helpers.HttpHelper;
 import com.ibititec.ldapp.helpers.JsonHelper;
 import com.ibititec.ldapp.helpers.UIHelper;
@@ -53,7 +59,7 @@ public class RestaurantesActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progress_restaurante);
         progressBar.setVisibility(View.VISIBLE);
 
-        setupComerciantes();
+        setupRestaurantes();
 
         progressBar.setVisibility(View.GONE);
 
@@ -82,16 +88,19 @@ public class RestaurantesActivity extends AppCompatActivity {
 
         startActivity(i);
     }
-    public void setupComerciantes() {
+    public void setupRestaurantes() {
+        ProgressDialog progressDialog;
+        progressDialog = ProgressDialog.show(RestaurantesActivity.this, "Aguarde", "Carregando os dados!");
         String json = leJsonComerciantes();
 
-        if (json.isEmpty()) {
+        if (json.isEmpty() || json.equals("[]")) {
             Log.i(TAG, "Baixou comerciantes.");
+            progressDialog.dismiss();
             AtualizarRestaurantes();
         } else {
             Log.i(TAG, "Carregou comerciantes salvos");
             preencherListComerciantes(json);
-            //marcaPatios();
+            progressDialog.dismiss();
         }
     }
 
@@ -133,10 +142,9 @@ public class RestaurantesActivity extends AppCompatActivity {
             protected void onPostExecute(String json) {
                 super.onPostExecute(json);
 
-                progressDialog.dismiss();
-
                 if (json == null) {
                     Log.w(TAG, "JSON veio nulo!");
+                    progressDialog.dismiss();
                     return;
                 }
 
@@ -145,6 +153,7 @@ public class RestaurantesActivity extends AppCompatActivity {
                         .apply();
 
                 preencherListComerciantes(json);
+                progressDialog.dismiss();
                 exibirMsgAtualizacao(String.format("%d Empresas atualizadas.", comerciantesArray.size()));
                 //marcaPatios()
             }
@@ -154,8 +163,7 @@ public class RestaurantesActivity extends AppCompatActivity {
     }
 
     private void exibirMsgAtualizacao(String mensagem) {
-        // Snackbar.make(findViewById(R.id.fab), String.format("%d Dados atualizados.", patios.size()), Snackbar.LENGTH_SHORT).show();
-        Snackbar.make(findViewById(R.id.fab), mensagem, Snackbar.LENGTH_SHORT).show();
+        AlertMensage.setMessageAlert(mensagem, this, "Aviso");
     }
 
     private void preencherListComerciantes(String json) {
@@ -172,5 +180,46 @@ public class RestaurantesActivity extends AppCompatActivity {
         } catch (Exception e) {
             Log.e(TAG, String.format("Erro ao mostrar comerciantes: %s", e.getMessage()));
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        switch (id) {
+            // Id correspondente ao botão Up/Home da actionbar
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_atualizar) {
+
+            new AlertDialog.Builder(this)
+                    .setTitle("Download")
+                    .setMessage("Deseja atualizar os dados das pousadas?")
+                    .setPositiveButton("Sim, baixar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Log.i(TAG, "Usuário pediu atualização.");
+                            AtualizarRestaurantes();
+                        }
+                    })
+                    .setNegativeButton("Cancelar", null)
+                    .show();
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -57,19 +57,24 @@ public class ComercianteAdapter extends BaseAdapter {
 
             TextView nome = (TextView) layout.findViewById(R.id.txtNomeComerciante);
             nome.setText(comerciante.getNome());
+            if(comerciante.getNome().equals("Alternativa Bar")) {
+                String teste = "";
+            }
+            Log.i(ListComercianteActivity.TAG, comerciante.getNome());
             nome.setPadding(10,0,0,0);
             TextView txtTelefoneComerciante = (TextView) layout.findViewById(R.id.txtTelefoneComerciante);
-            txtTelefoneComerciante.setText("Telefone: " + comerciante.getTelefones().get(0).getNumero());
+
+            if(comerciante.getTelefones() != null && comerciante.getTelefones().size() > 0
+                    && comerciante.getTelefones().get(0).getNumero() != null)
+                txtTelefoneComerciante.setText("Telefone: " + comerciante.getTelefones().get(0).getNumero());
+            else
+                txtTelefoneComerciante.setText("Telefone: ");
+
             txtTelefoneComerciante.setPadding(10,0,0,0);
-            /* ImageView ivCasa = (ImageView) layout.findViewById(R.id.ivComerciante);
-            ivCasa.setImageResource(comerciante.getComercianteImage(position));*/
 
             Uri imageUri = Uri.parse(comerciante.getNomeFoto());
             SimpleDraweeView draweeView = (SimpleDraweeView) layout.findViewById(R.id.my_image_view);
             draweeView.setImageURI(imageUri);
-//            if (!listComerciantes.contains(comerciante.getNome())) {
-//                listComerciantes.add(comerciante.getNome());
-//            }
 
             return layout;
 
