@@ -179,6 +179,31 @@ namespace LDApp.Controllers
             //return View(db.Comerciantes.ToList());
         }
 
+        // POST: /Comerciante/
+        public String EnviarCordenada(List<Endereco> enderecos)
+        {
+            try
+            {
+                Endereco endereco = enderecos[0];
+                Endereco enderecoBD =  db.Enderecos.Find(endereco.EnderecoId);
+
+                enderecoBD.Latitude = endereco.Latitude;
+                enderecoBD.Longitude = endereco.Longitude;
+
+                db.SaveChanges();
+
+                //Necessario converter o Json Serialize devido ao proxy do EntityFramework
+                return "OK";
+            }
+            catch (Exception ex)
+            {
+                ex = ex;
+                return "";
+            }
+
+            //return View(db.Comerciantes.ToList());
+        }
+
 
         // GET: /Comerciante/Details/5
         public ActionResult Details(Guid? id)

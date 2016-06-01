@@ -9,6 +9,8 @@
     <string name="url_pousadas">http://52.37.37.207:86/Comerciante/GetPousada</string>
     <string name="url_casas">http://52.37.37.207:86/Comerciante/GetCasasIbitipoca</string>
     <string name="url_restaurantes">http://52.37.37.207:86/Comerciante/GetRestaurantesIbitipoca</string>
+    <string name="url_enviar_cordenada">http://52.37.37.207:86/Comerciante/EnviarCordenada</string>
+
     <string name="title_activity_detalhe">Detalhe Empresa</string>
     <string name="title_activity_main">LDApp</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
