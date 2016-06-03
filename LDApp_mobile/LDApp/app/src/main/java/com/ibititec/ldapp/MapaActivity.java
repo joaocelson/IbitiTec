@@ -83,6 +83,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         Marker marker = markersPorEmpresa.get(sigla);
         mMap.animateCamera(CameraUpdateFactory.newLatLng(marker.getPosition()));
+
         marker.showInfoWindow();
     }
 
@@ -222,8 +223,14 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Log.i(TAG, String.format("Marker %s apertado.", marker.getTitle()));
 
                 if (!empresaPorMarker.containsKey(marker)) {
+<<<<<<< HEAD
                     Log.e(TAG, "Pátio não localizado!");
                     AlertMensage.setMessageAlert("Erro ao abrir informações do pátio!", MapaActivity.this, "Atenção");
+=======
+                    Log.e(TAG, "Empresa não localizada!");
+                    Snackbar.make(findViewById(R.id.fab), "Erro ao abrir informações do pátio!",
+                            Snackbar.LENGTH_SHORT).show();
+>>>>>>> origin/master
                     return;
                 }
 

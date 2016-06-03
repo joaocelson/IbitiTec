@@ -196,7 +196,21 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="docs\Farmacias.csv" />
+    <Content Include="docs\farmacia_1.csv" />
+    <Content Include="docs\farmacia_10.csv" />
+    <Content Include="docs\farmacia_11.csv" />
+    <Content Include="docs\farmacia_12.csv" />
+    <Content Include="docs\farmacia_2.csv" />
+    <Content Include="docs\farmacia_3.csv" />
+    <Content Include="docs\farmacia_4.csv" />
+    <Content Include="docs\farmacia_5.csv" />
+    <Content Include="docs\farmacia_6.csv" />
+    <Content Include="docs\farmacia_7.csv" />
+    <Content Include="docs\farmacia_8.csv" />
+    <Content Include="docs\farmacia_9.csv" />
+    <Content Include="docs\file.csv" />
     <None Include="Properties\PublishProfiles\FTP_LDApp.pubxml" />
+    <None Include="Properties\PublishProfiles\publhis.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -209,7 +223,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

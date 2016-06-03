@@ -3,43 +3,66 @@ package com.ibititec.ldapp;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+<<<<<<< HEAD
+=======
+import android.app.ProgressDialog;
+>>>>>>> origin/master
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
+<<<<<<< HEAD
 import com.ibititec.ldapp.helpers.AlertMensage;
+=======
+import com.ibititec.ldapp.helpers.HttpHelper;
+import com.ibititec.ldapp.helpers.JsonHelper;
+>>>>>>> origin/master
 import com.ibititec.ldapp.models.Comerciante;
 import com.ibititec.ldapp.models.Endereco;
 import com.ibititec.ldapp.models.Telefone;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DetalheActivity extends AppCompatActivity {
+public class DetalheActivity extends AppCompatActivity
+        implements LocationListener {
 
+    public static final int REQUEST_CODE_MY_LOCATION = 42;
     private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 12;
     private Comerciante comerciante;
     private TextView txtNomeComerciante;
     private String telefoneChamar;
     private ImageView btnVerMapa;
+    private Button enviarCordenada;
+    protected LocationManager locationManager;
+    private Location location;
     FloatingActionButton fab;
     ImageView imgCall;
 
@@ -58,12 +81,13 @@ public class DetalheActivity extends AppCompatActivity {
         txtNomeComerciante = (TextView) findViewById(R.id.txtNomeComercianteDetalhe);
         txtNomeComerciante.setText(comerciante.getNome());
 
-        imgCall = (ImageView)findViewById(R.id.btn_ligar_detalhe);
+        imgCall = (ImageView) findViewById(R.id.btn_ligar_detalhe);
 
         carregarTelefoneEndereco();
         setupFab();
 
         btnVerMapa = (ImageView) findViewById(R.id.btn_visualizar_mapa);
+
         btnVerMapa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +96,34 @@ public class DetalheActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        enviarCordenada = (Button) findViewById(R.id.btnEnviarCordeada);
+        enviarCordenada.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (location != null) {
+                    comerciante.getEnderecos().get(0).setLatitude(String.valueOf(location.getLatitude()));
+                    comerciante.getEnderecos().get(0).setLongitude(String.valueOf(location.getLongitude()));
+                    EnviarCordenada(comerciante);
+                }
+            }
+        });
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                    REQUEST_CODE_MY_LOCATION);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+            location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+        } else {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+            // location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        }
+
         //Appodeal.show(this, Appodeal.BANNER_BOTTOM);
     }
 
@@ -82,7 +134,7 @@ public class DetalheActivity extends AppCompatActivity {
 
         LinearLayout layout = (LinearLayout) findViewById(R.id.linear_layout_detalhe);
 
-        if (comerciante.getTelefones() != null && comerciante.getTelefones().size()>0) {
+        if (comerciante.getTelefones() != null && comerciante.getTelefones().size() > 0) {
             telefoneChamar = comerciante.getTelefones().get(0).getNumero();
 
             TextView tx = new TextView(this);
@@ -218,5 +270,80 @@ public class DetalheActivity extends AppCompatActivity {
 
     public Context getActivity() {
         return this;
+    }
+
+
+    private void EnviarCordenada(final Comerciante comerciante) {
+        try {
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(DetalheActivity.this);
+            (new AsyncTask<String, Void, String>() {
+                ProgressDialog progressDialog;
+                Comerciante objComer = comerciante;
+
+                @Override
+                protected void onPreExecute() {
+                    super.onPreExecute();
+                    progressDialog = ProgressDialog.show(DetalheActivity.this, "Aguarde", "Atualizando dados");
+                }
+
+                @Override
+                protected String doInBackground(String... params) {
+                    String json = null;
+
+                    try {
+
+                        String url = params[0];
+
+                        String comerciante = JsonHelper.objectToJson(objComer.getEnderecos());
+
+                        json = HttpHelper.POSTJson(url, comerciante);
+
+                        if (json.equals("OK")) {
+
+                            Log.i(MainActivity.TAG, json);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Log.e(MainActivity.TAG, String.format(getString(R.string.msg_erro_json), e.getMessage()));
+                    }
+                    return json;
+                }
+
+                @Override
+                protected void onPostExecute(String json) {
+                    super.onPostExecute(json);
+
+                    progressDialog.dismiss();
+                    if (json.equals("OK")) {
+                        Snackbar.make(findViewById(R.id.btnEnviarCordeada), "Cordenada atualizada", Snackbar.LENGTH_SHORT).show();
+                    } else {
+                        String mensagem = "Cadastro não realizado, tente novamente.";
+                        Snackbar.make(findViewById(R.id.btnEnviarCordeada), mensagem, Snackbar.LENGTH_SHORT).show();
+                    }
+                }
+            }).execute(getString(R.string.url_enviar_cordenada));
+        } catch (Exception ex) {
+            Log.i(MainActivity.TAG, "Erro ao salvar usuario." + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        this.location = location;
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
     }
 }

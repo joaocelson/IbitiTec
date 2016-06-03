@@ -146,13 +146,13 @@ namespace LDApp.Controllers
         public String GetCasasFarmaciasPlantao()
         {
             try
-            { 
+            {
                 String line = String.Empty;
                 List<Comerciante> comerciantes = new List<Comerciante>();
-                using (StreamReader CsvReader = new StreamReader(Server.MapPath("/docs/Farmacias.csv")))
+                using (StreamReader CsvReader = new StreamReader(Server.MapPath("/docs/Farmacia_" + DateTime.Now.Month + ".csv")))
                 {
 
-                  
+
 
                     while ((line = CsvReader.ReadLine()) != null)
                     {
@@ -174,6 +174,31 @@ namespace LDApp.Controllers
             {
                 ex = ex;
                 return null;
+            }
+
+            //return View(db.Comerciantes.ToList());
+        }
+
+        // POST: /Comerciante/
+        public String EnviarCordenada(List<Endereco> enderecos)
+        {
+            try
+            {
+                Endereco endereco = enderecos[0];
+                Endereco enderecoBD =  db.Enderecos.Find(endereco.EnderecoId);
+
+                enderecoBD.Latitude = endereco.Latitude;
+                enderecoBD.Longitude = endereco.Longitude;
+
+                db.SaveChanges();
+
+                //Necessario converter o Json Serialize devido ao proxy do EntityFramework
+                return "OK";
+            }
+            catch (Exception ex)
+            {
+                ex = ex;
+                return "";
             }
 
             //return View(db.Comerciantes.ToList());
@@ -204,6 +229,121 @@ namespace LDApp.Controllers
             ViewBag.Comerciante = comercia;
             return View(ViewBag.Comerciante);
         }
+
+        // GET: /Comerciante/Create
+        public String CreateFromArquivo()
+        {
+            try
+            {
+                String line = String.Empty;
+                List<Comerciante> comerciantes = new List<Comerciante>();
+                using (StreamReader CsvReader = new StreamReader(Server.MapPath("/docs/File.csv")))
+                {
+
+                    while ((line = CsvReader.ReadLine()) != null)
+                    {
+                        string[] vars = line.Split(',');
+                        Comerciante comerciante = new Comerciante();
+                        comerciante.ComercianteId = Guid.NewGuid();
+
+                        ICollection<Telefone> telefones = new List<Telefone>();
+                        Telefone telefone1 = new Telefone();
+                        telefone1.TelefoneId = Guid.NewGuid();
+                        Telefone telefone2 = new Telefone();
+                        telefone2.TelefoneId = Guid.NewGuid();
+                        Telefone telefone3 = new Telefone();
+                        telefone3.TelefoneId = Guid.NewGuid();
+                        Telefone telefone4 = new Telefone();
+                        telefone4.TelefoneId = Guid.NewGuid();
+                        
+                        comerciante.Nome = vars[0];
+                        String descricacaoComercio =  vars[8];
+                        IEnumerable<TipoComercio> tipoComercios = db.TipoComercios.Where(a => a.Descricao == descricacaoComercio);
+                        if (tipoComercios.Count() >= 1)
+                        {
+                            comerciante.TipoComercio = tipoComercios.First();
+                        }
+                        else
+                        {
+                            TipoComercio tpComercio = new TipoComercio();
+                            tpComercio.TipoComercioId = Guid.NewGuid();
+                            tpComercio.Descricao = vars[8];
+                            db.TipoComercios.Add(tpComercio);
+                            db.SaveChanges();
+                            comerciante.TipoComercio = tpComercio;
+                        }
+                      
+                        db.Comerciantes.Add(comerciante);
+                        db.SaveChanges();
+                        telefone1.Comerciante = comerciante;
+                        telefone2.Comerciante = comerciante;
+                        telefone3.Comerciante = comerciante;
+                        telefone4.Comerciante = comerciante;
+
+                        if (!vars[1].Equals(""))
+                        {
+                            telefone1.Descricao = vars[1];
+                            if (!vars[9].Equals(""))
+                            {
+                                telefone1.Descricao = vars[9];
+                            }
+                            telefones.Add(telefone1);
+                            db.Telefones.Add(telefone1);
+                            db.SaveChanges();
+                        }
+                        if (!vars[2].Equals(""))
+                        {
+                            telefone2.Numero = vars[2];
+                            telefones.Add(telefone2);
+                            db.Telefones.Add(telefone2);
+                            db.SaveChanges();
+                        }
+                        if (!vars[3].Equals(""))
+                        {
+                            telefone3.Numero = vars[3];
+                            telefones.Add(telefone3);
+
+                            db.Telefones.Add(telefone3);
+                            db.SaveChanges();
+                        }
+                        if (!vars[4].Equals(""))
+                        {
+                            telefone4.Numero = vars[4];
+                            telefones.Add(telefone4);
+
+                            db.Telefones.Add(telefone4);
+                            db.SaveChanges();
+                        }
+
+                        comerciante.Telefones = telefones;
+
+                        //ENDERECO
+                        Endereco endereco = new Endereco();
+                        endereco.Comerciante = comerciante;
+                        endereco.EnderecoId = Guid.NewGuid();
+                        endereco.Logradouro = vars[5];
+                        endereco.Numero = vars[6];
+                        endereco.Bairro = vars[7];
+                        endereco.Cidade = "LIMA DUARTE";
+                        endereco.Estado = "MG";
+                        endereco.Longitude = vars[11];
+                        endereco.Latitude = vars[10];
+                        db.Enderecos.Add(endereco);
+                        db.SaveChanges();
+
+                     
+                    }
+                    CsvReader.Close();
+                }
+                return "OK";
+            }
+            catch (Exception ex)
+            {
+                ex = ex;
+                return null;
+            }
+        }
+
 
         // POST: /Comerciante/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

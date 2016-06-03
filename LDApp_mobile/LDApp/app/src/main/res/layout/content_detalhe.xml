@@ -64,6 +64,11 @@
             android:text="Visualizar no Mapa"
             android:layout_gravity="right"
          />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnEnviarCordeada"
+            android:text="Enviar Cordenada"/>
     </LinearLayout>
         <LinearLayout
             android:id="@+id/linear_layout_detalhe"
@@ -72,4 +77,5 @@
             android:orientation="vertical"
             android:padding="10dp">
     </LinearLayout>
+
 </LinearLayout>
