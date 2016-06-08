@@ -3,10 +3,7 @@ package com.ibititec.ldapp;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
-<<<<<<< HEAD
-=======
 import android.app.ProgressDialog;
->>>>>>> origin/master
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -36,12 +33,12 @@ import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
-<<<<<<< HEAD
+
 import com.ibititec.ldapp.helpers.AlertMensage;
-=======
+
 import com.ibititec.ldapp.helpers.HttpHelper;
 import com.ibititec.ldapp.helpers.JsonHelper;
->>>>>>> origin/master
+
 import com.ibititec.ldapp.models.Comerciante;
 import com.ibititec.ldapp.models.Endereco;
 import com.ibititec.ldapp.models.Telefone;

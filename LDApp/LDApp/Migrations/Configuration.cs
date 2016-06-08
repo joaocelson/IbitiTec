@@ -9,8 +9,11 @@ namespace LDApp.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
+
+        //Add-Migration NomeDaMigration
+        //Update-database
 
         protected override void Seed(LDApp.Models.ApplicationDbContext context)
         {

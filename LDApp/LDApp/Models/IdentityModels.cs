@@ -10,7 +10,7 @@ namespace LDApp.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection")
+            : base("DefaultConnection", throwIfV1Schema:false)
         {
         }
 
@@ -19,5 +19,13 @@ namespace LDApp.Models
         public System.Data.Entity.DbSet<LDApp.Models.Endereco> Enderecos { get; set; }
 
         public System.Data.Entity.DbSet<LDApp.Models.TipoComercio> TipoComercios { get; set; }
+
+        public System.Data.Entity.DbSet<LDApp.Models.Token> Tokens { get; set; }
+
+
+        //Como atualizar a base de dados
+
+        //enable-migrations
+        //add-migration InitialCreate
     }
 }

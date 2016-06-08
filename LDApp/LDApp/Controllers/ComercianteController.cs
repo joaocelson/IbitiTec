@@ -9,6 +9,9 @@ using System.Web.Mvc;
 using LDApp.Models;
 using System.IO;
 using Newtonsoft.Json;
+using System.Text;
+using System.Security.Cryptography.X509Certificates;
+using System.Net.Security;
 
 namespace LDApp.Controllers
 {
@@ -185,7 +188,7 @@ namespace LDApp.Controllers
             try
             {
                 Endereco endereco = enderecos[0];
-                Endereco enderecoBD =  db.Enderecos.Find(endereco.EnderecoId);
+                Endereco enderecoBD = db.Enderecos.Find(endereco.EnderecoId);
 
                 enderecoBD.Latitude = endereco.Latitude;
                 enderecoBD.Longitude = endereco.Longitude;
@@ -255,9 +258,9 @@ namespace LDApp.Controllers
                         telefone3.TelefoneId = Guid.NewGuid();
                         Telefone telefone4 = new Telefone();
                         telefone4.TelefoneId = Guid.NewGuid();
-                        
+
                         comerciante.Nome = vars[0];
-                        String descricacaoComercio =  vars[8];
+                        String descricacaoComercio = vars[8];
                         IEnumerable<TipoComercio> tipoComercios = db.TipoComercios.Where(a => a.Descricao == descricacaoComercio);
                         if (tipoComercios.Count() >= 1)
                         {
@@ -272,7 +275,7 @@ namespace LDApp.Controllers
                             db.SaveChanges();
                             comerciante.TipoComercio = tpComercio;
                         }
-                      
+
                         db.Comerciantes.Add(comerciante);
                         db.SaveChanges();
                         telefone1.Comerciante = comerciante;
@@ -331,7 +334,7 @@ namespace LDApp.Controllers
                         db.Enderecos.Add(endereco);
                         db.SaveChanges();
 
-                     
+
                     }
                     CsvReader.Close();
                 }
@@ -477,6 +480,117 @@ namespace LDApp.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        //SEND TOKEN 
+        //=======================================================================================
+
+        //GOOGLE CLOUD MESSAGE  -- SEND MESSAGE FOR SERVER
+
+        // POST: /Campeonato/Create
+        public String EnviarMensagemGoogleCloud(String message, String tickerText, String contentTitle)
+        {
+            try
+            {
+                //string deviceId = "f0tnwv5yu5w:APA91bH9NbXK-FeCvDw1gBSnq_sKNRxrv20iPEF1p6aC_zZ4z3LSFF7Fv5KY1UQGiL-f4LO954FQWbooOQL_rJFJ8FcvNlnIy9yItmb4Yp-sX-EAVMb2dBAuk_-JO2Vf73S0V3GxIxOp";
+                string deviceId;
+                //string message = "Atualizado os resultados da última rodada";
+                //string tickerText = "Atualização Classificação Campeonato";
+                //string contentTitle = "FUTEBOL LD - Atualização Resultados e Classificação";
+                String response = "";
+                Token[] tokens = db.Tokens.ToArray();
+
+                //string text = System.IO.File.ReadAllText((Server.MapPath("/docs/tokens.txt")));
+
+                foreach (Token str in tokens)
+                {
+                    if (!str.TokenStr.Equals(""))
+                    {
+                        deviceId = str.TokenStr;
+                        string postData =
+                        "{ \"registration_ids\": [ \"" + deviceId + "\" ], " +
+                          "\"data\": {\"tickerText\":\"" + tickerText + "\", " +
+                                     "\"contentTitle\":\"" + contentTitle + "\", " +
+                                     "\"message\": \"" + message + "\"}}";
+
+                        //            string response = SendGCMNotification("AIzaSyCo_YCF3pzU6VL8e8quJxmnQZBAMyfvzkk", postData);
+                        response = SendNotification(deviceId, postData);
+                    }
+                }
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return "NOK";
+            }
+        }
+
+        public string SendNotification(string deviceId, string message)
+        {
+            try
+            {
+                string SERVER_API_KEY = "AIzaSyCWPM1kWJ-KYLlWEJouVW1-P2088UzwjdI";
+                var SENDER_ID = deviceId; //"application number";
+                var value = message;
+                WebRequest tRequest;
+                tRequest = WebRequest.Create("https://android.googleapis.com/gcm/send");
+                tRequest.Method = "post";
+                tRequest.ContentType = " application/x-www-form-urlencoded;charset=UTF-8";
+                tRequest.Headers.Add(string.Format("Authorization: key={0}", SERVER_API_KEY));
+
+                tRequest.Headers.Add(string.Format("Sender: id={0}", SENDER_ID));
+
+                string postData = "collapse_key=score_update&time_to_live=108&delay_while_idle=1&data.message=" + value + "&data.time=" + System.DateTime.Now.ToString() + "&registration_id=" + deviceId + "";
+                Console.WriteLine(postData);
+                Byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+                tRequest.ContentLength = byteArray.Length;
+
+                Stream dataStream = tRequest.GetRequestStream();
+                dataStream.Write(byteArray, 0, byteArray.Length);
+                dataStream.Close();
+
+                WebResponse tResponse = tRequest.GetResponse();
+
+                dataStream = tResponse.GetResponseStream();
+
+                StreamReader tReader = new StreamReader(dataStream);
+
+                String sResponseFromServer = tReader.ReadToEnd();
+
+                tReader.Close();
+                dataStream.Close();
+                tResponse.Close();
+                return sResponseFromServer;
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+        }
+
+        public static bool ValidateServerCertificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        {
+            return true;
+        }
+
+
+        // POST: /Campeonato/Create
+        public String SendToken(string tokenStr)
+        {
+            try
+            {
+                Token token = new Token();
+                token.TokenStr = tokenStr;
+                token.TokenId = new Guid();
+                db.Tokens.Add(token);
+                db.SaveChanges();
+                return "OK";
+            }
+            catch (Exception e)
+            {
+                // Console.WriteLine("Exception: " + e.Message);
+                return "";
+            }
         }
     }
 }
