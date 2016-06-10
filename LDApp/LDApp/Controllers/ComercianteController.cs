@@ -573,16 +573,16 @@ namespace LDApp.Controllers
             return true;
         }
 
-
-        // POST: /Campeonato/Create
-        public String SendToken(string tokenStr)
+        // POST: /Campeonato/SendToken
+        public String SendToken(string token)
         {
             try
             {
-                Token token = new Token();
-                token.TokenStr = tokenStr;
-                token.TokenId = new Guid();
-                db.Tokens.Add(token);
+
+                Token tokenObj = new Token();
+                tokenObj.TokenStr = token;
+                tokenObj.TokenId = Guid.NewGuid();
+                db.Tokens.Add(tokenObj);
                 db.SaveChanges();
                 return "OK";
             }
